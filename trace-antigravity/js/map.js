@@ -430,7 +430,7 @@ document.addEventListener('routeFilterChange', (e) => {
                 iconImg.style.width = '20px';
                 iconImg.style.height = '20px';
                 iconImg.style.display = 'block';
-                iconImg.style.filter = 'brightness(0) invert(1)'; // Force white
+                iconImg.style.filter = 'brightness(0)'; // Force dark — max contrast on yellow bg
                 iconContainer.appendChild(iconImg);
             }
         }
