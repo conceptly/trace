@@ -1,0 +1,733 @@
+/* =============================================================================
+   ABOUT PAGE — about.css
+   Styles for the About TRACE page, mobile-first, responsive to desktop.
+   Design based on Figma node 2734-12285.
+   ============================================================================= */
+
+/* ── Page Layout ──────────────────────────────────────────────────────────── */
+
+/* ── Force mobile menu overlay to always be dark (matches map page) ──────── */
+body.about-page .mobile-menu-overlay {
+    background-color: #12202a !important; /* --surface-1 dark value */
+}
+body.about-page .menu-btn {
+    background-color: #2d4855 !important; /* --surface-4 dark value */
+    color: #edf4f0 !important;            /* --content-1 dark value */
+}
+body.about-page .menu-btn .icon-circle {
+    background-color: #12202a !important; /* --surface-1 dark value */
+    color: #edf4f0 !important;
+}
+body.about-page .menu-label {
+    color: #bdd0cc !important; /* --content-2 dark value */
+}
+body.about-page .menu-divider {
+    background-color: #3d5e6a !important; /* --divider-strong dark value */
+}
+/* Active nav button — yellow, matching the map page active state */
+body.about-page .nav-btn.active {
+    background-color: #e7e626 !important;
+    border: 0.5px solid #cddbd0 !important;
+}
+body.about-page .nav-btn.active .icon-circle {
+    background-color: #0f2229 !important;
+    color: #e7e626 !important;
+}
+body.about-page .nav-btn.active .title {
+    color: #0f2229 !important;
+}
+body.about-page .nav-btn.active .subtitle {
+    color: #2d4855 !important;
+}
+
+/* ── Keep top nav dark on the always-light about page ─────────────────────── */
+body.about-page .top-nav {
+    background-color: #2d4855 !important;
+    color: #edf4f0 !important;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+body.about-page .logo-text {
+    color: #edf4f0 !important;
+}
+body.about-page .logo-to {
+    color: #e7e626 !important;
+}
+body.about-page .nav-item {
+    color: #BDD0CC !important;             /* --content-2 dark = dimmed text */
+    background-color: #3D5E6A !important;  /* --surface-5 dark = pill bg */
+}
+body.about-page .nav-item:hover {
+    color: #E7E626 !important;             /* --brand-trace */
+}
+body.about-page .nav-item.active {
+    color: #E7E626 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45) !important;
+}
+body.about-page .theme-switcher svg,
+body.about-page .mobile-search-btn svg,
+body.about-page .mobile-hamburger svg {
+    color: #edf4f0 !important;
+}
+
+/* The About page content is always light — matches Figma design intent */
+body.about-page {
+    background-color: #f5f9f6;
+    color: #0f2229;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.about-main {
+    flex: 1;
+    /* No padding-top — nav is sticky and in normal flow, no gap needed */
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* ── Breadcrumb Bar ───────────────────────────────────────────────────────── */
+
+.about-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px;
+    border-bottom: 1px solid #cddbd0;
+    background-color: #f5f9f6;
+    /* Not sticky — scrolls with content per Figma */
+}
+
+.about-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0f2229;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    text-decoration: none;
+    transition: opacity 0.15s ease;
+}
+
+.about-back:hover {
+    opacity: 0.6;
+}
+
+.about-breadcrumb-title {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 0.64px;
+    line-height: 1;
+    text-transform: capitalize;
+    color: #0f2229;
+}
+
+/* ── Content Wrapper ─────────────────────────────────────────────────────── */
+
+.about-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* ── Hero Image (mobile only) ───────────────────────────────────────────── */
+
+.about-hero-img {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.about-hero-photo {
+    width: 100%;
+    height: 179.38%;
+    object-fit: cover;
+    object-position: center top;
+    position: absolute;
+    top: -49.1%;
+    left: 0;
+    display: block;
+}
+
+.about-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.2) 100%);
+    pointer-events: none;
+}
+
+/* Desktop filmstrip — hidden on mobile */
+.about-hero-strip {
+    display: none;
+}
+
+/* ── Title Block ─────────────────────────────────────────────────────────── */
+
+.about-title-block {
+    background-color: #ebf2ee;
+    border-bottom: 1px solid #cddbd0;
+    padding: 24px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.about-trace-wordmark {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    letter-spacing: 1.12px;
+    line-height: 1;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.about-trace-subtitle {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 0.64px;
+    line-height: 1.35;
+    text-transform: uppercase;
+    color: #0f2229;
+    margin: 0;
+}
+
+/* Edition tags */
+.about-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+}
+
+.about-tag {
+    font-family: 'Roboto Slab', serif;
+    font-weight: 400;
+    font-size: 12px;
+    text-transform: uppercase;
+    line-height: 1;
+    padding: 6px 12px 7px;
+    background-color: var(--cta-text, #2d4855);
+    color: var(--bg-card, #ebf2ee);
+    border-radius: 8px;
+    white-space: nowrap;
+}
+
+/* ── Sections ─────────────────────────────────────────────────────────────── */
+
+.about-section {
+    padding: 36px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}
+
+.about-section--border {
+    border-top: 0.5px solid #cddbd0;
+}
+
+.about-section-heading {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: 2.2px;
+    line-height: 1.2;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.about-body-text {
+    font-family: 'Roboto Slab', serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.2;
+    color: #2d4855;
+    margin: 0;
+}
+
+.about-body-text strong {
+    font-weight: 500;
+}
+
+/* ── Mission Cards ───────────────────────────────────────────────────────── */
+
+.about-cards-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.about-mission-card {
+    background-color: var(--text-body, #2d4855);
+    border-radius: 14px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.about-card-label {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 0.64px;
+    line-height: 1.35;
+    text-transform: uppercase;
+    color: var(--brand-trace, #e7e626);
+    margin: 0;
+}
+
+.about-card-body {
+    font-family: 'Roboto Slab', serif;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.2;
+    color: var(--bg-base, #f5f9f6);
+    margin: 0;
+}
+
+/* ── Routes List ─────────────────────────────────────────────────────────── */
+
+.about-routes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.about-route-item {
+    background-color: var(--text-body, #2d4855);
+    border-left: 4px solid var(--route-accent, #3a4e9a);
+    border-radius: 0 14px 14px 0;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+/* Mobile: text wrapper lays out name + count horizontally */
+.about-route-text {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 16px 0 20px;
+}
+
+/* Mobile: image hidden */
+.about-route-img {
+    display: none;
+}
+
+.about-route-name {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 0.64px;
+    line-height: 1.35;
+    text-transform: uppercase;
+    color: var(--bg-base, #f5f9f6);
+}
+
+.about-route-count {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 1.2;
+    background-color: var(--brand-trace, #e7e626);
+    color: #2d4855;
+    padding: 2px 6px;
+    border-radius: 6px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.about-routes-note {
+    font-size: 15px;
+    color: #2d4855;
+}
+
+/* ── The Difference Card ─────────────────────────────────────────────────── */
+
+.about-difference-card {
+    background-color: var(--text-body, #2d4855);
+    border-radius: 0 14px 14px 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: inset 3px 0 0 0 var(--brand-trace, #e7e626), 4px 4px 16px 0px rgba(18, 32, 42, 0.33);
+    width: 100%;
+}
+
+.about-difference-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.about-difference-list li {
+    font-family: 'Roboto Slab', serif;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.2;
+    color: var(--bg-base, #f5f9f6);
+    padding-left: 16px;
+    position: relative;
+}
+
+.about-difference-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--brand-trace, #e7e626);
+    font-size: 10px;
+    line-height: 15px;
+}
+
+/* ── Ecosystem Cards ─────────────────────────────────────────────────────── */
+
+.about-ecosystem-card {
+    background-color: var(--text-body, #2d4855);
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.about-ecosystem-card-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.about-ecosystem-labels {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.about-eco-label {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 1.2;
+    color: var(--bg-base, #f5f9f6);
+    background-color: var(--route-experts, #0d7a82);
+    border-radius: 4px;
+    padding: 3px 6px 1px;
+}
+
+/* ── Author Section ─────────────────────────────────────────────────────── */
+
+.about-author-card {
+    background-color: #2d4855;
+    border-radius: 14px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Top row inside the author card: avatar + name/role */
+.about-author-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.about-author-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: #e7e626;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.about-author-initials {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: #2d4855;
+    letter-spacing: 0.5px;
+}
+
+.about-author-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.about-author-name {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 0.64px;
+    line-height: 1.35;
+    text-transform: uppercase;
+    color: #f5f9f6;
+    margin: 0;
+}
+
+.about-author-role {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+    line-height: 1.2;
+    text-transform: uppercase;
+    color: rgba(235, 242, 238, 0.55);
+    margin: 0;
+}
+
+/* Contact links grid — inside the dark author card */
+.about-links-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 12px;
+}
+
+.about-link-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: 24px;
+    text-decoration: none;
+    color: #f5f9f6;
+    transition: opacity 0.15s ease;
+}
+
+.about-link-item:hover {
+    opacity: 0.75;
+}
+
+.about-link-icon {
+    width: 24px;
+    height: 24px;
+    background-color: #e7e626;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #2d4855;
+    padding: 6px;
+}
+
+.about-link-text {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.2;
+    color: #f5f9f6;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   DESKTOP RESPONSIVE — ≥ 769px
+   ───────────────────────────────────────────────────────────────────────────── */
+
+@media (min-width: 769px) {
+
+    .about-main {
+        padding-top: 0; /* Nav is sticky in normal flow — no extra gap */
+    }
+
+    .about-breadcrumb {
+        padding: 14px 24px;
+    }
+
+    /* Mobile hero hidden, desktop filmstrip shown */
+    .about-hero-mobile {
+        display: none;
+    }
+
+    .about-hero-strip {
+        display: flex;
+        width: 100%;
+        height: 280px;
+        overflow: hidden;
+        flex-shrink: 0;
+    }
+
+    .about-hero-strip-item {
+        flex: 1;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .about-hero-strip-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+        display: block;
+        transition: transform 0.4s ease;
+    }
+
+    .about-hero-strip-item:first-child img {
+        object-position: center 20%; /* Author photo — favour face */
+    }
+
+    .about-hero-strip-item:hover img {
+        transform: scale(1.05);
+    }
+
+    .about-strip-label {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        font-family: 'Josefin Sans', sans-serif;
+        font-weight: 500;
+        font-size: 10px;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        color: #fff;
+        padding: 3px 8px 2px;
+        border-radius: 6px;
+        opacity: 0.9;
+        pointer-events: none;
+    }
+
+    /* Wider content area */
+    .about-content {
+        max-width: 1100px;
+        margin: 0 auto;
+        width: 100%;
+        padding: 0 24px;
+    }
+
+    /* Title side-by-side — taller on desktop */
+    .about-title-block {
+        padding: 44px 24px;
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: space-between;
+    }
+
+    .about-trace-wordmark {
+        font-size: 40px;
+    }
+
+    .about-trace-subtitle {
+        font-size: 18px;
+    }
+
+    .about-section {
+        padding: 36px 0;
+    }
+
+    /* Two-column mission cards on desktop */
+    .about-cards-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    /* Routes full width */
+    .about-route-item {
+        width: 100%;
+    }
+
+    /* Author links — 3 columns on desktop */
+    .about-links-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .about-section-heading {
+        font-size: 26px;
+    }
+
+    /* Roomier card padding on desktop */
+    .about-mission-card,
+    .about-difference-card,
+    .about-ecosystem-card,
+    .about-author-card {
+        padding: 24px;
+    }
+
+    /* Desktop routes — 2-column card grid with image thumbnails */
+    .about-routes-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    /* Last item (Artist's Pick) spans full width */
+    .about-routes-list .about-route-item:last-child {
+        grid-column: span 2;
+    }
+
+    .about-route-item {
+        min-height: 110px;
+        border-left-width: 5px;
+        border-radius: 0 16px 16px 0;
+        position: relative;
+        align-items: stretch;
+    }
+
+    .about-route-text {
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 20px 16px 20px 22px;
+        flex: 1;
+        min-width: 0;
+    }
+
+    .about-route-name {
+        font-size: 20px;
+        letter-spacing: 1px;
+    }
+
+    .about-route-count {
+        font-size: 13px;
+        padding: 4px 10px;
+        border-radius: 8px;
+        /* Override yellow pill → route color with white text for high contrast */
+        background-color: var(--route-accent);
+        color: #fff;
+    }
+
+    /* Image thumbnail revealed on desktop */
+    .about-route-img {
+        display: block;
+        width: 38%;
+        flex-shrink: 0;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+    }
+
+    /* Gradient overlay so image blends into the card */
+    .about-route-img::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to right, #2d4855 0%, transparent 40%);
+        pointer-events: none;
+    }
+}

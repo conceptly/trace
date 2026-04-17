@@ -1,0 +1,602 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -79.3948,
+                    43.6677
+                ]
+            },
+            "properties": {
+                "Name": "ROM (The Crystal)",
+                "Location": "100 Queens Park",
+                "Author": "Daniel Libeskind",
+                "About": "A deconstructivist explosion of glass and aluminum that shards through the museum's original stone walls.",
+                "Year": 2007,
+                "Style Tags": "Deconstructivist, Angular, Bold",
+                "Interesting Fact": "The design was famously first sketched by Libeskind on a napkin while dining at the ROM.",
+                "Designer Note": "A dramatic study in 'structural tension'; the way the aluminum and glass 'shards' intersect the original 1914 stone facade is a masterclass in architectural contrast.",
+                "Clue / Hint": "Look for the glass explosion!",
+                "Route": "Architecture",
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1773983623/buildings-6_rzq70d.jpg"
+            },
+            "id": 0
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -79.3861,
+                    43.6701
+                ]
+            },
+            "properties": {
+                "Name": "Two Bloor West",
+                "Location": "2 Bloor St W",
+                "Author": "BDP Quadrangle",
+                "About": "A high-performance modernization of a prominent Yonge and Bloor intersection corner featuring vertical glass fins.",
+                "Year": 2022,
+                "Style Tags": "Modernist, Glass, Adaptive Re-skinning",
+                "Interesting Fact": "The renovation added a 'shimmer' to the intersection using high-performance glass fins that change appearance based on the viewer's angle.",
+                "Designer Note": "A study in 'Adaptive Re-skinning.' The project replaced a dated facade with a curtain wall that adds a dynamic, contemporary layer to the Mink Mile.",
+                "Clue / Hint": "The shimmering glass corner at Yonge and Bloor.",
+                "Route": "Architecture",
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1776396227/bloor-yonge-1_tus3l2.jpg"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -79.3818,
+                    43.6479
+                ]
+            },
+            "properties": {
+                "Name": "TD Centre",
+                "Location": "66 Wellington St W",
+                "Author": "Ludwig Mies van der Rohe",
+                "About": "The global 'Gold Standard' of the International Style; a cluster of six black-painted steel and glass towers.",
+                "Year": "1967-1969",
+                "Style Tags": "International Style, Miesian, Minimalist",
+                "Interesting Fact": "Mies designed specific window blinds for the entire complex that only have three positions—open, closed, or halfway—to maintain a uniform facade.",
+                "Designer Note": "'Less is More' in physical form. The external I-beam mullions guide the eye upward, serving as a masterpiece of geometric precision and material honesty.",
+                "Clue / Hint": "Look for the black steel towers with the cows in the grass nearby.",
+                "Route": "Architecture",
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1776399402/td-centre-2_dyspkr.jpg"
+            },
+            "id": 2
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -79.3817,
+                    43.6582
+                ]
+            },
+            "properties": {
+                "Name": "TMU SLC",
+                "Location": "341 Yonge St",
+                "Author": "Snøhetta / Zeidler",
+                "About": "A prismatic, glass-skinned building that serves as a digital-era gateway and student gathering hub on Yonge.",
+                "Year": 2015,
+                "Style Tags": "Contemporary, Prismatic, Digital",
+                "Interesting Fact": "The building has no 'back'; all sides are covered in a complex glass skin with a digital frit pattern to control light.",
+                "Designer Note": "The faceted blue ceiling in the lobby mimics a 'gathering space under a bridge,' creating a vibrant urban entry point.",
+                "Clue / Hint": "Blue ceiling on Yonge Street!",
+                "Route": "Architecture",
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1773983622/buildings-2_hc2xzy.jpg"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -79.3788,
+                    43.6573
+                ]
+            },
+            "properties": {
+                "Name": "Mackenzie House",
+                "Location": "82 Bond St",
+                "Author": "Unknown",
+                "About": "The final home of William Lyon Mackenzie, Toronto’s first mayor. A rare surviving mid-19th-century Georgian row house.",
+                "Year": 1858,
+                "Style Tags": "Georgian, Symmetrical, Red-Brick",
+                "Interesting Fact": "Known as one of Toronto's most haunted sites; the printing press in the basement is said to click on its own at night.",
+                "Designer Note": "A study in Architectural Persistence. The flat Georgian brickwork stands in sharp contrast to the high-tech glass of the TMU campus surrounding it.",
+                "Clue / Hint": "The historic brick house tucked behind the modern campus.",
+                "Route": "Architecture",
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1776400113/mackenzie-1_qxnshh.jpg"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -79.3817,
+                    43.6525
+                ]
+            },
+            "properties": {
+                "Name": "Old City Hall",
+                "Location": "60 Queen St W",
+                "Author": "E.J. Lennox",
+                "About": "A Romanesque Revival masterpiece featuring a massive clock tower and detailed sandstone carvings.",
+                "Year": 1899,
+                "Style Tags": "Romanesque Revival, Heritage, Sandstone",
+                "Interesting Fact": "The architect secretly carved his own name into the stone eaves after being denied an official plaque.",
+                "Designer Note": "A masterclass in late 19th-century civic pride. The weight of the sandstone and the intricate carvings project the permanence of city authority.",
+                "Clue / Hint": "The clock tower at Queen and Bay.",
+                "Route": "Architecture",
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1776400889/city-hall-3_a2odjz.jpg"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -79.3776,
+                    43.647
+                ]
+            },
+            "properties": {
+                "Name": "Hockey Hall of Fame",
+                "Location": "30 Yonge St",
+                "Author": "Frank Darling / S. George Curry",
+                "About": "Housed in a former Bank of Montreal branch, this ornate building is a pinnacle of late Victorian banking architecture.",
+                "Year": 1885,
+                "Style Tags": "Neo-Classical, Victorian, Ornate",
+                "Interesting Fact": "The building contains one of the most beautiful stained-glass domes in Canada, located in the Esso Great Hall.",
+                "Designer Note": "The Corinthian columns and decorative stone pediments are designed to inspire awe and confidence—the architectural language of wealth and security.",
+                "Clue / Hint": "Look for the ornate bank building at Yonge and Front.",
+                "Route": "Architecture",
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1773983623/hockey_nycx9h.jpg"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -79.3792,
+                    43.6473
+                ]
+            },
+            "properties": {
+                "Name": "Brookfield Place (Allen Lambert Galleria)",
+                "Location": "181 Bay St",
+                "Author": "Santiago Calatrava",
+                "About": "A six-story high glass and steel pedestrian atrium known as the 'Crystal Cathedral of Commerce.'",
+                "Year": 1992,
+                "Style Tags": "High-Tech, Neo-Futuristic, Light",
+                "Interesting Fact": "The design is meant to mimic the canopy of a forest, with white steel columns branching out into an intricate web of glass.",
+                "Designer Note": "Note how the structure manages to feel organic despite its industrial materials. It is a 'Trace' of nature inserted into the Financial District.",
+                "Clue / Hint": "The white forest of steel in the Financial District.",
+                "Route": "Architecture"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -79.3853,
+                    43.6414
+                ]
+            },
+            "properties": {
+                "Name": "Railway Museum (John Street Roundhouse)",
+                "Location": "255 Bremner Blvd",
+                "Author": "Canadian Pacific Railway",
+                "About": "An outdoor industrial gallery featuring the John Street Roundhouse, the primary repair hub for the Canadian Pacific Railway.",
+                "Year": 1929,
+                "Style Tags": "Industrial, Heritage, Mechanical",
+                "Interesting Fact": "The 'Roundhouse' was a functioning repair hub for steam locomotives, featuring a rotating turntable to move massive trains.",
+                "Designer Note": "A mechanical 'Trace' of the steam era. Walking through the trains allows the reader to physically read the industrial history of Toronto.",
+                "Clue / Hint": "Look for the steam engines across from the CN Tower.",
+                "Route": "Architecture",
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1776400889/railway-1_xuhqig.jpg"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -79.4031,
+                    43.6665
+                ]
+            },
+            "properties": {
+                "Name": "Gallanough Block",
+                "Location": "351 Bloor St W",
+                "Author": "Unknown",
+                "About": "A moody, mid-century rooftop bar that offers the city's most iconic view of the skyline and university.",
+                "Year": 1904,
+                "Style Tags": "Edwardian, Commercial, Red-Brick",
+                "Interesting Fact": "It is one of the few surviving continuous commercial \"blocks\" from the early 1900s that still maintains its original rhythmic window bays.",
+                "Designer Note": "The repetitive \"grid\" of the windows and the heavy cornice provide a perfect example of balanced industrial-era proportions.",
+                "Clue / Hint": "Historic bricks above the shops!",
+                "Route": "Architecture",
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1773983673/murals-11_rfbtvy.jpg"
+            },
+            "id": 9
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -79.4124,
+                    43.6649
+                ]
+            },
+            "properties": {
+                "Name": "Paupers Pub",
+                "Location": "539 Bloor St W",
+                "Author": "Hynes, Feldman & Watson",
+                "About": "Originally built in 1911 as a branch for the Home Bank of Canada, this Edwardian Classical building features a striking red-brick facade.",
+                "Year": 1911,
+                "Style Tags": "Edwardian Classical, Banking Architecture, Heritage",
+                "Interesting Fact": "The 'snake symbol' is a Caduceus—a staff of Hermes, the patron of merchants, carved into the stone to represent prosperity and trade.",
+                "Designer Note": "Institutional branding via stone. Massive columns and a heavy entablature project immovable security in early 20th-century banking.",
+                "Clue / Hint": "Look for the staff of the merchants carved in stone above the patio.",
+                "Route": "Architecture",
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1776397927/signage-02_klisl4.jpg"
+            },
+            "id": 10
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -79.3792,
+                    43.6473
+                ]
+            },
+            "properties": {
+                "Name": "Brookfield Place",
+                "Location": "181 Bay St",
+                "Author": "Santiago Calatrava",
+                "About": "A soaring, skeletal \"forest\" of white steel arches that turns a transit corridor into a modern cathedral.",
+                "Year": 1992,
+                "Style Tags": "Neo-Gothic, Airy, Skeletal",
+                "Interesting Fact": "The soaring \"Allen Lambert Galleria\" is often called a \"cathedral of commerce\" due to its tree-like support columns.",
+                "Designer Note": "Calatrava’s \"biomorphic\" ribs turn a functional transit corridor into a rhythmic, organic forest of white steel.",
+                "Clue / Hint": "Walk through the white forest!",
+                "Route": "Architecture",
+                "IMG": ""
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -79.3773,
+                    43.6445
+                ]
+            },
+            "properties": {
+                "Name": "CIBC Square",
+                "Location": "81 Bay St",
+                "Author": "WilkinsonEyre",
+                "About": "A high-tech diamond-faceted skyscraper featuring an elevated park suspended over the city's rail lines.",
+                "Year": 2021,
+                "Style Tags": "High-Tech, Diamond, Elevated",
+                "Interesting Fact": "It features a one-acre \"Park in the Sky\" suspended four storeys above the rail corridor.",
+                "Designer Note": "The \"diamond-patterned\" facade isn't just for looks; the facets catch the light at different angles to break up the massive scale of the tower.",
+                "Clue / Hint": "Sparkling diamonds near the rails!",
+                "Route": "Architecture",
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1776396227/cibc-square-2_jzg3h6.jpg"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -79.4,
+                    43.6645
+                ]
+            },
+            "properties": {
+                "Name": "Robarts Library",
+                "Location": "130 St George St",
+                "Author": "Warner, Burns, Toan & Lunde",
+                "About": "A peak example of Brutalist architecture, designed as a massive concrete \"fortress of knowledge\" in the shape of a peacock.",
+                "Year": 1973,
+                "Style Tags": "Brutalist, Geometric, Concrete",
+                "Interesting Fact": "Often called \"Fort Book,\" it was designed to look like a peacock (or a turkey) from an aerial view.",
+                "Designer Note": "Brutalism at its peak; the raw, \"beton brut\" concrete shows the texture of the wooden molds it was poured into—pure material honesty.",
+                "Clue / Hint": "The giant concrete peacock!",
+                "Route": "Architecture",
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1776392761/robarts-library-1_qyddb2.jpg"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -79.3908,
+                    43.653
+                ]
+            },
+            "properties": {
+                "Name": "OCAD (Sharp Centre)",
+                "Location": "100 McCaul St",
+                "Author": "Will Alsop",
+                "About": "A playful, pixelated black-and-white \"tabletop\" that floats on multi-colored pencils high above the street.",
+                "Year": 2004,
+                "Style Tags": "Postmodern, Playful, Elevated",
+                "Interesting Fact": "The \"tabletop\" structure sits on 12 multi-colored legs, some of which are painted black to \"disappear\" at night.",
+                "Designer Note": "A \"courageous\" architectural UX; it preserves the view of the park by lifting the entire building 26 meters into the air on \"pencils.\"",
+                "Clue / Hint": "Black and white pixel box!",
+                "Route": "Architecture",
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1776392761/ocad-2_lrbmrj.jpg"
+            },
+            "id": 14
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -79.3791,
+                    43.6542
+                ]
+            },
+            "properties": {
+                "Name": "Massey Hall",
+                "Location": "178 Victoria St",
+                "Author": "Sidney Badgley (Original) / KPMB Architects (Renovation)",
+                "About": "Toronto’s 'Old Lady of Shuter Street,' a late-Victorian concert hall recently restored to integrate a high-tech glass 'passerelle' bridge system.",
+                "Year": "1894 / 2021",
+                "Style Tags": "Victorian, Neo-Palladian, Restoration",
+                "Interesting Fact": "The famous red doors weren't originally red; they were painted in the 1900s to make the building stand out in the city's industrial smog.",
+                "Designer Note": "A masterclass in 'Acoustic Logic.' The floating glass bridges allow the original masonry to breathe while providing a modern, transparent 'skin' for movement.",
+                "Clue / Hint": "Look for the floating glass bridges hugging the old red brick.",
+                "Route": "Architecture"
+            },
+            "id": 15
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -79.3715,
+                    43.6492
+                ]
+            },
+            "properties": {
+                "Name": "St. Lawrence Market",
+                "Location": "93 Front St E",
+                "Author": "John William Siddall",
+                "About": "A massive 19th-century public market built directly over the footprint of Toronto’s 1845 City Hall—a building within a building.",
+                "Year": "1845 / 1902",
+                "Style Tags": "Industrial, Victorian, Heritage",
+                "Interesting Fact": "The South Market building was originally the city's second city hall before being fully converted into a market space in 1902.",
+                "Designer Note": "A study in 'Structural Layering.' The lower levels still reveal the stone foundations of the original city hall, while the steel trusses represent Victorian-era engineering peaks.",
+                "Clue / Hint": "Find the massive brick archways where the city's first council used to meet.",
+                "Route": "Architecture",
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1776401818/st-lawrence-1_q2h21n.jpg"
+            },
+            "id": 16
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        -79.412494,
+                        43.665006
+                    ],
+                    [
+                        -79.403721,
+                        43.666874
+                    ],
+                    [
+                        -79.403364,
+                        43.666391
+                    ],
+                    [
+                        -79.402206,
+                        43.663942
+                    ],
+                    [
+                        -79.400559,
+                        43.664361
+                    ],
+                    [
+                        -79.401672,
+                        43.6671
+                    ],
+                    [
+                        -79.394903,
+                        43.668388
+                    ],
+                    [
+                        -79.39419,
+                        43.668549
+                    ],
+                    [
+                        -79.393121,
+                        43.666262
+                    ],
+                    [
+                        -79.393967,
+                        43.66507
+                    ],
+                    [
+                        -79.392231,
+                        43.661172
+                    ],
+                    [
+                        -79.390984,
+                        43.660431
+                    ],
+                    [
+                        -79.388608,
+                        43.654917
+                    ],
+                    [
+                        -79.390042,
+                        43.654581
+                    ],
+                    [
+                        -79.390421,
+                        43.654642
+                    ],
+                    [
+                        -79.391222,
+                        43.654459
+                    ],
+                    [
+                        -79.390674,
+                        43.653025
+                    ],
+                    [
+                        -79.38968,
+                        43.650356
+                    ],
+                    [
+                        -79.389412,
+                        43.650383
+                    ],
+                    [
+                        -79.38807,
+                        43.647055
+                    ],
+                    [
+                        -79.389565,
+                        43.646695
+                    ],
+                    [
+                        -79.387763,
+                        43.642146
+                    ],
+                    [
+                        -79.386154,
+                        43.641286
+                    ],
+                    [
+                        -79.385579,
+                        43.641979
+                    ],
+                    [
+                        -79.380327,
+                        43.643144
+                    ],
+                    [
+                        -79.379637,
+                        43.642589
+                    ],
+                    [
+                        -79.377951,
+                        43.643505
+                    ],
+                    [
+                        -79.379024,
+                        43.645862
+                    ],
+                    [
+                        -79.382321,
+                        43.64528
+                    ],
+                    [
+                        -79.383432,
+                        43.647859
+                    ],
+                    [
+                        -79.381784,
+                        43.648248
+                    ],
+                    [
+                        -79.380212,
+                        43.648581
+                    ],
+                    [
+                        -79.379752,
+                        43.64736
+                    ],
+                    [
+                        -79.377453,
+                        43.647887
+                    ],
+                    [
+                        -79.376993,
+                        43.646833
+                    ],
+                    [
+                        -79.37155,
+                        43.649218
+                    ],
+                    [
+                        -79.372048,
+                        43.650356
+                    ],
+                    [
+                        -79.376674,
+                        43.649399
+                    ],
+                    [
+                        -79.378706,
+                        43.654316
+                    ],
+                    [
+                        -79.379606,
+                        43.656317
+                    ],
+                    [
+                        -79.37894,
+                        43.656172
+                    ],
+                    [
+                        -79.378273,
+                        43.656268
+                    ],
+                    [
+                        -79.378773,
+                        43.657305
+                    ],
+                    [
+                        -79.379839,
+                        43.657015
+                    ],
+                    [
+                        -79.380106,
+                        43.657714
+                    ],
+                    [
+                        -79.381338,
+                        43.657449
+                    ],
+                    [
+                        -79.381671,
+                        43.658196
+                    ],
+                    [
+                        -79.38668,
+                        43.670194
+                    ]
+                ]
+            },
+            "properties": {}
+        }
+    ]
+}

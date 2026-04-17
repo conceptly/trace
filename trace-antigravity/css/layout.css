@@ -1,0 +1,894 @@
+/* trace-antigravity/css/layout.css */
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Fallback */
+  height: 100svh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* Top Navigation */
+.top-nav {
+  height: 64px;
+  background-color: var(--surface-4);
+  border-bottom: 1px solid var(--divider-strong);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-lg);
+  flex-shrink: 0;
+  z-index: 100;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.logo-container {
+  width: 418px; /* Matches the new sidebar width avoiding CTA wrapping */
+  height: 16px;
+  display: flex;
+  align-items: center;
+  padding-left: 0;
+}
+
+.search-container {
+  width: 370px;
+  height: 38px;
+  background-color: rgba(235, 242, 238, 0.33);
+  border: 0.5px solid var(--backgrounds-elevated, #cddbd0);
+  backdrop-filter: blur(4px);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 6px;
+  cursor: text;
+}
+
+.search-container svg {
+  color: var(--content-2);
+}
+
+.search-container input {
+  font-family: 'Adelle', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 15px;
+  color: var(--content-1);
+  background: transparent;
+  border: none;
+  outline: none;
+  width: 100%;
+}
+
+.search-container input::placeholder {
+  color: var(--content-2);
+}
+
+.nav-center {
+  display: flex;
+  gap: 12px;
+  margin-right: 24px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 14px;
+  border-radius: 8px; /* matching visual roundness */
+  text-decoration: none;
+  color: var(--content-1);
+  background-color: var(--surface-5);
+  text-transform: uppercase;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid transparent;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0); /* invisible shadow by default */
+}
+
+.nav-item:hover {
+  color: var(--brand-trace);
+}
+
+.nav-item:active {
+  transform: scale(0.96);
+}
+
+.nav-item.active {
+  color: var(--brand-trace);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45); /* Distinct soft drop shadow */
+}
+
+.nav-item:focus-visible {
+  outline: none;
+  border-color: var(--brand-trace);
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.theme-switcher button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--content-3);
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.theme-switcher button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Main Content Area */
+.main-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Sidebar */
+.side-nav {
+  width: 418px;
+  background-color: var(--surface-4);
+  border-right: 1px solid var(--divider-strong);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  z-index: 90;
+}
+
+.side-section {
+  padding: var(--space-lg);
+  border-bottom: 1px solid var(--divider-soft);
+}
+
+.side-section:last-child {
+  border-bottom: none;
+}
+
+.section-title {
+  color: var(--content-3);
+  margin-bottom: var(--space-md);
+}
+
+/* Map Area */
+.map-canvas {
+  flex: 1;
+  background-color: #1E3340; /* Dark mode map base */
+  position: relative;
+  overflow: hidden;
+}
+
+/* Marker Styles (HTML based for mapboxgl.Marker) */
+.map-marker {
+  width: 60px;
+  height: 60px;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.map-marker:hover {
+  transform: scale(1.1);
+  z-index: 10;
+}
+
+.map-marker:active {
+  transform: scale(1.05); /* slightly scale down on critical press */
+}
+
+.map-marker.active {
+  transform: scale(1.15);
+  z-index: 20;
+}
+
+.map-marker.hidden {
+  display: none !important;
+}
+
+.marker-inner {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 3px solid #ffffff; /* slightly thicker solid border for bigger scale */
+  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.15), 0 2px 4px rgba(0,0,0,0.3); /* precise halo & depth */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden; /* cleanly clip inner images */
+  background-size: cover;
+  background-position: center;
+  transition: all 0.2s ease;
+}
+
+.map-marker.active .marker-inner {
+  width: 64px;
+  height: 64px;
+  box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.25), 0 4px 8px rgba(0,0,0,0.5); /* Emphasized glow when selected */
+  border-width: 3px;
+}
+
+/* ── No-image dot marker (temporary placeholder) ────────────────────────────
+   Figma spec: 44px circle, route color ring, semi-transparent center.
+   Used when a spot has no IMG property — smaller & lighter than photo markers. */
+.map-marker.no-image {
+  width: 40px;
+  height: 40px;
+}
+
+.map-marker.no-image .marker-inner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid currentColor;           /* Ring uses route color set via JS */
+  background-color: rgba(255,255,255,0.15); /* Semi-transparent center */
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.1), 0 1px 3px rgba(0,0,0,0.25);
+  border-radius: 50%;
+}
+
+.map-marker.no-image.active .marker-inner {
+  width: 32px;
+  height: 32px;
+  box-shadow: 0 0 0 5px rgba(255,255,255,0.2), 0 2px 6px rgba(0,0,0,0.4);
+}
+
+
+/* Tooltip (Tulip) design */
+.marker-tooltip {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translate(-50%, -100%) translateY(10px);
+  background: var(--surface-4, #2A3B47);
+  padding: 10px 14px;
+  border-radius: 12px;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 140px;
+  max-width: 200px;
+  text-align: center;
+  border: 1px solid var(--divider-strong, rgba(255,255,255,0.1));
+}
+
+.marker-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: var(--surface-4, #2A3B47) transparent transparent transparent;
+}
+
+.map-marker.active .marker-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -100%) translateY(0); /* float up cleanly */
+}
+
+.marker-tooltip .tooltip-title {
+  color: var(--content-1, #fff);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.marker-tooltip .tooltip-hint {
+  color: var(--content-3, #99A1A6);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+/* Floating Actions */
+.quick-guide-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  z-index: 80;
+}
+
+.quick-guide-btn {
+  pointer-events: auto;
+  transform: rotate(-90deg) translateY(-50%);
+  transform-origin: center right;
+  background-color: var(--backgrounds-bg-card-glass, rgba(45, 72, 85, 0.75));
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 16px 16px 0 0;
+  color: var(--text-text-body, #bdd0cc);
+  font-family: 'Josefin Sans', sans-serif;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0;
+  cursor: pointer;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  white-space: nowrap;
+  transition: all var(--transition-fast, 0.2s ease);
+}
+
+.quick-guide-icon-box {
+  width: 24px;
+  height: 24px;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.quick-guide-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.quick-guide-btn:hover {
+  background-color: rgba(45, 72, 85, 0.95);
+  padding-top: 12px; /* Slight tab out effect for left-facing tab */
+}
+
+/* =========================================================================
+   MOBILE COMPONENTS & UTILITIES (Global Desktop Hidden)
+   ========================================================================= */
+.mobile-only {
+  display: none !important;
+}
+
+/* Hide the mobile bottom dock on desktop */
+#mobile-bottom-dock {
+  display: none;
+}
+
+/* Hide the mobile hamburger menu overlay on desktop */
+.mobile-menu-overlay {
+  display: none;
+}
+
+/* Hide the desktop-only nearby section on mobile (shown on desktop by default) */
+.desktop-only {
+  display: block;
+}
+
+.mobile-floating-search {
+  display: none;
+  width: 100%;
+  padding: 12px 16px;
+  background-color: transparent;
+  position: fixed;
+  top: 64px;
+  left: 0;
+  z-index: 150;
+  pointer-events: none;   /* Transparent area passes touches to map beneath */
+}
+
+.mobile-floating-search .search-inner {
+  width: 100%;
+  height: 54px;
+  background-color: rgba(235, 242, 238, 0.9); /* Higher contrast opacity */
+  border: 0.5px solid var(--text-secondary, #7a9a8e);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 10px;
+  pointer-events: auto;   /* The pill itself IS interactive */
+  /* Avoid backdrop-filter — it creates a stacking context that breaks iOS input focus */
+}
+
+/* Form must not break the flex layout — display:contents has iOS bugs */
+.mobile-floating-search .search-inner form {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  height: 100%;
+  min-width: 0;
+}
+
+.mobile-floating-search .search-inner input {
+  background: transparent;
+  border: none;
+  outline: none;
+  width: 100%;
+  flex: 1;
+  height: 100%;
+  font-family: 'Adelle', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 15px;
+  color: #0f2229;                      /* Dark text — legible on light map/pill background */
+  pointer-events: auto;
+  touch-action: auto;
+  -webkit-user-select: text;
+  user-select: text;
+  cursor: text;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.mobile-floating-search .search-inner input::placeholder {
+  color: rgba(15, 34, 41, 0.5);        /* Dark placeholder on light pill */
+  font-style: italic;
+}
+
+/* =========================================================================
+   MOBILE RESPONSIVE BREAKPOINT (iPhone Pro & Map Overlays)
+   Refactors the Desktop Flexbox into Absolute Float topology
+   ========================================================================= */
+@media (max-width: 768px) {
+  /* Release Map bounds to fill entire viewport */
+  .main-content { display: block; }
+  .map-canvas { 
+    position: absolute !important; 
+    inset: 0; width: 100vw; height: 100svh;
+  }
+
+  /* Release Desktop Fixed Widths protecting the mobile breakpoint */
+  .logo-container { width: auto; max-width: none; justify-content: center; left: 50%; position: absolute; transform: translateX(-50%); }
+  .search-container { display: none; }
+  .nav-center { display: none; } /* Hide massive desktop map/city guide/about links! */
+  .nav-right { gap: 8px; }
+  .top-nav { padding: 0 16px; height: 64px; position: relative; }
+
+  /* Hide desktop-only elements on mobile */
+  .desktop-only { display: none !important; }
+
+  /* Unveil Mobile Specific Nav Components */
+  .mobile-only { display: flex !important; }
+  .logo-to { display: inline !important; }
+
+  /* Style Header Mobile Icons */
+  .mobile-hamburger {
+    background: transparent; border: none; color: var(--content-3);
+    width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;
+  }
+  .mobile-search-btn {
+    background: transparent; border: none; color: var(--content-3);
+    width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;
+    border-radius: 50%; transition: background-color 0.2s;
+  }
+
+  /* Active State for Mobile Overlay Search */
+  .mobile-floating-search.mobile-search-active {
+    display: block;
+  }
+
+  /* Deconstruct Left Panel into Ghost Wrapper */
+  .side-nav {
+    position: fixed; inset: 0; width: 100vw; height: 100%;
+    background: transparent; border: none; padding: 0;
+    pointer-events: none; /* Allow map clicks through wrapper */
+    z-index: 50;
+  }
+
+  /* Explore Routes -> Sliding Tabs docked to Right Edge */
+  .side-section.explore-routes {
+    position: absolute; right: 0; top: 25vh; transform: none;
+    pointer-events: auto; padding: 0; margin: 0; border: none;
+    background: transparent; display: flex; flex-direction: column; gap: 12px; height: auto;
+    align-items: flex-end; z-index: 100;
+  }
+  .side-section.explore-routes h2,
+  .route-description { display: none; }
+  
+  .route-wrapper[data-category="artists-pick"] { --route-bg: var(--cat-artists-choice); }
+  .route-wrapper[data-category="typography"] { --route-bg: var(--cat-typography); }
+  .route-wrapper[data-category="art-objects"] { --route-bg: var(--cat-art-objects); }
+  .route-wrapper[data-category="architecture"] { --route-bg: var(--cat-architecture); }
+  .route-wrapper[data-category="street-art"] { --route-bg: var(--cat-street-art); }
+
+  .route-wrapper {
+    background-color: var(--route-bg);
+    border-radius: 16px 0 0 16px;  /* Figma: rounded-bl-[16px] rounded-tl-[16px] */
+    height: 48px;                  /* Figma: h-[48px] */
+    max-width: 54px;               /* Figma: w-[54px] closed (icon + padding only) */
+    width: max-content;
+    overflow: hidden;
+    transition: max-width 0.55s cubic-bezier(0.34, 1.22, 0.64, 1), opacity 0.3s ease;
+    opacity: 0.9;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    margin: 0; padding: 0; border: none;
+  }
+
+  .route-wrapper.mobile-open {
+    max-width: 184px;  /* Figma: w-[184px] open */
+    opacity: 1;
+  }
+  .route-wrapper.active {
+    opacity: 1; /* Stay full opacity when active, even if closed */
+  }
+
+  .route-item { 
+    display: flex; align-items: center; gap: 12px;
+    height: 48px; padding: 9px 12px;  /* Figma: px-[12px], centers icon in 48px height */
+    background: transparent; border: none; width: 100%; cursor: pointer;
+  }
+  .route-item:hover, .route-wrapper.active .route-item { border: none; background: transparent; box-shadow: none; }
+  
+  .route-icon {
+    width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;  /* Figma: size-[30px] */
+    background-color: rgba(235, 242, 238, 0.8) !important;
+    display: flex; align-items: center; justify-content: center;
+    border: none; box-shadow: none;
+  }
+  .explore-routes .route-icon img {
+    filter: none !important;
+  }
+  /* The img dropshadow logic relies on filter, we just rely on the existing filter drop shadow for color but we need the drop shadow to be colored using our variable. Wait... */
+  
+  .route-info { display: flex; align-items: center; white-space: nowrap; opacity: 0; transition: opacity 0.3s 0.18s ease; }
+  .route-wrapper.mobile-open .route-info { opacity: 1; }
+  .route-name { font-family: 'Josefin Sans', sans-serif; font-size: 17px; font-weight: 700; color: white !important; }  /* Figma: text-[17px] font-bold */
+  .route-meta { display: none !important; }
+
+  /* =========================================================================
+     MOBILE BOTTOM DOCK — Figma-accurate layout
+     Structure: #mobile-bottom-dock > .btn-cta + .side-section
+     Closed: button visible above drawer header (86px)
+     Open:   drawer expands, button moves inside at bottom
+     ========================================================================= */
+
+  /* Hide the desktop sidebar layout rules for side-section on mobile */
+  .side-section:not(.explore-routes) {
+    /* Will be styled via #mobile-bottom-dock instead */
+    position: static !important;
+    background: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    z-index: auto !important;
+  }
+
+  /* The unified fixed wrapper */
+  #mobile-bottom-dock {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    z-index: 95;
+    pointer-events: none; /* Let map through by default */
+  }
+
+
+
+
+  /* The frosted drawer — only the header visible when closed */
+  #mobile-bottom-dock .side-section {
+    position: relative !important;
+    background: rgba(241, 246, 243, 0.75) !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    border-radius: 24px 24px 0 0 !important;
+    border-top: 1px solid rgba(255,255,255,0.5) !important;
+    box-shadow: 0 -4px 32px rgba(0,0,0,0.08) !important;
+    padding: 0 20px 0 20px !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    pointer-events: auto;
+    overflow: visible; /* Allow btn-cta to float above the drawer */
+    z-index: 1;
+  }
+
+  /* Add bottom spacing only when open */
+  #mobile-bottom-dock.drawer-open .side-section {
+    padding-bottom: 24px !important;
+  }
+
+  /* Drag Handle pill */
+  .nearby-drag-handle {
+    width: 44px; height: 4px;
+    border-radius: 2px;
+    background: rgba(0,0,0,0.15);
+    margin: 10px auto 0 auto;
+    flex-shrink: 0;
+  }
+
+  /* Header row */
+  .nearby-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 12px 0;
+    flex-shrink: 0;
+  }
+  .nearby-header-left {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .nearby-header-right {
+    display: flex; align-items: center; gap: 4px;
+  }
+
+  /* Near You icon circle — hardcoded light bg so it's always visible */
+  .nearby-icon {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background-color: #F5F9F6; /* Figma bg-base, always light */
+    border: 1.5px solid #E7E626; /* brand-trace yellow */
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    overflow: visible; /* Don't clip the SVG */
+    padding: 0;
+  }
+  .nearby-icon img {
+    width: 20px; height: 20px;
+    display: block;
+    flex-shrink: 0;
+    /* SVG has its own dark fill (#2D4855) — no filter needed */
+  }
+
+  /* Near You heading — hardcoded Figma light-mode dark text */
+  #mobile-bottom-dock #nearby-heading {
+    margin: 0;
+    color: #1D3240 !important; /* Figma text-primary, always dark */
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    text-transform: capitalize;
+    letter-spacing: 0;
+  }
+
+  /* Spots count — hardcoded Figma text-body color */
+  #mobile-bottom-dock .nearby-spots-count {
+    color: #2D4855 !important; /* Figma text-body */
+    font-size: 12px;
+    font-weight: 400;
+    font-family: 'Josefin Sans', sans-serif;
+  }
+
+  /* Chevron — same dark color, rotate when open */
+  .nearby-chevron {
+    width: 12px;
+    transition: transform 0.4s ease;
+    opacity: 0.6;
+    filter: brightness(0); /* Make it dark */
+  }
+  #mobile-bottom-dock.drawer-open .nearby-chevron {
+    transform: rotate(180deg);
+  }
+
+  /* Image carousel — display:none when closed (fully collapses, no height residue) */
+  .nearby-grid {
+    display: none !important;
+    flex-wrap: nowrap;
+    gap: 12px;
+    scroll-snap-type: x mandatory;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    border: none !important;
+  }
+  .nearby-grid::-webkit-scrollbar { display: none; }
+
+  /* When open: reveal grid as horizontal flex scroll */
+  #mobile-bottom-dock.drawer-open .nearby-grid {
+    display: flex !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin-top: 4px;
+    margin-bottom: 16px;
+  }
+
+  .nearby-item {
+    flex: 0 0 100px; height: 100px; min-width: 100px;
+    scroll-snap-align: start;
+    border-radius: 16px; overflow: hidden;
+    box-shadow: none; border: none; margin: 0;
+  }
+  .nearby-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* CTA Button — floats ABOVE the drawer in closed state */
+  #mobile-bottom-dock .btn-cta {
+    position: absolute !important;
+    left: 20px !important;
+    right: 20px !important;
+    width: auto !important;
+    bottom: calc(100% + 12px) !important; /* 12px gap above drawer top edge */
+    margin: 0 !important;
+    padding: 14px 16px !important;
+    border-radius: 16px !important;
+    min-height: 56px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    pointer-events: auto;
+    z-index: 10;
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  /* CTA Button — flows inside when drawer is open */
+  #mobile-bottom-dock.drawer-open .btn-cta {
+    position: static !important;
+    width: 100% !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* On mobile: move geolocate control to sit just below the route pill buttons.
+     Route pills start at 25vh, total height = 5×50px + 4×12px gaps = 298px.
+     Adding 16px breathing room = calc(25vh + 314px) from top of map. */
+  .mapboxgl-ctrl-bottom-right {
+    bottom: auto !important;
+    top: calc(25vh + 314px) !important;
+    right: 0 !important;
+    transition: top 0.3s ease;
+  }
+
+  
+  /* Turn off non-mobile things */
+  /* Keep .quick-guide-wrapper visible on mobile, but move to the left edge */
+  .quick-guide-wrapper {
+    right: auto;
+    left: 0;
+    width: 35px;
+    justify-content: center;
+    padding-bottom: 25dvh; /* pushes the button higher visually out of the way of the bottom docks */
+  }
+  .quick-guide-btn {
+    transform-origin: center center;
+    transform: rotate(-90deg);
+    border-radius: 0 0 16px 16px;
+  }
+  .quick-guide-btn:hover {
+    padding-top: 8px; /* reset desktop hover */
+    padding-bottom: 12px; /* slight tab out effect for right-facing tab */
+  }
+
+  /* =========================================================================
+     MOBILE HAMBURGER MENU OVERLAY
+     ========================================================================= */
+  .mobile-menu-overlay {
+    display: none;
+    position: absolute; top: 64px; left: 0;
+    width: 100vw; height: calc(100vh - 64px); height: calc(100svh - 64px);
+    background-color: var(--surface-1); /* deep dark bg */
+    z-index: 200; padding: 24px;
+    overflow-y: auto; flex-direction: column; gap: 24px;
+  }
+  .mobile-menu-overlay.active { display: flex; }
+  
+  .menu-section { display: flex; flex-direction: column; gap: 16px; width: 100%; }
+  .menu-label { font-family: 'Josefin Sans', sans-serif; font-size: 16px; text-transform: uppercase; color: var(--content-2); }
+  
+  .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; width: 100%; }
+  .menu-grid .full-width { grid-column: span 2; }
+  
+  .menu-btn {
+    display: flex; align-items: center; gap: 10px; padding: 12px;
+    border-radius: 16px; border: none; cursor: pointer; text-decoration: none;
+    background-color: var(--surface-4); color: var(--content-1); text-align: left;
+  }
+  .menu-btn .icon-circle {
+    width: 30px; height: 30px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    background-color: var(--surface-1); color: var(--content-1);
+  }
+  .svg-mask {
+    width: 16px; height: 16px;
+    background-color: currentColor;
+    -webkit-mask-size: contain; mask-size: contain;
+    -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+    -webkit-mask-position: center; mask-position: center;
+  }
+  
+  /* Navigate Buttons — matches Figma NavItemHamburgerLines spec */
+  .nav-btn {
+    background-color: #2d4855;      /* var(--text-body) */
+    border-radius: 16px;
+    padding: 16px;
+    gap: 8px;                        /* Figma: gap-[8px] */
+    align-items: center;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.15s ease;
+  }
+  .nav-btn .icon-circle {
+    width: 30px; height: 30px;       /* Figma: size-[30px] */
+    border-radius: 50%;
+    background-color: #0f2229;       /* Figma: bg-[var(--text/text-primary)] */
+    color: #f5f9f6;
+    flex-shrink: 0;
+    padding: 4px;
+  }
+  .nav-btn .text { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }  /* Figma: gap-[4px] */
+  .nav-btn .title {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 16px;                  /* Figma: text-[16px] */
+    font-weight: 400;                 /* Figma: font-normal */
+    text-transform: uppercase;
+    color: #f5f9f6;                   /* Figma: var(--bg-base) */
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .nav-btn .subtitle {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 11px;                  /* Figma: text-[11px] */
+    font-weight: 400;
+    color: #cddbd0;                   /* Figma: var(--bg-elevated) */
+    line-height: 1.2;
+  }
+
+  /* Active state — brand-trace yellow bg, dark icon/text */
+  .nav-btn.active {
+    background-color: var(--brand-trace);
+    border: 0.5px solid #cddbd0;     /* Figma: border-[var(--border/divider)] */
+    box-shadow: inset 2px 2px 8px rgba(45, 72, 85, 0.33);  /* Figma: BtnSmallPressed */
+  }
+  .nav-btn.active .icon-circle {
+    background-color: #0f2229;       /* Figma: bg-[var(--text/text-primary)] */
+    border: 0.5px solid #cddbd0;
+    color: var(--brand-trace);
+  }
+  .nav-btn.active .title  { color: #0f2229; font-weight: 400; }   /* Figma: text-[var(--text/text-primary)] */
+  .nav-btn.active .subtitle { color: #2d4855; }                   /* Figma: text-[var(--text/text-body)] */
+
+
+  
+  /* Explore Routes Buttons */
+  .route-btn { align-items: center; font-family: 'Josefin Sans', sans-serif; font-size: 14px; font-weight: 500; transition: filter 0.2s ease, box-shadow 0.2s ease; }
+  .route-btn.typography { background-color: rgba(43, 94, 168, 0.75); }
+  .route-btn.art-objects { background-color: rgba(37, 122, 72, 0.75); }
+  .route-btn.architecture { background-color: rgba(154, 69, 32, 0.75); }
+  .route-btn.street-art { background-color: rgba(126, 48, 144, 0.75); }
+  .route-btn.artists-pick { background-color: rgba(13, 122, 130, 0.75); }
+  .route-btn .icon-circle { background-color: rgba(235, 242, 238, 0.33); color: white; }
+  /* Active tap state: brighten + add inset ring */
+  .route-btn.active { filter: brightness(1.25); box-shadow: inset 0 0 0 2px rgba(255,255,255,0.45); }
+  
+  /* Contact / Links Buttons */
+  .contact-btn { background-color: rgba(45, 72, 85, 0.5); border-radius: 8px; padding: 6px 12px; }
+  .contact-btn .icon-circle { background: transparent; width: 24px; height: 24px; margin-right: -4px;}
+  .contact-btn .title { font-family: 'Roboto Slab', serif; font-size: 14px; font-weight: 300; }
+  
+  .menu-divider { width: 100%; height: 1px; background: var(--divider-strong); margin: 0; }
+  
+  /* Toggle Animations */
+  .mobile-hamburger svg { transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+  .mobile-hamburger.open svg { transform: rotate(90deg); }
+}

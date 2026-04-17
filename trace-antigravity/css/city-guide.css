@@ -1,0 +1,840 @@
+/* city-guide.css  — light-themed page (top-nav stays dark via inline scoping) */
+
+/* ─── Layout Override ────────────────────────────────────────────────────── */
+/* page-container normally locks height:100svh + overflow:hidden for the map.  */
+/* City guide is a regular scrolling page instead.                             */
+body.city-guide-page .page-container,
+.page-container.city-guide-page {
+  height: auto;
+  min-height: 100svh;
+  overflow: visible;
+  overflow-x: hidden;
+}
+
+/* Page background — light green like Figma (#f0f5f2 ≈ lighter than card bg) */
+body.city-guide-page {
+  background-color: #f0f5f2;
+  color: #0f2229;
+}
+
+/* ─── Content wrapper ────────────────────────────────────────────────────── */
+.city-guide-content {
+  padding: 16px 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* When mobile search bar opens, push content down enough to clear the bar */
+/* Search pill: 54px height + 12px top + 12px bottom padding = 78px occupied  */
+/* Add a 16px breathing gap below the pill before the "City Guide" title.      */
+body.mobile-search-is-open .city-guide-content {
+  padding-top: calc(54px + 12px + 12px + 16px); /* = 94px */
+  transition: padding-top 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ─── Guide header ───────────────────────────────────────────────────────── */
+.guide-header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.guide-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.icon-btn.back-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #0f2229;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  flex-shrink: 0;
+}
+
+.guide-title {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+  color: #0f2229;
+  margin: 0;
+  flex: 1;
+  padding-left: 4px;
+}
+
+/* ─── Sort button ────────────────────────────────────────────────────────── */
+.sort-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #2d4855;
+  flex-shrink: 0;
+}
+
+.sort-label {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+/* ─── Route filter tags ──────────────────────────────────────────────────── */
+.tags-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 4px;
+  margin-right: -16px;
+  padding-right: 16px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.tags-container::-webkit-scrollbar { display: none; }
+
+.tag-btn {
+  font-family: 'Roboto Slab', serif;
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: uppercase;
+  padding: 7px 12px 8px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  border: 1px solid currentColor;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  letter-spacing: 0.3px;
+}
+
+.tag-all { color: #2d4855; border-color: #2d4855; }
+.tag-all.active {
+  background-color: var(--brand-trace, #E7E626);
+  color: #1d3240;
+  border-color: transparent;
+  box-shadow: inset 2px 2px 2px rgba(0,0,0,0.15);
+}
+
+.tag-artists-pick  { color: #0d7a82; border-color: #0d7a82; }
+.tag-artists-pick.active  { background-color: #0d7a82; color: #fff; border-color: transparent; }
+
+.tag-typography    { color: #3a4e9a; border-color: #3a4e9a; }
+.tag-typography.active    { background-color: #3a4e9a; color: #fff; border-color: transparent; }
+
+.tag-art-objects   { color: #257a48; border-color: #257a48; }
+.tag-art-objects.active   { background-color: #257a48; color: #fff; border-color: transparent; }
+
+.tag-architecture  { color: #9d372e; border-color: #9d372e; }
+.tag-architecture.active  { background-color: #9d372e; color: #fff; border-color: transparent; }
+
+.tag-street-art    { color: #7a3084; border-color: #7a3084; }
+.tag-street-art.active    { background-color: #7a3084; color: #fff; border-color: transparent; }
+
+/* ─── Divider ────────────────────────────────────────────────────────────── */
+.city-guide-content .spot-divider {
+  margin: 0;
+  border: none;
+  border-top: 1px solid rgba(45, 72, 85, 0.2);
+}
+
+/* ─── Gems catalog ───────────────────────────────────────────────────────── */
+.gems-catalog {
+  display: flex;
+  flex-direction: column;
+  gap: 0; /* gap handled inside gems-list */
+  overflow: visible;
+}
+
+.gems-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* gap between cards */
+}
+
+/* ─── Individual gem card ────────────────────────────────────────────────── */
+/* Figma: bg #ebf2ee, 116×116 square image, 16px left indicator bar           */
+.gem-item {
+  background-color: #ebf2ee;
+  border-radius: 16px;
+  display: flex;
+  gap: 0;
+  overflow: clip;
+  align-items: flex-start;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.gem-item:hover  { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+.gem-item:active { transform: scale(0.98); }
+
+/* Image square — exactly 116×116 per Figma */
+.gem-img-container {
+  width: 116px;
+  height: 116px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.gem-img {
+  width: 116px;
+  height: 116px;
+  object-fit: cover;
+  display: block;
+  border-radius: 16px 0 0 16px;
+}
+
+.gem-img-placeholder {
+  width: 116px;
+  height: 116px;
+  background-color: rgba(45, 72, 85, 0.15);
+  border-radius: 16px 0 0 16px;
+}
+
+/* 16px route-colour bar sits over the left edge of the image */
+.gem-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 116px;
+  border-radius: 16px 0 0 16px;
+}
+
+/* ─── Gem text area ──────────────────────────────────────────────────────── */
+.gem-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 12px 16px 12px;
+  min-width: 0;
+}
+
+/* Title: Josefin Sans Medium 16px, uppercase, dark */
+.gem-title {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #0f2229;
+  text-transform: uppercase;
+  letter-spacing: 0.64px;
+  line-height: 1.35;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Route pill — route colour at 75% opacity */
+.gem-route-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 6px;
+  border-radius: 4px;
+  align-self: flex-start;
+}
+.gem-route-tag p {
+  font-family: 'Roboto Slab', serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #ebf2ee;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Description: Roboto Slab Light 15px, contained to 3 lines */
+.gem-desc-wrapper {
+  overflow: hidden;
+  height: 54px; /* 3 lines × 1.2 × 15px */
+  display: flex;
+  align-items: flex-start;
+}
+.gem-description {
+  font-family: 'Roboto Slab', serif;
+  font-weight: 300;
+  font-size: 15px;
+  color: #2d4855;
+  margin: 0;
+  line-height: 1.2;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex: 1;
+}
+
+/* ─── See More / Collapse bottom row ─────────────────────────────────────── */
+.catalog-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centered horizontally */
+  padding: 12px 0 40px; /* Reduced bottom space */
+}
+
+.see-more-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px 0;
+}
+.see-more-btn span {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  color: #1d3240;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.see-more-btn svg {
+  color: #1d3240;
+  flex-shrink: 0;
+}
+/* Expand = arrow points down (chevron-left rotated -90deg) */
+.see-more-btn.expand svg  { transform: rotate(-90deg); }
+/* Collapse = arrow points up */
+.see-more-btn.collapse svg { transform: rotate(90deg); }
+
+/* ─── Spot drawer overlay: transparent — no dim on the light city guide page ── */
+body.city-guide-page .drawer-overlay {
+  backdrop-filter: none !important;
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+body.city-guide-page .drawer-overlay.active {
+  background-color: rgba(0, 0, 0, 0) !important;
+  opacity: 1 !important; /* keep it 'visible' for click-capture, just invisible */
+}
+/* The spot-drawer itself provides shadow — overlay only captures backdrop clicks */
+
+/* ─── Route buttons in hamburger: coloured (override dark menu-btn default) ─── */
+body.city-guide-page .mobile-menu-overlay .route-btn.typography   { background-color: rgba(43,  94, 168, 0.85) !important; }
+body.city-guide-page .mobile-menu-overlay .route-btn.art-objects  { background-color: rgba(37, 122,  72, 0.85) !important; }
+body.city-guide-page .mobile-menu-overlay .route-btn.architecture { background-color: rgba(154, 69,  32, 0.85) !important; }
+body.city-guide-page .mobile-menu-overlay .route-btn.street-art   { background-color: rgba(126, 48, 144, 0.85) !important; }
+body.city-guide-page .mobile-menu-overlay .route-btn.artists-pick { background-color: rgba(13, 122, 130, 0.85) !important; }
+body.city-guide-page .mobile-menu-overlay .route-btn .icon-circle { background-color: rgba(235, 242, 238, 0.3) !important; color: #fff !important; }
+body.city-guide-page .mobile-menu-overlay .route-btn .title       { color: #edf4f0 !important; }
+
+/* ─── Spot drawer: explicit height so inner content can scroll ─────────── */
+/* The page-container on city-guide is height:auto, so height:100% doesn't  */
+/* resolve to a fixed value. We force the drawer to viewport height instead. */
+@media (max-width: 768px) {
+  body.city-guide-page .spot-drawer {
+    height: 100vh;
+    height: 100dvh; /* dynamic viewport height for iOS */
+    overflow: hidden;
+  }
+  /* Increase search-open padding so breadcrumb isn't crowded under search bar */
+  body.city-guide-page.mobile-search-is-open .spot-drawer .spot-drawer-content {
+    padding-top: 170px; /* nav 64px + search bar ~54px + gap 52px */
+  }
+}
+
+
+/* ─── Desktop Layout ─────────────────────────────────────────────────────── */
+@media (min-width: 769px) {
+
+  /* Hide mobile-only elements on desktop */
+  .desktop-only-flex { display: flex !important; }
+
+  /* ── Two-column outer wrapper ── */
+  .guide-desktop-layout {
+    display: grid;
+    grid-template-columns: 272px 1fr;
+    height: calc(100vh - 64px); /* full height minus nav */
+    min-height: 600px;
+    overflow: hidden;
+  }
+
+  /* ── Dark sidebar ── */
+  .guide-desktop-sidebar {
+    background-color: #2d4855;
+    border-right: 0.5px solid #3d5e6a;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .guide-sidebar-inner {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px 16px;
+    scrollbar-width: thin;
+    scrollbar-color: #3d5e6a #2d4855;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  /* Sidebar section */
+  .sidebar-section {}
+
+  .sidebar-section-label {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #5a8a95;
+    margin-bottom: 10px;
+  }
+
+  /* Route filter buttons */
+  .sidebar-route-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .sidebar-route-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 10px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.15s;
+  }
+
+  .sidebar-route-btn:hover {
+    background: rgba(237, 244, 240, 0.07);
+  }
+
+  .sidebar-route-btn.active {
+    background: rgba(237, 244, 240, 0.12);
+  }
+
+  .sidebar-route-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: block;
+  }
+
+  .sidebar-route-name {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #edf4f0;
+    letter-spacing: 0.02em;
+    flex: 1;
+  }
+
+  .sidebar-route-count {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 10px;
+    color: #5a8a95;
+    letter-spacing: 0.04em;
+  }
+
+  .sidebar-route-check {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    border: 1.5px solid #3d5e6a;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s, border-color 0.15s;
+  }
+
+  .sidebar-route-btn.active .sidebar-route-check {
+    background: #e7e626;
+    border-color: #e7e626;
+  }
+
+  .sidebar-route-btn.active .sidebar-route-check::after {
+    content: '';
+    display: block;
+    width: 5px;
+    height: 8px;
+    border-right: 2px solid #1d3240;
+    border-bottom: 2px solid #1d3240;
+    transform: rotate(45deg) translate(-1px, -1px);
+  }
+
+  /* Sort options */
+  .sidebar-sort-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .sidebar-sort-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    transition: background 0.15s;
+  }
+
+  .sidebar-sort-btn:hover {
+    background: rgba(237, 244, 240, 0.07);
+  }
+
+  .sidebar-sort-btn.active {
+    background: rgba(237, 244, 240, 0.1);
+  }
+
+  .sidebar-sort-radio {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid #3d5e6a;
+    flex-shrink: 0;
+    transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+  }
+
+  .sidebar-sort-btn.active .sidebar-sort-radio {
+    border-color: #e7e626;
+    background: #e7e626;
+    box-shadow: inset 0 0 0 3px #2d4855;
+  }
+
+  .sidebar-sort-label {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 12px;
+    color: #bdd0cc;
+    letter-spacing: 0.02em;
+  }
+
+  .sidebar-sort-btn.active .sidebar-sort-label {
+    color: #edf4f0;
+    font-weight: 600;
+  }
+
+  /* Sidebar footer */
+  .guide-sidebar-footer {
+    padding: 14px 16px;
+    background: #223740;
+    border-top: 0.5px solid #3d5e6a;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  .sidebar-result-summary {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 11px;
+    color: #8aadb5;
+    letter-spacing: 0.04em;
+  }
+
+  .sidebar-result-summary strong {
+    color: #edf4f0;
+    font-weight: 600;
+  }
+
+  .sidebar-clear-btn {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #8aadb5;
+    background: transparent;
+    border: 0.5px solid #3d5e6a;
+    border-radius: 8px;
+    padding: 6px 10px;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+    align-self: flex-start;
+  }
+
+  .sidebar-clear-btn:hover {
+    color: #edf4f0;
+    border-color: #5a8a95;
+  }
+
+  /* ── Main content area ── */
+  .guide-main-area {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: #f0f5f2;
+  }
+
+  /* Desktop topbar */
+  .guide-desktop-topbar {
+    background: #edf5f7;
+    border-bottom: 0.5px solid #bdd0d5;
+    padding: 12px 24px;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    gap: 12px;
+  }
+
+  .guide-breadcrumb-desktop {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 11px;
+    color: #5a8a95;
+    letter-spacing: 0.04em;
+  }
+
+  .guide-breadcrumb-link {
+    color: #8aadb5;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .guide-breadcrumb-link:hover { color: #1d3240; }
+
+  .guide-breadcrumb-sep { color: #bdd0d5; }
+
+  .guide-breadcrumb-current {
+    color: #1d3240;
+    font-weight: 600;
+  }
+
+  /* On desktop, the mobile city-guide-content becomes the scrollable grid host */
+  .city-guide-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px 28px 40px;
+    max-width: none;
+    margin: 0;
+    scrollbar-width: thin;
+    scrollbar-color: #bdd0d5 transparent;
+  }
+
+  /* Hide mobile-only elements */
+  .guide-header,
+  .city-guide-content > .spot-divider { display: none; }
+
+  /* ── Route section groups (desktop grouped catalog) ── */
+  .gems-catalog {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  /* Each route group */
+  .route-group {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .route-group-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 10px;
+    border-bottom: 0.5px solid #bdd0d5;
+  }
+
+  .route-group-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .route-group-name {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #1d3240;
+    flex: 1;
+  }
+
+  .route-group-count {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 11px;
+    color: #8aadb5;
+    letter-spacing: 0.04em;
+  }
+
+  /* Desktop gem grid: 3 columns */
+  .gem-grid-desktop {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+
+  /* Desktop gem cards */
+  .gem-card-desktop {
+    background: #ffffff;
+    border-radius: 12px;
+    border: 0.5px solid #bdd0d5;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .gem-card-desktop:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(15, 34, 41, 0.1);
+  }
+
+  .gem-card-thumb {
+    height: 120px;
+    position: relative;
+    overflow: hidden;
+    background: #cddbd0;
+  }
+
+  .gem-card-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Coloured left edge stripe */
+  .gem-card-thumb::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--gem-route-color, #cddbd0);
+    z-index: 1;
+  }
+
+  /* Placeholder when no image */
+  .gem-card-thumb-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    opacity: 0.3;
+    background: inherit;
+  }
+
+  .gem-card-body {
+    padding: 12px 14px 13px;
+  }
+
+  .gem-card-name {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #1d3240;
+    letter-spacing: 0.01em;
+    line-height: 1.25;
+    margin-bottom: 3px;
+  }
+
+  .gem-card-location {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 10px;
+    color: #5a8a95;
+    letter-spacing: 0.03em;
+    margin-bottom: 6px;
+  }
+
+  .gem-card-tag {
+    display: inline-block;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    padding: 3px 7px;
+    border-radius: 4px;
+  }
+
+  /* Revert the mobile card styles that apply on desktop */
+  .gems-catalog .gem-item { display: none; } /* hide mobile cards */
+
+  /* Mobile-only UI hidden on desktop */
+  .city-guide-content .guide-header      { display: none !important; }
+  .city-guide-content > hr.spot-divider  { display: none !important; }
+  .catalog-bottom                         { display: none !important; }
+
+}
+
+
+/* ─────────────────────────────────────────────────────────────────────────
+   DARK NAV + MENU — keep consistent with every other page in the app.
+   about.css uses the same pattern; city-guide.css mirrors it.
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* Top nav bar — dark */
+body.city-guide-page .top-nav {
+  background-color: #2d4855 !important;
+  color: #edf4f0 !important;
+  border-bottom-color: #3d5e6a !important;
+}
+body.city-guide-page .logo-text { color: #edf4f0 !important; }
+body.city-guide-page .logo-to   { color: #e7e626 !important; }
+body.city-guide-page .nav-item  { color: #bdd0cc !important; background-color: #3d5e6a !important; }
+body.city-guide-page .nav-item:hover { color: #e7e626 !important; }
+body.city-guide-page .nav-item.active { color: #e7e626 !important; }
+body.city-guide-page .theme-switcher svg,
+body.city-guide-page .mobile-search-btn svg,
+body.city-guide-page .mobile-hamburger svg {
+  color: #edf4f0 !important;
+}
+
+/* Hamburger menu overlay — dark (matches map & about pages) */
+body.city-guide-page .mobile-menu-overlay {
+  background-color: #12202a !important;
+}
+body.city-guide-page .menu-btn {
+  background-color: #2d4855 !important;
+  color: #edf4f0 !important;
+}
+body.city-guide-page .menu-btn .icon-circle {
+  background-color: #12202a !important;
+  color: #edf4f0 !important;
+}
+body.city-guide-page .menu-label {
+  color: #bdd0cc !important;
+}
+body.city-guide-page .menu-divider {
+  background-color: #3d5e6a !important;
+}
+body.city-guide-page .nav-btn.active {
+  background-color: #e7e626 !important;
+  border: 0.5px solid #cddbd0 !important;
+}
+body.city-guide-page .nav-btn.active .icon-circle {
+  background-color: #0f2229 !important;
+  color: #e7e626 !important;
+}
+body.city-guide-page .nav-btn.active .title    { color: #0f2229 !important; }
+body.city-guide-page .nav-btn.active .subtitle { color: #2d4855 !important; }

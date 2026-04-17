@@ -1,0 +1,782 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=Roboto+Slab:wght@400;500&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .t-root {
+    font-family: 'Josefin Sans', sans-serif;
+    background: #E4EFF2;
+    color: #1D3240;
+  }
+
+  /* ── TOPNAV ── */
+  .t-topnav {
+    background: #2D4855;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid #3D5E6A;
+  }
+  .t-logo { display: flex; align-items: baseline; gap: 2px; text-decoration: none; }
+  .t-logo-trace { font-weight: 700; font-size: 22px; letter-spacing: 0.06em; color: #E7E626; }
+  .t-logo-to { font-weight: 300; font-size: 16px; letter-spacing: 0.06em; color: #BDD0CC; }
+  .t-search-bar {
+    display: flex; align-items: center; gap: 8px;
+    background: rgba(237,244,240,0.1); border: 1px solid rgba(237,244,240,0.15);
+    border-radius: 12px; padding: 0 14px; height: 36px; width: 260px;
+    cursor: pointer; transition: border-color 0.15s;
+  }
+  .t-search-bar:hover { border-color: rgba(237,244,240,0.3); }
+  .t-search-placeholder { font-size: 12px; color: #8AADB5; letter-spacing: 0.03em; }
+  .t-nav-links { display: flex; align-items: center; gap: 4px; }
+  .t-nav-link {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: #8AADB5; text-decoration: none;
+    padding: 6px 12px; border-radius: 8px; cursor: pointer;
+    transition: color 0.15s, background 0.15s;
+  }
+  .t-nav-link:hover { color: #EDF4F0; background: rgba(237,244,240,0.08); }
+  .t-nav-link.active { color: #EDF4F0; }
+  .t-icon-btn {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: transparent; border: 1px solid rgba(237,244,240,0.15);
+    color: #8AADB5; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 13px; transition: background 0.15s, color 0.15s;
+  }
+  .t-icon-btn:hover { background: rgba(237,244,240,0.1); color: #EDF4F0; }
+
+  /* ── MAIN LAYOUT ── */
+  .t-map-section {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    height: calc(100vh - 56px);
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* ── SIDEBAR ── */
+  .t-sidebar {
+    background: #2D4855;
+    display: flex; flex-direction: column;
+    border-right: 1px solid #3D5E6A;
+    overflow: hidden;
+    z-index: 10;
+  }
+  .t-sidebar-inner { flex: 1; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #3D5E6A #2D4855; }
+  .t-sidebar-section { padding: 16px; border-bottom: 1px solid rgba(61,94,106,0.5); }
+  .t-section-label {
+    font-size: 9px; font-weight: 600; letter-spacing: 0.18em;
+    text-transform: uppercase; color: #5A8A95; margin-bottom: 10px;
+  }
+
+  /* Route filters */
+  .t-route-btn {
+    display: flex; align-items: center; gap: 10px;
+    width: 100%; padding: 9px 10px; border-radius: 12px;
+    border: none; background: transparent; cursor: pointer;
+    margin-bottom: 4px; transition: background 0.15s; text-align: left;
+  }
+  .t-route-btn:hover { background: rgba(237,244,240,0.06); }
+  .t-route-btn.active { background: rgba(237,244,240,0.1); }
+  .t-route-icon {
+    width: 30px; height: 30px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-size: 11px; font-weight: 700; color: #fff;
+  }
+  .t-route-info { flex: 1; }
+  .t-route-name { font-size: 13px; font-weight: 600; color: #EDF4F0; letter-spacing: 0.02em; line-height: 1.2; }
+  .t-route-hint { font-size: 10px; color: #5A8A95; margin-top: 1px; letter-spacing: 0.02em; }
+  .t-route-count { font-size: 10px; font-weight: 600; color: #5A8A95; letter-spacing: 0.06em; flex-shrink: 0; }
+
+  /* Near You */
+  .t-spot-card {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px; border-radius: 10px; margin-bottom: 4px;
+    cursor: pointer; transition: background 0.15s;
+    background: rgba(237,244,240,0.04); border: 1px solid rgba(61,94,106,0.4);
+  }
+  .t-spot-card:hover { background: rgba(237,244,240,0.08); }
+  .t-spot-thumb {
+    width: 46px; height: 46px; border-radius: 8px;
+    flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 18px;
+  }
+  .t-spot-details { flex: 1; min-width: 0; }
+  .t-spot-name { font-size: 12px; font-weight: 600; color: #EDF4F0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: 0.02em; }
+  .t-spot-tag {
+    display: inline-block; font-size: 8px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 2px 6px; border-radius: 4px; color: #fff; margin-top: 2px;
+  }
+  .t-spot-meta { font-size: 10px; color: #5A8A95; margin-top: 1px; letter-spacing: 0.02em; }
+  .t-spot-dist { font-size: 10px; color: #8AADB5; flex-shrink: 0; letter-spacing: 0.04em; }
+
+  /* Sidebar CTA */
+  .t-sidebar-cta { padding: 14px 16px; background: #223740; border-top: 1px solid #3D5E6A; }
+  .t-cta-btn {
+    display: flex; align-items: center; justify-content: space-between;
+    width: 100%; background: #E7E626; border: none; border-radius: 14px;
+    padding: 12px 16px; cursor: pointer; transition: opacity 0.15s;
+  }
+  .t-cta-btn:hover { opacity: 0.9; }
+  .t-cta-left { display: flex; align-items: center; gap: 10px; }
+  .t-cta-icon {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: rgba(45,72,85,0.2);
+    display: flex; align-items: center; justify-content: center; font-size: 12px;
+  }
+  .t-cta-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #1D3240; line-height: 1.2; }
+  .t-cta-sub { font-size: 10px; color: #3A6070; margin-top: 1px; }
+  .t-cta-arrow { font-size: 14px; color: #1D3240; font-weight: 700; }
+
+  /* ── MAP AREA ── */
+  .t-map-area { position: relative; overflow: hidden; background: #C8DAE0; }
+
+  /* ── GUIDE BUTTON (right edge of map, replaces route buttons) ── */
+  .t-guide-trigger {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+  }
+  .t-guide-trigger-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 42px;
+    padding: 14px 0;
+    background: #2D4855;
+    border: 1px solid #3D5E6A;
+    border-right: none;
+    border-radius: 14px 0 0 14px;
+    cursor: pointer;
+    transition: background 0.2s, width 0.2s;
+  }
+  .t-guide-trigger-btn:hover { background: #1D3240; width: 48px; }
+  .t-guide-trigger-icon {
+    width: 26px; height: 26px;
+    background: rgba(231,230,38,0.15);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; color: #E7E626;
+  }
+  .t-guide-trigger-label {
+    font-size: 8px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: #8AADB5;
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    line-height: 1;
+  }
+
+  /* ── GUIDE SLIDE-IN PANEL ── */
+  .t-guide-panel {
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: 300px;
+    background: #1D3240;
+    border-left: 1px solid #3D5E6A;
+    z-index: 30;
+    display: flex; flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+  }
+  .t-guide-panel.open { transform: translateX(0); }
+  .t-guide-panel-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px; border-bottom: 1px solid rgba(61,94,106,0.5);
+    flex-shrink: 0;
+  }
+  .t-guide-panel-title { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #EDF4F0; }
+  .t-panel-close {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: rgba(237,244,240,0.08); border: 1px solid rgba(237,244,240,0.12);
+    color: #8AADB5; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 11px; transition: background 0.15s;
+  }
+  .t-panel-close:hover { background: rgba(237,244,240,0.15); color: #EDF4F0; }
+  .t-guide-panel-body { flex: 1; overflow-y: auto; padding: 16px; scrollbar-width: thin; scrollbar-color: #3D5E6A #1D3240; }
+
+  /* Onboarding steps inside panel */
+  .t-step-card {
+    background: rgba(237,244,240,0.04);
+    border: 1px solid rgba(61,94,106,0.5);
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .t-step-card:hover { background: rgba(237,244,240,0.08); }
+  .t-step-num {
+    font-size: 9px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: #E7E626; margin-bottom: 5px;
+  }
+  .t-step-title { font-size: 14px; font-weight: 700; color: #EDF4F0; margin-bottom: 8px; line-height: 1.2; }
+  .t-step-title span { color: #E7E626; }
+  .t-step-row { display: flex; gap: 10px; margin-bottom: 6px; }
+  .t-step-key { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #E7E626; width: 56px; flex-shrink: 0; padding-top: 1px; }
+  .t-step-val { font-family: 'Roboto Slab', serif; font-size: 12px; color: #BDD0CC; line-height: 1.5; flex: 1; }
+  .t-panel-cta {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(61,94,106,0.5);
+  }
+  .t-panel-cta-btn {
+    display: flex; align-items: center; justify-content: space-between;
+    width: 100%; background: #E7E626; border: none; border-radius: 12px;
+    padding: 11px 14px; cursor: pointer; transition: opacity 0.15s;
+  }
+  .t-panel-cta-btn:hover { opacity: 0.9; }
+  .t-panel-cta-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #1D3240; }
+  .t-panel-section { margin-bottom: 16px; }
+  .t-panel-section-label { font-size: 9px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #5A8A95; margin-bottom: 8px; }
+  .t-panel-route-row {
+    display: flex; align-items: center; gap: 8px;
+    padding: 7px 8px; border-radius: 8px; margin-bottom: 3px;
+    cursor: pointer; transition: background 0.15s;
+  }
+  .t-panel-route-row:hover { background: rgba(237,244,240,0.06); }
+  .t-panel-route-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .t-panel-route-name { font-size: 12px; font-weight: 600; color: #EDF4F0; flex: 1; letter-spacing: 0.02em; }
+  .t-panel-route-count { font-size: 10px; color: #5A8A95; letter-spacing: 0.04em; }
+
+  /* ── SCROLL DOWN ANCHOR (replaces Near You bar) ── */
+  .t-scroll-anchor {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+  }
+  .t-scroll-btn {
+    display: flex; align-items: center; gap: 8px;
+    background: rgba(29,50,64,0.82);
+    border: 1px solid rgba(61,94,106,0.7);
+    border-radius: 50px;
+    padding: 9px 18px;
+    cursor: pointer; color: #EDF4F0;
+    text-decoration: none;
+    transition: background 0.15s, border-color 0.15s;
+    backdrop-filter: blur(4px);
+  }
+  .t-scroll-btn:hover { background: rgba(29,50,64,0.96); border-color: #3D5E6A; }
+  .t-scroll-label { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #EDF4F0; }
+  .t-scroll-arrow {
+    display: flex; flex-direction: column; gap: 2px; align-items: center;
+  }
+  .t-scroll-arrow span {
+    display: block; width: 6px; height: 6px;
+    border-right: 1.5px solid #E7E626;
+    border-bottom: 1.5px solid #E7E626;
+    transform: rotate(45deg);
+    animation: bounce 1.6s ease-in-out infinite;
+  }
+  .t-scroll-arrow span:nth-child(2) { animation-delay: 0.2s; opacity: 0.6; }
+  @keyframes bounce {
+    0%, 100% { transform: rotate(45deg) translateY(0); opacity: 1; }
+    50% { transform: rotate(45deg) translateY(3px); opacity: 0.4; }
+  }
+
+  /* Map styles */
+  .t-map-badge {
+    position: absolute; top: 16px; left: 16px;
+    background: rgba(235,242,238,0.9); border: 1px solid #BDD0D5;
+    border-radius: 10px; padding: 8px 14px;
+    font-size: 11px; font-weight: 600; color: #1D3240;
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .t-map-label { color: #5A8A95; font-weight: 400; margin-right: 4px; }
+  .t-marker {
+    position: absolute; width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid rgba(255,255,255,0.6); cursor: pointer;
+    font-size: 11px; font-weight: 700; color: #fff;
+    transition: transform 0.15s;
+  }
+  .t-marker:hover { transform: scale(1.15); }
+
+  /* Onboarding modal */
+  .t-modal-overlay {
+    position: absolute; inset: 0;
+    background: rgba(29,50,64,0.55);
+    display: flex; align-items: center; justify-content: center; z-index: 40;
+  }
+  .t-modal {
+    background: #223740; border: 1px solid #3D5E6A;
+    border-radius: 20px; width: 320px; padding: 24px; position: relative;
+  }
+  .t-modal-close {
+    position: absolute; top: 14px; right: 14px;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: rgba(237,244,240,0.1); border: 1px solid rgba(237,244,240,0.15);
+    color: #8AADB5; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 11px; transition: background 0.15s;
+  }
+  .t-modal-close:hover { background: rgba(237,244,240,0.18); }
+  .t-modal-step { font-size: 9px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #E7E626; margin-bottom: 6px; }
+  .t-modal-title { font-size: 22px; font-weight: 700; color: #EDF4F0; margin-bottom: 18px; line-height: 1.2; letter-spacing: -0.01em; }
+  .t-modal-title span { color: #E7E626; }
+  .t-modal-row { display: flex; gap: 12px; margin-bottom: 12px; align-items: flex-start; }
+  .t-modal-key { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #E7E626; width: 58px; flex-shrink: 0; padding-top: 1px; }
+  .t-modal-val { font-family: 'Roboto Slab', serif; font-size: 13px; color: #BDD0CC; line-height: 1.5; flex: 1; }
+  .t-modal-dots { display: flex; gap: 5px; margin: 16px 0 14px; }
+  .t-modal-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(237,244,240,0.2); }
+  .t-modal-dot.on { background: #E7E626; width: 18px; border-radius: 3px; }
+  .t-modal-btn {
+    width: 100%; background: #E7E626; border: none; border-radius: 12px;
+    padding: 13px 16px; display: flex; align-items: center; justify-content: space-between;
+    cursor: pointer; transition: opacity 0.15s;
+  }
+  .t-modal-btn:hover { opacity: 0.9; }
+  .t-modal-btn-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #1D3240; }
+
+  /* ── BELOW FOLD ── */
+  .t-below { background: #F4F9FA; padding: 60px 40px; }
+  .t-below-grid { max-width: 1100px; margin: 0 auto; }
+  .t-below-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-bottom: 52px; align-items: end; }
+  .t-eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #0D7A82; margin-bottom: 10px; }
+  .t-h2 { font-size: 30px; font-weight: 700; color: #1D3240; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 14px; }
+  .t-h2 em { font-style: italic; color: #0D7A82; font-weight: 300; }
+  .t-body { font-family: 'Roboto Slab', serif; font-size: 15px; color: #3A6070; line-height: 1.7; }
+  .t-stat-row { display: flex; gap: 16px; }
+  .t-stat { text-align: center; padding: 20px; background: #EDF5F7; border-radius: 14px; border: 1px solid #BDD0D5; flex: 1; }
+  .t-stat-num { font-size: 28px; font-weight: 700; color: #1D3240; letter-spacing: -0.02em; }
+  .t-stat-label { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #3A6070; margin-top: 2px; }
+
+  .t-section-divider { margin-bottom: 14px; }
+  .t-routes-label { font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #3A6070; margin-bottom: 14px; }
+  .t-route-cards { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 48px; }
+  .t-rcard { border-radius: 14px; padding: 16px 14px; cursor: pointer; transition: transform 0.15s; position: relative; overflow: hidden; }
+  .t-rcard:hover { transform: translateY(-2px); }
+  .t-rcard-icon { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+  .t-rcard-name { font-size: 13px; font-weight: 700; color: #fff; letter-spacing: 0.02em; margin-bottom: 3px; }
+  .t-rcard-hint { font-size: 10px; color: rgba(255,255,255,0.7); line-height: 1.4; letter-spacing: 0.02em; }
+  .t-rcard-count { position: absolute; bottom: 12px; right: 12px; font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+
+  .t-spots-label { font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #3A6070; margin-bottom: 14px; }
+  .t-spot-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .t-gem-card { background: #fff; border-radius: 14px; border: 1px solid #BDD0D5; overflow: hidden; cursor: pointer; transition: transform 0.15s; }
+  .t-gem-card:hover { transform: translateY(-2px); }
+  .t-gem-thumb { height: 100px; display: flex; align-items: center; justify-content: center; font-size: 28px; position: relative; }
+  .t-gem-stripe { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; }
+  .t-gem-body { padding: 11px 12px 13px; }
+  .t-gem-route-tag { display: inline-block; font-size: 8px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #fff; padding: 2px 7px; border-radius: 4px; margin-bottom: 5px; }
+  .t-gem-name { font-size: 13px; font-weight: 700; color: #1D3240; margin-bottom: 3px; letter-spacing: 0.01em; line-height: 1.2; }
+  .t-gem-loc { font-size: 10px; color: #3A6070; letter-spacing: 0.04em; }
+
+  .t-guide-cta { margin-top: 32px; display: flex; align-items: center; gap: 12px; }
+  .t-guide-btn { display: inline-flex; align-items: center; gap: 8px; background: #1D3240; color: #E7E626; border: none; border-radius: 12px; padding: 12px 22px; font-family: 'Josefin Sans', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: opacity 0.15s; }
+  .t-guide-btn:hover { opacity: 0.88; }
+  .t-guide-note { font-family: 'Roboto Slab', serif; font-size: 13px; color: #3A6070; font-style: italic; }
+
+  /* ── FOOTER ── */
+  .t-footer { background: #0F2229; padding: 48px 40px 28px; border-top: 1px solid #1D3240; }
+  .t-footer-grid { max-width: 1100px; margin: 0 auto; }
+  .t-footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+  .t-footer-brand {}
+  .t-footer-logo { display: flex; align-items: baseline; gap: 2px; margin-bottom: 12px; }
+  .t-footer-logo-trace { font-size: 24px; font-weight: 700; letter-spacing: 0.06em; color: #E7E626; }
+  .t-footer-logo-to { font-size: 17px; font-weight: 300; letter-spacing: 0.06em; color: #3D5E6A; }
+  .t-footer-tagline { font-family: 'Roboto Slab', serif; font-size: 13px; color: #3D5E6A; line-height: 1.6; max-width: 260px; margin-bottom: 16px; }
+  .t-footer-meta { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #3D5E6A; }
+  .t-footer-meta span { color: #5A8A95; }
+
+  .t-footer-col-label { font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #3D5E6A; margin-bottom: 14px; }
+  .t-footer-link {
+    display: block; font-size: 13px; color: #5A8A95;
+    text-decoration: none; margin-bottom: 8px; letter-spacing: 0.02em;
+    transition: color 0.15s; cursor: pointer;
+  }
+  .t-footer-link:hover { color: #8AADB5; }
+  .t-footer-link.highlight { color: #BDD0CC; font-weight: 600; }
+
+  .t-footer-route-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 7px; vertical-align: middle; }
+
+  .t-footer-divider { border: none; border-top: 1px solid #1D3240; margin-bottom: 20px; }
+  .t-footer-bottom { display: flex; align-items: center; justify-content: space-between; }
+  .t-footer-copy { font-size: 11px; color: #2D4855; letter-spacing: 0.04em; }
+  .t-footer-copy span { color: #3D5E6A; }
+  .t-footer-links-inline { display: flex; gap: 20px; }
+  .t-footer-inline-link { font-size: 11px; color: #2D4855; text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; transition: color 0.15s; }
+  .t-footer-inline-link:hover { color: #3D5E6A; }
+
+  .t-footer-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(231,230,38,0.08); border: 1px solid rgba(231,230,38,0.15);
+    border-radius: 6px; padding: 5px 10px; margin-top: 14px;
+    font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(231,230,38,0.6);
+  }
+  .t-footer-badge-dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(231,230,38,0.5); }
+</style>
+
+<div class="t-root" id="traceRoot">
+  <h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">TRACE Toronto desktop home — interactive mockup</h2>
+
+  <!-- TOPNAV -->
+  <nav class="t-topnav">
+    <a class="t-logo" href="#">
+      <span class="t-logo-trace">TRACE</span><span class="t-logo-to">TO</span>
+    </a>
+    <div class="t-search-bar">
+      <span style="color:#8AADB5;font-size:13px;">&#9906;</span>
+      <span class="t-search-placeholder">Search spots or routes&hellip;</span>
+    </div>
+    <div class="t-nav-links">
+      <a class="t-nav-link active" href="#">Map</a>
+      <a class="t-nav-link" href="#">Guide</a>
+      <a class="t-nav-link" href="#">About</a>
+      <a class="t-nav-link" href="#">Profile</a>
+    </div>
+    <button class="t-icon-btn" title="Toggle theme">&#9788;</button>
+  </nav>
+
+  <!-- MAP SECTION -->
+  <div class="t-map-section">
+
+    <!-- SIDEBAR -->
+    <aside class="t-sidebar">
+      <div class="t-sidebar-inner">
+
+        <div class="t-sidebar-section">
+          <div class="t-section-label">Explore Routes</div>
+          <button class="t-route-btn active" onclick="this.classList.toggle('active')">
+            <div class="t-route-icon" style="background:#0D7A82;">&#10022;</div>
+            <div class="t-route-info"><div class="t-route-name">Artist&rsquo;s Choice</div><div class="t-route-hint">Curator-selected gems</div></div>
+            <div class="t-route-count">10+</div>
+          </button>
+          <button class="t-route-btn" onclick="this.classList.toggle('active')">
+            <div class="t-route-icon" style="background:#333DA7;">T</div>
+            <div class="t-route-info"><div class="t-route-name">Typography</div><div class="t-route-hint">Ghost signs &middot; neon &middot; civic type</div></div>
+            <div class="t-route-count">12+</div>
+          </button>
+          <button class="t-route-btn" onclick="this.classList.toggle('active')">
+            <div class="t-route-icon" style="background:#9D372E;">&#9962;</div>
+            <div class="t-route-info"><div class="t-route-name">Architecture</div><div class="t-route-hint">Brutalist &middot; modernist &middot; heritage</div></div>
+            <div class="t-route-count">10+</div>
+          </button>
+          <button class="t-route-btn" onclick="this.classList.toggle('active')">
+            <div class="t-route-icon" style="background:#257A48;">&#9670;</div>
+            <div class="t-route-info"><div class="t-route-name">Art Objects</div><div class="t-route-hint">Sculpture &middot; installation &middot; public art</div></div>
+            <div class="t-route-count">11+</div>
+          </button>
+          <button class="t-route-btn" onclick="this.classList.toggle('active')">
+            <div class="t-route-icon" style="background:#8E2E8E;">&#9670;</div>
+            <div class="t-route-info"><div class="t-route-name">Street Art</div><div class="t-route-hint">Murals &middot; commissioned &middot; grassroots</div></div>
+            <div class="t-route-count">14+</div>
+          </button>
+        </div>
+
+        <div class="t-sidebar-section">
+          <div class="t-section-label">Near You &mdash; 5 spots</div>
+          <div class="t-spot-card">
+            <div class="t-spot-thumb" style="background:#1C3340;">&#9670;</div>
+            <div class="t-spot-details"><div class="t-spot-name">Lee&rsquo;s Palace</div><div><span class="t-spot-tag" style="background:#333DA7;">Typography</span></div><div class="t-spot-meta">Bloor St W, The Annex</div></div>
+            <div class="t-spot-dist">80m</div>
+          </div>
+          <div class="t-spot-card">
+            <div class="t-spot-thumb" style="background:#1C2840;">&#9962;</div>
+            <div class="t-spot-details"><div class="t-spot-name">ROM (The Crystal)</div><div><span class="t-spot-tag" style="background:#9D372E;">Architecture</span></div><div class="t-spot-meta">Bloor St W, Yorkville</div></div>
+            <div class="t-spot-dist">210m</div>
+          </div>
+          <div class="t-spot-card">
+            <div class="t-spot-thumb" style="background:#1C3328;">&#9670;</div>
+            <div class="t-spot-details"><div class="t-spot-name">Spadina Ghost Sign</div><div><span class="t-spot-tag" style="background:#333DA7;">Typography</span></div><div class="t-spot-meta">Spadina Ave, Chinatown</div></div>
+            <div class="t-spot-dist">380m</div>
+          </div>
+          <div class="t-spot-card">
+            <div class="t-spot-thumb" style="background:#1C3228;">&#9670;</div>
+            <div class="t-spot-details"><div class="t-spot-name">Spirit Garden</div><div><span class="t-spot-tag" style="background:#257A48;">Art Objects</span></div><div class="t-spot-meta">100 Queen St W</div></div>
+            <div class="t-spot-dist">490m</div>
+          </div>
+        </div>
+
+      </div>
+      <div class="t-sidebar-cta">
+        <button class="t-cta-btn">
+          <div class="t-cta-left">
+            <div class="t-cta-icon">&#10022;</div>
+            <div><div class="t-cta-label">Start Artist&rsquo;s Choice</div><div class="t-cta-sub">2 spots nearby &rsaquo; The Annex</div></div>
+          </div>
+          <div class="t-cta-arrow">&rsaquo;</div>
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAP -->
+    <div class="t-map-area">
+
+      <!-- SVG map -->
+      <svg viewBox="0 0 800 560" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%;">
+        <rect width="800" height="560" fill="#C8DAE0"/>
+        <rect x="105" y="85" width="110" height="70" fill="#A5BCBF" opacity="0.55" rx="2"/>
+        <rect x="225" y="85" width="110" height="70" fill="#A5BCBF" opacity="0.55" rx="2"/>
+        <rect x="345" y="85" width="130" height="70" fill="#A5BCBF" opacity="0.55" rx="2"/>
+        <rect x="485" y="85" width="110" height="70" fill="#A5BCBF" opacity="0.55" rx="2"/>
+        <rect x="105" y="165" width="110" height="90" fill="#A5BCBF" opacity="0.4" rx="2"/>
+        <rect x="225" y="165" width="110" height="90" fill="#9DBFA5" opacity="0.45" rx="2"/>
+        <rect x="345" y="165" width="130" height="90" fill="#A5BCBF" opacity="0.4" rx="2"/>
+        <rect x="485" y="165" width="110" height="90" fill="#A5BCBF" opacity="0.4" rx="2"/>
+        <rect x="605" y="165" width="90" height="90" fill="#A5BCBF" opacity="0.4" rx="2"/>
+        <rect x="105" y="265" width="110" height="90" fill="#A5BCBF" opacity="0.4" rx="2"/>
+        <rect x="345" y="265" width="130" height="90" fill="#A5BCBF" opacity="0.4" rx="2"/>
+        <rect x="485" y="265" width="110" height="90" fill="#A5BCBF" opacity="0.4" rx="2"/>
+        <rect x="105" y="365" width="110" height="90" fill="#A5BCBF" opacity="0.4" rx="2"/>
+        <rect x="225" y="365" width="110" height="90" fill="#A5BCBF" opacity="0.4" rx="2"/>
+        <rect x="345" y="365" width="130" height="90" fill="#A5BCBF" opacity="0.4" rx="2"/>
+        <rect x="485" y="365" width="110" height="90" fill="#A5BCBF" opacity="0.4" rx="2"/>
+        <line x1="0" y1="80" x2="800" y2="80" stroke="#739AAA" stroke-width="5"/>
+        <line x1="0" y1="160" x2="800" y2="160" stroke="#739AAA" stroke-width="2.5"/>
+        <line x1="0" y1="260" x2="800" y2="260" stroke="#739AAA" stroke-width="5"/>
+        <line x1="0" y1="360" x2="800" y2="360" stroke="#739AAA" stroke-width="2.5"/>
+        <line x1="0" y1="460" x2="800" y2="460" stroke="#739AAA" stroke-width="5"/>
+        <line x1="100" y1="0" x2="100" y2="560" stroke="#739AAA" stroke-width="2.5"/>
+        <line x1="220" y1="0" x2="220" y2="560" stroke="#739AAA" stroke-width="2.5"/>
+        <line x1="340" y1="0" x2="340" y2="560" stroke="#739AAA" stroke-width="5"/>
+        <line x1="480" y1="0" x2="480" y2="560" stroke="#739AAA" stroke-width="2.5"/>
+        <line x1="600" y1="0" x2="600" y2="560" stroke="#739AAA" stroke-width="5"/>
+        <path d="M200,100 L340,185 L340,355 L480,425" stroke="#333DA7" stroke-width="2.5" stroke-dasharray="6,5" fill="none" opacity="0.85"/>
+        <text x="8" y="73" fill="rgba(20,48,62,0.45)" font-family="sans-serif" font-size="9" letter-spacing="1.5">BLOOR ST</text>
+        <text x="8" y="254" fill="rgba(20,48,62,0.45)" font-family="sans-serif" font-size="9" letter-spacing="1.5">COLLEGE ST</text>
+        <text x="8" y="450" fill="rgba(20,48,62,0.45)" font-family="sans-serif" font-size="9" letter-spacing="1.5">QUEEN ST W</text>
+        <text x="337" y="14" fill="rgba(20,48,62,0.4)" font-family="sans-serif" font-size="9" text-anchor="middle" letter-spacing="1.5">SPADINA</text>
+        <text x="597" y="14" fill="rgba(20,48,62,0.4)" font-family="sans-serif" font-size="9" text-anchor="middle" letter-spacing="1.5">YONGE</text>
+        <text x="148" y="222" fill="rgba(28,78,48,0.45)" font-family="sans-serif" font-size="8" letter-spacing="1">QUEEN'S PARK</text>
+      </svg>
+
+      <!-- Markers -->
+      <div class="t-marker" style="left:calc(22% - 18px);top:calc(16% - 18px);background:#0D7A82;">&#10022;</div>
+      <div class="t-marker" style="left:calc(37% - 18px);top:calc(25% - 18px);background:#333DA7;">T</div>
+      <div class="t-marker" style="left:calc(53% - 18px);top:calc(14% - 18px);background:#9D372E;">&#9962;</div>
+      <div class="t-marker" style="left:calc(30% - 18px);top:calc(44% - 18px);background:#257A48;">&#9670;</div>
+      <div class="t-marker" style="left:calc(46% - 18px);top:calc(56% - 18px);background:#333DA7;">T</div>
+      <div class="t-marker" style="left:calc(63% - 18px);top:calc(47% - 18px);background:#8E2E8E;">&#9670;</div>
+      <div class="t-marker" style="left:calc(19% - 18px);top:calc(70% - 18px);background:#0D7A82;">&#10022;</div>
+
+      <!-- Map info badge -->
+      <div class="t-map-badge">
+        <span class="t-map-label">Downtown TO</span>
+        Bloor &rarr; Front &middot; Bathurst &rarr; Yonge
+      </div>
+
+      <!-- GUIDE TRIGGER (replaces route edge buttons) -->
+      <div class="t-guide-trigger">
+        <button class="t-guide-trigger-btn" id="guideTriggerBtn" onclick="togglePanel()" title="Quick Guide">
+          <div class="t-guide-trigger-icon">&#9432;</div>
+          <div class="t-guide-trigger-label">Quick Guide</div>
+        </button>
+      </div>
+
+      <!-- GUIDE SLIDE-IN PANEL -->
+      <div class="t-guide-panel" id="guidePanel">
+        <div class="t-guide-panel-head">
+          <span class="t-guide-panel-title">Quick Guide</span>
+          <button class="t-panel-close" onclick="togglePanel()">&#10005;</button>
+        </div>
+        <div class="t-guide-panel-body">
+
+          <div class="t-panel-section">
+            <div class="t-panel-section-label">How it works</div>
+            <div class="t-step-card">
+              <div class="t-step-num">Step 1 &middot; Toggle</div>
+              <div class="t-step-title">Choose your <span>routes</span></div>
+              <div class="t-step-row"><div class="t-step-key">Select:</div><div class="t-step-val">Use the sidebar to filter which routes appear on the map.</div></div>
+              <div class="t-step-row"><div class="t-step-key">Multi:</div><div class="t-step-val">Layer multiple routes at once to plan a combined walk.</div></div>
+            </div>
+            <div class="t-step-card">
+              <div class="t-step-num">Step 2 &middot; Explore</div>
+              <div class="t-step-title">Tap a <span>marker</span></div>
+              <div class="t-step-row"><div class="t-step-key">Tap:</div><div class="t-step-val">Map markers uncover the hidden history of that site.</div></div>
+              <div class="t-step-row"><div class="t-step-key">Hint:</div><div class="t-step-val">Each spot has a clue to help navigate there on foot.</div></div>
+            </div>
+            <div class="t-step-card">
+              <div class="t-step-num">Step 3 &middot; Go deeper</div>
+              <div class="t-step-title">Open the <span>Guide</span></div>
+              <div class="t-step-row"><div class="t-step-key">Guide:</div><div class="t-step-val">Full stories, designer&rsquo;s notes &amp; photos for every gem.</div></div>
+              <div class="t-step-row"><div class="t-step-key">XP:</div><div class="t-step-val">Earn points and badges as you complete each route.</div></div>
+            </div>
+          </div>
+
+          <div class="t-panel-section">
+            <div class="t-panel-section-label">The five routes</div>
+            <div class="t-panel-route-row"><div class="t-panel-route-dot" style="background:#0D7A82;"></div><div class="t-panel-route-name">Artist&rsquo;s Choice</div><div class="t-panel-route-count">10+</div></div>
+            <div class="t-panel-route-row"><div class="t-panel-route-dot" style="background:#333DA7;"></div><div class="t-panel-route-name">Typography</div><div class="t-panel-route-count">12+</div></div>
+            <div class="t-panel-route-row"><div class="t-panel-route-dot" style="background:#9D372E;"></div><div class="t-panel-route-name">Architecture</div><div class="t-panel-route-count">10+</div></div>
+            <div class="t-panel-route-row"><div class="t-panel-route-dot" style="background:#257A48;"></div><div class="t-panel-route-name">Art Objects</div><div class="t-panel-route-count">11+</div></div>
+            <div class="t-panel-route-row"><div class="t-panel-route-dot" style="background:#8E2E8E;"></div><div class="t-panel-route-name">Street Art</div><div class="t-panel-route-count">14+</div></div>
+          </div>
+
+          <div class="t-panel-cta">
+            <button class="t-panel-cta-btn">
+              <span class="t-panel-cta-label">Start a Route &rsaquo;</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SCROLL DOWN ANCHOR (replaces Near You bar) -->
+      <div class="t-scroll-anchor">
+        <a class="t-scroll-btn" href="#belowFold" onclick="document.getElementById('belowFold').scrollIntoView({behavior:'smooth'});return false;">
+          <span class="t-scroll-label">More about TRACE</span>
+          <div class="t-scroll-arrow">
+            <span></span>
+            <span></span>
+          </div>
+        </a>
+      </div>
+
+      <!-- ONBOARDING MODAL -->
+      <div class="t-modal-overlay" id="modalOverlay">
+        <div class="t-modal">
+          <button class="t-modal-close" onclick="closeModal()">&#10005;</button>
+          <div class="t-modal-step">Step 1 of 3 &middot; Welcome</div>
+          <div class="t-modal-title">Hi There!<br>Welcome to <span>TRACE: Toronto</span></div>
+          <div class="t-modal-row"><div class="t-modal-key">Toggle:</div><div class="t-modal-val">Use the route buttons in the sidebar to filter what appears on the map.</div></div>
+          <div class="t-modal-row"><div class="t-modal-key">Tap:</div><div class="t-modal-val">Click any map marker to uncover the hidden history of that spot.</div></div>
+          <div class="t-modal-row"><div class="t-modal-key">Guide:</div><div class="t-modal-val">Scroll down or open the Quick Guide for full stories on every gem.</div></div>
+          <div class="t-modal-dots">
+            <div class="t-modal-dot on"></div>
+            <div class="t-modal-dot"></div>
+            <div class="t-modal-dot"></div>
+          </div>
+          <button class="t-modal-btn" onclick="closeModal()">
+            <span class="t-modal-btn-label">Quick Start &rsaquo;</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BELOW FOLD -->
+  <section class="t-below" id="belowFold">
+    <div class="t-below-grid">
+
+      <div class="t-below-intro">
+        <div>
+          <div class="t-eyebrow">Edition 1 &middot; Downtown Toronto</div>
+          <h2 class="t-h2">Most city guides tell you where to eat.<br>TRACE tells you what to <em>look at.</em></h2>
+          <p class="t-body">A curated creative exploration platform mapping Toronto&rsquo;s hidden visual culture &mdash; ghost signs, brutalist architecture, public art, murals, and typographic landmarks that most people walk past without noticing. Built by a designer, for designers.</p>
+        </div>
+        <div>
+          <div class="t-stat-row">
+            <div class="t-stat"><div class="t-stat-num">5</div><div class="t-stat-label">Routes</div></div>
+            <div class="t-stat"><div class="t-stat-num">57</div><div class="t-stat-label">Gems</div></div>
+            <div class="t-stat"><div class="t-stat-num">~3h</div><div class="t-stat-label">Full walk</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="t-routes-label">The Five Routes</div>
+      <div class="t-route-cards">
+        <div class="t-rcard" style="background:#0D7A82;"><div class="t-rcard-icon">&#10022;</div><div class="t-rcard-name">Artist&rsquo;s Choice</div><div class="t-rcard-hint">Curator-selected cross-category gems</div><div class="t-rcard-count">10+ spots</div></div>
+        <div class="t-rcard" style="background:#333DA7;"><div class="t-rcard-icon">T</div><div class="t-rcard-name">Typography</div><div class="t-rcard-hint">Ghost signs, neon, civic lettering</div><div class="t-rcard-count">12+ spots</div></div>
+        <div class="t-rcard" style="background:#9D372E;"><div class="t-rcard-icon">&#9962;</div><div class="t-rcard-name">Architecture</div><div class="t-rcard-hint">Brutalist, modernist, heritage</div><div class="t-rcard-count">10+ spots</div></div>
+        <div class="t-rcard" style="background:#257A48;"><div class="t-rcard-icon">&#9670;</div><div class="t-rcard-name">Art Objects</div><div class="t-rcard-hint">Public sculpture &amp; installation</div><div class="t-rcard-count">11+ spots</div></div>
+        <div class="t-rcard" style="background:#8E2E8E;"><div class="t-rcard-icon">&#9670;</div><div class="t-rcard-name">Street Art</div><div class="t-rcard-hint">Murals, commissioned &amp; grassroots</div><div class="t-rcard-count">14+ spots</div></div>
+      </div>
+
+      <div class="t-spots-label">Featured Gems</div>
+      <div class="t-spot-grid">
+        <div class="t-gem-card"><div class="t-gem-thumb" style="background:#D4E5EA;"><div class="t-gem-stripe" style="background:#333DA7;"></div>&#9670;</div><div class="t-gem-body"><span class="t-gem-route-tag" style="background:#333DA7;">Typography</span><div class="t-gem-name">Lee&rsquo;s Palace</div><div class="t-gem-loc">Bloor St W, The Annex</div></div></div>
+        <div class="t-gem-card"><div class="t-gem-thumb" style="background:#D4DFE5;"><div class="t-gem-stripe" style="background:#9D372E;"></div>&#9962;</div><div class="t-gem-body"><span class="t-gem-route-tag" style="background:#9D372E;">Architecture</span><div class="t-gem-name">ROM (The Crystal)</div><div class="t-gem-loc">Bloor St W, Yorkville</div></div></div>
+        <div class="t-gem-card"><div class="t-gem-thumb" style="background:#D4E5DA;"><div class="t-gem-stripe" style="background:#257A48;"></div>&#9670;</div><div class="t-gem-body"><span class="t-gem-route-tag" style="background:#257A48;">Art Objects</span><div class="t-gem-name">Spirit Garden</div><div class="t-gem-loc">100 Queen St W, Financial</div></div></div>
+        <div class="t-gem-card"><div class="t-gem-thumb" style="background:#E0D4E5;"><div class="t-gem-stripe" style="background:#8E2E8E;"></div>&#9670;</div><div class="t-gem-body"><span class="t-gem-route-tag" style="background:#8E2E8E;">Street Art</span><div class="t-gem-name">Annex Wall Mural</div><div class="t-gem-loc">Bathurst St, The Annex</div></div></div>
+      </div>
+
+      <div class="t-guide-cta">
+        <button class="t-guide-btn">Open the Full Guide &rarr;</button>
+        <span class="t-guide-note">57 spots &middot; full stories &middot; designer&rsquo;s notes</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="t-footer">
+    <div class="t-footer-grid">
+      <div class="t-footer-top">
+
+        <!-- Brand column -->
+        <div class="t-footer-brand">
+          <div class="t-footer-logo">
+            <span class="t-footer-logo-trace">TRACE</span><span class="t-footer-logo-to">TO</span>
+          </div>
+          <p class="t-footer-tagline">The Route of Art &amp; Creative Exploration. A non-commercial project for exploring the creative side of Toronto &mdash; by a designer, for designers.</p>
+          <div class="t-footer-meta">Edition 1 &middot; Downtown Toronto &middot; <span>2026</span></div>
+          <div class="t-footer-badge"><div class="t-footer-badge-dot"></div>Non-commercial &middot; Free forever</div>
+        </div>
+
+        <!-- Navigate column -->
+        <div>
+          <div class="t-footer-col-label">Navigate</div>
+          <a class="t-footer-link highlight" href="#">Map</a>
+          <a class="t-footer-link" href="#">City Guide</a>
+          <a class="t-footer-link" href="#">About TRACE</a>
+          <a class="t-footer-link" href="#">Profile &amp; XP</a>
+        </div>
+
+        <!-- Routes column -->
+        <div>
+          <div class="t-footer-col-label">Routes</div>
+          <a class="t-footer-link" href="#"><span class="t-footer-route-dot" style="background:#0D7A82;"></span>Artist&rsquo;s Choice</a>
+          <a class="t-footer-link" href="#"><span class="t-footer-route-dot" style="background:#333DA7;"></span>Typography</a>
+          <a class="t-footer-link" href="#"><span class="t-footer-route-dot" style="background:#9D372E;"></span>Architecture</a>
+          <a class="t-footer-link" href="#"><span class="t-footer-route-dot" style="background:#257A48;"></span>Art Objects</a>
+          <a class="t-footer-link" href="#"><span class="t-footer-route-dot" style="background:#8E2E8E;"></span>Street Art</a>
+        </div>
+
+        <!-- Contact column -->
+        <div>
+          <div class="t-footer-col-label">Contact</div>
+          <a class="t-footer-link" href="#">trace.design</a>
+          <a class="t-footer-link" href="#">@tracedesign.to</a>
+          <a class="t-footer-link" href="#">etual.conceptly@gmail.com</a>
+          <div style="margin-top:16px;">
+            <div class="t-footer-col-label">Future Cities</div>
+            <a class="t-footer-link" href="#" style="opacity:0.5;cursor:default;">Montr&eacute;al &mdash; coming soon</a>
+            <a class="t-footer-link" href="#" style="opacity:0.5;cursor:default;">Vancouver &mdash; coming soon</a>
+          </div>
+        </div>
+
+      </div>
+
+      <hr class="t-footer-divider">
+
+      <div class="t-footer-bottom">
+        <div class="t-footer-copy">&copy; 2026 TRACE &middot; Toronto &mdash; <span>Conceptly Design &middot; Etual Fomina</span></div>
+        <div class="t-footer-links-inline">
+          <a class="t-footer-inline-link" href="#">Privacy</a>
+          <a class="t-footer-inline-link" href="#">Terms</a>
+          <a class="t-footer-inline-link" href="#">Credits</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  function togglePanel() {
+    var panel = document.getElementById('guidePanel');
+    panel.classList.toggle('open');
+  }
+  function closeModal() {
+    document.getElementById('modalOverlay').style.display = 'none';
+  }
+  document.getElementById('modalOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+</script>

@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About TRACE — The Route of Art & Creative Exploration</title>
+    <meta name="description" content="Learn about TRACE Toronto — a designer-curated guide to the creative side of the city. 5 routes, 50+ gems.">
+    <!-- Design System Styles -->
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/about.css">
+</head>
+<body class="about-page">
+
+    <!-- Top Navigation (shared) -->
+    <header class="top-nav" aria-label="Main navigation">
+        <div class="nav-left">
+            <button class="mobile-hamburger mobile-only" aria-label="Open Mobile Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <circle cx="7" cy="5" r="2.5"/><circle cx="17" cy="5" r="2.5"/>
+                    <circle cx="7" cy="12" r="2.5"/><circle cx="17" cy="12" r="2.5"/>
+                    <circle cx="7" cy="19" r="2.5"/><circle cx="17" cy="19" r="2.5"/>
+                </svg>
+            </button>
+            <div class="logo-container">
+                <a href="index.html" style="text-decoration:none; display:flex; align-items:center;">
+                    <img src="../assets/logo/logoAPP.svg" alt="TRACE TO" height="16" style="display:block;">
+                </a>
+            </div>
+        </div>
+        <div class="nav-right">
+            <nav class="nav-center" aria-label="Primary links">
+                <a href="index.html" class="nav-item">Map</a>
+                <a href="city-guide.html" class="nav-item">City Guide</a>
+                <a href="about.html" class="nav-item active" aria-current="page">About</a>
+                <a href="profile.html" class="nav-item">Profile</a>
+            </nav>
+            <div class="theme-switcher">
+                <button id="theme-toggle" aria-label="Toggle theme">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 2V4M12 20V22M4.22 4.22L5.64 5.64M18.36 18.36L19.78 19.78M2 12H4M20 12H22M4.22 19.78L5.64 18.36M18.36 5.64L19.78 4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay (required by nav.js) -->
+    <div class="mobile-menu-overlay" id="mobileMenu">
+        <!-- NAVIGATE Section -->
+        <div class="menu-section">
+            <span class="menu-label">NAVIGATE</span>
+            <div class="menu-grid">
+                <button class="menu-btn nav-btn" onclick="window.location.href='index.html'">
+                    <div class="icon-circle">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M8.4444 4.43259L4.17773 5.41721V20L8.4444 19.0399V4.43259ZM9.86662 18.8266V4.21333L14.1333 5.17333V19.7867L9.86662 18.8266ZM15.5555 19.5674L19.8222 18.5828V4L15.5555 4.96V19.5674Z" fill="currentColor"/></svg>
+                    </div>
+                    <div class="text">
+                        <span class="title">Map</span>
+                        <span class="subtitle">5 Routes | 57 Gems</span>
+                    </div>
+                </button>
+                <button class="menu-btn nav-btn">
+                    <div class="icon-circle">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.3124 16.2432C15.0543 15.587 16.1043 15.1304 17.5651 15.1304V13.7391V6.08696V4C15.2523 4 13.9693 5.14429 13.3085 6.41381C12.8565 7.28252 12.6956 8.21014 12.6956 8.86957V15.9377V20C12.6956 19.05 13.0292 17.544 14.0869 16.4582C14.1587 16.3845 14.2338 16.3128 14.3124 16.2432ZM18.9564 16.5217H17.5651C16.0707 16.5217 15.2711 17.1133 14.7986 17.7695C14.609 18.0328 14.4634 18.3206 14.3548 18.6087H20.3478V17.913V6.78261V6.08696H19.6521H18.9564V15.1304V16.5217ZM4.34775 6.08696H3.6521V6.78261V17.913V18.6087H9.91297C10.6814 18.6087 11.3043 19.2316 11.3043 20V8.86957V6.78235C10.7229 6.3457 10.0003 6.08696 9.21732 6.08696H4.34775Z" fill="currentColor"/></svg>
+                    </div>
+                    <div class="text">
+                        <span class="title">City Guide</span>
+                        <span class="subtitle">Toronto Edition</span>
+                    </div>
+                </button>
+                <button class="menu-btn nav-btn active" onclick="window.location.href='about.html'">
+                    <div class="icon-circle">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.8836 4V6.23261H13.1162V4H10.8836ZM7.53467 7.5346H13.1162V17.7674H16.4651V20H7.53467V17.7674H10.8836V9.76721H7.53467V7.5346Z" fill="currentColor"/></svg>
+                    </div>
+                    <div class="text">
+                        <span class="title">About</span>
+                        <span class="subtitle">TRACE Story</span>
+                    </div>
+                </button>
+                <button class="menu-btn nav-btn">
+                    <div class="icon-circle">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M6.79442 4H17.1977L20.7257 12L17.1977 20H6.79442L3.27441 12L6.79442 4ZM10.5417 11.2727L10.5417 9.09092L9.08718 9.0909L9.08717 11.2727H10.5417ZM14.9054 9.09092V11.2727H13.4508V9.0909L14.9054 9.09092ZM7.88218 13.9322C8.9733 15.0233 10.4532 15.6364 11.9963 15.6364C13.5393 15.6364 15.0192 15.0233 16.1103 13.9322L15.0818 12.9037C14.2635 13.722 13.1536 14.1818 11.9963 14.1818C10.839 14.1818 9.72904 13.722 8.9107 12.9037L7.88218 13.9322Z" fill="currentColor"/></svg>
+                    </div>
+                    <div class="text">
+                        <span class="title">Profile</span>
+                        <span class="subtitle">Your Story</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <div class="menu-divider"></div>
+
+        <!-- CONTACT Section -->
+        <div class="menu-section">
+            <span class="menu-label">CONTACT</span>
+            <div class="menu-grid contact">
+                <a href="https://traceart.design" target="_blank" class="menu-btn contact-btn">
+                    <div class="icon-circle">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M19.9727 11.3337C19.6341 7.22719 16.1939 4 12 4C7.58172 4 4 7.58172 4 12C4 11.7755 4.00925 11.5532 4.02738 11.3333H7.53304L10.1188 4.22245C10.602 4.106 11.1023 4.03341 11.6151 4.00911L8.95179 11.3333H15.0482L12.3849 4.00912C12.8977 4.03341 13.398 4.106 13.8812 4.22245L16.467 11.3333L19.9727 11.3337ZM4.02738 12.6667C4.31382 16.1386 6.81731 18.9819 10.1189 19.7776L7.53309 12.6667H4.02738ZM11.6152 19.9909C11.7427 19.9969 11.871 20 12 20C12.129 20 12.2573 19.9969 12.3849 19.9909L15.0482 12.6667H8.95185L11.6152 19.9909ZM13.8812 19.7776C17.1827 18.9819 19.6862 16.1386 19.9726 12.6667H16.4669L13.8812 19.7776Z" fill="currentColor"/></svg>
+                    </div>
+                    <span class="title">tracedesign.art</span>
+                </a>
+                <a href="https://instagram.com/tracedesign.to" target="_blank" class="menu-btn contact-btn">
+                    <div class="icon-circle">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M4 4H20V20H4V4ZM16 6.18182H17.8182V8H16V6.18182ZM12 8C9.79086 8 8 9.79086 8 12C8 14.2092 9.79086 16 12 16C14.2092 16 16 14.2092 16 12C16 9.79086 14.2092 8 12 8Z" fill="currentColor"/></svg>
+                    </div>
+                    <span class="title">@tracedesign.to</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Page Content -->
+    <main class="about-main">
+
+        <!-- Breadcrumb bar -->
+        <div class="about-breadcrumb">
+            <a href="index.html" class="about-back" aria-label="Back to Map">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                    <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+            <span class="about-breadcrumb-title">About TRACE</span>
+        </div>
+
+        <div class="about-content">
+
+        <!-- Hero Images -->
+        <!-- Mobile: single full-width author photo -->
+        <section class="about-hero-img about-hero-mobile" aria-label="TRACE author photo">
+            <img
+                src="../assets/img/author/IMG_7108.JPG"
+                alt="Etual Fomina — TRACE author"
+                class="about-hero-photo"
+            >
+            <div class="about-hero-overlay"></div>
+        </section>
+
+        <!-- Desktop: horizontal filmstrip of 5 images -->
+        <section class="about-hero-strip" aria-label="TRACE photo gallery">
+            <div class="about-hero-strip-item">
+                <img src="../assets/img/author/IMG_7108.JPG" alt="Etual Fomina — Author" loading="lazy">
+                <span class="about-strip-label" style="background:#2d4855;">Author</span>
+            </div>
+            <div class="about-hero-strip-item">
+                <img src="assets/img/typography/mirvish.jpg" alt="Typography route — Mirvish" loading="lazy">
+                <span class="about-strip-label" style="background:#3a4e9a;">Typography</span>
+            </div>
+            <div class="about-hero-strip-item">
+                <img src="assets/img/architecture/ROM.jpg" alt="Architecture route — ROM" loading="lazy">
+                <span class="about-strip-label" style="background:#9d372e;">Architecture</span>
+            </div>
+            <div class="about-hero-strip-item">
+                <img src="assets/img/artefacts/brick-man.jpg" alt="Art Objects route — Brick Man" loading="lazy">
+                <span class="about-strip-label" style="background:#257a48;">Art Objects</span>
+            </div>
+            <div class="about-hero-strip-item">
+                <img src="assets/img/street-art/bianco.jpg" alt="Street Art route — Bianco" loading="lazy">
+                <span class="about-strip-label" style="background:#7a3084;">Street Art</span>
+            </div>
+        </section>
+
+            <!-- Title Block -->
+            <section class="about-title-block">
+                <div class="about-title-text">
+                    <!-- TRACE multicolor title -->
+                    <p class="about-trace-wordmark" aria-label="TRACE">
+                        <span style="color:#0d7a82">T</span><span style="color:#3a4e9a">r</span><span style="color:#9d372e">a</span><span style="color:#257a48">c</span><span style="color:#7a3084">e</span>
+                    </p>
+                    <!-- Subtitle with colored first letters -->
+                    <p class="about-trace-subtitle">
+                        <span style="color:#0d7a82">t</span>he <span style="color:#3a4e9a">r</span>oute of <span style="color:#9d372e">A</span>rt &amp; <span style="color:#257a48">C</span>reative <span style="color:#7a3084">E</span>xploration
+                    </p>
+                </div>
+                <!-- Edition tags -->
+                <div class="about-tags">
+                    <span class="about-tag">Edition 1 : Downtown TO</span>
+                    <span class="about-tag">5 Routes</span>
+                    <span class="about-tag">50+ Gems</span>
+                </div>
+            </section>
+
+            <!-- What Is TRACE -->
+            <section class="about-section" id="what-is-trace">
+                <h2 class="about-section-heading" style="color: var(--route-experts, #0d7a82);">What is TRACE?</h2>
+                <p class="about-body-text">
+                    Most city guides tell you where to eat. TRACE tells you <strong>what to look at</strong>. Discover ghost signs, brutalist architecture, artefacts, and signage most people walk past without noticing.
+                </p>
+            </section>
+
+            <!-- Mission -->
+            <section class="about-section about-section--border" id="mission">
+                <h2 class="about-section-heading" style="color: var(--route-typography, #3a4e9a);">Mission</h2>
+                <div class="about-cards-grid">
+                    <div class="about-mission-card">
+                        <p class="about-card-label">Document</p>
+                        <p class="about-card-body">Urban art and design before it disappears — ghost signs, murals, and vernacular typography that are part of the city's visual memory.</p>
+                    </div>
+                    <div class="about-mission-card">
+                        <p class="about-card-label">Connect</p>
+                        <p class="about-card-body">Graphic designers, architects, and curious locals with the city's creative fabric in a way generic tourism platforms never could.</p>
+                    </div>
+                    <div class="about-mission-card">
+                        <p class="about-card-label">Promote</p>
+                        <p class="about-card-body">Sustainable, walkable city exploration over mass tourism — neighbourhoods and streetscapes, not landmarks.</p>
+                    </div>
+                    <div class="about-mission-card">
+                        <p class="about-card-label">Educate</p>
+                        <p class="about-card-body">Through designer notes, historical context, and curatorial voice — not dry plaques.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- The Five Routes -->
+            <section class="about-section about-section--border" id="routes">
+                <h2 class="about-section-heading" style="color: var(--route-experts, #0d7a82);">The Five Routes</h2>
+                <div class="about-routes-list">
+                    <div class="about-route-item" style="--route-accent: #3a4e9a;">
+                        <div class="about-route-text">
+                            <span class="about-route-name">Typography</span>
+                            <span class="about-route-count" style="--count-color:#3a4e9a;">12+ spots</span>
+                        </div>
+                        <div class="about-route-img" style="background-image: url('assets/img/typography/mirvish.jpg');"></div>
+                    </div>
+                    <div class="about-route-item" style="--route-accent: #9d372e;">
+                        <div class="about-route-text">
+                            <span class="about-route-name">Architecture</span>
+                            <span class="about-route-count" style="--count-color:#9d372e;">10+ spots</span>
+                        </div>
+                        <div class="about-route-img" style="background-image: url('assets/img/architecture/ROM.jpg');"></div>
+                    </div>
+                    <div class="about-route-item" style="--route-accent: #257a48;">
+                        <div class="about-route-text">
+                            <span class="about-route-name">Art Objects</span>
+                            <span class="about-route-count" style="--count-color:#257a48;">11+ spots</span>
+                        </div>
+                        <div class="about-route-img" style="background-image: url('assets/img/artefacts/brick-man.jpg');"></div>
+                    </div>
+                    <div class="about-route-item" style="--route-accent: #7a3084;">
+                        <div class="about-route-text">
+                            <span class="about-route-name">Street Art</span>
+                            <span class="about-route-count" style="--count-color:#7a3084;">14+ spots</span>
+                        </div>
+                        <div class="about-route-img" style="background-image: url('assets/img/street-art/bianco.jpg');"></div>
+                    </div>
+                    <div class="about-route-item" style="--route-accent: #0d7a82;">
+                        <div class="about-route-text">
+                            <span class="about-route-name">Artist's Pick</span>
+                            <span class="about-route-count" style="--count-color:#0d7a82;">10+ spots</span>
+                        </div>
+                        <div class="about-route-img" style="background-image: url('assets/img/artefacts/dreaming.jpg');"></div>
+                    </div>
+                </div>
+                <p class="about-body-text about-routes-note">Routes are multi-select — explore one or layer multiple on the same map!</p>
+            </section>
+
+            <!-- The Difference -->
+            <section class="about-section about-section--border" id="difference">
+                <h2 class="about-section-heading" style="color: var(--route-architecture, #9d372e);">The Difference</h2>
+                <div class="about-difference-card">
+                    <p class="about-card-label">The only platform that…</p>
+                    <ul class="about-difference-list">
+                        <li>Created by a designer, for designers — curatorial voice, not crowd-sourced noise</li>
+                        <li>Walking route mechanic with genuine editorial depth</li>
+                        <li>Scavenger hunt on top of city exploration</li>
+                        <li>Documents ephemeral urban design before it's gone</li>
+                        <li>Built for walking experience</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- TRACE Ecosystem -->
+            <section class="about-section about-section--border" id="ecosystem">
+                <h2 class="about-section-heading" style="color: var(--route-street-art, #7a3084);">TRACE Ecosystem</h2>
+                <div class="about-cards-grid">
+                    <div class="about-ecosystem-card">
+                        <div class="about-ecosystem-card-text">
+                            <p class="about-card-label">Interactive Web Map</p>
+                            <p class="about-card-body">Mapbox-powered mobile-first web app with filterable routes, rich spot detail, and a scavenger hunt mechanic.</p>
+                        </div>
+                        <div class="about-ecosystem-labels">
+                            <span class="about-eco-label">Web</span>
+                            <span class="about-eco-label">Mobile App</span>
+                        </div>
+                    </div>
+                    <div class="about-ecosystem-card">
+                        <div class="about-ecosystem-card-text">
+                            <p class="about-card-label">City Guide</p>
+                            <p class="about-card-body">Editorial long-reads, route walkthroughs, and curated spot collections for deep neighbourhood exploration.</p>
+                        </div>
+                        <div class="about-ecosystem-labels">
+                            <span class="about-eco-label">Web</span>
+                            <span class="about-eco-label">Mobile App</span>
+                        </div>
+                    </div>
+                    <div class="about-ecosystem-card">
+                        <div class="about-ecosystem-card-text">
+                            <p class="about-card-label">TRACE Zine</p>
+                            <p class="about-card-body">Quarterly printed editorial with fold-out map insert — interviews, stories, new discoveries.</p>
+                        </div>
+                        <div class="about-ecosystem-labels">
+                            <span class="about-eco-label">Print</span>
+                        </div>
+                    </div>
+                    <div class="about-ecosystem-card">
+                        <div class="about-ecosystem-card-text">
+                            <p class="about-card-label">Social Media</p>
+                            <p class="about-card-body">Follow us on Instagram, Medium, and LinkedIn — for the recent news and new spots!</p>
+                        </div>
+                        <div class="about-ecosystem-labels">
+                            <span class="about-eco-label">Online</span>
+                        </div>
+                    </div>
+                </div>
+              <!-- Author -->
+            <section class="about-section about-section--border" id="author">
+                <h2 class="about-section-heading" style="color: var(--route-experts, #0d7a82);">Author</h2>
+                <div class="about-author-card">
+                    <!-- Top row: avatar + name/role -->
+                    <div class="about-author-top">
+                        <div class="about-author-avatar" aria-hidden="true" style="background:transparent; border:none; overflow:visible; width:52px; height:52px; flex-shrink:0;">
+                            <img src="../assets/logo/authorLogo/logo-square-dark.svg" alt="Author logo" width="52" height="52" style="display:block; border-radius:8px;">
+                        </div>
+                        <div class="about-author-info">
+                            <p class="about-author-name">Etual Fomina</p>
+                            <p class="about-author-role">Graphic Designer &amp; Photographer</p>
+                        </div>
+                    </div>
+
+                    <!-- Contacts grid inside the card -->
+                    <div class="about-links-grid">
+                        <a href="https://traceart.design" target="_blank" rel="noopener" class="about-link-item">
+                            <span class="about-link-icon">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 2C6.477 2 2 6.477 2 12C2 17.523 6.477 22 12 22C17.523 22 22 17.523 22 12C22 6.477 17.523 2 12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M2 12H22M12 2C9.333 7 9.333 17 12 22M12 2C14.667 7 14.667 17 12 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                            <span class="about-link-text">traceart.design</span>
+                        </a>
+                        <a href="https://conceptly.design" target="_blank" rel="noopener" class="about-link-item">
+                            <span class="about-link-icon">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 2C6.477 2 2 6.477 2 12C2 17.523 6.477 22 12 22C17.523 22 22 17.523 22 12C22 6.477 17.523 2 12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M2 12H22M12 2C9.333 7 9.333 17 12 22M12 2C14.667 7 14.667 17 12 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                            <span class="about-link-text">conceptly.design</span>
+                        </a>
+                        <!-- Row 2: personal contacts -->
+                        <a href="https://linkedin.com/in/etualfomina" target="_blank" rel="noopener" class="about-link-item">
+                            <span class="about-link-icon">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                                    <path d="M16 8C17.5913 8 19.1174 8.63214 20.2426 9.75736C21.3679 10.8826 22 12.4087 22 14V21H18V14C18 13.4696 17.7893 12.9609 17.4142 12.5858C17.0391 12.2107 16.5304 12 16 12C15.4696 12 14.9609 12.2107 14.5858 12.5858C14.2107 12.9609 14 13.4696 14 14V21H10V14C10 12.4087 10.6321 10.8826 11.7574 9.75736C12.8826 8.63214 14.4087 8 16 8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <rect x="2" y="9" width="4" height="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <circle cx="4" cy="4" r="2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                            <span class="about-link-text">/etualfomina</span>
+                        </a>
+                        <a href="https://instagram.com/etual.nd" target="_blank" rel="noopener" class="about-link-item">
+                            <span class="about-link-icon">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="2"/>
+                                    <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+                                    <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+                                </svg>
+                            </span>
+                            <span class="about-link-text">@etual.nd</span>
+                        </a>
+                        <!-- Row 3: email -->
+                        <a href="mailto:etual.conceptly@gmail.com" class="about-link-item">
+                            <span class="about-link-icon">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                                    <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                            <span class="about-link-text">etual.conceptly@gmail.com</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+        </div><!-- /about-content -->
+    </main>
+
+    <!-- nav.js for hamburger menu -->
+    <script src="js/nav.js"></script>
+    <script>
+        // Always keep about page in light mode regardless of saved preference
+        document.documentElement.setAttribute('data-theme', 'light');
+
+        // Theme toggle just saves preference for the map page, but stays light here
+        const themeToggle = document.getElementById('theme-toggle');
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                // On the about page, theme toggle is decorative — map page handles theme
+                const saved = localStorage.getItem('trace-theme') || 'dark';
+                const next = saved === 'dark' ? 'light' : 'dark';
+                localStorage.setItem('trace-theme', next);
+                // But keep this page light
+                document.documentElement.setAttribute('data-theme', 'light');
+            });
+        }
+    </script>
+</body>
+</html>

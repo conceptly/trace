@@ -1,0 +1,77 @@
+/* trace-antigravity/css/tokens.css */
+
+:root {
+  /* Brand Colors */
+  --brand-trace: #E7E626;
+  --focus-ring: #E7E626;
+
+  /* Category Palette (Agnostic) */
+  --cat-artists-choice: #0D7A82;
+  --cat-typography: #2B5EA8;
+  --cat-art-objects: #257A48;
+  --cat-architecture: #9A4520;
+  --cat-street-art: #7E3090;
+
+  /* Spacing Scale */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 48px;
+
+  /* Border Radius Scale */
+  --radius-pill: 50px;
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  --radius-sm: 8px;
+
+  /* Animation */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+}
+
+/* Dark Mode (Default) */
+[data-theme="dark"], :root {
+  --surface-1: #12202A;
+  --surface-2: #1D3240;
+  --surface-3: #223740;
+  --surface-4: #2D4855;
+  --surface-5: #3D5E6A;
+
+  --content-1: #EDF4F0;
+  --content-2: #BDD0CC;
+  --content-3: #8AADB5;
+
+  --divider-soft: #8AADB5;
+  --divider-strong: #3D5E6A;
+
+  --search-bg: rgba(237, 244, 240, 0.15);
+  --search-border: rgba(237, 244, 240, 0.12);
+  --focus-ring: #E7E626;
+  
+  --logo-trace: #E7E626;
+  --logo-to: #EDF4F0;
+}
+
+/* Light Mode */
+[data-theme="light"] {
+  --surface-1: #F4F9FA;
+  --surface-2: #EDF5F7;
+  --surface-3: #E4EFF2;
+  --surface-4: #FFFFFF;
+  --surface-5: #BDD0D5;
+
+  --content-1: #1D3240;
+  --content-2: #2D4855;
+  --content-3: #3A6070;
+
+  --divider-soft: #3A6070;
+  --divider-strong: #BDD0D5;
+
+  --search-bg: rgba(45, 72, 85, 0.08);
+  --search-border: rgba(45, 72, 85, 0.15);
+  --focus-ring: #1D3240;
+
+  --logo-trace: #1D3240;
+  --logo-to: #2D4855;
+}

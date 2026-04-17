@@ -1,0 +1,100 @@
+/* trace-antigravity/css/base.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Roboto+Slab:wght@100..900&display=swap');
+
+/* Basic Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Josefin Sans', Futura, sans-serif;
+  background-color: var(--surface-1);
+  color: var(--content-1);
+  line-height: normal;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Typography Classes as per Style Guide */
+
+.h1-screen-title {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+}
+
+.h2-section {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.label-large {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.label-medium {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.label-small {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.body-text {
+  font-family: 'Roboto Slab', serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.caption {
+  font-family: 'Roboto Slab', serif;
+  font-weight: 400;
+  font-size: 13px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Accessibility: Focus Indicators */
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+}
+
+input {
+  border: none;
+  font: inherit;
+  background: none;
+}

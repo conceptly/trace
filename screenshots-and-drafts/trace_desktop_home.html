@@ -1,0 +1,1178 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=Roboto+Slab:wght@400;500&display=swap');
+
+  .t-root {
+    font-family: 'Josefin Sans', sans-serif;
+    background: #E4EFF2;
+    min-height: 100vh;
+    color: #1D3240;
+  }
+
+  /* ── TOPNAV ── */
+  .t-topnav {
+    background: #2D4855;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid #3D5E6A;
+  }
+  .t-logo {
+    display: flex;
+    align-items: baseline;
+    gap: 2px;
+    text-decoration: none;
+  }
+  .t-logo-trace {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 0.06em;
+    color: #E7E626;
+  }
+  .t-logo-to {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    letter-spacing: 0.06em;
+    color: #BDD0CC;
+  }
+  .t-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .t-nav-link {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #8AADB5;
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: color 0.15s, background 0.15s;
+  }
+  .t-nav-link:hover { color: #EDF4F0; background: rgba(237,244,240,0.08); }
+  .t-nav-link.active { color: #EDF4F0; }
+  .t-search-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(237,244,240,0.1);
+    border: 1px solid rgba(237,244,240,0.15);
+    border-radius: 12px;
+    padding: 0 14px;
+    height: 36px;
+    width: 260px;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+  .t-search-bar:hover { border-color: rgba(237,244,240,0.3); }
+  .t-search-icon { color: #8AADB5; font-size: 13px; }
+  .t-search-placeholder { font-size: 12px; color: #8AADB5; letter-spacing: 0.03em; }
+  .t-topnav-icons { display: flex; gap: 4px; }
+  .t-icon-btn {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid rgba(237,244,240,0.15);
+    color: #8AADB5;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 13px;
+    transition: background 0.15s, color 0.15s;
+  }
+  .t-icon-btn:hover { background: rgba(237,244,240,0.1); color: #EDF4F0; }
+
+  /* ── MAIN LAYOUT ── */
+  .t-map-section {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    height: calc(100vh - 56px);
+    overflow: hidden;
+  }
+
+  /* ── SIDEBAR ── */
+  .t-sidebar {
+    background: #2D4855;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #3D5E6A;
+    overflow: hidden;
+  }
+  .t-sidebar-inner {
+    flex: 1;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #3D5E6A #2D4855;
+  }
+  .t-sidebar-section {
+    padding: 16px;
+    border-bottom: 1px solid rgba(61,94,106,0.6);
+  }
+  .t-section-label {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #5A8A95;
+    margin-bottom: 10px;
+  }
+
+  /* Route filters */
+  .t-route-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 9px 10px;
+    border-radius: 12px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    margin-bottom: 4px;
+    transition: background 0.15s;
+    text-align: left;
+  }
+  .t-route-btn:hover { background: rgba(237,244,240,0.06); }
+  .t-route-btn.active { background: rgba(237,244,240,0.1); }
+  .t-route-icon {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+    font-family: 'Josefin Sans', sans-serif;
+  }
+  .t-route-info { flex: 1; }
+  .t-route-name {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #EDF4F0;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+  }
+  .t-route-hint {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 10px;
+    color: #5A8A95;
+    margin-top: 1px;
+    letter-spacing: 0.02em;
+  }
+  .t-route-count {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    color: #5A8A95;
+    letter-spacing: 0.06em;
+    flex-shrink: 0;
+  }
+
+  /* Near You */
+  .t-spot-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    border-radius: 10px;
+    margin-bottom: 4px;
+    cursor: pointer;
+    transition: background 0.15s;
+    background: rgba(237,244,240,0.04);
+    border: 1px solid rgba(61,94,106,0.4);
+  }
+  .t-spot-card:hover { background: rgba(237,244,240,0.08); }
+  .t-spot-thumb {
+    width: 48px; height: 48px;
+    border-radius: 8px;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .t-spot-thumb-fill {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .t-spot-details { flex: 1; min-width: 0; }
+  .t-spot-name {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #EDF4F0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: 0.02em;
+  }
+  .t-spot-meta {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 10px;
+    color: #5A8A95;
+    margin-top: 2px;
+    letter-spacing: 0.02em;
+  }
+  .t-spot-dist {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 10px;
+    color: #8AADB5;
+    flex-shrink: 0;
+    letter-spacing: 0.04em;
+  }
+
+  .t-spot-tag {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #fff;
+    margin-top: 3px;
+  }
+
+  /* CTA */
+  .t-sidebar-cta {
+    padding: 14px 16px;
+    background: #223740;
+    border-top: 1px solid #3D5E6A;
+  }
+  .t-cta-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background: #E7E626;
+    border: none;
+    border-radius: 14px;
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .t-cta-btn:hover { opacity: 0.9; }
+  .t-cta-left { display: flex; align-items: center; gap: 10px; }
+  .t-cta-icon {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: rgba(45,72,85,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+  }
+  .t-cta-text { text-align: left; }
+  .t-cta-label {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #1D3240;
+    line-height: 1.2;
+  }
+  .t-cta-sub {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 10px;
+    color: #3A6070;
+    margin-top: 1px;
+  }
+  .t-cta-arrow {
+    font-size: 14px;
+    color: #1D3240;
+    font-weight: 700;
+  }
+
+  /* ── MAP AREA ── */
+  .t-map-area {
+    position: relative;
+    overflow: hidden;
+    background: #C8DAE0;
+  }
+  .t-map-placeholder {
+    width: 100%; height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+  .t-map-bg {
+    position: absolute; inset: 0;
+    background: #C8DAE0;
+  }
+  /* Simulated streets */
+  .t-map-grid {
+    position: absolute; inset: 0;
+    opacity: 0.7;
+  }
+  .t-map-badge {
+    position: absolute;
+    top: 16px; left: 16px;
+    background: rgba(235,242,238,0.9);
+    border: 1px solid #BDD0D5;
+    border-radius: 10px;
+    padding: 8px 14px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: #1D3240;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    backdrop-filter: blur(4px);
+  }
+  .t-map-label {
+    color: #5A8A95;
+    font-weight: 400;
+    margin-right: 4px;
+  }
+
+  /* Route edge buttons (right side of map) */
+  .t-route-edge {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .t-edge-btn {
+    width: 46px; height: 46px;
+    border-radius: 14px 0 0 14px;
+    border: none;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+    transition: width 0.2s, opacity 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+  .t-edge-btn:hover { width: 56px; opacity: 1; }
+
+  /* Map spot markers */
+  .t-marker {
+    position: absolute;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid rgba(255,255,255,0.6);
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+    font-family: 'Josefin Sans', sans-serif;
+    transition: transform 0.15s;
+  }
+  .t-marker:hover { transform: scale(1.15); }
+
+  /* Near You overlay (bottom of map) */
+  .t-nearyou-bar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: rgba(235,242,238,0.88);
+    backdrop-filter: blur(6px);
+    border-top: 1px solid #BDD0D5;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .t-nearyou-label {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #1D3240;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .t-nearyou-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #0D7A82;
+  }
+  .t-nearyou-count {
+    font-size: 11px;
+    color: #3A6070;
+    font-weight: 400;
+  }
+  .t-nearyou-spots {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+  .t-nearyou-thumb {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    font-size: 16px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: transform 0.15s;
+  }
+  .t-nearyou-thumb:hover { transform: scale(1.1); }
+
+  /* Onboarding modal overlay */
+  .t-modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(29,50,64,0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+  }
+  .t-modal {
+    background: #223740;
+    border: 1px solid #3D5E6A;
+    border-radius: 20px;
+    width: 320px;
+    padding: 24px;
+    position: relative;
+  }
+  .t-modal-close {
+    position: absolute;
+    top: 14px; right: 14px;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: rgba(237,244,240,0.1);
+    border: 1px solid rgba(237,244,240,0.15);
+    color: #8AADB5;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    font-size: 11px;
+    transition: background 0.15s;
+  }
+  .t-modal-close:hover { background: rgba(237,244,240,0.18); }
+  .t-modal-step {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #E7E626;
+    margin-bottom: 6px;
+  }
+  .t-modal-title {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #EDF4F0;
+    margin-bottom: 18px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  .t-modal-title span { color: #E7E626; }
+  .t-modal-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+    align-items: flex-start;
+  }
+  .t-modal-key {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #E7E626;
+    width: 60px;
+    flex-shrink: 0;
+    padding-top: 1px;
+  }
+  .t-modal-val {
+    font-family: 'Roboto Slab', serif;
+    font-size: 13px;
+    color: #BDD0CC;
+    line-height: 1.5;
+    flex: 1;
+  }
+  .t-modal-dots {
+    display: flex;
+    gap: 5px;
+    margin: 16px 0 14px;
+  }
+  .t-modal-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(237,244,240,0.2);
+  }
+  .t-modal-dot.on { background: #E7E626; width: 18px; border-radius: 3px; }
+  .t-modal-btn {
+    width: 100%;
+    background: #E7E626;
+    border: none;
+    border-radius: 12px;
+    padding: 13px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .t-modal-btn:hover { opacity: 0.9; }
+  .t-modal-btn-label {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #1D3240;
+  }
+
+  /* ── BELOW FOLD ── */
+  .t-below {
+    background: #F4F9FA;
+    padding: 60px 40px;
+  }
+  .t-below-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .t-below-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 56px;
+    align-items: end;
+  }
+  .t-eyebrow {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #0D7A82;
+    margin-bottom: 10px;
+  }
+  .t-h2 {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #1D3240;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+  }
+  .t-h2 em { font-style: italic; color: #0D7A82; font-weight: 300; }
+  .t-body {
+    font-family: 'Roboto Slab', serif;
+    font-size: 15px;
+    color: #3A6070;
+    line-height: 1.7;
+  }
+  .t-stat-row {
+    display: flex;
+    gap: 24px;
+  }
+  .t-stat {
+    text-align: center;
+    padding: 20px;
+    background: #EDF5F7;
+    border-radius: 14px;
+    border: 1px solid #BDD0D5;
+    flex: 1;
+  }
+  .t-stat-num {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #1D3240;
+    letter-spacing: -0.02em;
+  }
+  .t-stat-label {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #3A6070;
+    margin-top: 2px;
+  }
+
+  /* Route cards */
+  .t-routes-label {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #3A6070;
+    margin-bottom: 14px;
+  }
+  .t-route-cards {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-bottom: 48px;
+  }
+  .t-rcard {
+    border-radius: 14px;
+    padding: 16px 14px;
+    cursor: pointer;
+    transition: transform 0.15s, opacity 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+  .t-rcard:hover { transform: translateY(-2px); }
+  .t-rcard-icon {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  .t-rcard-name {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.02em;
+    margin-bottom: 3px;
+  }
+  .t-rcard-hint {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 10px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+  }
+  .t-rcard-count {
+    position: absolute;
+    bottom: 12px; right: 12px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* Featured spots */
+  .t-spots-label {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #3A6070;
+    margin-bottom: 14px;
+  }
+  .t-spot-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .t-gem-card {
+    background: #fff;
+    border-radius: 14px;
+    border: 1px solid #BDD0D5;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.15s;
+  }
+  .t-gem-card:hover { transform: translateY(-2px); }
+  .t-gem-thumb {
+    height: 110px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px;
+    position: relative;
+  }
+  .t-gem-stripe {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+  }
+  .t-gem-body { padding: 12px 12px 14px; }
+  .t-gem-route-tag {
+    display: inline-block;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #fff;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+  }
+  .t-gem-name {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #1D3240;
+    margin-bottom: 3px;
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+  }
+  .t-gem-loc {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 10px;
+    color: #3A6070;
+    letter-spacing: 0.04em;
+  }
+
+  .t-guide-cta {
+    margin-top: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .t-guide-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #1D3240;
+    color: #E7E626;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 22px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .t-guide-btn:hover { opacity: 0.88; }
+  .t-guide-note {
+    font-family: 'Roboto Slab', serif;
+    font-size: 13px;
+    color: #3A6070;
+    font-style: italic;
+  }
+
+  /* Modal toggle btn */
+  .t-show-modal-btn {
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #E7E626;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #1D3240;
+    cursor: pointer;
+    z-index: 60;
+    transition: opacity 0.15s;
+  }
+  .t-show-modal-btn:hover { opacity: 0.88; }
+</style>
+
+<div class="t-root">
+  <h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">TRACE Toronto — desktop home screen mockup showing map, sidebar with route filters and nearby spots, and a below-fold content section</h2>
+
+  <!-- TOPNAV -->
+  <nav class="t-topnav">
+    <a class="t-logo" href="#">
+      <span class="t-logo-trace">TRACE</span>
+      <span class="t-logo-to">TO</span>
+    </a>
+    <div class="t-search-bar">
+      <span class="t-search-icon">&#9906;</span>
+      <span class="t-search-placeholder">Search spots or routes&hellip;</span>
+    </div>
+    <div class="t-nav-links">
+      <a class="t-nav-link active" href="#">Map</a>
+      <a class="t-nav-link" href="#">Guide</a>
+      <a class="t-nav-link" href="#">About</a>
+      <a class="t-nav-link" href="#">Profile</a>
+    </div>
+    <div class="t-topnav-icons">
+      <button class="t-icon-btn" title="Light mode">&#9788;</button>
+    </div>
+  </nav>
+
+  <!-- MAP SECTION -->
+  <div class="t-map-section">
+
+    <!-- SIDEBAR -->
+    <aside class="t-sidebar">
+      <div class="t-sidebar-inner">
+
+        <!-- Route filters -->
+        <div class="t-sidebar-section">
+          <div class="t-section-label">Explore Routes</div>
+          <button class="t-route-btn active" onclick="this.classList.toggle('active')">
+            <div class="t-route-icon" style="background:#0D7A82;">&#10022;</div>
+            <div class="t-route-info">
+              <div class="t-route-name">Artist&rsquo;s Choice</div>
+              <div class="t-route-hint">Curator-selected gems</div>
+            </div>
+            <div class="t-route-count">10+</div>
+          </button>
+          <button class="t-route-btn" onclick="this.classList.toggle('active')">
+            <div class="t-route-icon" style="background:#333DA7;">T</div>
+            <div class="t-route-info">
+              <div class="t-route-name">Typography</div>
+              <div class="t-route-hint">Ghost signs &middot; neon &middot; civic type</div>
+            </div>
+            <div class="t-route-count">12+</div>
+          </button>
+          <button class="t-route-btn" onclick="this.classList.toggle('active')">
+            <div class="t-route-icon" style="background:#9D372E;">&#9962;</div>
+            <div class="t-route-info">
+              <div class="t-route-name">Architecture</div>
+              <div class="t-route-hint">Brutalist &middot; modernist &middot; heritage</div>
+            </div>
+            <div class="t-route-count">10+</div>
+          </button>
+          <button class="t-route-btn" onclick="this.classList.toggle('active')">
+            <div class="t-route-icon" style="background:#257A48;">&#9670;</div>
+            <div class="t-route-info">
+              <div class="t-route-name">Art Objects</div>
+              <div class="t-route-hint">Sculpture &middot; installation &middot; public art</div>
+            </div>
+            <div class="t-route-count">11+</div>
+          </button>
+          <button class="t-route-btn" onclick="this.classList.toggle('active')">
+            <div class="t-route-icon" style="background:#8E2E8E;">&#9670;</div>
+            <div class="t-route-info">
+              <div class="t-route-name">Street Art</div>
+              <div class="t-route-hint">Murals &middot; commissioned &middot; grassroots</div>
+            </div>
+            <div class="t-route-count">14+</div>
+          </button>
+        </div>
+
+        <!-- Near You -->
+        <div class="t-sidebar-section">
+          <div class="t-section-label">Near You &mdash; 5 spots</div>
+          <div class="t-spot-card">
+            <div class="t-spot-thumb"><div class="t-spot-thumb-fill" style="background:#1C3340;">&#9670;</div></div>
+            <div class="t-spot-details">
+              <div class="t-spot-name">Lee&rsquo;s Palace</div>
+              <div><span class="t-spot-tag" style="background:#333DA7;">Typography</span></div>
+              <div class="t-spot-meta">Bloor St W, The Annex</div>
+            </div>
+            <div class="t-spot-dist">80m</div>
+          </div>
+          <div class="t-spot-card">
+            <div class="t-spot-thumb"><div class="t-spot-thumb-fill" style="background:#1C2840;">&#9962;</div></div>
+            <div class="t-spot-details">
+              <div class="t-spot-name">ROM (The Crystal)</div>
+              <div><span class="t-spot-tag" style="background:#9D372E;">Architecture</span></div>
+              <div class="t-spot-meta">Bloor St W, Yorkville</div>
+            </div>
+            <div class="t-spot-dist">210m</div>
+          </div>
+          <div class="t-spot-card">
+            <div class="t-spot-thumb"><div class="t-spot-thumb-fill" style="background:#1C3328;">&#9670;</div></div>
+            <div class="t-spot-details">
+              <div class="t-spot-name">Spadina Ghost Sign</div>
+              <div><span class="t-spot-tag" style="background:#333DA7;">Typography</span></div>
+              <div class="t-spot-meta">Spadina Ave, Chinatown</div>
+            </div>
+            <div class="t-spot-dist">380m</div>
+          </div>
+          <div class="t-spot-card">
+            <div class="t-spot-thumb"><div class="t-spot-thumb-fill" style="background:#1C3228;">&#9670;</div></div>
+            <div class="t-spot-details">
+              <div class="t-spot-name">Spirit Garden</div>
+              <div><span class="t-spot-tag" style="background:#257A48;">Art Objects</span></div>
+              <div class="t-spot-meta">100 Queen St W</div>
+            </div>
+            <div class="t-spot-dist">490m</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sticky CTA -->
+      <div class="t-sidebar-cta">
+        <button class="t-cta-btn">
+          <div class="t-cta-left">
+            <div class="t-cta-icon">&#10022;</div>
+            <div class="t-cta-text">
+              <div class="t-cta-label">Start Artist&rsquo;s Choice</div>
+              <div class="t-cta-sub">2 spots nearby &rsaquo; The Annex</div>
+            </div>
+          </div>
+          <div class="t-cta-arrow">&rsaquo;</div>
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAP -->
+    <div class="t-map-area" id="mapArea">
+      <div class="t-map-placeholder">
+        <div class="t-map-bg"></div>
+
+        <!-- SVG street grid simulation -->
+        <svg class="t-map-grid" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%;">
+          <!-- Horizontal roads -->
+          <line x1="0" y1="80" x2="800" y2="80" stroke="#739AAA" stroke-width="4"/>
+          <line x1="0" y1="160" x2="800" y2="160" stroke="#739AAA" stroke-width="2.5"/>
+          <line x1="0" y1="260" x2="800" y2="260" stroke="#739AAA" stroke-width="4"/>
+          <line x1="0" y1="360" x2="800" y2="360" stroke="#739AAA" stroke-width="2.5"/>
+          <line x1="0" y1="460" x2="800" y2="460" stroke="#739AAA" stroke-width="4"/>
+          <line x1="0" y1="540" x2="800" y2="540" stroke="#739AAA" stroke-width="2.5"/>
+          <!-- Vertical roads -->
+          <line x1="100" y1="0" x2="100" y2="600" stroke="#739AAA" stroke-width="2.5"/>
+          <line x1="220" y1="0" x2="220" y2="600" stroke="#739AAA" stroke-width="2.5"/>
+          <line x1="340" y1="0" x2="340" y2="600" stroke="#739AAA" stroke-width="4"/>
+          <line x1="480" y1="0" x2="480" y2="600" stroke="#739AAA" stroke-width="2.5"/>
+          <line x1="600" y1="0" x2="600" y2="600" stroke="#739AAA" stroke-width="4"/>
+          <line x1="700" y1="0" x2="700" y2="600" stroke="#739AAA" stroke-width="2.5"/>
+          <!-- City blocks -->
+          <rect x="105" y="85" width="110" height="70" fill="#A5BCBF" opacity="0.5" rx="2"/>
+          <rect x="225" y="85" width="110" height="70" fill="#A5BCBF" opacity="0.5" rx="2"/>
+          <rect x="345" y="85" width="130" height="70" fill="#A5BCBF" opacity="0.5" rx="2"/>
+          <rect x="485" y="85" width="110" height="70" fill="#A5BCBF" opacity="0.5" rx="2"/>
+          <rect x="105" y="165" width="110" height="90" fill="#A5BCBF" opacity="0.4" rx="2"/>
+          <rect x="225" y="165" width="110" height="90" fill="#A5BCBF" opacity="0.4" rx="2"/>
+          <rect x="345" y="165" width="130" height="90" fill="#A5BCBF" opacity="0.4" rx="2"/>
+          <rect x="485" y="165" width="110" height="90" fill="#A5BCBF" opacity="0.4" rx="2"/>
+          <rect x="605" y="165" width="90" height="90" fill="#A5BCBF" opacity="0.4" rx="2"/>
+          <rect x="105" y="265" width="110" height="90" fill="#A5BCBF" opacity="0.4" rx="2"/>
+          <rect x="225" y="265" width="110" height="90" fill="#9DBFA5" opacity="0.5" rx="2"/>
+          <rect x="345" y="265" width="130" height="90" fill="#A5BCBF" opacity="0.4" rx="2"/>
+          <rect x="485" y="265" width="110" height="90" fill="#A5BCBF" opacity="0.4" rx="2"/>
+          <rect x="605" y="265" width="90" height="90" fill="#A5BCBF" opacity="0.4" rx="2"/>
+          <rect x="105" y="365" width="110" height="90" fill="#A5BCBF" opacity="0.4" rx="2"/>
+          <rect x="225" y="365" width="110" height="90" fill="#A5BCBF" opacity="0.4" rx="2"/>
+          <rect x="345" y="365" width="130" height="90" fill="#A5BCBF" opacity="0.4" rx="2"/>
+          <rect x="485" y="365" width="110" height="90" fill="#A5BCBF" opacity="0.4" rx="2"/>
+          <rect x="605" y="365" width="90" height="90" fill="#A5BCBF" opacity="0.4" rx="2"/>
+          <!-- Route line dashed -->
+          <path d="M200,120 L340,200 L340,360 L480,440" stroke="#333DA7" stroke-width="2.5" stroke-dasharray="6,5" fill="none" opacity="0.8"/>
+          <!-- Street labels -->
+          <text x="8" y="77" fill="rgba(20,48,62,0.5)" font-family="sans-serif" font-size="9" text-anchor="start" letter-spacing="1">BLOOR ST</text>
+          <text x="8" y="257" fill="rgba(20,48,62,0.5)" font-family="sans-serif" font-size="9" text-anchor="start" letter-spacing="1">COLLEGE ST</text>
+          <text x="8" y="457" fill="rgba(20,48,62,0.5)" font-family="sans-serif" font-size="9" text-anchor="start" letter-spacing="1">QUEEN ST W</text>
+          <text x="337" y="15" fill="rgba(20,48,62,0.5)" font-family="sans-serif" font-size="9" text-anchor="middle" letter-spacing="1">SPADINA</text>
+          <text x="597" y="15" fill="rgba(20,48,62,0.5)" font-family="sans-serif" font-size="9" text-anchor="middle" letter-spacing="1">YONGE</text>
+        </svg>
+
+        <!-- Spot markers -->
+        <div class="t-marker" style="left:170px;top:95px;background:#0D7A82;">&#10022;</div>
+        <div class="t-marker" style="left:310px;top:135px;background:#333DA7;">T</div>
+        <div class="t-marker" style="left:450px;top:85px;background:#9D372E;">&#9962;</div>
+        <div class="t-marker" style="left:250px;top:240px;background:#257A48;">&#9670;</div>
+        <div class="t-marker" style="left:380px;top:310px;background:#333DA7;">T</div>
+        <div class="t-marker" style="left:520px;top:260px;background:#8E2E8E;">&#9670;</div>
+        <div class="t-marker" style="left:160px;top:395px;background:#0D7A82;">&#10022;</div>
+
+        <!-- Map info badge -->
+        <div class="t-map-badge">
+          <span class="t-map-label">Downtown TO</span>
+          Bloor &rarr; Front &middot; Bathurst &rarr; Yonge
+        </div>
+
+        <!-- Route edge buttons -->
+        <div class="t-route-edge">
+          <button class="t-edge-btn" style="background:#0D7A82;" title="Artist's Choice">&#10022;</button>
+          <button class="t-edge-btn" style="background:#333DA7;opacity:0.75;" title="Typography">T</button>
+          <button class="t-edge-btn" style="background:#9D372E;opacity:0.75;" title="Architecture">&#9962;</button>
+          <button class="t-edge-btn" style="background:#257A48;opacity:0.75;" title="Art Objects">&#9670;</button>
+          <button class="t-edge-btn" style="background:#8E2E8E;opacity:0.75;" title="Street Art">&#9670;</button>
+        </div>
+
+        <!-- Near You bar -->
+        <div class="t-nearyou-bar">
+          <div class="t-nearyou-label">
+            <div class="t-nearyou-dot"></div>
+            Near You
+            <span class="t-nearyou-count">5 spots &rsaquo;</span>
+          </div>
+          <div class="t-nearyou-spots">
+            <div class="t-nearyou-thumb" style="background:#1C3340;" title="Lee's Palace">&#9670;</div>
+            <div class="t-nearyou-thumb" style="background:#1C2840;" title="ROM">&#9962;</div>
+            <div class="t-nearyou-thumb" style="background:#1C3328;" title="Spadina Sign">T</div>
+            <div class="t-nearyou-thumb" style="background:#1C3228;" title="Spirit Garden">&#9670;</div>
+            <div class="t-nearyou-thumb" style="background:#2A1C3A;" title="Old City Hall">&#9670;</div>
+          </div>
+        </div>
+
+        <!-- Onboarding modal -->
+        <div class="t-modal-overlay" id="modalOverlay">
+          <div class="t-modal">
+            <button class="t-modal-close" onclick="document.getElementById('modalOverlay').style.display='none'">&#10005;</button>
+            <div class="t-modal-step">Step 1 of 3 &middot; Welcome</div>
+            <div class="t-modal-title">Hi There!<br>Welcome to <span>TRACE: Toronto</span></div>
+            <div class="t-modal-row">
+              <div class="t-modal-key">Toggle:</div>
+              <div class="t-modal-val">Use the route buttons to filter what&rsquo;s on the map.</div>
+            </div>
+            <div class="t-modal-row">
+              <div class="t-modal-key">Tap:</div>
+              <div class="t-modal-val">Map markers uncover the hidden history of each spot.</div>
+            </div>
+            <div class="t-modal-row">
+              <div class="t-modal-key">Explore:</div>
+              <div class="t-modal-val">Open the City Guide for full stories on every gem.</div>
+            </div>
+            <div class="t-modal-dots">
+              <div class="t-modal-dot on"></div>
+              <div class="t-modal-dot"></div>
+              <div class="t-modal-dot"></div>
+            </div>
+            <button class="t-modal-btn" onclick="document.getElementById('modalOverlay').style.display='none'">
+              <span class="t-modal-btn-label">Quick Start &rsaquo;</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Show modal again -->
+        <button class="t-show-modal-btn" id="showModalBtn" style="display:none;" onclick="document.getElementById('modalOverlay').style.display='flex';document.getElementById('showModalBtn').style.display='none';">Show Onboarding</button>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- BELOW FOLD -->
+  <section class="t-below">
+    <div class="t-below-grid">
+
+      <!-- Intro + stats -->
+      <div class="t-below-intro">
+        <div>
+          <div class="t-eyebrow">Edition 1 &middot; Downtown Toronto</div>
+          <h2 class="t-h2">Most city guides tell you where to eat.<br>TRACE tells you what to <em>look at.</em></h2>
+          <p class="t-body">A curated creative exploration platform mapping Toronto&rsquo;s hidden visual culture &mdash; ghost signs, brutalist architecture, public art, murals, and typographic landmarks that most people walk past without noticing.</p>
+        </div>
+        <div class="t-stat-row">
+          <div class="t-stat">
+            <div class="t-stat-num">5</div>
+            <div class="t-stat-label">Routes</div>
+          </div>
+          <div class="t-stat">
+            <div class="t-stat-num">57</div>
+            <div class="t-stat-label">Gems</div>
+          </div>
+          <div class="t-stat">
+            <div class="t-stat-num">~3h</div>
+            <div class="t-stat-label">Full walk</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Route cards -->
+      <div class="t-routes-label">The Five Routes</div>
+      <div class="t-route-cards">
+        <div class="t-rcard" style="background:#0D7A82;">
+          <div class="t-rcard-icon">&#10022;</div>
+          <div class="t-rcard-name">Artist&rsquo;s Choice</div>
+          <div class="t-rcard-hint">Curator-selected cross-category gems</div>
+          <div class="t-rcard-count">10+ spots</div>
+        </div>
+        <div class="t-rcard" style="background:#333DA7;">
+          <div class="t-rcard-icon">T</div>
+          <div class="t-rcard-name">Typography</div>
+          <div class="t-rcard-hint">Ghost signs, neon, civic lettering</div>
+          <div class="t-rcard-count">12+ spots</div>
+        </div>
+        <div class="t-rcard" style="background:#9D372E;">
+          <div class="t-rcard-icon">&#9962;</div>
+          <div class="t-rcard-name">Architecture</div>
+          <div class="t-rcard-hint">Brutalist, modernist, heritage</div>
+          <div class="t-rcard-count">10+ spots</div>
+        </div>
+        <div class="t-rcard" style="background:#257A48;">
+          <div class="t-rcard-icon">&#9670;</div>
+          <div class="t-rcard-name">Art Objects</div>
+          <div class="t-rcard-hint">Public sculpture &amp; installation</div>
+          <div class="t-rcard-count">11+ spots</div>
+        </div>
+        <div class="t-rcard" style="background:#8E2E8E;">
+          <div class="t-rcard-icon">&#9670;</div>
+          <div class="t-rcard-name">Street Art</div>
+          <div class="t-rcard-hint">Murals, commissioned &amp; grassroots</div>
+          <div class="t-rcard-count">14+ spots</div>
+        </div>
+      </div>
+
+      <!-- Featured spots -->
+      <div class="t-spots-label">Featured Gems</div>
+      <div class="t-spot-grid">
+        <div class="t-gem-card">
+          <div class="t-gem-thumb" style="background:#D4E5EA;font-size:32px;">
+            <div class="t-gem-stripe" style="background:#333DA7;"></div>
+            &#9670;
+          </div>
+          <div class="t-gem-body">
+            <span class="t-gem-route-tag" style="background:#333DA7;">Typography</span>
+            <div class="t-gem-name">Lee&rsquo;s Palace</div>
+            <div class="t-gem-loc">Bloor St W, The Annex</div>
+          </div>
+        </div>
+        <div class="t-gem-card">
+          <div class="t-gem-thumb" style="background:#D4DFE5;font-size:32px;">
+            <div class="t-gem-stripe" style="background:#9D372E;"></div>
+            &#9962;
+          </div>
+          <div class="t-gem-body">
+            <span class="t-gem-route-tag" style="background:#9D372E;">Architecture</span>
+            <div class="t-gem-name">ROM (The Crystal)</div>
+            <div class="t-gem-loc">Bloor St W, Yorkville</div>
+          </div>
+        </div>
+        <div class="t-gem-card">
+          <div class="t-gem-thumb" style="background:#D4E5DA;font-size:32px;">
+            <div class="t-gem-stripe" style="background:#257A48;"></div>
+            &#9670;
+          </div>
+          <div class="t-gem-body">
+            <span class="t-gem-route-tag" style="background:#257A48;">Art Objects</span>
+            <div class="t-gem-name">Spirit Garden</div>
+            <div class="t-gem-loc">100 Queen St W, Financial</div>
+          </div>
+        </div>
+        <div class="t-gem-card">
+          <div class="t-gem-thumb" style="background:#E0D4E5;font-size:32px;">
+            <div class="t-gem-stripe" style="background:#8E2E8E;"></div>
+            &#9670;
+          </div>
+          <div class="t-gem-body">
+            <span class="t-gem-route-tag" style="background:#8E2E8E;">Street Art</span>
+            <div class="t-gem-name">Annex Wall Mural</div>
+            <div class="t-gem-loc">Bathurst St, The Annex</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="t-guide-cta">
+        <button class="t-guide-btn" onclick="sendPrompt('How should I build the Guide page for the TRACE desktop website?')">Open the Guide &rarr;</button>
+        <span class="t-guide-note">57 spots &middot; full stories &middot; designer&rsquo;s notes</span>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<script>
+  document.getElementById('modalOverlay').addEventListener('click', function(e) {
+    if (e.target === this) {
+      this.style.display = 'none';
+      document.getElementById('showModalBtn').style.display = 'block';
+    }
+  });
+  document.querySelector('.t-modal-close').addEventListener('click', function() {
+    document.getElementById('showModalBtn').style.display = 'block';
+  });
+  document.querySelector('.t-modal-btn').addEventListener('click', function() {
+    document.getElementById('showModalBtn').style.display = 'block';
+  });
+</script>

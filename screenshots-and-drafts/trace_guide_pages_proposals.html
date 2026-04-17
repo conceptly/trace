@@ -1,0 +1,502 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&family=Roboto+Slab:wght@300;400;500&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+.pg{font-family:'Josefin Sans',sans-serif;background:#F5F9F6;}
+
+/* shared nav */
+.nav{background:#2D4855;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;border-bottom:0.5px solid #3D5E6A;}
+.nav-logo{display:flex;align-items:baseline;gap:2px;}
+.nav-trace{font-size:20px;font-weight:700;letter-spacing:.06em;color:#E7E626;}
+.nav-to{font-size:14px;font-weight:300;letter-spacing:.06em;color:#BDD0CC;}
+.nav-search{display:flex;align-items:center;gap:8px;background:rgba(235,242,238,.33);border:0.5px solid #CDDBD0;border-radius:14px;padding:6px 14px;width:340px;cursor:pointer;}
+.nav-search-ph{font-size:13px;color:#CDDBD0;font-style:italic;font-family:'Roboto Slab',serif;}
+.nav-links{display:flex;gap:10px;}
+.nav-item{font-size:14px;font-weight:400;text-transform:uppercase;letter-spacing:.06em;color:#CDDBD0;padding:5px 12px;border-radius:8px;cursor:pointer;}
+.nav-item.active{color:#E7E626;background:#1D3240;border:0.5px solid #1D3240;}
+.nav-icon{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#8AADB5;font-size:14px;cursor:pointer;}
+
+/* section label */
+.page-label{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#8AADB5;margin-bottom:4px;}
+
+/* ── PAGE 1: CITY GUIDE ── */
+.guide-layout{display:grid;grid-template-columns:284px 1fr;height:calc(100vh - 56px);min-height:640px;}
+
+/* Left panel */
+.guide-sidebar{background:#2D4855;border-right:0.5px solid #3D5E6A;display:flex;flex-direction:column;overflow:hidden;}
+.guide-sidebar-inner{flex:1;overflow-y:auto;padding:20px 16px;scrollbar-width:thin;scrollbar-color:#3D5E6A #2D4855;}
+.gsec{margin-bottom:20px;}
+.gsec-label{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#5A8A95;margin-bottom:8px;}
+.route-filter{display:flex;align-items:center;gap:8px;width:100%;padding:8px 10px;border-radius:10px;border:none;background:transparent;cursor:pointer;transition:background .15s;text-align:left;margin-bottom:3px;}
+.route-filter:hover{background:rgba(237,244,240,.06);}
+.route-filter.on{background:rgba(237,244,240,.1);}
+.route-filter-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.route-filter-name{font-size:13px;font-weight:500;color:#EDF4F0;letter-spacing:.02em;flex:1;}
+.route-filter-count{font-size:10px;color:#5A8A95;letter-spacing:.04em;}
+.route-filter-check{width:16px;height:16px;border-radius:4px;border:1.5px solid #3D5E6A;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.route-filter.on .route-filter-check{background:#E7E626;border-color:#E7E626;}
+.route-filter.on .route-filter-check::after{content:'';display:block;width:5px;height:8px;border-right:2px solid #1D3240;border-bottom:2px solid #1D3240;transform:rotate(45deg) translate(-1px,-1px);}
+
+/* Sort options */
+.sort-group{display:flex;flex-direction:column;gap:3px;}
+.sort-opt{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:10px;border:none;background:transparent;cursor:pointer;width:100%;text-align:left;transition:background .15s;}
+.sort-opt:hover{background:rgba(237,244,240,.06);}
+.sort-opt.on{background:rgba(237,244,240,.08);}
+.sort-radio{width:14px;height:14px;border-radius:50%;border:2px solid #3D5E6A;flex-shrink:0;}
+.sort-opt.on .sort-radio{border-color:#E7E626;background:#E7E626;box-shadow:inset 0 0 0 3px #2D4855;}
+.sort-label{font-size:12px;color:#BDD0CC;letter-spacing:.02em;}
+.sort-opt.on .sort-label{color:#EDF4F0;font-weight:600;}
+
+/* Result summary */
+.guide-sidebar-footer{padding:14px 16px;background:#223740;border-top:0.5px solid #3D5E6A;}
+.result-summary{font-size:11px;color:#8AADB5;letter-spacing:.04em;margin-bottom:10px;}
+.result-summary span{color:#EDF4F0;font-weight:600;}
+.clear-btn{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8AADB5;background:transparent;border:0.5px solid #3D5E6A;border-radius:8px;padding:5px 10px;cursor:pointer;transition:color .15s,border-color .15s;}
+.clear-btn:hover{color:#EDF4F0;border-color:#5A8A95;}
+
+/* Main content */
+.guide-main{background:#F5F9F6;display:flex;flex-direction:column;overflow:hidden;}
+.guide-topbar{background:#EDF5F7;border-bottom:0.5px solid #BDD0D5;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.guide-breadcrumb{font-size:11px;color:#5A8A95;letter-spacing:.04em;display:flex;align-items:center;gap:6px;}
+.guide-breadcrumb a{color:#8AADB5;text-decoration:none;cursor:pointer;}
+.guide-breadcrumb a:hover{color:#1D3240;}
+.guide-breadcrumb-sep{color:#BDD0D5;}
+.guide-view-toggle{display:flex;gap:4px;background:#DDE9ED;border-radius:8px;padding:3px;}
+.view-btn{padding:5px 10px;border-radius:6px;border:none;background:transparent;font-size:11px;font-weight:600;color:#5A8A95;cursor:pointer;letter-spacing:.06em;text-transform:uppercase;}
+.view-btn.on{background:#fff;color:#1D3240;border:0.5px solid #BDD0D5;}
+
+.guide-grid-wrap{flex:1;overflow-y:auto;padding:20px 24px;}
+.route-section{margin-bottom:28px;}
+.route-section-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding-bottom:8px;border-bottom:0.5px solid #BDD0D5;}
+.route-section-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.route-section-name{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#1D3240;}
+.route-section-count{font-size:11px;color:#8AADB5;letter-spacing:.04em;margin-left:auto;}
+.gem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.gem-card{background:#fff;border-radius:12px;border:0.5px solid #BDD0D5;overflow:hidden;cursor:pointer;transition:transform .15s;}
+.gem-card:hover{transform:translateY(-2px);}
+.gem-thumb{height:88px;display:flex;align-items:center;justify-content:center;font-size:26px;position:relative;}
+.gem-stripe{position:absolute;left:0;top:0;bottom:0;width:3px;}
+.gem-body{padding:10px 12px 11px;}
+.gem-name{font-size:13px;font-weight:700;color:#1D3240;margin-bottom:2px;letter-spacing:.01em;line-height:1.2;}
+.gem-loc{font-size:10px;color:#5A8A95;letter-spacing:.03em;margin-bottom:4px;}
+.gem-tags{display:flex;gap:4px;flex-wrap:wrap;}
+.gem-tag{font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;padding:2px 6px;border-radius:4px;}
+.gem-dist{font-size:9px;color:#8AADB5;letter-spacing:.04em;margin-top:3px;}
+
+/* ── PAGE 2: ITEM GUIDE ── */
+.item-layout{display:grid;grid-template-columns:1fr 420px;min-height:640px;}
+.item-media{background:#1D3240;position:relative;display:flex;flex-direction:column;overflow:hidden;}
+.item-hero{flex:1;min-height:300px;background:#223740;display:flex;align-items:center;justify-content:center;font-size:48px;position:relative;}
+.item-hero-overlay{position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(to top,rgba(15,34,41,.9),transparent);display:flex;align-items:flex-end;padding:16px;}
+.item-thumbs{display:flex;gap:6px;padding:12px 16px;background:#1D3240;border-top:0.5px solid #3D5E6A;}
+.item-thumb{width:64px;height:64px;border-radius:8px;background:#2D4855;border:1.5px solid transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;transition:border-color .15s;flex-shrink:0;}
+.item-thumb.on{border-color:#E7E626;}
+.item-thumb:hover{border-color:#8AADB5;}
+.item-nav-row{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#2D4855;border-top:0.5px solid #3D5E6A;}
+.item-nav-btn{display:flex;align-items:center;gap:6px;background:transparent;border:0.5px solid #3D5E6A;border-radius:8px;padding:7px 12px;cursor:pointer;font-family:'Josefin Sans',sans-serif;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:#8AADB5;transition:color .15s,border-color .15s;}
+.item-nav-btn:hover{color:#EDF4F0;border-color:#5A8A95;}
+.item-nav-pos{font-size:11px;color:#5A8A95;letter-spacing:.06em;}
+
+/* Right panel */
+.item-panel{background:#F5F9F6;display:flex;flex-direction:column;border-left:0.5px solid #BDD0D5;overflow:hidden;}
+.item-panel-head{background:#EDF5F7;padding:14px 20px;border-bottom:0.5px solid #BDD0D5;flex-shrink:0;}
+.item-breadcrumb{font-size:10px;color:#8AADB5;letter-spacing:.04em;margin-bottom:6px;display:flex;align-items:center;gap:4px;}
+.item-breadcrumb a{color:#5A8A95;text-decoration:none;cursor:pointer;}
+.item-breadcrumb a:hover{color:#1D3240;}
+.item-title{font-size:22px;font-weight:700;color:#1D3240;line-height:1.15;letter-spacing:-.01em;margin-bottom:6px;}
+.item-meta-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.item-route-tag{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff;padding:3px 8px;border-radius:5px;}
+.item-loc{font-size:11px;color:#5A8A95;letter-spacing:.03em;display:flex;align-items:center;gap:4px;}
+.item-panel-body{flex:1;overflow-y:auto;padding:18px 20px;scrollbar-width:thin;}
+.item-section{margin-bottom:20px;padding-bottom:18px;border-bottom:0.5px solid #DDE9ED;}
+.item-section:last-child{border-bottom:none;}
+.item-section-label{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#8AADB5;margin-bottom:8px;}
+.item-body{font-family:'Roboto Slab',serif;font-size:13px;color:#3A6070;line-height:1.65;}
+.item-note{font-family:'Roboto Slab',serif;font-size:13px;color:#3A6070;line-height:1.65;font-style:italic;background:#EDF5F7;border-left:3px solid #0D7A82;border-radius:0 8px 8px 0;padding:10px 14px;}
+.style-tags{display:flex;gap:6px;flex-wrap:wrap;}
+.style-tag{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;border-radius:6px;background:#DDE9ED;color:#3A6070;border:0.5px solid #BDD0D5;}
+.xp-badge{display:flex;align-items:center;gap:8px;background:#1D3240;border-radius:10px;padding:10px 14px;}
+.xp-icon{width:28px;height:28px;border-radius:50%;background:#E7E626;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#1D3240;flex-shrink:0;}
+.xp-text{font-size:11px;color:#EDF4F0;font-weight:600;letter-spacing:.04em;}
+.xp-sub{font-size:10px;color:#8AADB5;}
+
+.item-panel-cta{padding:14px 20px;background:#EDF5F7;border-top:0.5px solid #BDD0D5;flex-shrink:0;}
+.item-cta-btn{width:100%;background:#E7E626;border:none;border-radius:12px;padding:11px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:opacity .15s;}
+.item-cta-btn:hover{opacity:.9;}
+.item-cta-label{font-family:'Josefin Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#1D3240;}
+.item-cta-meta{font-family:'Josefin Sans',sans-serif;font-size:10px;color:#3A6070;}
+
+/* Page switcher */
+.switcher{display:flex;gap:0;background:#1D3240;border-bottom:0.5px solid #3D5E6A;}
+.switch-btn{flex:1;padding:10px 0;font-family:'Josefin Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:transparent;border:none;color:#5A8A95;cursor:pointer;border-bottom:2px solid transparent;transition:color .15s,border-color .15s;}
+.switch-btn.on{color:#E7E626;border-bottom-color:#E7E626;}
+.switch-btn:hover:not(.on){color:#8AADB5;}
+
+.quick-guide-tab{position:absolute;right:0;top:50%;transform:translateY(-50%)translateX(0);writing-mode:vertical-lr;text-orientation:mixed;background:rgba(45,72,85,.75);border:0.5px solid #3D5E6A;border-right:none;border-radius:12px 0 0 12px;padding:12px 8px;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#BDD0CC;cursor:pointer;display:flex;align-items:center;gap:6px;}
+</style>
+
+<div class="pg">
+  <h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">TRACE Toronto — City Guide and Item Guide desktop page layout proposals</h2>
+
+  <div class="switcher">
+    <button class="switch-btn on" onclick="showPage('guide')">City Guide page</button>
+    <button class="switch-btn" onclick="showPage('item')">Item Guide page</button>
+  </div>
+
+  <!-- PAGE 1: CITY GUIDE -->
+  <div id="page-guide">
+    <nav class="nav">
+      <div class="nav-logo"><span class="nav-trace">TRACE</span><span class="nav-to">TO</span></div>
+      <div class="nav-search"><span style="color:#8AADB5;font-size:14px;">&#9906;</span><span class="nav-search-ph">Search for spots or routes!</span></div>
+      <div class="nav-links">
+        <div class="nav-item">Map</div>
+        <div class="nav-item active">Guidebook</div>
+        <div class="nav-item">About</div>
+        <div class="nav-item">Profile</div>
+      </div>
+      <div class="nav-icon">&#9788;</div>
+    </nav>
+
+    <div class="guide-layout">
+      <aside class="guide-sidebar">
+        <div class="guide-sidebar-inner">
+
+          <div class="gsec">
+            <div class="gsec-label">Filter by Route</div>
+            <button class="route-filter on" onclick="this.classList.toggle('on')">
+              <div class="route-filter-dot" style="background:#0D7A82;"></div>
+              <span class="route-filter-name">Artist&rsquo;s Choice</span>
+              <span class="route-filter-count">10</span>
+              <div class="route-filter-check"></div>
+            </button>
+            <button class="route-filter on" onclick="this.classList.toggle('on')">
+              <div class="route-filter-dot" style="background:#333DA7;"></div>
+              <span class="route-filter-name">Typography</span>
+              <span class="route-filter-count">12</span>
+              <div class="route-filter-check"></div>
+            </button>
+            <button class="route-filter" onclick="this.classList.toggle('on')">
+              <div class="route-filter-dot" style="background:#9D372E;"></div>
+              <span class="route-filter-name">Architecture</span>
+              <span class="route-filter-count">10</span>
+              <div class="route-filter-check"></div>
+            </button>
+            <button class="route-filter on" onclick="this.classList.toggle('on')">
+              <div class="route-filter-dot" style="background:#257A48;"></div>
+              <span class="route-filter-name">Art Objects</span>
+              <span class="route-filter-count">11</span>
+              <div class="route-filter-check"></div>
+            </button>
+            <button class="route-filter" onclick="this.classList.toggle('on')">
+              <div class="route-filter-dot" style="background:#8E2E8E;"></div>
+              <span class="route-filter-name">Street Art</span>
+              <span class="route-filter-count">14</span>
+              <div class="route-filter-check"></div>
+            </button>
+          </div>
+
+          <div class="gsec">
+            <div class="gsec-label">Sort by</div>
+            <div class="sort-group">
+              <button class="sort-opt on" onclick="setSortActive(this)">
+                <div class="sort-radio"></div>
+                <span class="sort-label">Top Picks</span>
+              </button>
+              <button class="sort-opt" onclick="setSortActive(this)">
+                <div class="sort-radio"></div>
+                <span class="sort-label">Proximity to you</span>
+              </button>
+              <button class="sort-opt" onclick="setSortActive(this)">
+                <div class="sort-radio"></div>
+                <span class="sort-label">A &rarr; Z</span>
+              </button>
+              <button class="sort-opt" onclick="setSortActive(this)">
+                <div class="sort-radio"></div>
+                <span class="sort-label">Z &rarr; A</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+        <div class="guide-sidebar-footer">
+          <div class="result-summary">Showing <span>33</span> of 57 gems</div>
+          <button class="clear-btn">Clear filters</button>
+        </div>
+      </aside>
+
+      <div class="guide-main">
+        <div class="guide-topbar">
+          <div class="guide-breadcrumb">
+            <a>Map</a>
+            <span class="guide-breadcrumb-sep">/</span>
+            <span style="color:#1D3240;font-weight:600;">City Guide</span>
+          </div>
+          <div class="guide-view-toggle">
+            <button class="view-btn on">Grid</button>
+            <button class="view-btn">List</button>
+          </div>
+        </div>
+
+        <div class="guide-grid-wrap">
+
+          <div class="route-section">
+            <div class="route-section-header">
+              <div class="route-section-dot" style="background:#0D7A82;"></div>
+              <span class="route-section-name">Artist&rsquo;s Choice</span>
+              <span class="route-section-count">10 gems</span>
+            </div>
+            <div class="gem-grid">
+              <div class="gem-card">
+                <div class="gem-thumb" style="background:#D4E5E6;">
+                  <div class="gem-stripe" style="background:#0D7A82;"></div>
+                  &#9670;
+                </div>
+                <div class="gem-body">
+                  <div class="gem-name">Phlegm Wall</div>
+                  <div class="gem-loc">Ossington Ave &middot; Trinity Bellwoods</div>
+                  <div class="gem-tags"><span class="gem-tag" style="background:#0D7A82;">Artist&rsquo;s</span></div>
+                  <div class="gem-dist">280m away</div>
+                </div>
+              </div>
+              <div class="gem-card">
+                <div class="gem-thumb" style="background:#D4DDE6;">
+                  <div class="gem-stripe" style="background:#0D7A82;"></div>
+                  &#9670;
+                </div>
+                <div class="gem-body">
+                  <div class="gem-name">Equilibrium Sculpture</div>
+                  <div class="gem-loc">Queen St W &middot; Kensington</div>
+                  <div class="gem-tags"><span class="gem-tag" style="background:#0D7A82;">Artist&rsquo;s</span></div>
+                  <div class="gem-dist">490m away</div>
+                </div>
+              </div>
+              <div class="gem-card">
+                <div class="gem-thumb" style="background:#D9D4E6;">
+                  <div class="gem-stripe" style="background:#0D7A82;"></div>
+                  &#9670;
+                </div>
+                <div class="gem-body">
+                  <div class="gem-name">Giant Steps Mural</div>
+                  <div class="gem-loc">Spadina Ave &middot; Chinatown</div>
+                  <div class="gem-tags"><span class="gem-tag" style="background:#0D7A82;">Artist&rsquo;s</span></div>
+                  <div class="gem-dist">620m away</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="route-section">
+            <div class="route-section-header">
+              <div class="route-section-dot" style="background:#333DA7;"></div>
+              <span class="route-section-name">Typography</span>
+              <span class="route-section-count">12 gems</span>
+            </div>
+            <div class="gem-grid">
+              <div class="gem-card">
+                <div class="gem-thumb" style="background:#D4D8E6;">
+                  <div class="gem-stripe" style="background:#333DA7;"></div>
+                  T
+                </div>
+                <div class="gem-body">
+                  <div class="gem-name">Lee&rsquo;s Palace</div>
+                  <div class="gem-loc">Bloor St W &middot; The Annex</div>
+                  <div class="gem-tags"><span class="gem-tag" style="background:#333DA7;">Typography</span></div>
+                  <div class="gem-dist">80m away</div>
+                </div>
+              </div>
+              <div class="gem-card">
+                <div class="gem-thumb" style="background:#D4D8E6;">
+                  <div class="gem-stripe" style="background:#333DA7;"></div>
+                  T
+                </div>
+                <div class="gem-body">
+                  <div class="gem-name">Honest Ed&rsquo;s Ghost Letters</div>
+                  <div class="gem-loc">Bloor St W &middot; Mirvish Village</div>
+                  <div class="gem-tags"><span class="gem-tag" style="background:#333DA7;">Typography</span></div>
+                  <div class="gem-dist">120m away</div>
+                </div>
+              </div>
+              <div class="gem-card">
+                <div class="gem-thumb" style="background:#D4D8E6;">
+                  <div class="gem-stripe" style="background:#333DA7;"></div>
+                  T
+                </div>
+                <div class="gem-body">
+                  <div class="gem-name">Spadina Ghost Sign</div>
+                  <div class="gem-loc">Spadina Ave &middot; Chinatown</div>
+                  <div class="gem-tags"><span class="gem-tag" style="background:#333DA7;">Typography</span></div>
+                  <div class="gem-dist">380m away</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="route-section">
+            <div class="route-section-header">
+              <div class="route-section-dot" style="background:#257A48;"></div>
+              <span class="route-section-name">Art Objects</span>
+              <span class="route-section-count">11 gems</span>
+            </div>
+            <div class="gem-grid">
+              <div class="gem-card">
+                <div class="gem-thumb" style="background:#D4E6DA;">
+                  <div class="gem-stripe" style="background:#257A48;"></div>
+                  &#9670;
+                </div>
+                <div class="gem-body">
+                  <div class="gem-name">Spirit Garden</div>
+                  <div class="gem-loc">100 Queen St W &middot; Financial</div>
+                  <div class="gem-tags"><span class="gem-tag" style="background:#257A48;">Art Objects</span></div>
+                  <div class="gem-dist">490m away</div>
+                </div>
+              </div>
+              <div class="gem-card">
+                <div class="gem-thumb" style="background:#D4E6DA;">
+                  <div class="gem-stripe" style="background:#257A48;"></div>
+                  &#9670;
+                </div>
+                <div class="gem-body">
+                  <div class="gem-name">Dreaming in the Rain</div>
+                  <div class="gem-loc">Nathan Phillips Sq &middot; Downtown</div>
+                  <div class="gem-tags"><span class="gem-tag" style="background:#257A48;">Art Objects</span></div>
+                  <div class="gem-dist">700m away</div>
+                </div>
+              </div>
+              <div class="gem-card">
+                <div class="gem-thumb" style="background:#D4E6DA;">
+                  <div class="gem-stripe" style="background:#257A48;"></div>
+                  &#9670;
+                </div>
+                <div class="gem-body">
+                  <div class="gem-name">Audience Sculpture</div>
+                  <div class="gem-loc">York St &middot; Financial District</div>
+                  <div class="gem-tags"><span class="gem-tag" style="background:#257A48;">Art Objects</span></div>
+                  <div class="gem-dist">820m away</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 2: ITEM GUIDE -->
+  <div id="page-item" style="display:none;">
+    <nav class="nav">
+      <div class="nav-logo"><span class="nav-trace">TRACE</span><span class="nav-to">TO</span></div>
+      <div class="nav-search"><span style="color:#8AADB5;font-size:14px;">&#9906;</span><span class="nav-search-ph">Search for spots or routes!</span></div>
+      <div class="nav-links">
+        <div class="nav-item">Map</div>
+        <div class="nav-item active">Guidebook</div>
+        <div class="nav-item">About</div>
+        <div class="nav-item">Profile</div>
+      </div>
+      <div class="nav-icon">&#9788;</div>
+    </nav>
+
+    <div class="item-layout">
+      <div class="item-media">
+        <div class="item-hero" style="background:#1D3240;font-family:'Josefin Sans',sans-serif;">
+          <div style="font-size:72px;color:#2D4855;user-select:none;">T</div>
+          <div class="item-hero-overlay">
+            <span style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(237,244,240,.6);">Lee&rsquo;s Palace &middot; Bloor St W</span>
+          </div>
+        </div>
+        <div class="item-thumbs">
+          <div class="item-thumb on">T</div>
+          <div class="item-thumb">T</div>
+          <div class="item-thumb">T</div>
+          <div class="item-thumb">T</div>
+          <div style="display:flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:8px;background:rgba(237,244,240,.08);border:1.5px dashed #3D5E6A;font-size:11px;color:#5A8A95;letter-spacing:.06em;flex-shrink:0;">+3</div>
+        </div>
+        <div class="item-nav-row">
+          <button class="item-nav-btn">&#8592; Previous spot</button>
+          <span class="item-nav-pos">3 of 12 &middot; Typography</span>
+          <button class="item-nav-btn">Next spot &#8594;</button>
+        </div>
+      </div>
+
+      <div class="item-panel">
+        <div class="item-panel-head">
+          <div class="item-breadcrumb">
+            <a>Guide</a>
+            <span>/</span>
+            <a style="color:#333DA7;">Typography</a>
+            <span>/</span>
+            <span style="color:#1D3240;font-weight:600;">Lee&rsquo;s Palace</span>
+          </div>
+          <div class="item-title">Lee&rsquo;s Palace</div>
+          <div class="item-meta-row">
+            <span class="item-route-tag" style="background:#333DA7;">Typography</span>
+            <span class="item-loc">&#9906; Bloor St W, The Annex</span>
+            <span style="font-size:10px;color:#8AADB5;letter-spacing:.04em;margin-left:4px;">80m away</span>
+          </div>
+        </div>
+
+        <div class="item-panel-body">
+          <div class="item-section">
+            <div class="item-section-label">About this gem</div>
+            <p class="item-body">A beloved Toronto music venue since 1958, Lee&rsquo;s Palace is as famous for its hand-painted exterior mural as for the bands that have played inside. The facade&mdash;featuring a wildly detailed cartoon cityscape in primary colours&mdash;is one of the most photographed pieces of signage in the city.</p>
+          </div>
+
+          <div class="item-section">
+            <div class="item-section-label">Style</div>
+            <div class="style-tags">
+              <div class="style-tag">Hand-lettered</div>
+              <div class="style-tag">Mural signage</div>
+              <div class="style-tag">Pop vernacular</div>
+              <div class="style-tag">1950s throwback</div>
+            </div>
+          </div>
+
+          <div class="item-section">
+            <div class="item-section-label">Designer&rsquo;s note</div>
+            <div class="item-note">The cartoon-style lettering on the facade breaks every rule of Swiss typography&mdash;and that&rsquo;s exactly what makes it memorable. Notice how the thick-to-thin stroke variation mimics hand-painted circus lettering from a century earlier.</div>
+          </div>
+
+          <div class="item-section">
+            <div class="item-section-label">Spot reward</div>
+            <div class="xp-badge">
+              <div class="xp-icon">+</div>
+              <div>
+                <div class="xp-text">+75 XP on visit</div>
+                <div class="xp-sub">Complete all 12 Typography spots to unlock the Typographer badge</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="item-panel-cta">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+            <span style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8AADB5;">On this route</span>
+            <span style="font-size:10px;color:#8AADB5;letter-spacing:.04em;">3 of 12</span>
+          </div>
+          <button class="item-cta-btn">
+            <div>
+              <div class="item-cta-label">Start Typography Route</div>
+              <div class="item-cta-meta">Next stop: Honest Ed&rsquo;s Ghost Letters &rsaquo; 40m</div>
+            </div>
+            <span style="font-size:16px;color:#1D3240;font-weight:700;">&rsaquo;</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function showPage(p){
+  document.getElementById('page-guide').style.display = p==='guide'?'block':'none';
+  document.getElementById('page-item').style.display = p==='item'?'block':'none';
+  document.querySelectorAll('.switch-btn').forEach(function(b,i){
+    b.classList.toggle('on', (i===0&&p==='guide')||(i===1&&p==='item'));
+  });
+}
+function setSortActive(el){
+  el.closest('.sort-group').querySelectorAll('.sort-opt').forEach(function(b){b.classList.remove('on');});
+  el.classList.add('on');
+}
+</script>

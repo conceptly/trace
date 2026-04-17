@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>City Guide - Trace TO</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+    
+    <!-- Design System Styles -->
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    
+    <!-- Page Specific Styles -->
+    <link rel="stylesheet" href="css/city-guide.css">
+
+</head>
+<body class="city-guide-page">
+    <div class="page-container city-guide-page">
+        <!-- Top Navigation -->
+        <header class="top-nav" aria-label="Main navigation">
+            <div class="nav-left">
+                <!-- Mobile Hamburger Menu (Hidden on Desktop) -->
+                <button class="mobile-hamburger mobile-only" aria-label="Open Mobile Menu">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <circle cx="7" cy="5" r="2.5"/><circle cx="17" cy="5" r="2.5"/>
+                        <circle cx="7" cy="12" r="2.5"/><circle cx="17" cy="12" r="2.5"/>
+                        <circle cx="7" cy="19" r="2.5"/><circle cx="17" cy="19" r="2.5"/>
+                    </svg>
+                </button>
+
+                <div class="logo-container">
+                    <a href="index.html" style="text-decoration:none; display:flex; align-items:center;">
+                        <img src="../assets/logo/logoAPP.svg" alt="TRACE TO" height="16" style="display:block;">
+                    </a>
+                </div>
+
+                <!-- Desktop Search -->
+                <div class="search-container">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M21 21L16.65 16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <input type="text" placeholder="Search for spots or routes!" id="search-input" autocomplete="off" autocorrect="off" spellcheck="false">
+                </div>
+            </div>
+
+            <div class="nav-right">
+                <nav class="nav-center" aria-label="Primary links">
+                    <a href="index.html" class="nav-item">Map</a>
+                    <a href="city-guide.html" class="nav-item active" aria-current="page">City Guide</a>
+                    <a href="about.html" class="nav-item">About</a>
+                    <a href="profile.html" class="nav-item">Profile</a>
+                </nav>
+
+                <!-- Mobile Search Icon (Hidden on Desktop) -->
+                <button class="mobile-search-btn mobile-only shadow-icon" aria-label="Open Search">
+                    <div class="icon-wrapper">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M21 21L16.65 16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </button>
+
+                <div class="theme-switcher">
+                    <button id="theme-toggle" aria-label="Toggle theme">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 2V4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 20V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M4.22 4.22L5.64 5.64" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M18.36 18.36L19.78 19.78" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2 12H4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M20 12H22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M4.22 19.78L5.64 18.36" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M18.36 5.64L19.78 4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Mobile Hamburger Menu Overlay (Reused) -->
+        <div class="mobile-menu-overlay" id="mobileMenu">
+             <div class="menu-section">
+                <span class="menu-label">NAVIGATE</span>
+                <div class="menu-grid">
+                    <button class="menu-btn nav-btn" onclick="window.location.href='index.html'">
+                        <div class="icon-circle">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M8.4444 4.43259L4.17773 5.41721V20L8.4444 19.0399V4.43259ZM9.86662 18.8266V4.21333L14.1333 5.17333V19.7867L9.86662 18.8266ZM15.5555 19.5674L19.8222 18.5828V4L15.5555 4.96V19.5674Z" fill="currentColor"/></svg>
+                        </div>
+                        <div class="text">
+                            <span class="title">Map</span>
+                            <span class="subtitle">5 Routes | 57 Gems</span>
+                        </div>
+                    </button>
+                    <button class="menu-btn nav-btn active" onclick="window.location.href='city-guide.html'">
+                        <div class="icon-circle">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.3124 16.2432C15.0543 15.587 16.1043 15.1304 17.5651 15.1304V13.7391V6.08696V4C15.2523 4 13.9693 5.14429 13.3085 6.41381C12.8565 7.28252 12.6956 8.21014 12.6956 8.86957V15.9377V20C12.6956 19.05 13.0292 17.544 14.0869 16.4582C14.1587 16.3845 14.2338 16.3128 14.3124 16.2432ZM18.9564 16.5217H17.5651C16.0707 16.5217 15.2711 17.1133 14.7986 17.7695C14.609 18.0328 14.4634 18.3206 14.3548 18.6087H20.3478V17.913V6.78261V6.08696H19.6521H18.9564V15.1304V16.5217ZM4.34775 6.08696H3.6521V6.78261V17.913V18.6087H9.91297C10.6814 18.6087 11.3043 19.2316 11.3043 20V8.86957V6.78235C10.7229 6.3457 10.0003 6.08696 9.21732 6.08696H4.34775Z" fill="currentColor"/></svg>
+                        </div>
+                        <div class="text">
+                            <span class="title">City Guide</span>
+                            <span class="subtitle">Toronto Edition</span>
+                        </div>
+                    </button>
+                    <button class="menu-btn nav-btn" onclick="window.location.href='about.html'">
+                        <div class="icon-circle">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.8836 4V6.23261H13.1162V4H10.8836ZM7.53467 7.5346H13.1162V17.7674H16.4651V20H7.53467V17.7674H10.8836V9.76721H7.53467V7.5346Z" fill="currentColor"/></svg>
+                        </div>
+                        <div class="text">
+                            <span class="title">About</span>
+                            <span class="subtitle">TRACE Story</span>
+                        </div>
+                    </button>
+                    <button class="menu-btn nav-btn">
+                        <div class="icon-circle">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M6.79442 4H17.1977L20.7257 12L17.1977 20H6.79442L3.27441 12L6.79442 4ZM10.5417 11.2727L10.5417 9.09092L9.08718 9.0909L9.08717 11.2727H10.5417ZM14.9054 9.09092V11.2727H13.4508V9.0909L14.9054 9.09092ZM7.88218 13.9322C8.9733 15.0233 10.4532 15.6364 11.9963 15.6364C13.5393 15.6364 15.0192 15.0233 16.1103 13.9322L15.0818 12.9037C14.2635 13.722 13.1536 14.1818 11.9963 14.1818C10.839 14.1818 9.72904 13.722 8.9107 12.9037L7.88218 13.9322Z" fill="currentColor"/></svg>
+                        </div>
+                        <div class="text">
+                            <span class="title">Profile</span>
+                            <span class="subtitle">Your Story</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <div class="menu-divider"></div>
+
+            <!-- EXPLORE ROUTES Section -->
+            <div class="menu-section">
+                <span class="menu-label">EXPLORE THE ROUTES</span>
+                <div class="menu-grid">
+                    <button class="menu-btn route-btn typography">
+                        <div class="icon-circle">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M20.7259 4H3.27417L6.18095 20H17.8191L20.7259 4ZM8.3638 6.90909H7.63653V9.81818H9.09107V8.36364H11.273V15.6364H9.81834V17.0909H14.182V15.6364H12.7276V8.36364H14.9092V9.81818H16.3638V6.90909H8.3638Z" fill="currentColor"/></svg>
+                        </div>
+                        <span class="title">Typography</span>
+                    </button>
+                    <button class="menu-btn route-btn art-objects">
+                        <div class="icon-circle">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M19.4721 8.1708V17.0044L12.6794 20V11.1664L19.4721 8.1708ZM18.7892 6.98719L12.0001 4L5.20756 6.98873L11.9966 9.98271L18.7892 6.98719ZM11.3208 20V11.1695L4.52808 8.17387V17.0044L11.3208 20Z" fill="currentColor"/></svg>
+                        </div>
+                        <span class="title">Art Objects</span>
+                    </button>
+                    <button class="menu-btn route-btn architecture">
+                        <div class="icon-circle">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 4H11.2727V6.51206L6.18182 9.78479V10.5455H17.8182V9.78479L12.7273 6.51206V5.45455H14.1818V4H12ZM19.2727 13.4545V18.5455H20V20H4V18.5455H4.72727V13.4545H4V12H20V13.4545H19.2727ZM7.63636 18.5455V13.4545H9.09091V18.5455H7.63636ZM11.2727 18.5455H12.7273V16.3636H11.2727V18.5455ZM14.9091 18.5455V13.4545H16.3636V18.5455H14.9091Z" fill="currentColor"/></svg>
+                        </div>
+                        <span class="title">Architecture</span>
+                    </button>
+                    <button class="menu-btn route-btn street-art">
+                        <div class="icon-circle">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.0006 4H6.66724V8.66667H12.0006V4ZM14.0006 10H4.66724V20H14.0006V10ZM16.0006 6.66643C16.0006 7.21906 15.5526 7.66707 15 7.66717C14.4473 7.66717 13.9992 7.21929 13.9992 6.6666C13.9992 6.11397 14.4472 5.66579 14.9998 5.66569C15.5525 5.66569 16.0006 6.11373 16.0006 6.66643ZM18.333 6.00073C18.8851 6.00033 19.3326 5.55261 19.3326 5.00037C19.3326 4.44788 18.8847 4 18.3322 4C17.7801 4.0004 17.3326 4.4482 17.3326 5.00045C17.3326 5.55293 17.7805 6.00073 18.333 6.00073ZM17.3326 8.33207C17.3326 7.77959 17.7805 7.33171 18.333 7.33171C18.8851 7.3321 19.3326 7.78007 19.3326 8.33231C19.3326 8.8848 18.8847 9.33244 18.3322 9.33244C17.7801 9.33204 17.3326 8.88431 17.3326 8.33207Z" fill="currentColor"/></svg>
+                        </div>
+                        <span class="title">Street Art</span>
+                    </button>
+                    <button class="menu-btn route-btn artists-pick full-width">
+                        <div class="icon-circle">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M15.5906 7.59035L15.1185 8.06243L12.4723 10.7086L12.0002 11.1807L11.5282 10.7086L8.882 8.06243L8.40991 7.59035L8.882 7.11826L11.5282 4.47208L12.0002 4L12.4723 4.47208L15.1185 7.11826L15.5906 7.59035ZM19.5285 12.4721L20.0006 12L19.5285 11.5279L16.8823 8.88175L16.4103 8.40966L15.9382 8.88175L13.292 11.5279L12.8199 12L13.292 12.4721L15.9382 15.1182L16.4103 15.5904L16.8823 15.1182L19.5285 12.4721ZM15.5906 16.4097L15.1185 16.8818L12.4723 19.5279L12.0002 20L11.5282 19.5279L8.882 16.8818L8.40991 16.4097L8.882 15.9376L11.5282 13.2914L12.0002 12.8193L12.4723 13.2914L15.1185 15.9376L15.5906 16.4097ZM11.18 12L10.7078 12.4721L8.0617 15.1182L7.58961 15.5904L7.11753 15.1182L4.47135 12.4721L3.99927 12L4.47135 11.5279L7.11753 8.88175L7.58961 8.40966L8.0617 8.88175L10.7078 11.5279L11.18 12Z" fill="currentColor"/></svg>
+                        </div>
+                        <span class="title">Artist's Pick</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="menu-divider"></div>
+
+            <!-- CONTACT Section -->
+            <div class="menu-section">
+                <span class="menu-label">CONTACT</span>
+                <div class="menu-grid contact">
+                    <a href="https://tracedesign.art" class="menu-btn contact-btn">
+                        <div class="icon-circle">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M19.9727 11.3337C19.6341 7.22719 16.1939 4 12 4C7.58172 4 4 7.58172 4 12C4 11.7755 4.00925 11.5532 4.02738 11.3333H7.53304L10.1188 4.22245C10.602 4.106 11.1023 4.03341 11.6151 4.00911L8.95179 11.3333H15.0482L12.3849 4.00912C12.8977 4.03341 13.398 4.106 13.8812 4.22245L16.467 11.3333L19.9727 11.3337ZM4.02738 12.6667C4.31382 16.1386 6.81731 18.9819 10.1189 19.7776L7.53309 12.6667H4.02738ZM11.6152 19.9909C11.7427 19.9969 11.871 20 12 20C12.129 20 12.2573 19.9969 12.3849 19.9909L15.0482 12.6667H8.95185L11.6152 19.9909ZM13.8812 19.7776C17.1827 18.9819 19.6862 16.1386 19.9726 12.6667H16.4669L13.8812 19.7776Z" fill="currentColor"/></svg>
+                        </div>
+                        <span class="title">tracedesign.art</span>
+                    </a>
+                    <a href="https://instagram.com/tracedesign.to" class="menu-btn contact-btn">
+                        <div class="icon-circle">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M4 4H20V20H4V4ZM16 6.18182H17.8182V8H16V6.18182ZM12 8C9.79086 8 8 9.79086 8 12C8 14.2092 9.79086 16 12 16C14.2092 16 16 14.2092 16 12C16 9.79086 14.2092 8 12 8Z" fill="currentColor"/></svg>
+                        </div>
+                        <span class="title">@tracedesign.to</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Desktop two-column layout wrapper ──────────────────────── -->
+        <div class="guide-desktop-layout">
+
+        <!-- ── Desktop sidebar (hidden on mobile) ─────────────────────── -->
+        <aside class="guide-desktop-sidebar desktop-only-flex" id="guide-sidebar" aria-label="Filter and sort options">
+            <div class="guide-sidebar-inner">
+
+                <!-- Filter by Route -->
+                <div class="sidebar-section">
+                    <div class="sidebar-section-label">Filter by Route</div>
+                    <div class="sidebar-route-filters" id="sidebar-route-filters">
+                        <button class="sidebar-route-btn active" data-route="all">
+                            <span class="sidebar-route-dot" style="background:currentColor; color:#8AADB5;"></span>
+                            <span class="sidebar-route-name">All Routes</span>
+                            <span class="sidebar-route-count" id="srf-count-all">—</span>
+                            <span class="sidebar-route-check"></span>
+                        </button>
+                        <button class="sidebar-route-btn" data-route="artists-pick">
+                            <span class="sidebar-route-dot" style="background:#0d7a82;"></span>
+                            <span class="sidebar-route-name">Artist's Pick</span>
+                            <span class="sidebar-route-count" id="srf-count-artists-pick">—</span>
+                            <span class="sidebar-route-check"></span>
+                        </button>
+                        <button class="sidebar-route-btn" data-route="typography">
+                            <span class="sidebar-route-dot" style="background:#3a4e9a;"></span>
+                            <span class="sidebar-route-name">Typography</span>
+                            <span class="sidebar-route-count" id="srf-count-typography">—</span>
+                            <span class="sidebar-route-check"></span>
+                        </button>
+                        <button class="sidebar-route-btn" data-route="art-objects">
+                            <span class="sidebar-route-dot" style="background:#257a48;"></span>
+                            <span class="sidebar-route-name">Art Objects</span>
+                            <span class="sidebar-route-count" id="srf-count-art-objects">—</span>
+                            <span class="sidebar-route-check"></span>
+                        </button>
+                        <button class="sidebar-route-btn" data-route="architecture">
+                            <span class="sidebar-route-dot" style="background:#9d372e;"></span>
+                            <span class="sidebar-route-name">Architecture</span>
+                            <span class="sidebar-route-count" id="srf-count-architecture">—</span>
+                            <span class="sidebar-route-check"></span>
+                        </button>
+                        <button class="sidebar-route-btn" data-route="street-art">
+                            <span class="sidebar-route-dot" style="background:#7a3084;"></span>
+                            <span class="sidebar-route-name">Street Art</span>
+                            <span class="sidebar-route-count" id="srf-count-street-art">—</span>
+                            <span class="sidebar-route-check"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Sort By -->
+                <div class="sidebar-section">
+                    <div class="sidebar-section-label">Sort by</div>
+                    <div class="sidebar-sort-group" id="sidebar-sort-group">
+                        <button class="sidebar-sort-btn active" data-sort="top-picks">
+                            <span class="sidebar-sort-radio"></span>
+                            <span class="sidebar-sort-label">Top Picks</span>
+                        </button>
+                        <button class="sidebar-sort-btn" data-sort="location">
+                            <span class="sidebar-sort-radio"></span>
+                            <span class="sidebar-sort-label">Proximity to you</span>
+                        </button>
+                        <button class="sidebar-sort-btn" data-sort="a-z">
+                            <span class="sidebar-sort-radio"></span>
+                            <span class="sidebar-sort-label">A → Z</span>
+                        </button>
+                        <button class="sidebar-sort-btn" data-sort="z-a">
+                            <span class="sidebar-sort-radio"></span>
+                            <span class="sidebar-sort-label">Z → A</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Sidebar footer -->
+            <div class="guide-sidebar-footer">
+                <div class="sidebar-result-summary" id="sidebar-result-summary">
+                    Showing <strong id="sidebar-result-count">—</strong> gems
+                </div>
+                <button class="sidebar-clear-btn" id="sidebar-clear-btn">Clear filters</button>
+            </div>
+        </aside>
+
+        <!-- ── Main content area ───────────────────────────────────────── -->
+        <div class="guide-main-area">
+
+            <!-- Desktop topbar: breadcrumb + view toggle (hidden on mobile) -->
+            <div class="guide-desktop-topbar desktop-only-flex">
+                <nav class="guide-breadcrumb-desktop" aria-label="Breadcrumb">
+                    <a href="index.html" class="guide-breadcrumb-link">Map</a>
+                    <span class="guide-breadcrumb-sep">/</span>
+                    <span class="guide-breadcrumb-current">City Guide</span>
+                </nav>
+            </div>
+
+            <!-- Mobile guide header (back btn, title, sort, tags) -->
+            <main class="city-guide-content" aria-label="City Guide Content">
+                
+                <div class="guide-header">
+                    <div class="guide-title-row">
+                        <button class="icon-btn back-btn" onclick="window.location.href='index.html'" aria-label="Back to Map">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M15 18L9 12L15 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <h1 class="guide-title">City Guide</h1>
+                        
+                        <button class="icon-btn sort-btn" id="sort-control" aria-label="Sort options">
+                            <span class="sort-label">Sort by Top Picks</span>
+                            <!-- Icon swapped by JS — uses files from assets/icons/ -->
+                            <img class="sort-icon" id="sort-icon"
+                                 src="assets/icons/Icon=sortCircles.svg"
+                                 alt="Sort"
+                                 width="24" height="24">
+
+                        </button>
+                    </div>
+                    
+                    <div class="tags-container" id="route-tags-container">
+                        <button class="tag-btn tag-all active">all</button>
+                        <button class="tag-btn tag-artists-pick" data-route="artists-pick">Artist's Pick</button>
+                        <button class="tag-btn tag-typography" data-route="typography">Typography</button>
+                        <button class="tag-btn tag-art-objects" data-route="art-objects">Art Objects</button>
+                        <button class="tag-btn tag-architecture" data-route="architecture">Architecture</button>
+                        <button class="tag-btn tag-street-art" data-route="street-art">Street Art</button>
+                    </div>
+                </div>
+
+                <hr class="spot-divider">
+
+                <div class="gems-catalog" id="gems-catalog">
+                    <!-- Dynamically populated by JS -->
+                </div>
+            </main>
+        </div><!-- /.guide-main-area -->
+        </div><!-- /.guide-desktop-layout -->
+    </div><!-- /.page-container -->
+
+    <!-- Mobile Floating Search Bar (hidden, used globally via nav.js) -->
+    <div class="mobile-floating-search">
+        <div class="search-inner">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M21 21L16.65 16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <form id="mobile-search-form" action="#" role="search" onsubmit="return false;">
+                <input type="search" id="mobile-search-input" placeholder="Search for spots or routes!" autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="search">
+            </form>
+        </div>
+    </div>
+
+    <!-- Spot Detail Drawer (reused from index.html, hydrated by city-guide.js) -->
+    <!-- Overlay backdrop -->
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+    <aside class="drawer spot-drawer" id="spot-drawer">
+        <div class="spot-drawer-content">
+            <!-- Breadcrumbs -->
+            <div class="spot-breadcrumbs">
+                <button class="icon-btn back-btn close-spot" aria-label="Close spot info">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <div class="breadcrumbs-path">
+                    <span class="breadcrumb-root">City Guide</span>
+                    <span class="breadcrumb-slash">/</span>
+                    <span class="breadcrumb-current"></span>
+                </div>
+            </div>
+
+            <hr class="spot-divider">
+
+            <!-- Title Header -->
+            <div class="spot-header">
+                <h2 class="spot-title"></h2>
+                <div class="spot-subtitle"></div>
+                <div class="spot-location">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z" fill="currentColor"/>
+                    </svg>
+                    <span></span>
+                </div>
+            </div>
+
+            <!-- Hero Photo -->
+            <div class="spot-hero">
+                <img src="" alt="" />
+            </div>
+
+            <hr class="spot-divider">
+
+            <!-- About Section -->
+            <div class="spot-section">
+                <h3>About</h3>
+                <p></p>
+            </div>
+
+            <hr class="spot-divider">
+
+            <!-- Interesting Fact -->
+            <div class="spot-section" style="display:none">
+                <h3>Interesting Fact!</h3>
+                <p></p>
+            </div>
+
+            <hr class="spot-divider">
+
+            <!-- Designer's Note -->
+            <div class="spot-designer-note" style="display:none">
+                <h3>Designer's Note</h3>
+                <p></p>
+            </div>
+
+            <!-- Footer Actions -->
+            <div class="spot-actions">
+                <button class="btn-primary" onclick="window.location.href='index.html'">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.3124 16.2432C15.0543 15.587 16.1043 15.1304 17.5651 15.1304V13.7391V6.08696V4C15.2523 4 13.9693 5.14429 13.3085 6.41381C12.8565 7.28252 12.6956 8.21014 12.6956 8.86957V15.9377V20C12.6956 19.05 13.0292 17.544 14.0869 16.4582C14.1587 16.3845 14.2338 16.3128 14.3124 16.2432ZM18.9564 16.5217H17.5651C16.0707 16.5217 15.2711 17.1133 14.7986 17.7695C14.609 18.0328 14.4634 18.3206 14.3548 18.6087H20.3478V17.913V6.78261V6.08696H19.6521H18.9564V15.1304V16.5217ZM4.34775 6.08696H3.6521V6.78261V17.913V18.6087H9.91297C10.6814 18.6087 11.3043 19.2316 11.3043 20V8.86957V6.78235C10.7229 6.3457 10.0003 6.08696 9.21732 6.08696H4.34775Z"/></svg>
+                    <span>TO THE TRACE CITY GUIDE</span>
+                </button>
+                <button class="btn-secondary close-spot">
+                    <svg width="15" height="24" viewBox="0 0 15 24" fill="none" stroke="currentColor"><path d="M10 18L4 12L10 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <span>Back to the list</span>
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Data Scripts -->
+
+    <script src="js/data-architecture.js"></script>
+    <script src="js/data-typography.js"></script>
+    <script src="js/data-street-art.js"></script>
+    <script src="js/data-artefacts.js"></script>
+    
+    <!-- Nav functionality -->
+    <script src="js/nav.js"></script>
+    <!-- Page Logic -->
+    <script src="js/city-guide.js"></script>
+
+</body>
+</html>

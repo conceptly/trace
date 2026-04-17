@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Profile - Coming Soon · Trace TO</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- Design System Styles -->
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+
+    <style>
+        /* ── Profile page ── */
+        html, body { height: 100%; background: #1a2c36; margin: 0; }
+
+        .profile-page-wrap {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: #1a2c36;
+        }
+
+        /* Nav dark */
+        .top-nav { background: #1a2c36 !important; border-bottom: 0.5px solid #2d4855 !important; }
+        .top-nav .nav-item, .top-nav .logo-text, .top-nav svg, .top-nav input { color: #edf4f0 !important; }
+        .top-nav .nav-item.active { color: #e7e626 !important; border-color: #e7e626 !important; }
+        .top-nav .search-container { background: rgba(237,244,240,0.06) !important; border-color: rgba(237,244,240,0.12) !important; }
+        .top-nav .search-container input::placeholder { color: #8aadb5 !important; }
+
+        /* ── Page shell ── */
+        .profile-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 24px 64px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Subtle animated rings in bg */
+        .profile-rings { position: absolute; inset: 0; display: flex; align-items: flex-start; justify-content: center; pointer-events: none; overflow: hidden; padding-top: 60px; }
+        .ring { position: absolute; border-radius: 50%; border: 1px solid rgba(231,230,38,0.06); animation: ringPulse 4s ease-in-out infinite; }
+        .ring:nth-child(1) { width: 200px; height: 200px; animation-delay: 0s; }
+        .ring:nth-child(2) { width: 360px; height: 360px; animation-delay: 0.7s; }
+        .ring:nth-child(3) { width: 520px; height: 520px; animation-delay: 1.4s; }
+        .ring:nth-child(4) { width: 700px; height: 700px; animation-delay: 2.1s; }
+        @keyframes ringPulse { 0%,100%{opacity:.5;transform:scale(1)} 50%{opacity:.15;transform:scale(1.03)} }
+
+        /* ── "In Development" badge ── */
+        .dev-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: rgba(231,230,38,0.1);
+            border: 1px solid rgba(231,230,38,0.25);
+            border-radius: 100px;
+            padding: 5px 14px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        .dev-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #e7e626; animation: blink 1.4s ease-in-out infinite; }
+        .dev-badge span { font-family: 'Josefin Sans', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #e7e626; }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+        .profile-intro-heading {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: clamp(22px, 4vw, 36px);
+            font-weight: 700;
+            color: #edf4f0;
+            text-align: center;
+            margin: 0 0 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .profile-intro-heading em { font-style: normal; color: #e7e626; }
+
+        .profile-intro-sub {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 14px;
+            color: #7a9a8e;
+            text-align: center;
+            max-width: 420px;
+            line-height: 1.6;
+            margin: 0 auto 36px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ── Preview card shell ── */
+        .profile-preview-card {
+            width: 100%;
+            max-width: 480px;
+            background: #f5f9f6;
+            border-radius: 24px;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 24px 64px rgba(0,0,0,0.4);
+        }
+
+        /* Frosted lock overlay */
+        .preview-lock-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(26,44,54, 0.55);
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            z-index: 10;
+            border-radius: 24px;
+        }
+        .preview-lock-overlay svg { color: rgba(237,244,240,0.5); }
+        .preview-lock-overlay p {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(237,244,240,0.5);
+        }
+
+        /* ── Profile header area ── */
+        .preview-header {
+            background: #f5f9f6;
+            padding: 20px 16px 0;
+        }
+        .preview-breadcrumb {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #0f2229;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .preview-breadcrumb svg { color: #2d4855; }
+
+        .preview-divider { height: 0.5px; background: rgba(45,72,85,0.15); margin: 12px 0; }
+
+        .preview-user-row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 14px;
+            padding-bottom: 16px;
+        }
+        .preview-user-left { display: flex; align-items: flex-start; gap: 14px; }
+
+        .preview-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #cddbd0 0%, #a8c4b8 100%);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .preview-avatar svg { color: #7a9a8e; }
+
+        .preview-user-info { display: flex; flex-direction: column; gap: 4px; }
+        .preview-username {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #0f2229;
+            letter-spacing: 0.02em;
+        }
+        .preview-title-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 11px;
+            color: #0f2229;
+        }
+        .preview-location {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+        .preview-location svg { color: #2d4855; }
+
+        .preview-xp-row { display: flex; align-items: center; gap: 10px; margin-top: 6px; }
+        .preview-xp-bar-wrap { width: 110px; height: 5px; background: rgba(45,72,85,0.15); border-radius: 100px; overflow: hidden; }
+        .preview-xp-bar-fill { height: 100%; width: 41.6%; background: #0f2229; border-radius: 100px; }
+        .preview-xp-label { font-family: 'Josefin Sans', sans-serif; font-size: 10px; color: #0f2229; white-space: nowrap; }
+
+        .preview-settings-icon { color: #2d4855; flex-shrink: 0; margin-top: 2px; }
+
+        /* Highlights bar */
+        .preview-highlights {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            padding-bottom: 16px;
+        }
+        .preview-highlight {
+            background: #cddbd0;
+            border-radius: 12px;
+            padding: 10px 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+        }
+        .preview-highlight-num {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #2d4855;
+        }
+        .preview-highlight-label {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 10px;
+            color: #2d4855;
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        /* ── Achievements area ── */
+        .preview-achievements {
+            background: #ebf2ee;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .preview-section-title {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #2d4855;
+            margin-bottom: 14px;
+        }
+
+        /* Badges grid */
+        .preview-badges-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+        .preview-badge-item {
+            background: #f5f9f6;
+            border-radius: 12px;
+            padding: 10px 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+        .preview-badge-item.locked { opacity: 0.55; }
+        .badge-shield {
+            width: 32px;
+            height: 38px;
+            border-radius: 4px 4px 16px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+        }
+        .badge-shield svg { color: rgba(255,255,255,0.9); }
+        .preview-badge-name {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 10px;
+            color: #0f2229;
+            text-align: center;
+            white-space: nowrap;
+        }
+        .preview-badge-item.locked .preview-badge-name { color: rgba(15,34,41,0.55); }
+
+        /* Route progress trackers */
+        .preview-route-tracker {
+            background: #f5f9f6;
+            border-radius: 12px;
+            padding: 10px 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .route-tracker-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 1.5px solid;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            background: #f5f9f6;
+            font-size: 13px;
+        }
+        .route-tracker-content { flex: 1; min-width: 0; }
+        .route-tracker-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        .route-tracker-name {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: capitalize;
+        }
+        .route-tracker-count {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+        }
+        .route-tracker-bar { height: 4px; background: rgba(45,72,85,0.12); border-radius: 100px; overflow: hidden; }
+        .route-tracker-fill { height: 100%; border-radius: 100px; }
+
+        /* Rewards grid */
+        .preview-rewards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+        .preview-reward-item {
+            background: #f5f9f6;
+            border-radius: 12px;
+            padding: 14px 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            opacity: 0.5;
+        }
+        .preview-reward-icon { font-size: 24px; }
+        .preview-reward-label { font-family: 'Josefin Sans', sans-serif; font-size: 10px; color: #0f2229; text-align: center; }
+
+        /* Footer */
+        .preview-footer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            padding: 12px 16px 20px;
+            background: #ebf2ee;
+        }
+        .preview-footer span {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 10px;
+            color: #7a9a8e;
+        }
+        .preview-footer span:last-child { color: #2d4855; }
+
+        /* ── CTAs ── */
+        .profile-cta {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+            margin-top: 32px;
+        }
+        .btn-explore {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #1a2c36;
+            background: #e7e626;
+            border: none;
+            border-radius: 100px;
+            padding: 13px 28px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s, transform 0.15s;
+        }
+        .btn-explore:hover { background: #f0ef40; transform: translateY(-1px); }
+        .btn-back {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #8aadb5;
+            background: transparent;
+            border: 1px solid rgba(189,208,213,0.2);
+            border-radius: 100px;
+            padding: 13px 28px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.2s, border-color 0.2s, transform 0.15s;
+        }
+        .btn-back:hover { color: #edf4f0; border-color: rgba(189,208,213,0.4); transform: translateY(-1px); }
+    </style>
+</head>
+<body>
+<div class="profile-page-wrap">
+
+    <!-- Top Navigation -->
+    <header class="top-nav" aria-label="Main navigation">
+        <div class="nav-left">
+            <button class="mobile-hamburger mobile-only" aria-label="Open Mobile Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <circle cx="7" cy="5" r="2.5"/><circle cx="17" cy="5" r="2.5"/>
+                    <circle cx="7" cy="12" r="2.5"/><circle cx="17" cy="12" r="2.5"/>
+                    <circle cx="7" cy="19" r="2.5"/><circle cx="17" cy="19" r="2.5"/>
+                </svg>
+            </button>
+            <div class="logo-container">
+                <a href="index.html" style="text-decoration:none; display:flex; align-items:center;">
+                    <img src="../assets/logo/logoAPP.svg" alt="TRACE TO" height="16" style="display:block;">
+                </a>
+            </div>
+            <div class="search-container">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M21 21L16.65 16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <input type="text" placeholder="Search for spots or routes!" id="search-input" autocomplete="off">
+            </div>
+        </div>
+        <div class="nav-right">
+            <nav class="nav-center" aria-label="Primary links">
+                <a href="index.html" class="nav-item">Map</a>
+                <a href="city-guide.html" class="nav-item">City Guide</a>
+                <a href="about.html" class="nav-item">About</a>
+                <a href="profile.html" class="nav-item active" aria-current="page">Profile</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay (required by nav.js) -->
+    <div class="mobile-menu-overlay" id="mobileMenu">
+        <!-- NAVIGATE Section -->
+        <div class="menu-section">
+            <span class="menu-label">NAVIGATE</span>
+            <div class="menu-grid">
+                <button class="menu-btn nav-btn" onclick="window.location.href='index.html'">
+                    <div class="icon-circle">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M8.4444 4.43259L4.17773 5.41721V20L8.4444 19.0399V4.43259ZM9.86662 18.8266V4.21333L14.1333 5.17333V19.7867L9.86662 18.8266ZM15.5555 19.5674L19.8222 18.5828V4L15.5555 4.96V19.5674Z" fill="currentColor"/></svg>
+                    </div>
+                    <div class="text">
+                        <span class="title">Map</span>
+                        <span class="subtitle">5 Routes | 62 Gems</span>
+                    </div>
+                </button>
+                <button class="menu-btn nav-btn" onclick="window.location.href='city-guide.html'">
+                    <div class="icon-circle">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.3124 16.2432C15.0543 15.587 16.1043 15.1304 17.5651 15.1304V13.7391V6.08696V4C15.2523 4 13.9693 5.14429 13.3085 6.41381C12.8565 7.28252 12.6956 8.21014 12.6956 8.86957V15.9377V20C12.6956 19.05 13.0292 17.544 14.0869 16.4582C14.1587 16.3845 14.2338 16.3128 14.3124 16.2432ZM18.9564 16.5217H17.5651C16.0707 16.5217 15.2711 17.1133 14.7986 17.7695C14.609 18.0328 14.4634 18.3206 14.3548 18.6087H20.3478V17.913V6.78261V6.08696H19.6521H18.9564V15.1304V16.5217ZM4.34775 6.08696H3.6521V6.78261V17.913V18.6087H9.91297C10.6814 18.6087 11.3043 19.2316 11.3043 20V8.86957V6.78235C10.7229 6.3457 10.0003 6.08696 9.21732 6.08696H4.34775Z" fill="currentColor"/></svg>
+                    </div>
+                    <div class="text">
+                        <span class="title">City Guide</span>
+                        <span class="subtitle">Toronto Edition</span>
+                    </div>
+                </button>
+                <button class="menu-btn nav-btn" onclick="window.location.href='about.html'">
+                    <div class="icon-circle">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.8836 4V6.23261H13.1162V4H10.8836ZM7.53467 7.5346H13.1162V17.7674H16.4651V20H7.53467V17.7674H10.8836V9.76721H7.53467V7.5346Z" fill="currentColor"/></svg>
+                    </div>
+                    <div class="text">
+                        <span class="title">About</span>
+                        <span class="subtitle">TRACE Story</span>
+                    </div>
+                </button>
+                <button class="menu-btn nav-btn active" onclick="window.location.href='profile.html'">
+                    <div class="icon-circle">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M6.79442 4H17.1977L20.7257 12L17.1977 20H6.79442L3.27441 12L6.79442 4ZM10.5417 11.2727L10.5417 9.09092L9.08718 9.0909L9.08717 11.2727H10.5417ZM14.9054 9.09092V11.2727H13.4508V9.0909L14.9054 9.09092ZM7.88218 13.9322C8.9733 15.0233 10.4532 15.6364 11.9963 15.6364C13.5393 15.6364 15.0192 15.0233 16.1103 13.9322L15.0818 12.9037C14.2635 13.722 13.1536 14.1818 11.9963 14.1818C10.839 14.1818 9.72904 13.722 8.9107 12.9037L7.88218 13.9322Z" fill="currentColor"/></svg>
+                    </div>
+                    <div class="text">
+                        <span class="title">Profile</span>
+                        <span class="subtitle">Your Story</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <div class="menu-divider"></div>
+
+        <!-- CONTACT Section -->
+        <div class="menu-section">
+            <span class="menu-label">CONTACT</span>
+            <div class="menu-grid contact">
+                <a href="https://traceart.design" target="_blank" class="menu-btn contact-btn">
+                    <div class="icon-circle">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M19.9727 11.3337C19.6341 7.22719 16.1939 4 12 4C7.58172 4 4 7.58172 4 12C4 11.7755 4.00925 11.5532 4.02738 11.3333H7.53304L10.1188 4.22245C10.602 4.106 11.1023 4.03341 11.6151 4.00911L8.95179 11.3333H15.0482L12.3849 4.00912C12.8977 4.03341 13.398 4.106 13.8812 4.22245L16.467 11.3333L19.9727 11.3337ZM4.02738 12.6667C4.31382 16.1386 6.81731 18.9819 10.1189 19.7776L7.53309 12.6667H4.02738ZM11.6152 19.9909C11.7427 19.9969 11.871 20 12 20C12.129 20 12.2573 19.9969 12.3849 19.9909L15.0482 12.6667H8.95185L11.6152 19.9909ZM13.8812 19.7776C17.1827 18.9819 19.6862 16.1386 19.9726 12.6667H16.4669L13.8812 19.7776Z" fill="currentColor"/></svg>
+                    </div>
+                    <span class="title">tracedesign.art</span>
+                </a>
+                <a href="https://instagram.com/tracedesign.to" target="_blank" class="menu-btn contact-btn">
+                    <div class="icon-circle">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M4 4H20V20H4V4ZM16 6.18182H17.8182V8H16V6.18182ZM12 8C9.79086 8 8 9.79086 8 12C8 14.2092 9.79086 16 12 16C14.2092 16 16 14.2092 16 12C16 9.79086 14.2092 8 12 8Z" fill="currentColor"/></svg>
+                    </div>
+                    <span class="title">@tracedesign.to</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main content -->
+    <main class="profile-main" aria-label="Profile — Coming Soon">
+
+        <!-- Background rings -->
+        <div class="profile-rings" aria-hidden="true">
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <div class="ring"></div>
+        </div>
+
+        <!-- Badge + heading -->
+        <div class="dev-badge">
+            <div class="dev-badge-dot"></div>
+            <span>In Development</span>
+        </div>
+
+        <h1 class="profile-intro-heading">Your Trace <em>is coming soon</em></h1>
+        <p class="profile-intro-sub">
+            A full profile with gamification — earn badges, track routes, collect rewards and climb the explorer leaderboard.
+        </p>
+
+        <!-- Preview card -->
+        <div class="profile-preview-card" aria-label="Upcoming profile preview">
+
+            <!-- Lock overlay -->
+            <div class="preview-lock-overlay" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+                <p>Coming soon</p>
+            </div>
+
+            <!-- Profile header -->
+            <div class="preview-header">
+                <div class="preview-breadcrumb">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+                    Profile
+                </div>
+                <div class="preview-divider"></div>
+
+                <div class="preview-user-row">
+                    <div class="preview-user-left">
+                        <div class="preview-avatar">
+                            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                        </div>
+                        <div class="preview-user-info">
+                            <div class="preview-username">Your Name</div>
+                            <div class="preview-title-row">
+                                <span>Explorer</span>
+                                <div class="preview-location">
+                                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                                    Toronto
+                                </div>
+                            </div>
+                            <div class="preview-xp-row">
+                                <div class="preview-xp-bar-wrap">
+                                    <div class="preview-xp-bar-fill"></div>
+                                </div>
+                                <span class="preview-xp-label">625 / 1500 xp</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-settings-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                    </div>
+                </div>
+
+                <!-- Highlights -->
+                <div class="preview-highlights">
+                    <div class="preview-highlight">
+                        <div class="preview-highlight-num">2</div>
+                        <div class="preview-highlight-label">Badges</div>
+                    </div>
+                    <div class="preview-highlight">
+                        <div class="preview-highlight-num">1</div>
+                        <div class="preview-highlight-label">Route in progress</div>
+                    </div>
+                    <div class="preview-highlight">
+                        <div class="preview-highlight-num">1</div>
+                        <div class="preview-highlight-label">Rewards</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Achievements -->
+            <div class="preview-achievements">
+
+                <!-- Badges -->
+                <div>
+                    <div class="preview-section-title">Badges</div>
+                    <div class="preview-badges-grid">
+                        <div class="preview-badge-item">
+                            <div class="badge-shield" style="background:#0d7a82;">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            </div>
+                            <div class="preview-badge-name">All Stars</div>
+                        </div>
+                        <div class="preview-badge-item">
+                            <div class="badge-shield" style="background:#3a4e9a;">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            </div>
+                            <div class="preview-badge-name">Type Master</div>
+                        </div>
+                        <div class="preview-badge-item locked">
+                            <div class="badge-shield" style="background:#7a9a8e;">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            </div>
+                            <div class="preview-badge-name">Keen Eye</div>
+                        </div>
+                        <div class="preview-badge-item locked">
+                            <div class="badge-shield" style="background:#7a3084;">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            </div>
+                            <div class="preview-badge-name">Mural Guru</div>
+                        </div>
+                        <div class="preview-badge-item locked">
+                            <div class="badge-shield" style="background:#9d372e;">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            </div>
+                            <div class="preview-badge-name">Architect</div>
+                        </div>
+                        <div class="preview-badge-item locked">
+                            <div class="badge-shield" style="background:#cddbd0;">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="rgba(45,72,85,0.4)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            </div>
+                            <div class="preview-badge-name">???</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="preview-divider"></div>
+
+                <!-- Routes in progress -->
+                <div>
+                    <div class="preview-section-title">Routes in Progress</div>
+                    <div style="display:flex;flex-direction:column;gap:8px;">
+
+                        <div class="preview-route-tracker">
+                            <div class="route-tracker-icon" style="border-color:#3a4e9a; color:#3a4e9a;">Aa</div>
+                            <div class="route-tracker-content">
+                                <div class="route-tracker-row">
+                                    <span class="route-tracker-name" style="color:#3a4e9a;">Typography</span>
+                                    <span class="route-tracker-count" style="color:#3a4e9a;">2 / 12</span>
+                                </div>
+                                <div class="route-tracker-bar"><div class="route-tracker-fill" style="width:16.6%;background:#3a4e9a;"></div></div>
+                            </div>
+                        </div>
+
+                        <div class="preview-route-tracker">
+                            <div class="route-tracker-icon" style="border-color:#257a48; color:#257a48;">🏛</div>
+                            <div class="route-tracker-content">
+                                <div class="route-tracker-row">
+                                    <span class="route-tracker-name" style="color:#257a48;">Art Objects</span>
+                                    <span class="route-tracker-count" style="color:#257a48;">2 / 18</span>
+                                </div>
+                                <div class="route-tracker-bar"><div class="route-tracker-fill" style="width:11.1%;background:#257a48;"></div></div>
+                            </div>
+                        </div>
+
+                        <div class="preview-route-tracker">
+                            <div class="route-tracker-icon" style="border-color:#9d372e; color:#9d372e;">🏗</div>
+                            <div class="route-tracker-content">
+                                <div class="route-tracker-row">
+                                    <span class="route-tracker-name" style="color:#9d372e;">Architecture</span>
+                                    <span class="route-tracker-count" style="color:#9d372e;">2 / 15</span>
+                                </div>
+                                <div class="route-tracker-bar"><div class="route-tracker-fill" style="width:13.3%;background:#9d372e;"></div></div>
+                            </div>
+                        </div>
+
+                        <div class="preview-route-tracker">
+                            <div class="route-tracker-icon" style="border-color:#7a3084; color:#7a3084;">🎨</div>
+                            <div class="route-tracker-content">
+                                <div class="route-tracker-row">
+                                    <span class="route-tracker-name" style="color:#7a3084;">Street Art</span>
+                                    <span class="route-tracker-count" style="color:#7a3084;">2 / 15</span>
+                                </div>
+                                <div class="route-tracker-bar"><div class="route-tracker-fill" style="width:13.3%;background:#7a3084;"></div></div>
+                            </div>
+                        </div>
+
+                        <div class="preview-route-tracker">
+                            <div class="route-tracker-icon" style="border-color:#0d7a82; color:#0d7a82;">⭐</div>
+                            <div class="route-tracker-content">
+                                <div class="route-tracker-row">
+                                    <span class="route-tracker-name" style="color:#0d7a82;">Artist's Pick</span>
+                                    <span class="route-tracker-count" style="color:#0d7a82;">Coming soon</span>
+                                </div>
+                                <div class="route-tracker-bar"><div class="route-tracker-fill" style="width:0%;background:#0d7a82;"></div></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="preview-divider"></div>
+
+                <!-- Rewards -->
+                <div>
+                    <div class="preview-section-title">Your Rewards</div>
+                    <div class="preview-rewards-grid">
+                        <div class="preview-reward-item">
+                            <span class="preview-reward-icon">📸</span>
+                            <span class="preview-reward-label">Free Photo Print</span>
+                        </div>
+                        <div class="preview-reward-item">
+                            <span class="preview-reward-icon">☕</span>
+                            <span class="preview-reward-label">Coffee Voucher</span>
+                        </div>
+                        <div class="preview-reward-item">
+                            <span class="preview-reward-icon">🎟</span>
+                            <span class="preview-reward-label">Gallery Pass</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="preview-footer">
+                    <span>Preferences</span>
+                    <span>Sign out</span>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- CTAs -->
+        <div class="profile-cta">
+            <a href="city-guide.html" class="btn-explore">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+                Explore the City Guide
+            </a>
+            <a href="index.html" class="btn-back">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+                Back to Map
+            </a>
+        </div>
+
+    </main>
+
+</div>
+
+<!-- nav.js for hamburger menu -->
+<script src="js/nav.js"></script>
+</body>
+</html>
