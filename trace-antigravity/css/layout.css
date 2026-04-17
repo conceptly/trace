@@ -749,14 +749,12 @@
     box-shadow: none !important;
   }
 
-  /* On mobile: move geolocate control to sit just below the route pill buttons.
-     Route pills start at 25vh, total height = 5×50px + 4×12px gaps = 298px.
-     Adding 16px breathing room = calc(25vh + 314px) from top of map. */
+  /* On mobile: keep geolocate above the bottom CTA dock.
+     120px = ~80px CTA bar height + 40px breathing room. */
   .mapboxgl-ctrl-bottom-right {
-    bottom: auto !important;
-    top: calc(25vh + 314px) !important;
+    bottom: 120px !important;
+    top: auto !important;
     right: 0 !important;
-    transition: top 0.3s ease;
   }
 
   
