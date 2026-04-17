@@ -415,39 +415,23 @@ document.addEventListener('routeFilterChange', (e) => {
             }
         }
         if (iconContainer && color) {
-            iconContainer.style.backgroundColor = 'var(--brand-trace)'; // Explicit trace-yellow circle per Figma 
-            iconContainer.style.overflow = 'hidden'; // Required for shadow clipping
-            
-            // Clean up any old implementations
-            const oldMask = iconContainer.querySelector('.mask-icon');
-            if (oldMask) oldMask.remove();
-            let rawImg = iconContainer.querySelector('img:not(.shadow-img)');
-            if (rawImg) rawImg.remove();
-            
-            // Build absolute drop-shadow filter element
-            let shadowWrapper = iconContainer.querySelector('.shadow-wrapper');
-            if (!shadowWrapper) {
-                shadowWrapper = document.createElement('div');
-                shadowWrapper.className = 'shadow-wrapper';
-                shadowWrapper.style.width = '24px';
-                shadowWrapper.style.height = '24px';
-                shadowWrapper.style.position = 'relative';
-                shadowWrapper.style.left = '-100px'; // Shove original out of frame
-                iconContainer.appendChild(shadowWrapper);
-                
-                const shadowImg = document.createElement('img');
-                shadowImg.className = 'shadow-img';
-                shadowImg.style.width = '100%';
-                shadowImg.style.height = '100%';
-                shadowImg.style.display = 'block';
-                shadowWrapper.appendChild(shadowImg);
-            }
-            
+            iconContainer.style.backgroundColor = 'var(--brand-trace)'; // Trace-yellow circle per Figma
+            iconContainer.style.overflow = 'visible';
+
+            // Clear any previous icon content
+            iconContainer.innerHTML = '';
+
+            // Inject icon directly — filter it white so it shows on any colored background
             if (iconUrl) {
-                const img = shadowWrapper.querySelector('img');
-                img.src = iconUrl;
-                // Force to black for solid projection, then aggressively project colored shadow back into frame perfectly
-                img.style.filter = `brightness(0) drop-shadow(100px 0 0 ${color})`;
+                const iconImg = document.createElement('img');
+                iconImg.src = iconUrl;
+                iconImg.alt = '';
+                iconImg.setAttribute('aria-hidden', 'true');
+                iconImg.style.width = '20px';
+                iconImg.style.height = '20px';
+                iconImg.style.display = 'block';
+                iconImg.style.filter = 'brightness(0) invert(1)'; // Force white
+                iconContainer.appendChild(iconImg);
             }
         }
         
