@@ -273,7 +273,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (guideBtn) guideBtn.addEventListener('click', openDrawer);
     if (closeGuideBtn) closeGuideBtn.addEventListener('click', closeDrawer);
-    if (goToGuideBtn) goToGuideBtn.addEventListener('click', closeDrawer);
+    if (goToGuideBtn) goToGuideBtn.addEventListener('click', () => {
+        window.location.href = 'city-guide.html';
+    });
     
     closeSpotBtns.forEach(btn => btn.addEventListener('click', closeDrawer));
 
