@@ -749,12 +749,12 @@
     box-shadow: none !important;
   }
 
-  /* On mobile: geolocate sits on the right, well above the bottom CTA dock. */
+  /* On mobile: geolocate sits on the LEFT (route buttons own the right side). */
   .mapboxgl-ctrl-bottom-right {
     bottom: 160px !important;
     top: auto !important;
-    right: 12px !important;
-    left: auto !important;
+    right: auto !important;
+    left: 12px !important;
   }
 
   
