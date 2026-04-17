@@ -749,12 +749,12 @@
     box-shadow: none !important;
   }
 
-  /* On mobile: keep geolocate above the bottom CTA dock.
-     120px = ~80px CTA bar height + 40px breathing room. */
+  /* On mobile: geolocate sits on the right, well above the bottom CTA dock. */
   .mapboxgl-ctrl-bottom-right {
-    bottom: 120px !important;
+    bottom: 160px !important;
     top: auto !important;
-    right: 0 !important;
+    right: 12px !important;
+    left: auto !important;
   }
 
   
