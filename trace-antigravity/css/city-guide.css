@@ -11,6 +11,9 @@ body.city-guide-page .page-container,
   overflow-x: hidden;
 }
 
+/* Hide desktop sidebar on mobile — shown only via @media below */
+.guide-desktop-sidebar { display: none; }
+
 /* Page background — light green like Figma (#f0f5f2 ≈ lighter than card bg) */
 body.city-guide-page {
   background-color: #f0f5f2;
