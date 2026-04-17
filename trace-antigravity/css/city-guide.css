@@ -341,12 +341,20 @@ body.city-guide-page .mobile-menu-overlay .route-btn .title       { color: #edf4
 /* ─── Spot drawer: explicit height so inner content can scroll ─────────── */
 /* The page-container on city-guide is height:auto, so height:100% doesn't  */
 /* resolve to a fixed value. We force the drawer to viewport height instead. */
+/* Applied at ALL viewport sizes (position:fixed + height:100dvh = correct). */
+body.city-guide-page .spot-drawer {
+  height: 100vh;
+  height: 100dvh; /* dynamic viewport height for iOS */
+  overflow: hidden;
+}
+/* Inner content: also needs an explicit height so overflow-y:auto can scroll */
+body.city-guide-page .spot-drawer .spot-drawer-content {
+  height: 100dvh;
+  max-height: 100dvh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
 @media (max-width: 768px) {
-  body.city-guide-page .spot-drawer {
-    height: 100vh;
-    height: 100dvh; /* dynamic viewport height for iOS */
-    overflow: hidden;
-  }
   /* Increase search-open padding so breadcrumb isn't crowded under search bar */
   body.city-guide-page.mobile-search-is-open .spot-drawer .spot-drawer-content {
     padding-top: 170px; /* nav 64px + search bar ~54px + gap 52px */
