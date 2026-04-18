@@ -624,6 +624,12 @@
     z-index: 120 !important;
   }
 
+  /* Raise the side-nav stacking context above the quick-guide-wrapper (z:80)
+     when the drawer is open — :has() is supported in all modern browsers */
+  .side-nav:has(#mobile-bottom-dock.drawer-open) {
+    z-index: 90 !important;
+  }
+
   /* Drag Handle pill */
   .nearby-drag-handle {
     width: 44px; height: 4px;
@@ -900,7 +906,6 @@
 .sidebar-footer {
   margin-top: auto;
   padding: 16px 20px 20px;
-  border-top: 1px solid var(--divider-soft);
   display: flex;
   flex-direction: column;
   gap: 10px;
