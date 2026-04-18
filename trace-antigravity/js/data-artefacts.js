@@ -136,7 +136,7 @@ const geojsonArtObjects = {
                 "Designer Note": "This is \"Living Architecture\"; the garden is designed to change with the seasons, creating a shifting temporal trace.",
                 "Clue / Hint": "Find the massive limestone turtle in the city's civic garden.",
                 "Route": "Art Objects",
-                "IMG": ""
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1776531516/spirit-garden-1_juviof.jpg"
             }
         },
         {

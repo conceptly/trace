@@ -229,7 +229,7 @@ const geojsonTypography =
                 "Designer Note": "The use of heavy slab-serifs suggests stability (banking), while the name \"Jump\" implies movement—a clever brand tension.",
                 "Clue / Hint": "The big leap on Wellington!",
                 "Route": "Typography",
-                "IMG": null
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1776529793/jump-1_qnjmwr.jpg"
             }
         },
         {
@@ -275,7 +275,7 @@ const geojsonTypography =
                 "Designer Note": "Chiseled typography is the most \"permanent\" form of UX—there is no \"Edit\" button once the serif is carved into the sandstone.",
                 "Clue / Hint": "Carved in stone above Queen!",
                 "Route": "Typography",
-                "IMG": null
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1776396226/city-hall-1_rmgqdb.jpg"
             }
         },
         {
