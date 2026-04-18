@@ -619,6 +619,11 @@
     padding-bottom: 24px !important;
   }
 
+  /* When drawer is open, raise dock above route pills (z:100) and nav (z:100) */
+  #mobile-bottom-dock.drawer-open {
+    z-index: 120 !important;
+  }
+
   /* Drag Handle pill */
   .nearby-drag-handle {
     width: 44px; height: 4px;
@@ -889,4 +894,71 @@
   /* Toggle Animations */
   .mobile-hamburger svg { transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
   .mobile-hamburger.open svg { transform: rotate(90deg); }
+}
+
+/* ─── Desktop Sidebar Footer ──────────────────────────────────────────────── */
+.sidebar-footer {
+  margin-top: auto;
+  padding: 16px 20px 20px;
+  border-top: 1px solid var(--divider-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar-footer-brand {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.sidebar-footer-logo {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  color: var(--text-text-primary);
+}
+
+.sidebar-footer-tagline {
+  font-family: 'Roboto Slab', serif;
+  font-size: 10px;
+  font-weight: 300;
+  color: var(--content-3);
+  letter-spacing: 0.03em;
+}
+
+.sidebar-footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sidebar-footer-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--content-3);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: color 0.2s ease;
+}
+
+.sidebar-footer-link:hover {
+  color: var(--brand-trace);
+}
+
+.sidebar-footer-copy {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 10px;
+  color: var(--content-3);
+  opacity: 0.6;
+}
+
+/* Hide footer on mobile (sidebar is deconstructed) */
+@media (max-width: 768px) {
+  .sidebar-footer { display: none; }
 }
