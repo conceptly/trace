@@ -425,8 +425,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Close buttons inside the drawer
-    spotDrawer?.querySelectorAll('.close-spot').forEach(btn => {
-        btn.addEventListener('click', closeSpot);
+    spotDrawer?.querySelectorAll('.close-spot, .breadcrumb-root').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            if (btn.classList.contains('breadcrumb-root')) {
+                e.preventDefault(); // Prevent page reload since we're already on the city guide
+            }
+            closeSpot();
+        });
     });
     spotOverlay?.addEventListener('click', closeSpot);
 
