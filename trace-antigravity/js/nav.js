@@ -216,11 +216,30 @@ document.addEventListener('DOMContentLoaded', () => {
         }, {passive: true});
     }
 
-    // Simple Theme Switcher mock (can be expanded)
-    const searchInput = document.getElementById('search-input');
-    if (searchInput) {
-        searchInput.addEventListener('focus', () => {
-            console.log('Search focused');
+    // Map Style Toggle — switches between satellite (dark) and street (light) basemap
+    const mapStyleToggle = document.getElementById('map-style-toggle');
+    const satelliteBtn   = document.getElementById('toggle-satellite');
+    const streetBtn      = document.getElementById('toggle-street');
+
+    if (mapStyleToggle && satelliteBtn && streetBtn) {
+        // Satellite slot clicked → switch to satellite/dark map
+        satelliteBtn.addEventListener('click', () => {
+            if (mapStyleToggle.classList.contains('map-light')) {
+                mapStyleToggle.classList.remove('map-light');
+                satelliteBtn.setAttribute('aria-pressed', 'true');
+                streetBtn.setAttribute('aria-pressed', 'false');
+                document.dispatchEvent(new CustomEvent('mapStyleChange', { detail: { style: 'satellite' } }));
+            }
+        });
+
+        // Street slot clicked → switch to street/light map
+        streetBtn.addEventListener('click', () => {
+            if (!mapStyleToggle.classList.contains('map-light')) {
+                mapStyleToggle.classList.add('map-light');
+                satelliteBtn.setAttribute('aria-pressed', 'false');
+                streetBtn.setAttribute('aria-pressed', 'true');
+                document.dispatchEvent(new CustomEvent('mapStyleChange', { detail: { style: 'street' } }));
+            }
         });
     }
 

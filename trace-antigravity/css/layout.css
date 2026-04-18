@@ -119,22 +119,156 @@
   gap: 12px;
 }
 
-.theme-switcher button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--content-3);
-  width: 34px;
-  height: 34px;
+/* ── Map Style Toggle (Figma: ThemeSwitch component) ───────────────────────
+   Pill with two icon slots — selected side gets an elevated bg pill + inner shadow.
+   Default = satellite/dark map (light-icon slot active, pill bg is dark #2d4855).
+   Active  = street/light map  (dark-icon slot active, pill bg is light #ebf2ee).
+   ──────────────────────────────────────────────────────────────────────────── */
+.theme-switcher {
+  display: flex;
+  align-items: center;
+}
+
+.map-style-toggle {
+  /* Outer pill — always dark bg in default state */
+  display: flex;
+  align-items: center;
+  border: 0.5px solid #cddbd0;
+  border-radius: 50px;
+  background-color: #2d4855;
+  padding: 0;
+  cursor: default; /* individual slots are interactive */
+  transition: background-color 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.32s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Light-map active: flip outer pill to light bg */
+.map-style-toggle.map-light {
+  background-color: #ebf2ee;
+}
+
+/* ── Shared slot styles ── */
+.toggle-slot {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  transition: background-color 0.2s;
+  padding: 2px;
+  border-radius: 50px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  line-height: 0;
+  transition: background-color 0.25s ease;
+  z-index: 1;
 }
 
-.theme-switcher button:hover {
+/* The inner elevated pill that appears on the ACTIVE slot */
+.toggle-slot::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+/* Inner shadow layer (tapped-icon effect from Figma) */
+.toggle-slot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50px;
+  box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+/* Icon wrapper — 24×24 with 4px padding = 16px icon display area */
+.toggle-icon-box {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  position: relative;
+  z-index: 1;
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.toggle-icon-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* ── Slot: Light icon (left) — active in DEFAULT/satellite state ───────── */
+/* In default state: bg = #ebf2ee, shadow visible */
+.map-style-toggle:not(.map-light) .toggle-slot-light::before {
+  background-color: #ebf2ee;
+  opacity: 1;
+}
+.map-style-toggle:not(.map-light) .toggle-slot-light::after {
+  opacity: 1;
+}
+
+/* ── Slot: Dark icon (right) — active in MAP-LIGHT/street state ─────────── */
+/* In map-light state: bg = #2d4855, shadow visible */
+.map-style-toggle.map-light .toggle-slot-dark::before {
+  background-color: #2d4855;
+  opacity: 1;
+}
+.map-style-toggle.map-light .toggle-slot-dark::after {
+  opacity: 1;
+}
+
+/* ── Icon visibility rules ──────────────────────────────────────────────────
+   Both SVG icons use #2D4855 fill by default:
+   • Sun/lightDark icon  → dark fill, always fine on light elevated pill (#ebf2ee)
+   • Moon/dark-2.svg     → dark fill, invisible on dark (#2d4855) backgrounds!
+
+   Moon icon needs filter:invert(1) in TWO situations:
+   1. satellite/dark map (no .map-light) — icon sits on dark outer pill #2d4855
+   2. street/light map (.map-light)      — icon sits on dark inner ACTIVE pill #2d4855
+   ie. whenever the background behind the moon is dark, flip it white.          */
+
+/* 1. Dark map (no .map-light): moon on dark outer pill → make it white */
+.map-style-toggle:not(.map-light) .toggle-slot-dark .toggle-icon-box img {
+  filter: brightness(0) invert(1);
+}
+
+/* 2. Light map (.map-light): moon on dark ACTIVE inner pill → keep it white */
+.map-style-toggle.map-light .toggle-slot-dark .toggle-icon-box img {
+  filter: brightness(0) invert(1);
+}
+
+/* Sun icon: always dark fill → always fine on its light elevated pill or light outer pill.
+   No filter needed. */
+
+/* Hover intent — subtle highlight on inactive slot */
+.map-style-toggle:not(.map-light) .toggle-slot-dark:hover::before {
   background-color: rgba(255, 255, 255, 0.1);
+  opacity: 1;
+}
+.map-style-toggle.map-light .toggle-slot-light:hover::before {
+  background-color: rgba(45, 72, 85, 0.1);
+  opacity: 1;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+  .toggle-icon-box {
+    width: 22px;
+    height: 22px;
+    padding: 3px;
+  }
 }
 
 /* Main Content Area */

@@ -1,34 +1,62 @@
 // Setup Mapbox GL JS map
 mapboxgl.accessToken = 'pk.eyJ1IjoiZXR1YWwtY29uY2VwdGx5IiwiYSI6ImNtbHU5ZjlvbjA5MmkzanEzeGd3eHI1ajQifQ.kD3o5_-eHOmsWmBQfP7RFg';
 
+// Map style URLs — light is the default
+// CACHE NOTE: If you update either style in Mapbox Studio and the old version
+// appears, increment the matching ?v= number below to force a fresh fetch.
+const MAP_STYLES = {
+    // Mapbox Standard lets us apply theme:faded + lightPreset:day via setConfigProperty
+    street:    'mapbox://styles/mapbox/standard',
+    satellite: 'mapbox://styles/etual-conceptly/cmnt68n6r009i01qtg090hkz8?v=2' // bump v= after Studio republish
+};
+
 const map = new mapboxgl.Map({
     container: 'mapbox-container',
-    style: 'mapbox://styles/etual-conceptly/cmmy1pnn9000301qu6z8k4zta', // Base Dark Style with routes
+    style: MAP_STYLES.street, // Default: light faded standard map
     center: [-79.3832, 43.6532], // Downtown Toronto
     zoom: 13.5
 });
 
-// Force Mapbox V3 Standard parameters before data layers load
+// Track active style so style.load handlers know which config to apply
+let currentMapStyle = 'street';
+
+// Apply Mapbox Standard config on initial load (matches Studio: theme=Faded, lightPreset=Day)
 map.on('style.load', () => {
-    map.setConfigProperty('basemap', 'lightPreset', 'day');
-    map.setConfigProperty('basemap', 'theme', 'faded');
+    // Only apply to the Standard style — satellite has its own config baked in
+    if (currentMapStyle === 'street') {
+        map.setConfigProperty('basemap', 'lightPreset', 'day');
+        map.setConfigProperty('basemap', 'theme', 'faded');
+    }
 });
 
-// Route Color Mapping referenced from CSS variables
-const routeColors = {
-    'Architecture': '#9A4520', /* fallback from --cat-architecture */
-    'Typography': '#2B5EA8',
-    'Artist’s Pick': '#0D7A82',
-    'Street Art': '#A0522D',
-    'Art Objects': '#6B4E9A'
+// Route Color Mapping — two palettes for light vs dark basemap
+// Light map: rich/muted tones readable on cream/white street backgrounds
+// Dark  map: vibrant/bright tones that pop against dark teal backgrounds
+const routeColorsLight = {
+    'Architecture':  '#9A4520',
+    'Typography':    '#2B5EA8',
+    "Artist\u2019s Pick": '#0D7A82',
+    'Street Art':    '#7E3090',
+    'Art Objects':   '#257A48'
 };
 
+const routeColorsDark = {
+    'Architecture':  '#E8713A',
+    'Typography':    '#5B8EE8',
+    "Artist\u2019s Pick": '#12B5C1',
+    'Street Art':    '#B84FDF',
+    'Art Objects':   '#3BB86B'
+};
+
+// Active palette — starts on light (default map is street)
+let routeColors = { ...routeColorsLight };
+
 const routeClassNames = {
-    'Architecture': 'architecture',
-    'Typography': 'typography',
-    'Artist’s Pick': 'artists-pick',
-    'Street Art': 'street-art',
-    'Art Objects': 'art-objects'
+    'Architecture':  'architecture',
+    'Typography':    'typography',
+    "Artist\u2019s Pick": 'artists-pick',
+    'Street Art':    'street-art',
+    'Art Objects':   'art-objects'
 };
 
 // Store elements for dynamic interactions
@@ -36,6 +64,37 @@ const allMarkers = [];
 const allLineSources = [];
 let routeLineActive = false; // toggle state for line visibility
 let currentActiveCategoryId = null;
+
+/**
+ * Mix a hex colour toward white by `amount` (0 = original, 1 = pure white).
+ * Used to generate a lighter tint for the dark-map glow layer.
+ */
+function lightenHex(hex, amount) {
+    const h = hex.replace('#', '');
+    const r = parseInt(h.slice(0, 2), 16);
+    const g = parseInt(h.slice(2, 4), 16);
+    const b = parseInt(h.slice(4, 6), 16);
+    const mix = (ch) => Math.round(ch + (255 - ch) * amount);
+    return `#${mix(r).toString(16).padStart(2,'0')}${mix(g).toString(16).padStart(2,'0')}${mix(b).toString(16).padStart(2,'0')}`;
+}
+
+/**
+ * Animate a map layer's line-opacity from its current value to `targetOpacity`
+ * using an easeInOutCubic curve. Duration in ms (show: ~700, hide: ~350).
+ */
+function animateLineOpacity(layerId, targetOpacity, duration) {
+    if (!map.getLayer(layerId)) return;
+    const from = map.getPaintProperty(layerId, 'line-opacity') ?? 0;
+    if (from === targetOpacity) return;
+    const startTime = performance.now();
+    const ease = t => t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;
+    (function tick(now) {
+        const t  = Math.min((now - startTime) / duration, 1);
+        const op = from + (targetOpacity - from) * ease(t);
+        if (map.getLayer(layerId)) map.setPaintProperty(layerId, 'line-opacity', op);
+        if (t < 1) requestAnimationFrame(tick);
+    })(startTime);
+}
 
 function hydrateSpotDrawer(spot) {
     if (!spot || !spot.properties) return;
@@ -219,18 +278,54 @@ function loadGeoJSONData(geojsonData, fallbackCategory) {
             allMarkers.push(thisSpotStruct);
 
         } else if (feature.geometry.type === 'LineString') {
-            const sourceId = `route-line-${cssClass}-${index}`;
+            const sourceId    = `route-line-${cssClass}-${index}`;
+            const haloLayerId = `${sourceId}-halo`;
+            const isDarkMap   = currentMapStyle === 'satellite';
+
             map.addSource(sourceId, { 'type': 'geojson', 'data': feature });
+
+            // ── Glow layer — only on the dark satellite map ────────────────────
+            // Starts at opacity 0 (visibility stays 'visible' always so we can
+            // animate with setPaintProperty instead of toggling layout visibility).
+            if (isDarkMap) {
+                map.addLayer({
+                    'id':     haloLayerId,
+                    'type':   'line',
+                    'source': sourceId,
+                    'layout': { 'line-join': 'round', 'line-cap': 'round', 'visibility': 'visible' },
+                    'paint':  {
+                        'line-color':             lightenHex(finalColor, 0.6),
+                        'line-width':             16,
+                        'line-opacity':           0,   // hidden at start — animated in on CTA click
+                        'line-blur':              4,
+                        'line-emissive-strength': 1
+                    }
+                });
+            }
+
+            // ── Colour line — always created (dashed, round caps) ─────────────
             map.addLayer({
-                'id': sourceId,
-                'type': 'line',
+                'id':     sourceId,
+                'type':   'line',
                 'source': sourceId,
-                'layout': { 'line-join': 'round', 'line-cap': 'round', 'visibility': 'none' },
-                'paint': { 'line-color': finalColor, 'line-width': 5, 'line-opacity': 0.8 }
+                'layout': { 'line-join': 'round', 'line-cap': 'round', 'visibility': 'visible' },
+                'paint':  {
+                    'line-color':             finalColor,
+                    'line-width':             5,
+                    'line-opacity':           0,    // hidden at start — animated in on CTA click
+                    'line-dasharray':         [2, 2],
+                    'line-emissive-strength': 1
+                }
             });
 
-            map.setLayoutProperty(sourceId, 'visibility', 'none');
-            allLineSources.push({ id: sourceId, category: cssClass });
+            // Store target opacities alongside layer IDs so CTA toggle can animate to correct value
+            allLineSources.push({
+                id:            sourceId,
+                haloId:        isDarkMap ? haloLayerId : null,
+                category:      cssClass,
+                colourOpacity: 0.95,
+                haloOpacity:   0.9
+            });
         }
     });
 }
@@ -366,9 +461,10 @@ document.addEventListener('routeFilterChange', (e) => {
         });
     });
 
-    // Hide all lines
+    // Hide all lines instantly (no animation — switching routes is a context change, not a reveal)
     allLineSources.forEach(s => {
-        if (map.getLayer(s.id)) map.setLayoutProperty(s.id, 'visibility', 'none');
+        if (map.getLayer(s.id))                   map.setPaintProperty(s.id,     'line-opacity', 0);
+        if (s.haloId && map.getLayer(s.haloId))   map.setPaintProperty(s.haloId, 'line-opacity', 0);
     });
     
     // Display only matching markers
@@ -459,13 +555,69 @@ const buildCtaLogic = () => {
             btn.classList.toggle('btn-active-line', routeLineActive);
         });
         
-        // Turn lines on/off for current category
+        // Animate lines in/out for current category using easeInOutCubic
         allLineSources.forEach(s => {
-            if (s.category === currentActiveCategoryId && map.getLayer(s.id)) {
-                map.setLayoutProperty(s.id, 'visibility', routeLineActive ? 'visible' : 'none');
+            if (s.category === currentActiveCategoryId) {
+                const showColour = routeLineActive ? (s.colourOpacity ?? 0.95) : 0;
+                const showHalo   = routeLineActive ? (s.haloOpacity   ?? 0.9)  : 0;
+                const duration   = routeLineActive ? 700 : 350; // slower reveal, faster hide
+                animateLineOpacity(s.id,     showColour, duration);
+                if (s.haloId) animateLineOpacity(s.haloId, showHalo, duration);
             }
         });
     });
 };
 
 document.addEventListener('DOMContentLoaded', buildCtaLogic);
+
+// ── Map Style Toggle ─────────────────────────────────────────────────────────
+// street (light, default) ↔ satellite (dark custom).
+// Markers are re-added after setStyle() since it wipes all layers.
+// (currentMapStyle declared near top of file, above map init)
+
+document.addEventListener('mapStyleChange', (e) => {
+    const { style } = e.detail;
+    if (style === currentMapStyle) return;
+
+    currentMapStyle = style;
+
+    // Swap the active route color palette + body class for CSS consumers
+    if (style === 'satellite') {
+        Object.assign(routeColors, routeColorsDark);
+        document.body.classList.add('map-dark');
+    } else {
+        Object.assign(routeColors, routeColorsLight);
+        document.body.classList.remove('map-dark');
+    }
+
+    map.setStyle(MAP_STYLES[style]);
+
+    // After the new style loads, restore GeoJSON markers + active filter
+    map.once('style.load', () => {
+        // Apply faded/day config when returning to the light Standard style
+        if (style === 'street') {
+            map.setConfigProperty('basemap', 'lightPreset', 'day');
+            map.setConfigProperty('basemap', 'theme', 'faded');
+        }
+
+        // Remove stale HTML markers before re-creating them
+        allMarkers.forEach(m => m.marker.remove());
+        allMarkers.length = 0;
+        allLineSources.length = 0;
+
+        if (typeof geojsonArchitecture !== 'undefined') loadGeoJSONData(geojsonArchitecture, 'architecture');
+        if (typeof geojsonTypography    !== 'undefined') loadGeoJSONData(geojsonTypography,   'typography');
+        if (typeof geojsonArtistpick    !== 'undefined') loadGeoJSONData(geojsonArtistpick,   'artists-pick');
+        if (typeof geojsonStreetart     !== 'undefined') loadGeoJSONData(geojsonStreetart,    'street-art');
+        if (typeof geojsonArtObjects    !== 'undefined') loadGeoJSONData(geojsonArtObjects,   'art-objects');
+        if (typeof geojsonArtefacts     !== 'undefined') loadGeoJSONData(geojsonArtefacts,    'art-objects');
+
+        // Re-apply the active route filter
+        if (currentActiveCategoryId) {
+            allMarkers.forEach(m => {
+                const el = m.marker.getElement();
+                el.style.display = m.category === currentActiveCategoryId ? 'block' : 'none';
+            });
+        }
+    });
+});

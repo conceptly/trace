@@ -5,12 +5,19 @@
   --brand-trace: #E7E626;
   --focus-ring: #E7E626;
 
-  /* Category Palette (Agnostic) */
+  /* Category Palette — Light map (default) */
   --cat-artists-choice: #0D7A82;
   --cat-typography: #2B5EA8;
   --cat-art-objects: #257A48;
   --cat-architecture: #9A4520;
   --cat-street-art: #7E3090;
+
+  /* Category Palette — Dark satellite map (brighter for pop on dark bg) */
+  --cat-artists-choice-dark: #12B5C1;
+  --cat-typography-dark:     #5B8EE8;
+  --cat-art-objects-dark:    #3BB86B;
+  --cat-architecture-dark:   #E8713A;
+  --cat-street-art-dark:     #B84FDF;
 
   /* Spacing Scale */
   --space-xs: 4px;
