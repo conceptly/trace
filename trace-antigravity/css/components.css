@@ -578,6 +578,17 @@
   line-height: 1;
 }
 
+/* When breadcrumb-root is an <a> tag, strip link defaults */
+a.breadcrumb-root {
+  text-decoration: none;
+  cursor: pointer;
+  transition: text-decoration-color 0.2s ease;
+}
+a.breadcrumb-root:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--text-text-primary, #0f2229);
+}
+
 .breadcrumb-current {
   font-family: 'Josefin Sans', sans-serif;
   font-weight: 600;
