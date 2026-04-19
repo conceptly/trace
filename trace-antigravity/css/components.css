@@ -799,22 +799,44 @@ a.breadcrumb-root:hover {
 }
 
 /* ── Custom User Location Marker (The Dot) ────────────────────────────────── */
-/* Replaces the default Mapbox blue with TRACE brand yellow */
+/* Theme-aware: Yellow on Dark Map, Surface-5 on Light/Street Map */
+
+/* 1. Default / Dark Map State (Yellow) */
+.map-dark .mapboxgl-user-location-dot,
 .mapboxgl-user-location-dot {
     background-color: var(--brand-trace) !important;
 }
 
+.map-dark .mapboxgl-user-location-dot::before,
 .mapboxgl-user-location-dot::before {
     background-color: var(--brand-trace) !important;
 }
 
-/* Custom Heading Arrow (Compass) */
+.map-dark .mapboxgl-user-location-show-heading .mapboxgl-user-location-heading::after,
+.map-dark .mapboxgl-user-location-show-heading .mapboxgl-user-location-heading::before,
 .mapboxgl-user-location-show-heading .mapboxgl-user-location-heading::after,
 .mapboxgl-user-location-show-heading .mapboxgl-user-location-heading::before {
     border-bottom-color: var(--brand-trace) !important;
 }
 
-/* Accuracy Circle - subtle yellow tint instead of blue */
-.mapboxgl-user-location-accuracy-circle {
+.map-dark .mapboxgl-user-location-accuracy-circle {
     background-color: rgba(231, 230, 38, 0.1) !important;
+}
+
+/* 2. Light Map State (Contrast Surface Color) */
+body:not(.map-dark) .mapboxgl-user-location-dot {
+    background-color: var(--surface-5) !important;
+}
+
+body:not(.map-dark) .mapboxgl-user-location-dot::before {
+    background-color: var(--surface-5) !important;
+}
+
+body:not(.map-dark) .mapboxgl-user-location-show-heading .mapboxgl-user-location-heading::after,
+body:not(.map-dark) .mapboxgl-user-location-show-heading .mapboxgl-user-location-heading::before {
+    border-bottom-color: var(--surface-5) !important;
+}
+
+body:not(.map-dark) .mapboxgl-user-location-accuracy-circle {
+    background-color: rgba(189, 208, 213, 0.2) !important; /* surface-5 tint */
 }
