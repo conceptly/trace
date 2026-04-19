@@ -746,28 +746,54 @@ a.breadcrumb-root:hover {
 }
 
 /* User Location Control Stylings */
+.mapboxgl-ctrl-bottom-right {
+    margin-right: 12px !important;
+    margin-bottom: 24px !important;
+}
+
 .mapboxgl-ctrl-bottom-right .mapboxgl-ctrl-group {
-    background: transparent !important; /* Strip Mapbox white block */
+    background: transparent !important;
     box-shadow: none !important;
     border: none !important;
 }
+
 .mapboxgl-ctrl-group button.mapboxgl-ctrl-geolocate {
-  background-color: rgba(231, 230, 38, 0.75) !important; /* Brand yellow with 75% opacity */
-  backdrop-filter: blur(4px); /* Make it glossy/glassmorphism if behind map layers */
-  width: 48px !important;
-  height: 48px !important;
+  background-color: rgba(231, 230, 38, 0.75) !important;
+  width: 42px !important;
+  height: 42px !important;
   border-radius: 50% !important;
-  transition: transform 0.2s ease, filter 0.2s ease !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
-  margin: 16px !important; /* Push slightly off the absolute corner */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
 }
 
 .mapboxgl-ctrl-group button.mapboxgl-ctrl-geolocate:hover {
-  transform: scale(1.1);
-  background-color: rgba(231, 230, 38, 0.85) !important;
+  background-color: #e7e626 !important;
+  box-shadow: 4px 4px 12px 0px rgba(15, 34, 41, 0.33) !important;
 }
 
-.mapboxgl-ctrl-group button.mapboxgl-ctrl-geolocate .mapboxgl-ctrl-icon {
-  /* Shifts the native grey mapbox icon to a dark cyan/blue mimicking var(--surface-4) */
-  filter: sepia(1) hue-rotate(160deg) saturate(2) brightness(0.3) contrast(2) !important;
+.mapboxgl-ctrl-group button.mapboxgl-ctrl-geolocate:active {
+  background-color: #e7e626 !important;
+  box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.25) !important;
+}
+
+.mapboxgl-ctrl-geolocate .mapboxgl-ctrl-icon {
+    background-image: url('../assets/icons/user-location.svg') !important;
+    background-size: 26px 26px !important;
+    width: 26px !important;
+    height: 26px !important;
+    filter: none !important;
+}
+
+/* On mobile, adjust position to clear the bottom dock if it's visible */
+@media (max-width: 768px) {
+    .mapboxgl-ctrl-bottom-right {
+        margin-bottom: 96px !important;
+    }
 }
