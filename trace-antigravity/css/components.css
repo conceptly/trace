@@ -510,9 +510,17 @@
 @media (max-width: 768px) {
   .spot-drawer {
     width: 100vw;
+    /* Cancel the left:-100vw set by .drawer mobile — we use right-based positioning */
+    left: auto;
     right: -100vw;
     z-index: 99; /* Sit behind the z-index:100 Top Nav & Search Bar on Mobile */
     background-color: var(--surface-bg-base, #f5f9f6);
+    transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .spot-drawer.active {
+    /* Override the transform-based .drawer.active to use right:0 instead */
+    transform: none;
+    right: 0;
   }
   .spot-drawer .spot-drawer-content {
     /* Push content below mobile Top Nav (64px) + tight gap by default */
@@ -536,6 +544,7 @@
   overflow-y: auto;
   overflow-x: hidden;
   height: 100%;
+  min-height: 0; /* Allow flex container to respect its fixed height bound */
 }
 
 .spot-breadcrumbs {

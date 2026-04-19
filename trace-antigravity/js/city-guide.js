@@ -411,17 +411,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
 
+    // ── Scroll lock ──────────────────────────────────────────────────────────
+    // City-guide is a normal scrolling page (height:auto). Lock the <html>
+    // element when the drawer is open so the list behind doesn't scroll.
+    function lockBodyScroll() {
+        document.documentElement.style.overflow = 'hidden';
+    }
+    function unlockBodyScroll() {
+        document.documentElement.style.overflow = '';
+    }
+
     function openSpot(spot) {
         hydrateSpotDrawer(spot);
         if (spotDrawer) spotDrawer.classList.add('active');
-        if (spotOverlay) spotOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
+        // DO NOT activate the overlay on mobile — it sits at z-index:1000 while the
+        // spot-drawer is z-index:99 on mobile, making it invisible but fully
+        // intercepting touch/scroll events above the drawer content.
+        // This matches nav.js behaviour on index.html, which also skips the overlay.
+        // On desktop the drawer is narrower (417px) so activate the overlay to
+        // capture clicks on the dimmed area beside it.
+        if (window.innerWidth >= 769 && spotOverlay) spotOverlay.classList.add('active');
+        lockBodyScroll();
     }
 
     function closeSpot() {
         if (spotDrawer) spotDrawer.classList.remove('active');
         if (spotOverlay) spotOverlay.classList.remove('active');
-        document.body.style.overflow = '';
+        unlockBodyScroll();
     }
 
     // Close buttons inside the drawer
@@ -433,6 +449,7 @@ document.addEventListener('DOMContentLoaded', () => {
             closeSpot();
         });
     });
+    // Overlay click closes drawer (desktop only — on mobile overlay is inactive)
     spotOverlay?.addEventListener('click', closeSpot);
 
     // Expose so renderCatalog can attach wiring after each re-render
