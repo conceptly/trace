@@ -7,38 +7,7 @@
 /* ── Page Layout ──────────────────────────────────────────────────────────── */
 
 /* ── Force mobile menu overlay to always be dark (matches map page) ──────── */
-body.about-page .mobile-menu-overlay {
-    background-color: #12202a !important; /* --surface-1 dark value */
-}
-body.about-page .menu-btn {
-    background-color: #2d4855 !important; /* --surface-4 dark value */
-    color: #edf4f0 !important;            /* --content-1 dark value */
-}
-body.about-page .menu-btn .icon-circle {
-    background-color: #12202a !important; /* --surface-1 dark value */
-    color: #edf4f0 !important;
-}
-body.about-page .menu-label {
-    color: #bdd0cc !important; /* --content-2 dark value */
-}
-body.about-page .menu-divider {
-    background-color: #3d5e6a !important; /* --divider-strong dark value */
-}
-/* Active nav button — yellow, matching the map page active state */
-body.about-page .nav-btn.active {
-    background-color: #e7e626 !important;
-    border: 0.5px solid #cddbd0 !important;
-}
-body.about-page .nav-btn.active .icon-circle {
-    background-color: #0f2229 !important;
-    color: #e7e626 !important;
-}
-body.about-page .nav-btn.active .title {
-    color: #0f2229 !important;
-}
-body.about-page .nav-btn.active .subtitle {
-    color: #2d4855 !important;
-}
+/* Redundant overrides removed - now handled globally in layout.css */
 
 /* ── Keep top nav dark on the always-light about page ─────────────────────── */
 body.about-page .top-nav {
@@ -518,7 +487,7 @@ body.about-page {
 }
 
 .about-link-item:hover {
-    opacity: 0.75;
+    color: var(--brand-trace);
 }
 
 .about-link-icon {
