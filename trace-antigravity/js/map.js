@@ -2,10 +2,12 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiZXR1YWwtY29uY2VwdGx5IiwiYSI6ImNtbHU5ZjlvbjA5MmkzanEzeGd3eHI1ajQifQ.kD3o5_-eHOmsWmBQfP7RFg';
 
 // Map style URLs
-// Bump ?v= after republishing in Studio to force a fresh fetch.
+// Both are published custom styles from Mapbox Studio.
+// Faded/Day is baked into TraceToronto-LightMode — no setConfigProperty needed.
+// Bump ?v= after republishing in Studio to bust the browser cache.
 const MAP_STYLES = {
-    street:    'mapbox://styles/mapbox/standard', // Mapbox Standard (Faded/Day applied via setConfigProperty)
-    satellite: 'mapbox://styles/etual-conceptly/cmnt68n6r009i01qtg090hkz8?v=2' // TraceToronto-DarkMode
+    street:    'mapbox://styles/etual-conceptly/cmmy1pnn9000301qu6z8k4zta?v=1', // TraceToronto-LightMode
+    satellite: 'mapbox://styles/etual-conceptly/cmnt68n6r009i01qtg090hkz8?v=2'  // TraceToronto-DarkMode
 };
 
 const map = new mapboxgl.Map({
@@ -18,13 +20,6 @@ const map = new mapboxgl.Map({
 // Track active style
 let currentMapStyle = 'street';
 
-// Apply Faded/Day after style AND all tiles are fully rendered.
-// Using 'idle' instead of 'style.load' ensures the Standard style's
-// basemap slot is initialized before setConfigProperty is called.
-map.once('idle', () => {
-    map.setConfigProperty('basemap', 'lightPreset', 'day');
-    map.setConfigProperty('basemap', 'theme', 'faded');
-});
 // Route Color Mapping — two palettes for light vs dark basemap
 // Light map: rich/muted tones readable on cream/white street backgrounds
 // Dark  map: vibrant/bright tones that pop against dark teal backgrounds
