@@ -791,12 +791,7 @@ a.breadcrumb-root:hover {
     filter: none !important;
 }
 
-/* On mobile, adjust position to clear the bottom dock if it's visible */
-@media (max-width: 768px) {
-    .mapboxgl-ctrl-bottom-right {
-        margin-bottom: 96px !important;
-    }
-}
+/* On mobile, position is fully handled by layout.css bottom offset */
 
 /* ── Custom User Location Marker (The Dot) ────────────────────────────────── */
 /* Theme-aware: Yellow on Dark Map, Surface-5 on Light/Street Map */

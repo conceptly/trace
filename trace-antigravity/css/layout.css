@@ -898,9 +898,10 @@
     box-shadow: none !important;
   }
 
-  /* On mobile: geolocate sits on the LEFT (route buttons own the right side). */
+  /* On mobile: geolocate sits on the LEFT (route buttons own the right side).
+     Positioned midway between the Quick-Guide tab and the Near-You drawer. */
   .mapboxgl-ctrl-bottom-right {
-    bottom: 160px !important;
+    bottom: 210px !important;
     top: auto !important;
     right: auto !important;
     left: 12px !important;
