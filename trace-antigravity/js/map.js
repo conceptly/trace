@@ -387,12 +387,14 @@ map.on('load', () => {
         console.warn("Could not set basemap configuration:", error);
     }
 
-    map.addControl(new mapboxgl.GeolocateControl({
+    // Store geolocate control so routeFilterChange can deactivate tracking
+    window._geolocateControl = new mapboxgl.GeolocateControl({
         positionOptions: { enableHighAccuracy: true },
         trackUserLocation: true,
         showUserHeading: true,
         showAccuracyCircle: false
-    }), 'bottom-right');
+    });
+    map.addControl(window._geolocateControl, 'bottom-right');
 
     if (typeof geojsonArchitecture !== 'undefined') loadGeoJSONData(geojsonArchitecture, 'architecture');
     if (typeof geojsonTypography !== 'undefined') loadGeoJSONData(geojsonTypography, 'typography');
@@ -523,6 +525,32 @@ document.addEventListener('routeFilterChange', (e) => {
         }
     });
     
+    // ── Deactivate geolocate tracking & fly to route bounds ─────────────────
+    // If the user had the location button active, selecting a route should
+    // break the tracking lock and pan the map to show all the route's spots.
+    const geoBtn = document.querySelector('.mapboxgl-ctrl-geolocate');
+    if (geoBtn && (
+        geoBtn.classList.contains('mapboxgl-ctrl-geolocate-active') ||
+        geoBtn.classList.contains('mapboxgl-ctrl-geolocate-waiting') ||
+        geoBtn.classList.contains('mapboxgl-ctrl-geolocate-background')
+    )) {
+        // Programmatically click — cleanest way to cycle it off regardless
+        // of Mapbox GL JS version's internal state machine
+        geoBtn.click();
+    }
+
+    // Fly to the bounding box of this route's markers
+    if (categoryMarkers.length > 0) {
+        const bounds = new mapboxgl.LngLatBounds();
+        categoryMarkers.forEach(m => bounds.extend(m.coords));
+        map.fitBounds(bounds, {
+            padding: { top: 80, bottom: 220, left: 60, right: 80 },
+            maxZoom: 15,
+            duration: 1000,
+            essential: true
+        });
+    }
+
     // Dynamically update ALL CTA Buttons (desktop + mobile)
     const ctaBtns = document.querySelectorAll('.btn-cta');
     ctaBtns.forEach(ctaBtn => {
