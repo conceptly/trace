@@ -613,26 +613,40 @@ body.city-guide-page .spot-drawer .spot-drawer-content {
   .guide-breadcrumb-desktop {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     font-family: 'Josefin Sans', sans-serif;
     font-size: 11px;
     color: #5a8a95;
     letter-spacing: 0.04em;
   }
 
-  .guide-breadcrumb-link {
+  /* Back-arrow icon button — matches About page .about-back */
+  .guide-breadcrumb-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: #8aadb5;
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
     text-decoration: none;
-    transition: color 0.15s;
+    transition: color 0.15s ease;
   }
 
-  .guide-breadcrumb-link:hover { color: #1d3240; }
-
-  .guide-breadcrumb-sep { color: #bdd0d5; }
+  .guide-breadcrumb-back:hover { color: #1d3240; }
 
   .guide-breadcrumb-current {
+    font-size: 13px;
     color: #1d3240;
     font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* Search bar alignment: shrink logo zone to match the 272px sidebar width     */
+  /* so the search input left-edge lines up with the start of the content area. */
+  body.city-guide-page .logo-container {
+    width: 272px;
   }
 
   /* On desktop, the mobile city-guide-content becomes the scrollable grid host */
@@ -851,3 +865,102 @@ body.city-guide-page .nav-btn.active .icon-circle {
 }
 body.city-guide-page .nav-btn.active .title    { color: #0f2229 !important; }
 body.city-guide-page .nav-btn.active .subtitle { color: #2d4855 !important; }
+
+/* ─── Search Suggestions Dropdown ────────────────────────────────────────── */
+
+/* Wrapper that holds the input must be position:relative (already is for
+   .search-container and .search-inner).  The dropdown is appended inside. */
+.search-suggestions {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: #1d3240;
+  border: 0.5px solid #3d5e6a;
+  border-radius: 12px;
+  overflow: hidden;
+  z-index: 9000;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.search-suggestions.visible { display: block; }
+
+.search-suggestion-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 14px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.12s ease;
+}
+
+.search-suggestion-item:hover,
+.search-suggestion-item:focus {
+  background: rgba(255, 255, 255, 0.07);
+  outline: none;
+}
+
+.search-suggestion-item + .search-suggestion-item {
+  border-top: 0.5px solid rgba(255,255,255,0.07);
+}
+
+.suggestion-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.suggestion-name {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #edf4f0;
+  letter-spacing: 0.03em;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.suggestion-route {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+.search-suggestion-empty {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 12px;
+  color: #8aadb5;
+  padding: 12px 14px;
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+
+/* Highlighted match in suggestion names */
+.search-highlight {
+  background: #e7e626;
+  color: #1d3240;
+  border-radius: 2px;
+  padding: 0 1px;
+}
+
+/* Ensure search-container and search-inner are relative for the dropdown */
+.search-container { position: relative; }
+.search-inner      { position: relative; }
+
+/* Mobile floating search needs extra z-context */
+.mobile-floating-search .search-inner .search-suggestions {
+  top: calc(100% + 8px);
+  border-radius: 12px;
+}

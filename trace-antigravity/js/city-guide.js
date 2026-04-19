@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentSort      = 'top-picks';
     let userLocation     = null;
     let showAll          = false; // whether "See more" has been clicked
+    let searchQuery      = '';    // live name-filter text
 
     // Helper: is a given routeClass visible given current activeRoutes?
     function isRouteActive(routeClass) {
@@ -89,10 +90,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // NOTE: showAll is NOT reset here — callers that change filter/sort
         // must reset it themselves before calling renderCatalog()
 
-        // 1. Filter
+        // 1. Filter by route
         let filtered = activeRoutes === null
             ? allSpots
             : allSpots.filter(s => activeRoutes.has(s.routeClass));
+
+        // 1b. Filter by search query
+        if (searchQuery) {
+            const q = searchQuery.toLowerCase();
+            filtered = filtered.filter(s => s.name.toLowerCase().includes(q));
+        }
 
         // 2. Sort
         let sorted;
@@ -471,19 +478,26 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderDesktopCatalog() {
         catalog.innerHTML = '';
 
+        // Base pool: apply search query first
+        let basePool = allSpots;
+        if (searchQuery) {
+            const q = searchQuery.toLowerCase();
+            basePool = allSpots.filter(s => s.name.toLowerCase().includes(q));
+        }
+
         let sorted;
         if (currentSort === 'a-z') {
-            sorted = [...allSpots].sort((a, b) => a.name.localeCompare(b.name));
+            sorted = [...basePool].sort((a, b) => a.name.localeCompare(b.name));
         } else if (currentSort === 'z-a') {
-            sorted = [...allSpots].sort((a, b) => b.name.localeCompare(a.name));
+            sorted = [...basePool].sort((a, b) => b.name.localeCompare(a.name));
         } else if (currentSort === 'location' && userLocation) {
-            sorted = [...allSpots].sort((a, b) => {
+            sorted = [...basePool].sort((a, b) => {
                 const dA = Math.hypot(a.coords[0]-userLocation[0], a.coords[1]-userLocation[1]);
                 const dB = Math.hypot(b.coords[0]-userLocation[0], b.coords[1]-userLocation[1]);
                 return dA - dB;
             });
         } else {
-            sorted = initialSort;
+            sorted = initialSort.filter(s => basePool.includes(s));
         }
 
         const routesToShow = activeRoutes === null
@@ -539,6 +553,10 @@ document.addEventListener('DOMContentLoaded', () => {
             group.appendChild(grid);
             catalog.appendChild(group);
         });
+
+        if (totalShown === 0) {
+            catalog.innerHTML = `<p style="padding:32px 0;text-align:center;font-family:'Josefin Sans',sans-serif;color:#5a8a95;letter-spacing:0.05em;">No spots match &ldquo;${searchQuery}&rdquo;</p>`;
+        }
 
         updateSidebarCounts(totalShown);
     }
@@ -645,6 +663,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ── Clear filters ────────────────────────────────────────────────────
     document.getElementById('sidebar-clear-btn')?.addEventListener('click', () => {
         activeRoutes = null; currentSort = 'top-picks'; showAll = false;
+        searchQuery = ''; clearSearchInputs();
         syncSidebarChecks();
         sidebarSortBtns.forEach(b => b.classList.remove('active'));
         document.querySelector('.sidebar-sort-btn[data-sort="top-picks"]')?.classList.add('active');
@@ -662,6 +681,128 @@ document.addEventListener('DOMContentLoaded', () => {
             if (nowDesktop) renderDesktopCatalog(); else { showAll = false; renderCatalog(); }
         }
     });
+
+    // ── Search: highlight matched text ──────────────────────────────────
+    function highlightMatch(text, query) {
+        if (!query) return text;
+        const idx = text.toLowerCase().indexOf(query.toLowerCase());
+        if (idx === -1) return text;
+        return text.slice(0, idx) +
+               `<mark class="search-highlight">${text.slice(idx, idx + query.length)}</mark>` +
+               text.slice(idx + query.length);
+    }
+
+    // ── Search: autocomplete suggestions dropdown ────────────────────────
+    function buildSuggestionDropdown(inputEl) {
+        // Each input gets its own dropdown sibling
+        let dropdown = inputEl.parentElement.querySelector('.search-suggestions');
+        if (!dropdown) {
+            dropdown = document.createElement('div');
+            dropdown.className = 'search-suggestions';
+            inputEl.parentElement.appendChild(dropdown);
+        }
+        return dropdown;
+    }
+
+    function showSuggestions(inputEl, query) {
+        const dropdown = buildSuggestionDropdown(inputEl);
+        if (!query || query.length < 1) {
+            dropdown.innerHTML = '';
+            dropdown.classList.remove('visible');
+            return;
+        }
+
+        const q = query.toLowerCase();
+        const matches = allSpots
+            .filter(s => s.name.toLowerCase().includes(q))
+            .slice(0, 8); // max 8 suggestions
+
+        if (matches.length === 0) {
+            dropdown.innerHTML = `<div class="search-suggestion-empty">No spots found</div>`;
+            dropdown.classList.add('visible');
+            return;
+        }
+
+        dropdown.innerHTML = matches.map(s => {
+            const color = routeColorMapping[s.routeClass] || '#0d7a82';
+            return `<button class="search-suggestion-item" data-name="${s.name}" type="button">
+                <span class="suggestion-dot" style="background:${color};"></span>
+                <span class="suggestion-name">${highlightMatch(s.name, query)}</span>
+                <span class="suggestion-route" style="color:${color};">${s.route}</span>
+            </button>`;
+        }).join('');
+
+        dropdown.classList.add('visible');
+
+        // Wire suggestion clicks
+        dropdown.querySelectorAll('.search-suggestion-item').forEach(btn => {
+            btn.addEventListener('mousedown', (e) => {
+                e.preventDefault(); // Don't blur the input
+                const name = btn.dataset.name;
+                // Fill input & run search
+                inputEl.value = name;
+                searchQuery = name;
+                dropdown.innerHTML = '';
+                dropdown.classList.remove('visible');
+                showAll = true;
+                if (isDesktop()) renderDesktopCatalog(); else renderCatalog();
+
+                // Find and open the spot
+                const spot = allSpots.find(s => s.name === name);
+                if (spot) setTimeout(() => openSpot(spot), 100);
+            });
+        });
+    }
+
+    function hideSuggestions(inputEl) {
+        const dropdown = inputEl.parentElement?.querySelector('.search-suggestions');
+        if (dropdown) {
+            dropdown.innerHTML = '';
+            dropdown.classList.remove('visible');
+        }
+    }
+
+    // ── Search: keep all inputs in sync ─────────────────────────────────
+    function clearSearchInputs() {
+        const desktopInput = document.getElementById('search-input');
+        const mobileInput  = document.getElementById('mobile-search-input');
+        if (desktopInput) { desktopInput.value = ''; hideSuggestions(desktopInput); }
+        if (mobileInput)  { mobileInput.value  = ''; hideSuggestions(mobileInput);  }
+    }
+
+    function wireSearchInput(inputEl) {
+        if (!inputEl) return;
+
+        inputEl.addEventListener('input', () => {
+            searchQuery = inputEl.value.trim();
+            showAll = false;
+            showSuggestions(inputEl, searchQuery);
+            if (isDesktop()) renderDesktopCatalog(); else renderCatalog();
+        });
+
+        inputEl.addEventListener('focus', () => {
+            if (inputEl.value.trim()) showSuggestions(inputEl, inputEl.value.trim());
+        });
+
+        inputEl.addEventListener('blur', () => {
+            // Slight delay so mousedown on a suggestion fires first
+            setTimeout(() => hideSuggestions(inputEl), 150);
+        });
+
+        inputEl.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                searchQuery = '';
+                inputEl.value = '';
+                hideSuggestions(inputEl);
+                showAll = false;
+                if (isDesktop()) renderDesktopCatalog(); else renderCatalog();
+            }
+        });
+    }
+
+    // Wire both inputs
+    wireSearchInput(document.getElementById('search-input'));
+    wireSearchInput(document.getElementById('mobile-search-input'));
 
     // ── Initial render ────────────────────────────────────────────────────
     syncSidebarChecks();

@@ -261,11 +261,14 @@
         <!-- ── Main content area ───────────────────────────────────────── -->
         <div class="guide-main-area">
 
-            <!-- Desktop topbar: breadcrumb + view toggle (hidden on mobile) -->
+            <!-- Desktop topbar: breadcrumb (hidden on mobile) -->
             <div class="guide-desktop-topbar desktop-only-flex">
                 <nav class="guide-breadcrumb-desktop" aria-label="Breadcrumb">
-                    <a href="index.html" class="guide-breadcrumb-link">Map</a>
-                    <span class="guide-breadcrumb-sep">/</span>
+                    <a href="index.html" class="guide-breadcrumb-back" aria-label="Back to Map">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
                     <span class="guide-breadcrumb-current">City Guide</span>
                 </nav>
             </div>
