@@ -797,3 +797,23 @@ a.breadcrumb-root:hover {
         margin-bottom: 96px !important;
     }
 }
+
+/* ── Custom User Location Marker (The Dot) ────────────────────────────────── */
+/* Replaces the default Mapbox blue with TRACE brand yellow */
+.mapboxgl-user-location-dot {
+    background-color: var(--brand-trace) !important;
+}
+
+.mapboxgl-user-location-dot::before {
+    background-color: var(--brand-trace) !important;
+}
+
+/* Custom Heading Arrow (Compass) */
+.mapboxgl-user-location-show-heading .mapboxgl-user-location-heading::after {
+    border-bottom-color: var(--brand-trace) !important;
+}
+
+/* Accuracy Circle - subtle yellow tint instead of blue */
+.mapboxgl-user-location-accuracy-circle {
+    background-color: rgba(231, 230, 38, 0.1) !important;
+}
