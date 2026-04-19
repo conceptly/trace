@@ -481,18 +481,11 @@
 
 .copyright {
   font-family: 'Josefin Sans', sans-serif;
+  font-weight: 400;
   font-size: 11px;
   color: #cddbd0;
-}
-  border-top: none;
 }
 
-.copyright {
-  font-family: 'Josefin Sans', sans-serif;
-  font-weight: 400;
-  color: #cddbd0;
-  font-size: 11px;
-}
 
 /* Responsive adjustments for drawer */
 @media (max-width: 768px) {
