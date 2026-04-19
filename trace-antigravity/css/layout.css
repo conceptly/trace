@@ -288,6 +288,10 @@
   flex-direction: column;
   overflow-y: auto;
   z-index: 90;
+  scrollbar-width: none; /* Firefox */
+}
+.side-nav::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Edge */
 }
 
 .side-section {
