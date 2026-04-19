@@ -639,7 +639,7 @@
 
   /* Explore Routes -> Sliding Tabs docked to Right Edge */
   .side-section.explore-routes {
-    position: absolute; right: 0; top: 25vh; transform: none;
+    position: absolute; right: 0; top: 15vh; transform: none;
     pointer-events: auto; padding: 0; margin: 0; border: none;
     background: transparent; display: flex; flex-direction: column; gap: 12px; height: auto;
     align-items: flex-end; z-index: 100;
