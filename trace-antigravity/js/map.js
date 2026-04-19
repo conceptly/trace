@@ -332,6 +332,60 @@ map.on('click', () => {
 
 map.on('load', () => {
     console.log('Mapbox style loaded successfully!');
+    
+    // Explicitly enforce Mapbox Standard basemap configuration.
+    // Studio publishes don't always propagate config overrides to GL JS,
+    // so we set every property manually to guarantee the TRACE palette.
+    // Values below are the EXACT values from the published Studio style JSON.
+    try {
+        if (currentMapStyle === 'street') {
+            map.setConfigProperty('basemap', 'theme', 'faded');
+            map.setConfigProperty('basemap', 'lightPreset', 'day');
+            map.setConfigProperty('basemap', 'font', 'DIN Pro');
+
+            // Land & water — exact Studio values
+            map.setConfigProperty('basemap', 'colorLand',            '#ffffff');
+            map.setConfigProperty('basemap', 'colorWater',           '#deeff7');
+            map.setConfigProperty('basemap', 'colorGreenspace',      '#e8f4e6');
+            map.setConfigProperty('basemap', 'colorCommercial',      'rgba(255, 255, 255, 0.78)');
+            map.setConfigProperty('basemap', 'colorEducation',       'rgba(250, 247, 240, 0.65)');
+            map.setConfigProperty('basemap', 'colorMedical',         '#ffffff');
+            map.setConfigProperty('basemap', 'colorIndustrial',      'rgba(232, 233, 238, 0.63)');
+
+            // Roads & labels
+            map.setConfigProperty('basemap', 'colorMotorways',       '#d7d9db');
+            map.setConfigProperty('basemap', 'colorTrunks',          'rgba(217, 217, 217, 0.66)');
+            map.setConfigProperty('basemap', 'colorRoads',           'rgba(216, 219, 228, 0.67)');
+            map.setConfigProperty('basemap', 'colorRoadLabels',      '#9c9696');
+            map.setConfigProperty('basemap', 'colorPlaceLabels',     'rgba(137, 120, 93, 0.67)');
+
+            // Buildings & boundaries
+            map.setConfigProperty('basemap', 'colorBuildings',       'rgba(221, 211, 198, 0.73)');
+            map.setConfigProperty('basemap', 'colorBuildingSelect',  '#ffffff');
+            map.setConfigProperty('basemap', 'colorAdminBoundaries', 'hsl(345, 5%, 73%)');
+            map.setConfigProperty('basemap', 'showAdminBoundaries',  false);
+
+            // Visibility toggles
+            map.setConfigProperty('basemap', 'showPlaceLabels',      true);
+            map.setConfigProperty('basemap', 'showRoadLabels',       true);
+            map.setConfigProperty('basemap', 'showTransitLabels',    true);
+            map.setConfigProperty('basemap', 'showLandmarkIcons',    false);
+            map.setConfigProperty('basemap', 'showLandmarkIconLabels', true);
+            map.setConfigProperty('basemap', 'show3dFacades',        true);
+        } else {
+            map.setConfigProperty('basemap', 'lightPreset', 'night');
+
+            // TRACE dark basemap
+            map.setConfigProperty('basemap', 'colorLand',            '#223740');
+            map.setConfigProperty('basemap', 'colorGreenspace',      '#1C3328');
+            map.setConfigProperty('basemap', 'colorWater',           '#12202A');
+            map.setConfigProperty('basemap', 'colorPlaceLabels',     '#BDD0CC');
+        }
+        map.setConfigProperty('basemap', 'showPointOfInterestLabels', false);
+        map.setConfigProperty('basemap', 'densityPointOfInterestLabels', 5);
+    } catch (error) {
+        console.warn("Could not set basemap configuration:", error);
+    }
 
     map.addControl(new mapboxgl.GeolocateControl({
         positionOptions: { enableHighAccuracy: true },
@@ -585,7 +639,52 @@ document.addEventListener('mapStyleChange', (e) => {
 
     // After the new style loads, restore GeoJSON markers + active filter
     map.once('style.load', () => {
-        // No setConfigProperty needed — Faded/Day is baked into the Studio style
+        // Explicitly enforce Mapbox Standard basemap configuration for the new style.
+        // Mirrors the exact values from the on('load') block above.
+        try {
+            if (currentMapStyle === 'street') {
+                map.setConfigProperty('basemap', 'theme', 'faded');
+                map.setConfigProperty('basemap', 'lightPreset', 'day');
+                map.setConfigProperty('basemap', 'font', 'DIN Pro');
+
+                map.setConfigProperty('basemap', 'colorLand',            '#ffffff');
+                map.setConfigProperty('basemap', 'colorWater',           '#deeff7');
+                map.setConfigProperty('basemap', 'colorGreenspace',      '#e8f4e6');
+                map.setConfigProperty('basemap', 'colorCommercial',      'rgba(255, 255, 255, 0.78)');
+                map.setConfigProperty('basemap', 'colorEducation',       'rgba(250, 247, 240, 0.65)');
+                map.setConfigProperty('basemap', 'colorMedical',         '#ffffff');
+                map.setConfigProperty('basemap', 'colorIndustrial',      'rgba(232, 233, 238, 0.63)');
+
+                map.setConfigProperty('basemap', 'colorMotorways',       '#d7d9db');
+                map.setConfigProperty('basemap', 'colorTrunks',          'rgba(217, 217, 217, 0.66)');
+                map.setConfigProperty('basemap', 'colorRoads',           'rgba(216, 219, 228, 0.67)');
+                map.setConfigProperty('basemap', 'colorRoadLabels',      '#9c9696');
+                map.setConfigProperty('basemap', 'colorPlaceLabels',     'rgba(137, 120, 93, 0.67)');
+
+                map.setConfigProperty('basemap', 'colorBuildings',       'rgba(221, 211, 198, 0.73)');
+                map.setConfigProperty('basemap', 'colorBuildingSelect',  '#ffffff');
+                map.setConfigProperty('basemap', 'colorAdminBoundaries', 'hsl(345, 5%, 73%)');
+                map.setConfigProperty('basemap', 'showAdminBoundaries',  false);
+
+                map.setConfigProperty('basemap', 'showPlaceLabels',      true);
+                map.setConfigProperty('basemap', 'showRoadLabels',       true);
+                map.setConfigProperty('basemap', 'showTransitLabels',    true);
+                map.setConfigProperty('basemap', 'showLandmarkIcons',    false);
+                map.setConfigProperty('basemap', 'showLandmarkIconLabels', true);
+                map.setConfigProperty('basemap', 'show3dFacades',        true);
+            } else {
+                map.setConfigProperty('basemap', 'lightPreset', 'night');
+
+                map.setConfigProperty('basemap', 'colorLand',            '#223740');
+                map.setConfigProperty('basemap', 'colorGreenspace',      '#1C3328');
+                map.setConfigProperty('basemap', 'colorWater',           '#12202A');
+                map.setConfigProperty('basemap', 'colorPlaceLabels',     '#BDD0CC');
+            }
+            map.setConfigProperty('basemap', 'showPointOfInterestLabels', false);
+            map.setConfigProperty('basemap', 'densityPointOfInterestLabels', 5);
+        } catch (error) {
+            console.warn("Could not set basemap configuration:", error);
+        }
 
         // Remove stale HTML markers before re-creating them
         allMarkers.forEach(m => m.marker.remove());
