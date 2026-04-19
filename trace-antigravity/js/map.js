@@ -1,13 +1,13 @@
 // Setup Mapbox GL JS map
 mapboxgl.accessToken = 'pk.eyJ1IjoiZXR1YWwtY29uY2VwdGx5IiwiYSI6ImNtbHU5ZjlvbjA5MmkzanEzeGd3eHI1ajQifQ.kD3o5_-eHOmsWmBQfP7RFg';
 
-// Map style URLs — light is the default
-// CACHE NOTE: If you update either style in Mapbox Studio and the old version
-// appears, increment the matching ?v= number below to force a fresh fetch.
+// Map style URLs
+// Both are published custom styles in Mapbox Studio — settings (Faded/Day) are
+// baked into TraceToronto-LightMode, so no setConfigProperty calls are needed.
+// Bump ?v= after republishing in Studio to force a fresh fetch.
 const MAP_STYLES = {
-    // Mapbox Standard lets us apply theme:faded + lightPreset:day via setConfigProperty
-    street:    'mapbox://styles/mapbox/standard',
-    satellite: 'mapbox://styles/etual-conceptly/cmnt68n6r009i01qtg090hkz8?v=2' // bump v= after Studio republish
+    street:    'mapbox://styles/etual-conceptly/cmny1pnn000301qu6z8k4zta?v=1', // TraceToronto-LightMode
+    satellite: 'mapbox://styles/etual-conceptly/cmnt68n6r009i01qtg090hkz8?v=2'  // TraceToronto-DarkMode
 };
 
 const map = new mapboxgl.Map({
@@ -19,16 +19,6 @@ const map = new mapboxgl.Map({
 
 // Track active style so style.load handlers know which config to apply
 let currentMapStyle = 'street';
-
-// Apply Mapbox Standard config after the map is fully rendered (not just style.load).
-// 'idle' fires after the first frame completes, guaranteeing the Standard style's
-// 'basemap' slot is fully initialized — avoids race condition on cold/slow loads.
-map.once('idle', () => {
-    if (currentMapStyle === 'street') {
-        map.setConfigProperty('basemap', 'lightPreset', 'day');
-        map.setConfigProperty('basemap', 'theme', 'faded');
-    }
-});
 
 // Route Color Mapping — two palettes for light vs dark basemap
 // Light map: rich/muted tones readable on cream/white street backgrounds
@@ -595,13 +585,7 @@ document.addEventListener('mapStyleChange', (e) => {
 
     // After the new style loads, restore GeoJSON markers + active filter
     map.once('style.load', () => {
-        // Apply faded/day config after full render — same idle trick as initial load
-        if (style === 'street') {
-            map.once('idle', () => {
-                map.setConfigProperty('basemap', 'lightPreset', 'day');
-                map.setConfigProperty('basemap', 'theme', 'faded');
-            });
-        }
+        // No setConfigProperty needed — Faded/Day is baked into the Studio style
 
         // Remove stale HTML markers before re-creating them
         allMarkers.forEach(m => m.marker.remove());
