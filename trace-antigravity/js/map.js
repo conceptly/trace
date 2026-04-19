@@ -20,9 +20,10 @@ const map = new mapboxgl.Map({
 // Track active style so style.load handlers know which config to apply
 let currentMapStyle = 'street';
 
-// Apply Mapbox Standard config on initial load (matches Studio: theme=Faded, lightPreset=Day)
-map.on('style.load', () => {
-    // Only apply to the Standard style — satellite has its own config baked in
+// Apply Mapbox Standard config after the map is fully rendered (not just style.load).
+// 'idle' fires after the first frame completes, guaranteeing the Standard style's
+// 'basemap' slot is fully initialized — avoids race condition on cold/slow loads.
+map.once('idle', () => {
     if (currentMapStyle === 'street') {
         map.setConfigProperty('basemap', 'lightPreset', 'day');
         map.setConfigProperty('basemap', 'theme', 'faded');
@@ -594,10 +595,12 @@ document.addEventListener('mapStyleChange', (e) => {
 
     // After the new style loads, restore GeoJSON markers + active filter
     map.once('style.load', () => {
-        // Apply faded/day config when returning to the light Standard style
+        // Apply faded/day config after full render — same idle trick as initial load
         if (style === 'street') {
-            map.setConfigProperty('basemap', 'lightPreset', 'day');
-            map.setConfigProperty('basemap', 'theme', 'faded');
+            map.once('idle', () => {
+                map.setConfigProperty('basemap', 'lightPreset', 'day');
+                map.setConfigProperty('basemap', 'theme', 'faded');
+            });
         }
 
         // Remove stale HTML markers before re-creating them
