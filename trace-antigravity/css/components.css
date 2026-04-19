@@ -809,7 +809,8 @@ a.breadcrumb-root:hover {
 }
 
 /* Custom Heading Arrow (Compass) */
-.mapboxgl-user-location-show-heading .mapboxgl-user-location-heading::after {
+.mapboxgl-user-location-show-heading .mapboxgl-user-location-heading::after,
+.mapboxgl-user-location-show-heading .mapboxgl-user-location-heading::before {
     border-bottom-color: var(--brand-trace) !important;
 }
 
