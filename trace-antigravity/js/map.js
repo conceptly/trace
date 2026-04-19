@@ -309,13 +309,14 @@ function loadGeoJSONData(geojsonData, fallbackCategory) {
                 }
             });
 
-            // Store target opacities alongside layer IDs so CTA toggle can animate to correct value
+            // Store target opacities + coordinates so CTA click can fly to the path
             allLineSources.push({
                 id:            sourceId,
                 haloId:        isDarkMap ? haloLayerId : null,
                 category:      cssClass,
                 colourOpacity: 0.95,
-                haloOpacity:   0.9
+                haloOpacity:   0.9,
+                coordinates:   feature.geometry.coordinates  // LineString coords for fitBounds
             });
         }
     });
@@ -636,6 +637,29 @@ const buildCtaLogic = () => {
                 const duration   = routeLineActive ? 700 : 350; // slower reveal, faster hide
                 animateLineOpacity(s.id,     showColour, duration);
                 if (s.haloId) animateLineOpacity(s.haloId, showHalo, duration);
+
+                // When revealing the path, deactivate geolocate + fly to the full route line
+                if (routeLineActive && s.coordinates && s.coordinates.length > 0) {
+                    // Deactivate geolocate tracking if active
+                    const geoBtn = document.querySelector('.mapboxgl-ctrl-geolocate');
+                    if (geoBtn && (
+                        geoBtn.classList.contains('mapboxgl-ctrl-geolocate-active') ||
+                        geoBtn.classList.contains('mapboxgl-ctrl-geolocate-waiting') ||
+                        geoBtn.classList.contains('mapboxgl-ctrl-geolocate-background')
+                    )) {
+                        geoBtn.click();
+                    }
+
+                    // Fit the full path in view
+                    const bounds = new mapboxgl.LngLatBounds();
+                    s.coordinates.forEach(coord => bounds.extend(coord));
+                    map.fitBounds(bounds, {
+                        padding: { top: 80, bottom: 220, left: 60, right: 80 },
+                        maxZoom: 15,
+                        duration: 900,
+                        essential: true
+                    });
+                }
             }
         });
     });
