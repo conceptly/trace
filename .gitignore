@@ -1,2 +1,5 @@
 # Root-level image library (kept locally, not needed for website)
 assets/
+
+# Mapbox Studio style exports (reference only)
+map-data/TraceToronto-*/
