@@ -899,12 +899,29 @@
   }
 
   /* On mobile: geolocate sits on the LEFT (route buttons own the right side).
-     Positioned midway between the Quick-Guide tab and the Near-You drawer. */
+     bottom value accounts for real Safari browser chrome (~85px) being taller
+     than desktop viewport simulation, so it sits midway between Quick-Guide
+     and the Start Route CTA. */
   .mapboxgl-ctrl-bottom-right {
-    bottom: 210px !important;
+    bottom: 200px !important;
     top: auto !important;
     right: auto !important;
     left: 12px !important;
+  }
+
+  /* Split the Mapbox attribution out of the left-side geolocate stack —
+     reposition it to its natural bottom-right corner so it never crowds
+     the location icon. Uses position:fixed to break out of the parent. */
+  .mapboxgl-ctrl-bottom-right .mapboxgl-ctrl-attrib {
+    position: fixed !important;
+    bottom: 130px !important;  /* sits just above the Near You drawer header */
+    right: 12px !important;
+    left: auto !important;
+    top: auto !important;
+    background: rgba(255, 255, 255, 0.7) !important;
+    border-radius: 8px !important;
+    padding: 2px 6px !important;
+    font-size: 10px !important;
   }
 
   
