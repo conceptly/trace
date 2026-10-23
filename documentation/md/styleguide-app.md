@@ -128,8 +128,11 @@ Two divider tokens exist to distinguish structural edges from soft internal sepa
 |---|---|
 | Search BG | `rgba(237, 244, 240, 0.15)` |
 | Search Border | `rgba(237, 244, 240, 0.12)` |
-| Search Text | `#8AADB5` — `--content-3` |
+| Search Text (typed) | `#FFFFFF` — 6.5 : 1 on the pill |
+| Search Placeholder & Icon | `#D6E3DF` — 4.9 : 1 on the pill |
 | Caret Colour | `#E7E626` |
+
+The top-nav search pill always uses these dark values, on every page. The top nav stays dark even on light-theme pages (City Guide), so the pill must not follow the page's theme tokens.
 
 ### Sheets & Drawers
 
@@ -200,6 +203,8 @@ All contrast ratios measured against the primary screen background (`--surface-3
 | Search Border | `rgba(45, 72, 85, 0.15)` |
 | Search Text | `#3A6070` — `--content-3` |
 | Caret Colour | `#1D3240` — `--content-1` |
+
+These apply to inputs that sit on light surfaces, not to the top-nav search pill (see the dark-mode table). The mobile floating search pill is a light surface: background `rgba(235, 242, 238, 0.9)`, typed text `#0F2229`, placeholder `#3A6070` (solid, about 6 : 1).
 
 ### Sheets & Drawers
 
@@ -435,11 +440,18 @@ Each marker is a `<button>` with `aria-label="{Spot Name} — {Category} spot"`.
 
 ### Search bar
 - `<label htmlFor="...">` with `sr-only` class wrapping visible input
-- Placeholder text in `--content-3`
-- Background: `rgba(237, 244, 240, 0.15)` dark / `rgba(45, 72, 85, 0.08)` light
+- Top-nav pill (all pages): background `rgba(237, 244, 240, 0.15)`, typed text `#FFFFFF`, placeholder and icon `#D6E3DF`. Fixed values, not theme tokens, because the nav is dark on every page
+- Mobile floating pill (light surface): typed text `#0F2229`, placeholder `#3A6070`
 - Border: `rgba(237, 244, 240, 0.12)` dark / `rgba(45, 72, 85, 0.15)` light
 - Height: 50px; border radius: 16px
 - Caret colour: `#E7E626` dark / `--content-1` light
+
+#### Search suggestions dropdown
+- Background `#1D3240`, border `0.5px solid #3D5E6A`, radius 12px
+- Spot name: Josefin Sans 500, 13px, `#EDF4F0` (11.9 : 1)
+- Route label: Josefin Sans 600, 10px uppercase, `#BDD0CC` (8.3 : 1). Never the route hue: the category colours are too dark on `#1D3240`
+- Route dot (8px) carries the category colour
+- Matched letters: `#E7E626` highlight with `#1D3240` text
 
 ---
 
@@ -662,4 +674,23 @@ The following six colour failures were identified in the original Figma-imported
 
 ---
 
-*End of TRACE Toronto Style Guide. Version: April 2026.*
+### 7. Search bar and suggestions (October 2026)
+
+Measured on the City Guide page at 1280px with "ann" typed into the search.
+
+| Element | Before | After | Result |
+|---|---|---|---|
+| Typed text | `#1D3240` (light-theme `--content-1`) on the grey pill | `#FFFFFF` | 6.5 : 1 PASS ✓ AA |
+| Placeholder | `#2D4855` (light-theme `--content-2`) | `#D6E3DF` | 4.9 : 1 PASS ✓ AA |
+| Search icon | `#2D4855` | `#D6E3DF` | 4.9 : 1 PASS ✓ AA |
+| Pill background | `rgba(235, 242, 238, 0.33)` | `rgba(237, 244, 240, 0.15)` (styleguide dark `--search-bg`) | — |
+| Suggestion route label | route hue at 85% opacity on `#1D3240` | `#BDD0CC` | 8.3 : 1 PASS ✓ AAA |
+| Mobile pill placeholder | `rgba(15, 34, 41, 0.5)` | `#3A6070` | about 6 : 1 PASS ✓ AA |
+
+**Problem:** The City Guide page runs the light theme, so its search text picked up the light theme's dark text colours, but the top nav behind the search stays dark. The result was dark grey text on a grey pill. Even on the dark Map page, the light pill (33% white) left the old light text at about 3.7 : 1. In the suggestions dropdown, the route names used their own category colours, which are too dark to read on the dropdown's navy.
+**Fix:** The top-nav search now uses fixed dark-nav colours on every page, with the darker styleguide background. Route labels in the dropdown use a light neutral, and the dot next to each name keeps the category colour. The mobile placeholder is a solid colour instead of 50% opacity, in line with the rule against semi-transparent text.
+**Files:** `css/layout.css`, `css/city-guide.css`, `js/city-guide.js` (commit `3e3c1f7`, live on tracedesign.art since 23 Oct 2026).
+
+---
+
+*End of TRACE Toronto Style Guide. Version: October 2026.*

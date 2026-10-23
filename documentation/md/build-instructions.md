@@ -3,6 +3,8 @@
 **Companion to design.md. Paste both files at the start of every Claude Code session.**  
 **Figma file:** https://www.figma.com/design/qWtyO6CR3xF5vrACpVBjuU/Trace-Mi-Fi-Backup-March-27?node-id=2423-4831
 
+> **October 2026: the site is moving to Framer.** Sections 0–15 describe the current static build (vanilla HTML/CSS/JS in `trace-antigravity/`, hosted on Netlify), which stays live until cutover. Section 16 is the migration plan. Progress is tracked in [migration-progress.md](migration-progress.md).
+
 ---
 
 ## 0. Stack Constraints — READ BEFORE WRITING ANY CODE
@@ -1270,3 +1272,85 @@ Use these if Claude Code has Figma plugin access.
 | gemsScreen (spot detail) | `2423:7248` |
 | guidebook-content | `2423:7188` |
 | Style Guide frame | `2509:2879` |
+
+---
+
+## 16. Migration to Framer (plan, October 2026)
+
+Progress is tracked in [migration-progress.md](migration-progress.md). Update that file whenever a step changes status; this section only changes when the plan changes.
+
+### 16.1 Why Framer
+
+- **Visual building.** Layout, styles, variants and breakpoints are edited on a canvas, like Figma, instead of in CSS.
+- **Room to grow.** Every CMS item gets its own page (`/places/<slug>`), which gives per-place pages and SEO. Future cities (Victoria, Vancouver, Montreal) fit in the same collections.
+- **Real code where it's needed.** The Mapbox map, route state and Near You logic are React code components and overrides. Code is only used where canvas features can't express the behaviour.
+- **AI access.** The Framer MCP connector can edit the project directly, which is how the test project was built.
+- **Webflow** was set up first (style guide variables, Places CMS, playground, 36 icon components). It's paused as the fallback, not deleted.
+
+### 16.2 Plan and limits
+
+| | Basic (CA$14/mo, yearly) | Pro (CA$41/mo, yearly) |
+|---|---|---|
+| CMS collections | **2** | 10 (up to 40 with add-ons) |
+| CMS items | 1,000 | 2,500 (up to 40,000) |
+| Designed pages | 30 | 150 |
+| Bandwidth | 50 GB | 100 GB |
+| Custom domain | ✓ | ✓ |
+| Staging | — | ✓ |
+
+**Start on Basic.** Two collections are enough if the city is a field on each place and route, not its own collection:
+
+- **Places:** name, slug, route (option), city (option), lat, lng, address, photo, author, year, style tags, about, interesting fact, designer note, clue.
+- **Routes:** name, slug, key, colour, description, path (JSON coordinate list), city.
+
+Upgrade to Pro only when a third collection is needed (articles, artists, a real Cities collection) or when staging becomes worth it. On Basic every publish goes straight to the live site, so test in the editor's Preview first.
+
+### 16.3 How the current build maps to Framer
+
+| Current build (`trace-antigravity/`) | Framer |
+|---|---|
+| `css/tokens.css` colours, day/night | Colour styles (tokens) with light/dark values |
+| `css/base.css` type classes | Text styles (Josefin Sans for UI, Roboto Slab for editorial; Adobe kit later) |
+| `assets/icons/Icon=*.svg` | `Icon.tsx` code component: 36 Streamline Sharp icons, Icon/Color/Size controls |
+| `js/map.js` (Mapbox, markers, route lines, reveal, fly-to) | `TraceMap.tsx` code component |
+| `js/data-*.js`, `map-data/*.geojson` | Places and Routes CMS collections, bridged to the map by `PlaceMarker.tsx` and `RouteLine.tsx` |
+| `js/nav.js` route selection state | `TraceStore.ts` (shared store) + overrides in `RouteControls.tsx` |
+| Sidebar route list, mobile route pills, CTA | `Route row`, `Route tab`, `Start CTA` components; variants are switched by overrides |
+| Near You grid and count (`map.js`) | `NearYou.tsx` (grid/row component + `withNearCount` text override) |
+| Spot drawer (map and City Guide) | Place detail page `/places/:slug` (drawer can come later) |
+| `js/city-guide.js` filters, sort, search | Not built yet; needs a code component (multi-select filters, A–Z/Z–A, proximity, live suggestions) |
+| Quick Guide drawer, mobile menu, day/night toggle, geolocate | Not built yet: drawer and menu as component variants, toggle and geolocate as code |
+| About, Profile pages | Not built yet: canvas pages; Profile gamification later |
+
+### 16.4 Phases
+
+1. **Prototype (done).** Framer test project with Places and Routes CMS, map, route lines, Start route reveal, place pages.
+2. **Foundations.** Colour and text styles, Icon component, Button, Route pill, Place card. Label optical offset: Josefin Sans sits about 1.5px high at 100% line height, so labels sit in a wrapper with 3px top padding.
+3. **Home page.** Desktop, tablet and phone layouts matching the live build: sidebar with route rows, Near You, Start CTA; mobile route tabs, Near You drawer.
+4. **Content migration.** Import all 62 spots from `map-data/csv/*.csv` and the GeoJSON files into Places, with their photos. Import each route's LineString from `map-data/*.geojson` into Routes. Check every spot's route, coordinates and slug against the live map.
+5. **Remaining pages and behaviour.** City Guide (filters, sort, proximity, search with suggestions), About, Profile, Quick Guide drawer, mobile menu, day/night toggle, geolocate, photo markers as on the live map.
+6. **QA.** WCAG AA contrast and focus states per the styleguide, keyboard use, real-device mobile checks, page titles and descriptions per place, performance, analytics.
+7. **Cutover.**
+   - Buy Basic.
+   - Connect `tracedesign.art` in Framer and move the DNS from Netlify.
+   - Add the Mapbox token's new allowed URLs: the domain and the framer.app address.
+   - Add redirects: `/city-guide.html` → `/city-guide`, `/about.html` → `/about`, `/profile.html` → `/profile`, `/index.html` → `/`.
+8. **After cutover.** Keep the Netlify site and this repo as the rollback (point DNS back) for at least a month. Then archive `trace-antigravity/`.
+
+### 16.5 Working rules for the Framer project
+
+- **Publishing:** don't publish without asking. With staging off, publishing updates the live framer.app address, and after cutover it would update tracedesign.art.
+- **Testing:** test in the editor's Preview. Plain `<a>` links (map popup, Near You photos) show "404 page not found" in Preview but work on the published site.
+- **Code imports:** code files may import only from `react`, `react-dom`, `framer` and `framer-motion`. The type checker flags `./TraceStore.ts` imports as missing; that warning is harmless at runtime.
+- **Component dropdowns:** Framer gives a component's own dropdown options random ids. `Icon.tsx` maps the Button's "Icon" dropdown back to icon names through its `ALIASES` table. Update that table if the Button's options change.
+- **CMS option fields:** the Places "Route" option field passes option ids to code. The id → route key table lives in `TraceMap.tsx` and `NearYou.tsx`; keep both in step if route options change.
+- **Contrast:** no semi-transparent text, and inactive states use solid colours (styleguide §9). The mobile route tabs' "inactive" variants follow this.
+
+### 16.6 Exit strategy
+
+Framer has no native code export, so plan the content to outlive the tool:
+
+- **Source of truth.** Keep the spot data in `map-data/` (CSV and GeoJSON) as the master copy and import it into Framer, never the other way round.
+- **Portable code.** The code components are plain React and would move to Next.js or another React host almost unchanged.
+- **Static snapshot.** Export plugins (Framer to Code, Full Site Export) can produce static HTML from the published site as a snapshot. It isn't maintainable source.
+- **Moving to another builder** (Figma Sites, Webflow) means rebuilding the layouts from Figma and re-importing the CSV/GeoJSON data.

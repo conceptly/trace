@@ -60,7 +60,7 @@
 .search-container input {
   font-family: 'Adelle', serif;
   font-style: italic;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 15px;
   color: #FFFFFF;
   background: transparent;
@@ -573,7 +573,7 @@
   height: 100%;
   font-family: 'Adelle', serif;
   font-style: italic;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 15px;
   color: #0f2229;                      /* Dark text — legible on light map/pill background */
   pointer-events: auto;
