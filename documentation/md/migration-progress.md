@@ -124,7 +124,8 @@ Fixes still land on the current site until cutover. Port each one to Framer too.
 | Date | Change | Commit | Ported to Framer |
 |---|---|---|---|
 | 23 Oct 2026 | Search bar and suggestions contrast (styleguide §10.7) | `3e3c1f7` | ⬜ Framer's pill is still a 32% white fill; switch it to the 15% styleguide fill and `#D6E3DF` placeholder |
-| 23 Oct 2026 | Search input text weight 300 → 400 | see git log | ⬜ |
+| 23 Oct 2026 | Search input text weight 300 → 400 | `d7b4ea8` | ⬜ |
+| 23 Oct 2026 | Search placeholder removed; `aria-label` as the accessible name | see git log | ⬜ Framer's pill still shows "Search for spots or routes!" |
 
 ---
 
