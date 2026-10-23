@@ -728,7 +728,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return `<button class="search-suggestion-item" data-name="${s.name}" type="button">
                 <span class="suggestion-dot" style="background:${color};"></span>
                 <span class="suggestion-name">${highlightMatch(s.name, query)}</span>
-                <span class="suggestion-route" style="color:${color};">${s.route}</span>
+                <span class="suggestion-route">${s.route}</span>
             </button>`;
         }).join('');
 

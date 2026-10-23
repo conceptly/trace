@@ -935,7 +935,7 @@ body.city-guide-page .nav-btn.active .subtitle { color: #2d4855 !important; }
   letter-spacing: 0.07em;
   text-transform: uppercase;
   flex-shrink: 0;
-  opacity: 0.85;
+  color: #BDD0CC;   /* Route hues are too dark on #1d3240; the dot carries the colour */
 }
 
 .search-suggestion-empty {

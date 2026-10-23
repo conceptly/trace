@@ -39,7 +39,10 @@
 .search-container {
   width: 370px;
   height: 38px;
-  background-color: rgba(235, 242, 238, 0.33);
+  /* The top nav stays dark on every page (City Guide uses the light theme),
+     so the search pill uses fixed dark-nav values instead of theme tokens.
+     Background is the styleguide's dark --search-bg; text >= 4.5:1 on it. */
+  background-color: rgba(237, 244, 240, 0.15);
   border: 0.5px solid var(--backgrounds-elevated, #cddbd0);
   backdrop-filter: blur(4px);
   border-radius: 16px;
@@ -51,7 +54,7 @@
 }
 
 .search-container svg {
-  color: var(--content-2);
+  color: #D6E3DF;
 }
 
 .search-container input {
@@ -59,7 +62,7 @@
   font-style: italic;
   font-weight: 300;
   font-size: 15px;
-  color: var(--content-1);
+  color: #FFFFFF;
   background: transparent;
   border: none;
   outline: none;
@@ -67,7 +70,7 @@
 }
 
 .search-container input::placeholder {
-  color: var(--content-2);
+  color: #D6E3DF;
 }
 
 .nav-center {
@@ -583,7 +586,7 @@
 }
 
 .mobile-floating-search .search-inner input::placeholder {
-  color: rgba(15, 34, 41, 0.5);        /* Dark placeholder on light pill */
+  color: #3A6070;                      /* Solid dark placeholder on light pill (6:1) */
   font-style: italic;
 }
 
