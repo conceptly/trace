@@ -535,13 +535,13 @@
 .spot-breadcrumbs {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
 }
 
 .breadcrumbs-path {
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 4px;
 }
 
 .icon-btn {
@@ -563,6 +563,7 @@
   color: var(--text-text-primary, #0f2229);
   text-transform: capitalize;
   line-height: 1;
+  padding-top: 2px; /* optical offset, as in the Framer "Breadcrumb" style */
 }
 
 /* When breadcrumb-root is an <a> tag, strip link defaults */
