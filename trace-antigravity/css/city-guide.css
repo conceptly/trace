@@ -422,10 +422,10 @@ body.city-guide-page .spot-drawer .spot-drawer-content {
   .sidebar-route-btn {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     width: 100%;
-    padding: 8px 10px;
-    border-radius: 10px;
+    padding: 8px 12px;
+    border-radius: 4px; /* Framer Filter row, 4px grid */
     border: none;
     background: transparent;
     cursor: pointer;
@@ -502,9 +502,9 @@ body.city-guide-page .spot-drawer .spot-drawer-content {
   .sidebar-sort-btn {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 8px 10px;
-    border-radius: 10px;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 4px; /* Framer Sort option, 4px grid */
     border: none;
     background: transparent;
     cursor: pointer;
@@ -721,7 +721,7 @@ body.city-guide-page .spot-drawer .spot-drawer-content {
   /* Desktop gem cards */
   .gem-card-desktop {
     background: #ffffff;
-    border-radius: 12px;
+    border-radius: 4px; /* Framer Gem card, 4px grid */
     border: 0.5px solid #bdd0d5;
     overflow: hidden;
     cursor: pointer;

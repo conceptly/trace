@@ -382,9 +382,9 @@ Components and layouts use the semantic tokens. A primitive is used directly onl
 
 | Token         | Value  | Use |
 |---------------|--------|-----|
-| `radius/xs`   | 4px    | Buttons and CTAs (Primary, Secondary, Start CTA), nav items, search field, route rows, Quick Guide tab, route tags, checkboxes |
+| `radius/xs`   | 4px    | Buttons and CTAs (Primary, Secondary, Start CTA), nav items, search field, route rows, City Guide filter and sort rows, desktop gem cards, Quick Guide tab, route tags, checkboxes |
 | `radius/s`    | 8px    | Near You box and photo tiles, filter chips, small badges |
-| `radius/md`   | 12px   | Desktop gem cards, City Guide filter and sort rows |
+| `radius/md`   | 12px   | (free; desktop gem cards and City Guide rows moved to 4px on 25 Oct 2026) |
 | `radius/lg`   | 16px   | Phone gem rows, image containers, menu tiles, Quick Guide steps, map markers |
 | `radius/xlg`  | 24px   | Phone route tabs (left corners), drawers, pull-up sheets |
 | `radius/pill` | 999px  | Icon buttons, toggles, dots |
