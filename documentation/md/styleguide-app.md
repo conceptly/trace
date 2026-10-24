@@ -475,7 +475,7 @@ Framer: Start CTA. Live: `.btn-cta`.
 - Background: transparent
 - Border: `1px solid` `--divider-strong`
 - Icon fill: `--content-3`
-- Size: 34×34px
+- Size: 34×34px on the live site; 32×32px in Framer (4px grid, not yet applied to the live CSS)
 - Border radius: 50% (pill)
 - Focus ring: 2px solid focus-ring token
 
@@ -504,7 +504,7 @@ Framer: Start CTA. Live: `.btn-cta`.
 
 #### Route side nav (Map screen)
 - Right-anchored, icon-only buttons
-- Size: 54×54px, border radius `16px 0 0 16px` (rounded left only)
+- Size: 54×48px closed (184px open), border radius `4px 0 0 4px` (rounded left only), padding 8/12, gap 8, 30px icon circle — same spacing as the desktop route rows (25 Oct 2026)
 - Background: `{categoryHex}CC` (dark) / `{categoryHex}DD` (light)
 - Each button has `aria-label="{Route Name} route"`
 - No visible text labels — all labelling through `aria-label` only
@@ -512,6 +512,8 @@ Framer: Start CTA. Live: `.btn-cta`.
 ### Cards
 
 #### Gem card
+Phone list row below. Desktop City Guide card: white, 4px radius (`radius/xs`, 25 Oct 2026), 16:9 photo with a 3px route stripe, 12px body padding, Gem name 16px / Gem address 14px, route tag 8px caps with 6/8/4 padding.
+
 - Background: `--surface-4`
 - Border radius: 16px
 - Box shadow (light mode only): `0 1px 4px rgba(0,0,0,0.08)`
@@ -556,7 +558,7 @@ Each marker is a `<button>` with `aria-label="{Spot Name} — {Category} spot"`.
 - Top-nav pill (all pages): background `rgba(237, 244, 240, 0.15)`, typed text `#FFFFFF`, icon `#D6E3DF`. Fixed values, not theme tokens, because the nav is dark on every page
 - Mobile floating pill (light surface): typed text `#0F2229`
 - Border: `rgba(237, 244, 240, 0.12)` dark / `rgba(45, 72, 85, 0.15)` light
-- Height: 50px; border radius: 16px
+- Height: 40px top-nav pill / 50px mobile floating pill; border radius: 4px (`radius/xs`, 25 Oct 2026; was 16px)
 - Caret colour: `#E7E626` dark / `--content-1` light
 
 #### Search suggestions dropdown
