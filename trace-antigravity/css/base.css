@@ -23,6 +23,12 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Balanced paragraph endings (no one-word last lines). Class rules with
+   white-space: nowrap still win: they're more specific than `p` */
+p {
+  text-wrap: pretty;
+}
+
 /* Typography Classes as per Style Guide */
 
 .h1-screen-title {
