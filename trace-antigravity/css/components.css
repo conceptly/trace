@@ -450,29 +450,10 @@
   line-height: 1.35;
 }
 
-/* Yellow Action Button */
+/* Yellow Action Button (Quick Guide): same look as .btn-primary */
 .btn-yellow-guide {
   width: 100%;
-  background-color: var(--brand-trace);
-  border: 1px solid var(--brand-trace);
-  border-radius: 16px;
-  color: #2d4855;
-  font-family: 'Josefin Sans', sans-serif;
-  font-weight: 600;
-  font-size: 12px;
-  text-transform: uppercase;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 8px 12px;
   margin-top: 4px;
-  cursor: pointer;
-  transition: filter 0.2s ease;
-}
-
-.btn-yellow-guide:hover {
-  filter: brightness(1.1);
 }
 
 .drawer-footer {
@@ -707,42 +688,109 @@ a.breadcrumb-root:hover {
 .spot-actions {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   width: 100%;
   padding-bottom: 24px;
 }
 
-.btn-primary {
-  background-color: var(--cta-cta-default, #e7e626);
-  border: 1px solid var(--cta-cta-focused-ring, #e7e626);
-  border-radius: 16px;
-  padding: 6px 12px;
+/* CTA buttons (Figma 4015:16415 Primary, 4015:16430 Secondary; styleguide §7).
+   12/24 padding on the 4px grid, plus 2px at the top as the optical offset
+   for Josefin's high-sitting caps (same as the Framer "Label box"). */
+.btn-primary,
+.btn-yellow-guide,
+.btn-secondary {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  cursor: pointer;
+  padding: 14px 24px 12px;
+  border: 1px solid var(--cta-ring);
+  border-radius: 24px;
   font-family: 'Josefin Sans', sans-serif;
-  font-weight: 600;
-  font-size: 12px;
-  color: var(--cta-cta-text, #2d4855);
-  text-transform: uppercase;
+  font-size: 16px;
+  line-height: 1;
+  text-transform: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
 }
 
+.btn-primary svg,
+.btn-yellow-guide svg,
+.btn-secondary svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin-top: -2px; /* undo the optical offset for the icon */
+}
+
+/* Primary: yellow */
+.btn-primary,
+.btn-yellow-guide {
+  background-color: var(--cta-default);
+  color: var(--cta-text);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.btn-primary:hover,
+.btn-yellow-guide:hover {
+  background-color: var(--cta-hover);
+  border-color: var(--cta-focused-border);
+  box-shadow: var(--cta-shadow-hover);
+}
+
+.btn-primary:active,
+.btn-yellow-guide:active {
+  background-color: var(--cta-default);
+  border-color: var(--cta-focused-border);
+  color: var(--cta-focused-border);
+  box-shadow: var(--cta-shadow-pressed);
+}
+
+.btn-primary:disabled,
+.btn-yellow-guide:disabled {
+  background-color: var(--cta-disabled);
+  border-color: var(--cta-default);
+  color: var(--cta-text);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* Secondary (light surfaces: the spot drawer) */
 .btn-secondary {
-  background-color: var(--text-text-primary-glass, rgba(237, 244, 240, 0.25));
-  border: 1px solid var(--cta-cta-default, #e7e626);
-  border-radius: 16px;
-  padding: 6px 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  cursor: pointer;
-  font-family: 'Josefin Sans', sans-serif;
+  background-color: var(--cta-secondary-fill);
+  color: var(--cta-text);
   font-weight: 400;
-  font-size: 12px;
-  color: var(--backgrounds-bg-card, #2d4855);
+  letter-spacing: 0;
+}
+
+.btn-secondary:hover {
+  background-color: var(--cta-hover);
+  border-color: var(--cta-default);
+  box-shadow: var(--cta-shadow-hover);
+}
+
+.btn-secondary:active {
+  background-color: var(--cta-hover);
+  border-color: var(--cta-focused-border);
+  color: var(--cta-focused-border);
+  box-shadow: var(--cta-shadow-pressed-secondary);
+}
+
+.btn-secondary:disabled {
+  background-color: var(--cta-secondary-disabled);
+  border-color: var(--cta-secondary-disabled-border);
+  color: var(--cta-ring);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.btn-primary:focus-visible,
+.btn-yellow-guide:focus-visible,
+.btn-secondary:focus-visible {
+  outline: 2px solid var(--cta-focused-border);
+  outline-offset: 2px;
+  border-color: var(--cta-focused-border);
 }
 
 /* User Location Control Stylings */

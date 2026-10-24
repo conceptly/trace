@@ -572,7 +572,7 @@ document.addEventListener('routeFilterChange', (e) => {
         const iconImg = ctaBtn.querySelector('.cta-icon img');
         
         if (titleEl) {
-            titleEl.textContent = hasData ? `START ${routeName.toUpperCase()} ROUTE` : `Select a route to begin!`;
+            titleEl.textContent = hasData ? `Start ${routeName} route` : `Select a route to begin!`;
             titleEl.style.color = '#FFFFFF';
         }
         

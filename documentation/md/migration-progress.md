@@ -169,6 +169,7 @@ Fixes still land on the current site until cutover. Port each one to Framer too.
 | 23 Oct 2026 | Search input text weight 300 → 400 | `d7b4ea8` | ⬜ |
 | 23 Oct 2026 | Search placeholder removed; `aria-label` as the accessible name | `4f61806` | ⬜ Framer's pill still shows "Search for spots or routes!" |
 | 23 Oct 2026 | Desktop City Guide card thumbnails keep 16:9 (`aspect-ratio: 16 / 9` instead of a fixed 120px height) | `327d622` | ✅ Gem card uses the Photo component at 16:9 |
+| 24 Oct 2026 | Buttons match the refined Figma / Framer Button (44px, 12/24 padding, 24px radius, 16px Josefin, 18px icons, CTA tokens, hover / pressed / disabled / focus). Typed caps removed: "To the Trace City Guide", "To the guide", Start CTA text (caps kept by CSS) | (this commit) | ✅ already in Framer |
 
 ---
 

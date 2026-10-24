@@ -420,12 +420,15 @@ Allowed exceptions (kept on purpose): optical-offset label wrappers (2–3px top
 ### Buttons
 
 #### Primary CTA
-- Background: `#E7E626`
-- Text: `#1D3240` (ITC Avant Garde Gothic Pro 600, uppercase, tracking `0.1em`)
-- Height: 48px
-- Border radius: 16px
-- Hover: 8% darker background
-- Focus: `outline: 2px solid #E7E626; outline-offset: 2px` (dark) / `outline: 2px solid #1D3240` (light)
+Figma `4015:16415`. Live: `.btn-primary`, `.btn-yellow-guide`. Framer: Button → Primary.
+- Background: `--cta-default` `#E7E626`; border `1px solid --cta-ring` `#7A9A8E`
+- Text: Josefin Sans 500, 16px, tracking `0.02em`, `--cta-text` `#2D4855`. **Sentence case, never typed in caps** ("To the Trace City Guide")
+- Padding: 12px 24px (+2px top as the optical offset), gap 8px, icons 18px. Height: 44px
+- Border radius: 24px
+- Hover: `--cta-hover` `#F2F040`, border `#0D7A82`, shadow `4px 4px 12px rgba(15,34,41,0.33)`
+- Pressed: `#E7E626`, border and label `#0D7A82`, inner shadow `inset 4px 4px 8px rgba(45,72,85,0.33)`
+- Disabled: `rgba(231,230,38,0.5)`, border `#E7E626`
+- Focus: `outline: 2px solid #0D7A82; outline-offset: 2px`, border `#0D7A82`
 
 #### Category CTA (e.g. Artist's Choice)
 - Background: full-saturation category hex
@@ -433,12 +436,20 @@ Allowed exceptions (kept on purpose): optical-offset label wrappers (2–3px top
 - Height: 48px
 - Border radius: 16px
 
-#### Ghost / Secondary
-- Background: transparent
-- Border: `1px solid` `--divider-strong`
-- Text: `--content-3`
-- Height: 40px
-- Border radius: 12px
+#### Secondary (light surfaces)
+Figma `4015:16430`. Live: `.btn-secondary` (spot drawer). Framer: Button → Secondary light.
+- Background: `#F5F9F6`; border `1px solid #7A9A8E`
+- Text: Josefin Sans 400, 16px, `#2D4855`, sentence case
+- Same padding, gap, icon size, height and radius as the Primary CTA
+- Hover: `#F2F040`, border `#E7E626`, same shadow as the Primary hover
+- Pressed: `#F2F040`, border and label `#0D7A82`, inner shadow `inset 2px 2px 8px rgba(45,72,85,0.33)`
+- Disabled: `rgba(235,242,238,0.33)`, border `#CDDBD0`, label `#7A9A8E`
+
+#### Secondary (dark surfaces)
+Framer: Button → Secondary. Transparent fill, `1px solid #E7E626` border, `#EDF4F0` label; hover and pressed as the light Secondary.
+
+#### Start CTA (route selector)
+Caps are a style, not typed text: write "Start Typography route" and let `text-transform: uppercase` do the rest, so screen readers read words, not letters.
 
 #### Icon Button — Default
 - Background: transparent
