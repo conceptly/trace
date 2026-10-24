@@ -1022,8 +1022,8 @@
   .menu-grid .full-width { grid-column: span 2; }
   
   .menu-btn {
-    display: flex; align-items: center; gap: 10px; padding: 12px;
-    border-radius: 16px; border: none; cursor: pointer; text-decoration: none;
+    display: flex; align-items: center; gap: 10px; padding: 8px 12px;  /* Figma RouteItemNav: 8/12, gap 10 */
+    border-radius: 4px; border: none; cursor: pointer; text-decoration: none;
     background-color: var(--surface-4); color: var(--content-1); text-align: left;
   }
   .menu-btn .icon-circle {
@@ -1042,7 +1042,7 @@
   /* Navigate Buttons — matches Figma NavItemHamburgerLines spec */
   .nav-btn {
     background-color: #2d4855;      /* var(--text-body) */
-    border-radius: 16px;
+    border-radius: 4px;              /* Figma: rounded-[4px] */
     padding: 16px;
     gap: 8px;                        /* Figma: gap-[8px] */
     align-items: center;
@@ -1062,12 +1062,13 @@
   .nav-btn .text { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }  /* Figma: gap-[4px] */
   .nav-btn .title {
     font-family: 'Josefin Sans', sans-serif;
-    font-size: 20px;                  /* Framer "Label L" (was Figma 16px Regular caps) */
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    text-transform: none;
+    font-size: 16px;                  /* Figma "Nav Item Hamburger": Regular 16, caps */
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: uppercase;
     color: #f5f9f6;                   /* Figma: var(--bg-base) */
     line-height: 1;
+    padding: 3px 0 1px;               /* Figma optical offset */
     white-space: nowrap;
   }
   .nav-btn .subtitle {
@@ -1076,6 +1077,7 @@
     font-weight: 400;
     color: #cddbd0;                   /* Figma: var(--bg-elevated) */
     line-height: 1.2;
+    white-space: nowrap;              /* Figma: one line */
   }
 
   /* Active state — brand-trace yellow bg, dark icon/text */
@@ -1102,22 +1104,26 @@
   .route-btn.street-art { background-color: rgba(126, 48, 144, 0.75); }
   .route-btn.artists-pick { background-color: rgba(13, 122, 130, 0.75); }
   .route-btn .icon-circle { background-color: rgba(235, 242, 238, 0.33); color: white; }
+  .route-btn .title { font-size: 16px; font-weight: 500; line-height: 1.35; }  /* Figma: Josefin Medium 16 */
   /* Active tap state: brighten + add inset ring */
   .route-btn.active { filter: brightness(1.25); box-shadow: inset 0 0 0 2px rgba(255,255,255,0.45); }
   
   /* Contact / Links Buttons */
   .contact-btn { 
     background-color: rgba(45, 72, 85, 0.5); 
-    border-radius: 12px; 
-    padding: 10px 12px; 
+    border-radius: 8px;               /* Figma: rounded-[8px] */
+    padding: 4px 8px;                 /* Figma: px-8 py-4 */
+    gap: 4px; 
     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     border: 1px solid transparent;
   }
-  .contact-btn .icon-circle { background: transparent; width: 24px; height: 24px; margin-right: -4px;}
+  .contact-btn .icon-circle { background: transparent; width: 24px; height: 24px; }
   .contact-btn .title { 
-    font-family: 'Josefin Sans', sans-serif; 
-    font-size: 14px; 
-    font-weight: 400; 
+    font-family: 'Roboto Slab', serif;  /* Figma: Roboto Slab Light 15 */
+    font-size: 15px; 
+    font-weight: 300; 
+    line-height: 1.2;
+    padding: 1px 0 3px;               /* Figma optical offset (Roboto sits low) */
     color: var(--content-1);
     transition: color 0.2s ease;
   }

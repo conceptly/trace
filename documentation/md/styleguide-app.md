@@ -307,7 +307,7 @@ The Framer text styles are the source of truth while the font pair is Josefin Sa
 | Style | Spec | Used for (live selector) |
 |---|---|---|
 | Section | Josefin Bold 20px, 0em, 120% | Spot drawer headings (`.spot-section h3`) |
-| Label L | Josefin Medium 20px, 0.02em, 100% | Sidebar route names (`.route-name`), menu tile titles (`.nav-btn .title`), Near You title |
+| Label L | Josefin Medium 20px, 0.02em, 100% | Sidebar route names (`.route-name`), Near You title. The mobile menu tiles follow Figma's "Nav Item Hamburger" instead (Josefin Regular 16px caps) |
 | Label M | Josefin SemiBold 14px, 0em, uppercase | Nav items (`.nav-item`), route pills |
 | CTA title | Josefin Medium 18px, 0em, 120%, title case | Start CTA (`.cta-title`), "Start Typography Route" |
 | Spot meta | Josefin Light 14px, 120% | Author, year, address (`.spot-subtitle`, `.spot-location`) |
