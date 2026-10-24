@@ -58,6 +58,14 @@ body.about-page {
     overflow-x: hidden;
 }
 
+/* Photo-strip links jump to their section; keep headings clear of the sticky nav */
+html { scroll-behavior: smooth; }
+.about-section { scroll-margin-top: 72px; }
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+}
+
 /* ── Breadcrumb Bar ───────────────────────────────────────────────────────── */
 
 .about-breadcrumb {
@@ -577,14 +585,22 @@ body.about-page {
         object-position: center 20%; /* Author photo — favour face */
     }
 
-    .about-hero-strip-item:hover img {
+    .about-hero-strip-item:hover img,
+    .about-hero-strip-item:focus-visible img {
         transform: scale(1.05);
+    }
+
+    .about-hero-strip-item:focus-visible {
+        outline: 2px solid var(--brand-trace, #e7e626);
+        outline-offset: -2px;
     }
 
     .about-strip-label {
         position: absolute;
         bottom: 12px;
-        left: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        white-space: nowrap;
         font-family: 'Josefin Sans', sans-serif;
         font-weight: 500;
         font-size: 14px;
