@@ -484,8 +484,27 @@ html { scroll-behavior: smooth; }
     transition: color 0.15s ease;
 }
 
-.about-link-item:hover {
-    color: var(--brand-trace);
+/* Figma Link Primary states on the dark card: hover = text-secondary
+   (desktop component only, so pointer devices only), pressed = text-primary
+   with the label's 4px bottom padding dropped (text sits 2px lower) */
+@media (hover: hover) {
+    .about-link-item:hover {
+        color: #8aadb5;
+    }
+}
+
+.about-link-item:active {
+    color: #edf4f0;
+}
+
+.about-link-item:active .about-link-text {
+    transform: translateY(2px);
+}
+
+.about-link-item:focus-visible {
+    outline: 2px solid var(--brand-trace, #e7e626);
+    outline-offset: 2px;
+    border-radius: 2px;
 }
 
 /* 18px icon frame; the glyph is a mask so it takes the link colour on hover */
