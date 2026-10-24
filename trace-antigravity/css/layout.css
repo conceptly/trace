@@ -698,7 +698,7 @@
 
   .route-wrapper {
     background-color: var(--route-bg);
-    border-radius: 16px 0 0 16px;  /* Figma: rounded-bl-[16px] rounded-tl-[16px] */
+    border-radius: 24px 0 0 24px;  /* Framer Route tab: half-pill on the 48px height */
     height: 48px;                  /* Figma: h-[48px] */
     max-width: 54px;               /* Figma: w-[54px] closed (icon + padding only) */
     width: max-content;
@@ -708,6 +708,9 @@
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     margin: 0; padding: 0; border: none;
   }
+
+  /* The inner button follows the tab's shape (its desktop radius is 4px) */
+  .route-wrapper .route-item { border-radius: inherit; }
 
   .route-wrapper.mobile-open {
     max-width: 184px;  /* Figma: w-[184px] open */
