@@ -404,12 +404,12 @@ body.city-guide-page .spot-drawer .spot-drawer-content {
 
   .sidebar-section-label {
     font-family: 'Josefin Sans', sans-serif;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #5a8a95;
-    margin-bottom: 10px;
+    color: var(--divider-strong);
+    margin-bottom: 12px;
   }
 
   /* Route filter buttons */
