@@ -387,12 +387,14 @@ Device frame (52px) is a presentation value only, not a UI token.
 |---------|------------|----------------------------------|
 | Figma   | Number variables in a `Space` collection | A `Layout` collection with Desktop / Tablet / Phone modes, aliasing the primitives |
 | Webflow | Size variables (`space/…`, `radius/…`) in the Base collection | A `Layout` collection with breakpoint modes, aliasing the primitives (as in the portfolio) |
-| Framer  | No project-wide spacing variables (Framer's shared styles are colour styles and text styles only). Use the scale by value | Breakpoint variants hold the per-breakpoint values; components expose **Padding**, **Gap** and **Radius** variables so a component's spacing is set in one place and shown as a control on every instance |
+| Framer  | No project-wide spacing variables (Framer's shared styles are colour styles and text styles only). Use the scale by value | Breakpoint variants hold the per-breakpoint values. Components expose **Number** variables: **Radius** and **Gap** wherever the value is a single number, **Padding** only where it is the same on all four sides (Guide step, Welcome card, Menu tile, Gem card body). Mixed padding such as 8/12 stays a fixed value, because Framer only binds a single number to padding |
 | Code (`trace-antigravity/`) | CSS custom properties `--space-4` … `--space-96`, `--radius-xs` … | `--spacing-gutter` etc., redefined inside each breakpoint's media query |
 
 ### Audit: off-grid values to fix
 
-Values found in the live CSS and the Framer build that are not on the 4px grid. Fix them while refining each page.
+Values found in the live CSS and the Framer build that are not on the 4px grid. **Framer: fixed on 24 Oct 2026** (all components, Home and City Guide). The live CSS still has them; fix those while refining each page.
+
+Allowed exceptions (kept on purpose): optical-offset label wrappers (2–3px top padding, and the spot drawer route tag at 3/1), the Day/Night knob clearance (2px), strokes and bars (0.5–1px borders, 3px route stripes and note bars), logo artwork widths, widths derived from the 390px phone frame (390, 358 = 390 − 2×16, 163 = menu tile column), and the pill radius 999px.
 
 | Value | Where | Becomes |
 |-------|-------|---------|
@@ -402,7 +404,11 @@ Values found in the live CSS and the Framer build that are not on the 4px grid. 
 | 2px, 3px, 7px, 9px, 13px | tag padding (3/7), card body bottom (13) | 4 / 8 / 12 |
 | 22px, 46px, 54px | misc. sizes | 20 or 24, 48, 56 |
 | 418px / 417px | map sidebar, spot drawer | 416px |
-| 34px | icon buttons | 32px desktop, 44px touch target on phone |
+| 34px | icon buttons, menu button | 32px desktop (done in Framer); 44px touch target on phone still to do |
+| 42px | locate button | 44px (done in Framer) |
+| 30px | menu tile icon circle | 32px (done in Framer) |
+| 6px / 3px | page dots size, radius and gap | 8px dots, 4px radius, 8px gap (done in Framer) |
+| 9/14, 10/12, 14/0 | nav item, contact tile, side tab padding | 8/16, 8/12, 12/0 (done in Framer) |
 | 28px | Framer City Guide group gap, sidebar section gap | 32 (`spacing/group`) |
 | 12/14/13 | Framer gem card body padding | 12 all round (`spacing/inset`) |
 | 7/12/8 | Framer and live route chip padding | 8/12 |
