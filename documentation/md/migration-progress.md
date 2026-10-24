@@ -4,7 +4,7 @@ Tracks the move from the static build (`trace-antigravity/`, Netlify) to Framer.
 
 **Status key:** ✅ done · 🟡 in progress · ⬜ not started · ⏸ paused
 
-**Last updated:** 23 Oct 2026
+**Last updated:** 24 Oct 2026
 
 ---
 
@@ -29,7 +29,7 @@ Tracks the move from the static build (`trace-antigravity/`, Netlify) to Framer.
 | 2 | Foundations (styles, components, icons) | ✅ |
 | 3 | Home page (desktop, tablet, phone) | 🟡 |
 | 4 | Content migration (62 spots, 5 routes) | ⬜ |
-| 5 | Remaining pages and behaviour | ⬜ |
+| 5 | Remaining pages and behaviour | 🟡 |
 | 6 | QA | ⬜ |
 | 7 | Cutover to tracedesign.art | ⬜ |
 | 8 | After cutover (rollback window, archive) | ⬜ |
@@ -80,6 +80,7 @@ One step at a time. Each step ends with screenshots, and Etual refines the desig
 | 1 | **Photo**: Image, Radius; ratio variants 1:1 / 4:3 / 3:2 / 16:9 (fill width, height from the ratio). Used in Place card (3:2, radius 0) and the place page hero (16:9, radius 16). Alt text comes from the image itself | ✅ built, waiting for design review |
 | 2 | **Buttons**: Button gets an Outline variant (with hover and pressed) and an On Click event; new **Icon button** (34px; Default / Active / hover / pressed; Icon dropdown; On Click event). Phone search uses it | ✅ built, waiting for design review |
 | 2b | **Button states to Figma** (`4015:16415`, `4015:16430`): Primary 36px / Secondary 30px, new 12px "Button" text style; hover = yellow + elevated shadow; pressed = inner shadow + teal `#0D7A82` border, teal label; Primary disabled (50% yellow) and Secondary disabled (card glass). Secondary keeps a light label on dark backgrounds. Old dark Secondary removed. New **Side tab** (Quick Guide tab, `4015:16764`: 36px → 56px on hover, yellow border when pressed) and **Locate button** (`4330:7093`, 42px; elevated hover, inset pressed). Hover and the drawer opening checked in Preview | ✅ built, waiting for design review |
+| 2b++ | **Button refinements** (Figma `4015:16415`, `4015:16430`, 24 Oct): padding 12/24, gap 8, radius 24, 1px borders, 18px icons; text styles **CTA Primary** (Josefin Medium 16, 0.02em; was "Button") and **CTA Secondary** (Josefin Regular 16). New colour tokens in Brand: CTA hover `#F2F040`, CTA focused border `#0D7A82`, CTA focused ring `#7A9A8E`, CTA disabled (50% yellow), Background base `#F5F9F6`, Card glass, Divider light `#CDDBD0`. Primary: default ring border, hover = CTA hover + teal border + shadow, pressed = teal border/text + inner shadow, disabled 50%. **Secondary light** = Figma Secondary (bg-base fill, ring border), with a new **Secondary light disabled**. The dark-background **Secondary** got the same sizes and states but keeps its light label and yellow border | ✅ built, waiting for design review |
 | 2b+ | **Button leading icon**: new properties **Show leading icon** (off by default) and **Leading icon** (dropdown, default Back). Existing ones renamed **Show trailing icon** / **Trailing icon**. The leading icon follows the trailing icon's colour in every state. Used on the drawer's "Back to the map!" (leading back arrow, no trailing icon) | ✅ built, waiting for design review |
 | 2c | **Adobe fonts**: `AdobeFonts.tsx` loads kit `evd2cyp` and swaps the text styles to ITC Avant Garde Gothic Pro and Adelle on the published site and in Preview (checked in Preview). On Home and Place pages. Still needed: add Avant Garde Medium and Demi to the kit; re-check the 3px label offset with the real fonts; drag `AdobeFonts.tsx` into **1 Foundations** | ⏸ paused (23 Oct): both "Adobe fonts (keep)" layers are hidden and the code fonts are back to Josefin Sans / Roboto Slab while Etual tests the original pair. To turn it back on, show the two layers again and put the Adobe families first in `TraceMap.tsx` and `RouteControls.tsx` |
 | 2d | **Start CTA states** (Figma `4008:15091` + live build): live sizes (44px, 16px radius, 36px circle) and type (new "CTA title" 13px Medium caps, "CTA subtitle" 11px Light); Figma hover (yellow glow, yellow text) and pressed (yellow border, yellow text, inner shadow); live **Started** state per route (white border + soft ring, yellow title) with tap-again to hide the path (`toggleRoute()` in TraceStore); keyboard focus ring and Enter/Space from the override. Tested in Preview. Not built: the "Next spot" in-route variant | ✅ built, waiting for design review |
@@ -111,9 +112,21 @@ Desktop 1280+ · Laptop 992–1279 (new; search field 240px) · Tablet 768–991
 - ⬜ Artist's Pick route data (still "Coming soon" on the live site)
 - ⬜ Spot-check every spot against the live map: route, coordinates, slug, photo
 
-## 5. Remaining pages and behaviour ⬜
+## 5. Remaining pages and behaviour 🟡
 
-- ⬜ City Guide page: multi-select route filters, A–Z / Z–A / proximity sort, search with suggestions, "See more". Desktop card photos use the Photo component at 16:9 (as on the live site since `327d622`)
+- 🟡 City Guide page `/city-guide` (24 Oct, built from the live build and Figma mobile `2734:12063`; waiting for design review)
+  - Made by duplicating Home, so the nav, menu and breakpoints carry over. City Guide is the active nav item; nav items and menu tiles link Map → `/` and City Guide → `/city-guide`; the spot drawer's "To the Trace City Guide" button links here
+  - Desktop / Laptop / Tablet: dark 280px sidebar (240px on Tablet) with **Filter row** ×6 (All Routes + 5 routes, counts, checkbox) and **Sort option** ×4 (Top Picks, Proximity to you, A → Z, Z → A), "Showing N gems" and Clear filters. Light content: "City Guide" title, one group per route (dot, name, "N gems", 1px `#BDD0D5` rule) with a CMS grid of **Gem card** (16:9 Photo, 3px route stripe, name, address, route tag). Columns fill at 220px minimum
+  - Phone: title with "Sort by …" (tap to cycle Top Picks / A → Z / Z → A), **Route chip** row (All + 5 routes, scrolls sideways), divider, one CMS list of **Gem row** (4px route strip, 116px square photo, caps title, route tag, 3-line description)
+  - Cards link to the CMS place page (the drawer stays on the map, the page belongs to the guide)
+  - `GuideControls.tsx`: multi-select route filters (none or all selected = All), counts, Clear filters, sort. A–Z / Z–A are extra copies of each CMS list sorted by name; the current sort shows one copy. On the canvas all three copies are visible, so each group looks tripled there
+  - New text styles: Gem name, Gem address, Gem tag, Gem title, Gem about, Chip, Filter label, Filter count, Sidebar label. Components are in the "9 City Guide" asset folder
+  - Tested in Preview (desktop): filters, counts, Z → A, card → place page. Phone checked on the canvas only
+  - ⬜ Proximity sort (cards need coordinates; it shows the Top Picks order for now)
+  - ⬜ "See more" per group (not needed with 6 spots)
+  - ⬜ Search with suggestions
+  - ⬜ Empty state for Artist's Pick (0 gems; the group shows its header only)
+  - ⬜ Back arrow before the title on desktop (live: "‹ CITY GUIDE")
 - ⬜ Place detail page: final design (breadcrumb, sections, next/previous)
 - ⬜ About page
 - ⬜ Profile page (gamification teaser)
@@ -154,7 +167,7 @@ Fixes still land on the current site until cutover. Port each one to Framer too.
 | 23 Oct 2026 | Search bar and suggestions contrast (styleguide §10.7) | `3e3c1f7` | ⬜ Framer's pill is still a 32% white fill; switch it to the 15% styleguide fill and `#D6E3DF` placeholder |
 | 23 Oct 2026 | Search input text weight 300 → 400 | `d7b4ea8` | ⬜ |
 | 23 Oct 2026 | Search placeholder removed; `aria-label` as the accessible name | `4f61806` | ⬜ Framer's pill still shows "Search for spots or routes!" |
-| 23 Oct 2026 | Desktop City Guide card thumbnails keep 16:9 (`aspect-ratio: 16 / 9` instead of a fixed 120px height) | `327d622` | ⬜ when the City Guide page is built |
+| 23 Oct 2026 | Desktop City Guide card thumbnails keep 16:9 (`aspect-ratio: 16 / 9` instead of a fixed 120px height) | `327d622` | ✅ Gem card uses the Photo component at 16:9 |
 
 ---
 
@@ -167,3 +180,5 @@ Fixes still land on the current site until cutover. Port each one to Framer too.
 | 23 Oct 2026 | The left panel follows the live build where it deliberately differs from the Figma: glyphs on inactive routes, 75% tint on the selected row, small section labels, 418px sidebar |
 | 23 Oct 2026 | Mobile inactive route tabs use solid lighter colours instead of opacity (styleguide accessibility rule) |
 | 23 Oct 2026 | Place pages replace the spot drawer for now |
+| 24 Oct 2026 | City Guide cards open the CMS place page, not a drawer |
+| 24 Oct 2026 | City Guide sort uses CMS-sorted copies of each list (Framer-native) instead of reordering in code |
