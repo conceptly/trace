@@ -698,7 +698,7 @@
 
   .route-wrapper {
     background-color: var(--route-bg);
-    border-radius: 24px 0 0 24px;  /* Framer Route tab: half-pill on the 48px height */
+    border-radius: 4px 0 0 4px;    /* 4px grid, like the desktop route rows */
     height: 48px;                  /* Figma: h-[48px] */
     max-width: 54px;               /* Figma: w-[54px] closed (icon + padding only) */
     width: max-content;
@@ -721,8 +721,8 @@
   }
 
   .route-item { 
-    display: flex; align-items: center; gap: 12px;
-    height: 48px; padding: 9px 12px;  /* Figma: px-[12px], centers icon in 48px height */
+    display: flex; align-items: center; gap: 8px;
+    height: 48px; padding: 8px 12px;  /* same as the desktop route rows; icon centred in 48px */
     background: transparent; border: none; width: 100%; cursor: pointer;
   }
   .route-item:hover, .route-wrapper.active .route-item { border: none; background: transparent; box-shadow: none; }
