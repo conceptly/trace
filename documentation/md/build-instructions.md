@@ -1345,6 +1345,7 @@ Upgrade to Pro only when a third collection is needed (articles, artists, a real
 - **Component dropdowns:** Framer gives a component's own dropdown options random ids. `Icon.tsx` maps the Button's "Icon" dropdown back to icon names through its `ALIASES` table. Update that table if the Button's options change.
 - **CMS option fields:** the Places "Route" option field passes option ids to code. The id → route key table lives in `TraceMap.tsx` and `NearYou.tsx`; keep both in step if route options change.
 - **Contrast:** no semi-transparent text, and inactive states use solid colours (styleguide §9). The mobile route tabs' "inactive" variants follow this.
+- **Brand fonts:** the text styles use Josefin Sans and Roboto Slab, which the canvas shows. `AdobeFonts.tsx` (placed once per page as "Adobe fonts (keep)") loads Adobe kit `evd2cyp` on the published site and in Preview. It re-declares every text style's font with `itc-avant-garde-gothic-pro` (for Josefin Sans) or `adelle` (for Roboto Slab) first. New pages need their own instance. Fonts named in code (map popup, toast) list the Adobe family first too. The kit loaded on Framer's Preview domain without any domain setup. The text styles use weights 400, 600 and 700, so the kit needs ITC Avant Garde Gothic Pro Medium (500) and Demi (600), or the 600 labels render in Bold.
 
 ### 16.6 Exit strategy
 

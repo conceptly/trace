@@ -407,6 +407,7 @@ font-family: 'Adelle', 'Roboto Slab', Avro, serif;
 - Left edge indicator strip: 14px wide, full category hex, rounded left corners
 - Card is a `<button>` with `aria-label="{title}: {category}. {description}"`
 - Focus ring: 2px solid focus-ring token
+- Desktop City Guide grid card (3 columns): photo on top at a fixed **16:9** ratio (`aspect-ratio: 16 / 9`, cover crop), so its shape stays the same at every screen width
 
 #### Designer's Note card
 - Background (dark): `--surface-4`; (light): `#EEF5F7`

@@ -12,8 +12,8 @@ Tracks the move from the static build (`trace-antigravity/`, Netlify) to Framer.
 
 | What | Where |
 |---|---|
-| Framer test project | "Youthful Scone", project id `BTWkApQ3pJgFVyoNzc31` |
-| Published test site | https://youthful-scone-296021.framer.app (last published before the Home page rebuild; Home changes are unpublished) |
+| Framer project | "Trace.Design" (was "Youthful Scone"), project id `BTWkApQ3pJgFVyoNzc31` |
+| Published test site | https://youthful-scone-296021.framer.app (last published before the Home page rebuild; everything since is unpublished) |
 | Live site (until cutover) | https://tracedesign.art (Netlify, from `main` of `conceptly/trace`) |
 | Spot data (source of truth) | `map-data/csv/*.csv`, `map-data/*.geojson` |
 | Figma | Trace-Toronto file: desktop layout `4007:2`, route list states `4015:15398`, mobile map `2734:11965`, mobile route tabs `2734:12976` |
@@ -71,6 +71,34 @@ Tracks the move from the static build (`trace-antigravity/`, Netlify) to Framer.
 - ⬜ Near You drawer opens and closes
 - ⬜ Locate button follows the drawer height on phone
 
+### Home page component rebuild
+
+One step at a time. Each step ends with screenshots, and Etual refines the design before the next step starts.
+
+| Step | Components | Status |
+|---|---|---|
+| 1 | **Photo**: Image, Radius; ratio variants 1:1 / 4:3 / 3:2 / 16:9 (fill width, height from the ratio). Used in Place card (3:2, radius 0) and the place page hero (16:9, radius 16). Alt text comes from the image itself | ✅ built, waiting for design review |
+| 2 | **Buttons**: Button gets an Outline variant (with hover and pressed) and an On Click event; new **Icon button** (34px; Default / Active / hover / pressed; Icon dropdown; On Click event). Phone search uses it | ✅ built, waiting for design review |
+| 2b | **Button states to Figma** (`4015:16415`, `4015:16430`): Primary 36px / Secondary 30px, new 12px "Button" text style; hover = yellow + elevated shadow; pressed = inner shadow + teal `#0D7A82` border, teal label; Primary disabled (50% yellow) and Secondary disabled (card glass). Secondary keeps a light label on dark backgrounds. Old dark Secondary removed. New **Side tab** (Quick Guide tab, `4015:16764`: 36px → 56px on hover, yellow border when pressed) and **Locate button** (`4330:7093`, 42px; elevated hover, inset pressed). Hover and the drawer opening checked in Preview | ✅ built, waiting for design review |
+| 2b+ | **Button leading icon**: new properties **Show leading icon** (off by default) and **Leading icon** (dropdown, default Back). Existing ones renamed **Show trailing icon** / **Trailing icon**. The leading icon follows the trailing icon's colour in every state. Used on the drawer's "Back to the map!" (leading back arrow, no trailing icon) | ✅ built, waiting for design review |
+| 2c | **Adobe fonts**: `AdobeFonts.tsx` loads kit `evd2cyp` and swaps the text styles to ITC Avant Garde Gothic Pro and Adelle on the published site and in Preview (checked in Preview). On Home and Place pages. Still needed: add Avant Garde Medium and Demi to the kit; re-check the 3px label offset with the real fonts; drag `AdobeFonts.tsx` into **1 Foundations** | ⏸ paused (23 Oct): both "Adobe fonts (keep)" layers are hidden and the code fonts are back to Josefin Sans / Roboto Slab while Etual tests the original pair. To turn it back on, show the two layers again and put the Adobe families first in `TraceMap.tsx` and `RouteControls.tsx` |
+| 2d | **Start CTA states** (Figma `4008:15091` + live build): live sizes (44px, 16px radius, 36px circle) and type (new "CTA title" 13px Medium caps, "CTA subtitle" 11px Light); Figma hover (yellow glow, yellow text) and pressed (yellow border, yellow text, inner shadow); live **Started** state per route (white border + soft ring, yellow title) with tap-again to hide the path (`toggleRoute()` in TraceStore); keyboard focus ring and Enter/Space from the override. Tested in Preview. Not built: the "Next spot" in-route variant | ✅ built, waiting for design review |
+| 2e | **Day/Night toggle** matched to the live build: Day = light `#EBF2EE` pill with the knob (dark, inset shadow) on the moon; Night = dark `#2D4855` pill with the knob (light) on the sun; 0.5px `#CDDBD0` border; 56×28 (24px slots, 16px icons). Hover = Figma yellow border + faint tint on the slot you'd switch to. `withMapModeToggle` switches the map through a shared `useMapMode` store (the map's own Mode setting applies until the toggle is used); keyboard Enter/Space, `role="switch"`. Tested in Preview. Not done: brighter route colours at night (live swaps them), remembering the choice | ✅ built, waiting for design review |
+| 3 | **Top nav**: **Nav item** (Active / Default + hovers; Label, Link), **Search field** (no placeholder), **Day/Night toggle** (Day / Night, click switches the look only), **Logo** (links home). The nav stays a page frame with breakpoint overrides; turning it into one Top nav component waits for the second page | ✅ built, waiting for design review |
+| 4 | **Quick Guide**: **Info row**, **Guide step** (Step, Heading, Highlight, 2 rows, optional button), **Guide drawer** (340px, close button, ©). Opens as a page overlay from the Quick Guide tab, with a dimmed backdrop that closes it. Tested in Preview. "To the guide" has no link until the City Guide page exists | ✅ built, waiting for design review |
+| 4b | **Quick Guide matched to the live build** (Figma `2734:11961`): drawer and steps restyled from the live CSS (title 16px light caps, plain ×, "Step N" 11px, 16px headings with a yellow rule, 80px label column, Roboto Slab Light text, no rule above ©). New text styles: Drawer title, Step label, Step heading, Info label, Info text, Footnote. Phone: Side tab "Left" variant on the left edge opens the drawer full screen. Tested in Preview on phone | ✅ built, waiting for design review |
+| 5 | **Welcome card** (not on the live site; turned off on phone, kept for later) (3 pages: welcome, Step 1, Step 2; Next → Next → Let's go; × and Close the Window) and **Page dots** (1 / 2 / 3). Shown on phone over the map through a **Welcome layer** component (Open / Closed). It shows on every visit; remembering that it was closed needs a small code override. Pages 2–3 copy is a draft | 🟡 needs a Preview check |
+| 6 | **Mobile menu**: **Menu tile** (Nav / Nav active / Route / Contact; Title, Subtitle, Icon, Tint, Link, On Click) and a full-screen menu overlay opened by the menu icon. Route tiles select the route and close the menu; Artist's Pick shows the "under construction" note. Tested in Preview | ✅ built, waiting for design review |
+| 7 | **Near You drawer** (phone) is now a component with Open / Closed variants; tap the header to toggle. Starts closed. Tested in Preview | ✅ built, waiting for design review |
+| 8 | **Spot drawer** (Figma `4187:31914` desktop, `2734:12541` mobile, values from the live CSS): canvas component bound to the Places CMS — breadcrumb with back arrow and route tag, title with route bar, author/year, address, 16:9 photo, About, Interesting fact, Designer's note box, optional Clue box, "TO THE TRACE CITY GUIDE" + "Back to the map!" (new Button variant **Secondary light**). New text styles: Spot title, Spot meta, Spot body, Breadcrumb, Route tag. New CMS fields **Route name** and **Route colour** (filled for the 6 test places; include them in the import). Map: desktop marker click toggles the 417px drawer, phone tap shows the popup whose link opens a full-screen drawer; Near You photos fly the map there (offset for the drawer) and open it; the Quick Guide tab hides while it's open. **Place page** now uses the same component on a light page (640px, with the Clue). Tested in Preview on desktop and phone. Open points: the guide button links to the place page until a City Guide page exists; Fact/Note show even when empty | ✅ built, waiting for design review |
+| 9 | **Code-driven pieces**: search suggestions, Day/Night switching the map and UI, photo markers, geolocate | ⬜ |
+
+Images drawn by code (Near You tiles, map markers, map popup) follow the Photo component's sizes and radii but can't use the component itself.
+
+### Breakpoints (23 Oct 2026)
+
+Desktop 1280+ · Laptop 992–1279 (new; search field 240px) · Tablet 768–991 · Phone 0–767, matching the live site's 768px phone switch. In Framer a breakpoint's number is where it starts; it runs up to the next one. The map code uses the same 768px switch. The canvas always shows 100vh as 800px, so check real heights in Preview by typing them into its W×H fields: Desktop 1280×720, Laptop 992×640, Tablet 768×954, Phone 390×664.
+
 ## 4. Content migration ⬜
 
 - ⬜ Add a City option field to Places and Routes (Toronto for now)
@@ -85,7 +113,7 @@ Tracks the move from the static build (`trace-antigravity/`, Netlify) to Framer.
 
 ## 5. Remaining pages and behaviour ⬜
 
-- ⬜ City Guide page: multi-select route filters, A–Z / Z–A / proximity sort, search with suggestions, "See more"
+- ⬜ City Guide page: multi-select route filters, A–Z / Z–A / proximity sort, search with suggestions, "See more". Desktop card photos use the Photo component at 16:9 (as on the live site since `327d622`)
 - ⬜ Place detail page: final design (breadcrumb, sections, next/previous)
 - ⬜ About page
 - ⬜ Profile page (gamification teaser)
@@ -125,7 +153,8 @@ Fixes still land on the current site until cutover. Port each one to Framer too.
 |---|---|---|---|
 | 23 Oct 2026 | Search bar and suggestions contrast (styleguide §10.7) | `3e3c1f7` | ⬜ Framer's pill is still a 32% white fill; switch it to the 15% styleguide fill and `#D6E3DF` placeholder |
 | 23 Oct 2026 | Search input text weight 300 → 400 | `d7b4ea8` | ⬜ |
-| 23 Oct 2026 | Search placeholder removed; `aria-label` as the accessible name | see git log | ⬜ Framer's pill still shows "Search for spots or routes!" |
+| 23 Oct 2026 | Search placeholder removed; `aria-label` as the accessible name | `4f61806` | ⬜ Framer's pill still shows "Search for spots or routes!" |
+| 23 Oct 2026 | Desktop City Guide card thumbnails keep 16:9 (`aspect-ratio: 16 / 9` instead of a fixed 120px height) | `327d622` | ⬜ when the City Guide page is built |
 
 ---
 
