@@ -387,7 +387,7 @@ Device frame (52px) is a presentation value only, not a UI token.
 |---------|------------|----------------------------------|
 | Figma   | Number variables in a `Space` collection | A `Layout` collection with Desktop / Tablet / Phone modes, aliasing the primitives |
 | Webflow | Size variables (`space/…`, `radius/…`) in the Base collection | A `Layout` collection with breakpoint modes, aliasing the primitives (as in the portfolio) |
-| Framer  | No project-wide spacing variables (Framer's shared styles are colour styles and text styles only). Use the scale by value | Breakpoint variants hold the per-breakpoint values. Components expose **Number** variables: **Radius** and **Gap** wherever the value is a single number, **Padding** only where it is the same on all four sides (Guide step, Welcome card, Menu tile, Gem card body). Mixed padding such as 8/12 stays a fixed value, because Framer only binds a single number to padding |
+| Framer  | No project-wide spacing variables (Framer's shared styles are colour styles and text styles only). Use the scale by value | Breakpoint variants hold the per-breakpoint values. Spacing lives as **plain values inside each component**: editing a component's padding, gap or radius updates every instance. Don't bind spacing to component Number variables: tested 25 Oct 2026, a changed variable shows on the canvas but Preview and the published site keep the value from when it was bound |
 | Code (`trace-antigravity/`) | CSS custom properties `--space-4` … `--space-96`, `--radius-xs` … | `--spacing-gutter` etc., redefined inside each breakpoint's media query |
 
 ### Audit: off-grid values to fix
