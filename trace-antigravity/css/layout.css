@@ -526,13 +526,14 @@
 }
 
 /* Hide the desktop-only nearby section on mobile (shown on desktop by default) */
-/* Desktop Near You header (Framer: "Near You" in Section, "N spots" in Caption, one row) */
+/* Desktop sidebar headings (Framer: "Explore the routes" and "Near You" in Section, counts in Caption) */
 #desktop-nearby .nearby-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
+#routes-heading,
 #desktop-nearby-heading {
   font-family: 'Josefin Sans', sans-serif;
   font-size: 20px;
@@ -542,6 +543,15 @@
   text-transform: none;
   color: var(--content-3);
   padding-top: 3px; /* optical offset */
+}
+
+#routes-heading {
+  margin-bottom: 12px;
+}
+
+/* Framer Near you: 12px between the header and the photos box */
+#desktop-nearby .nearby-grid {
+  margin-top: 12px;
 }
 
 #desktop-spots-count {
