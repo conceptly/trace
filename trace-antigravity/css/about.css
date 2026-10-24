@@ -518,6 +518,34 @@ body.about-page {
    DESKTOP RESPONSIVE — ≥ 769px
    ───────────────────────────────────────────────────────────────────────────── */
 
+/* ── Phone: Figma mobile About (2734:12285) ─────────────────────────────
+   Desktop keeps the Pinegrow values above / in the desktop block below. */
+@media (max-width: 768px) {
+    .about-title-block { padding: 24px 16px; }
+    .about-trace-subtitle { font-size: 18px; letter-spacing: 0.72px; }
+    .about-tags { gap: 8px; }  /* tags wrap to a second line on phones narrower than ~400px */
+    .about-tag { font-size: 14px; text-transform: none; }
+
+    .about-mission-card { padding: 12px; gap: 4px; }
+    .about-card-label { font-size: 18px; letter-spacing: 0.72px; }
+    .about-card-body { font-size: 15px; }
+
+    .about-route-item { border-radius: 0 8px 8px 0; }
+    .about-route-name { font-size: 18px; letter-spacing: 0.72px; text-transform: none; }
+    .about-route-count {
+        font-size: 14px;
+        font-weight: 400;
+        padding: 2px 8px;
+        border-radius: 4px;
+        color: var(--count-color, #2d4855);
+    }
+
+    .about-difference-card { padding: 16px; }
+    .about-ecosystem-card { padding: 16px; }
+    .about-author-card { padding: 16px; gap: 16px; }
+    .about-links-grid { grid-template-columns: 1fr; gap: 8px; }
+}
+
 @media (min-width: 769px) {
 
     .about-main {
