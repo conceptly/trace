@@ -273,7 +273,7 @@ const geojsonArchitecture =
                 "Interesting Fact": "The famous red doors weren't originally red; they were painted in the 1900s to make the building stand out in the city's industrial smog.",
                 "Designer Note": "A masterclass in 'Acoustic Logic.' The floating glass bridges allow the original masonry to breathe while providing a modern, transparent 'skin' for movement.",
                 "Clue / Hint": "Look for the floating glass bridges hugging the old red brick.",
-                "Route": "Artist's Pick"
+                "Route": "Architecture"
             },
             "id": 15
         },
@@ -290,7 +290,7 @@ const geojsonArchitecture =
                 "Interesting Fact": "The South Market building was originally the city's second city hall before being fully converted into a market space in 1902.",
                 "Designer Note": "A study in 'Structural Layering.' The lower levels still reveal the stone foundations of the original city hall, while the steel trusses represent Victorian-era engineering peaks.",
                 "Clue / Hint": "Find the massive brick archways where the city's first council used to meet.",
-                "Route": "Artist's Pick",
+                "Route": "Architecture",
                 "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1776401818/st-lawrence-1_q2h21n.jpg"
             },
             "id": 16

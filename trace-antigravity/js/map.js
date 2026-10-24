@@ -173,11 +173,6 @@ function loadGeoJSONData(geojsonData, fallbackCategory) {
     if (!geojsonData || !geojsonData.features) return;
     
     geojsonData.features.forEach((feature, index) => {
-        // Artist's Pick is hidden until its route is ready (25 Oct 2026). Some spots are tagged
-        // with a straight apostrophe, so match both forms. Skipping them here also keeps them out of search.
-        const route = feature.properties && feature.properties.Route;
-        if (route && /^Artist['’]s Pick$/.test(route)) return;
-
         let cssClass;
         if (feature.properties && feature.properties.Route) {
             cssClass = routeClassNames[feature.properties.Route] || fallbackCategory;
