@@ -246,14 +246,15 @@ body.mobile-search-is-open .city-guide-content {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 4px 6px;
+  padding: 7px 8px 4px; /* Framer Gem row tag: 4/8 plus optical offset */
   border-radius: 4px;
   align-self: flex-start;
 }
 .gem-route-tag p {
-  font-family: 'Roboto Slab', serif;
+  font-family: 'Josefin Sans', sans-serif; /* Framer "Route tag": 12px SemiBold caps, 0.02em */
   font-size: 12px;
-  font-weight: 400;
+  font-weight: 600;
+  letter-spacing: 0.02em;
   color: #ebf2ee;
   text-transform: uppercase;
   margin: 0;
@@ -771,25 +772,25 @@ body.city-guide-page .spot-drawer .spot-drawer-content {
   }
 
   .gem-card-body {
-    padding: 12px 14px 13px;
+    padding: 12px;
   }
 
   .gem-card-name {
     font-family: 'Josefin Sans', sans-serif;
-    font-size: 13px;
+    font-size: 16px; /* Framer "Gem name" */
     font-weight: 700;
     color: #1d3240;
-    letter-spacing: 0.01em;
-    line-height: 1.25;
-    margin-bottom: 3px;
+    letter-spacing: 0.02em;
+    line-height: 1.3;
+    margin-bottom: 4px;
   }
 
   .gem-card-location {
     font-family: 'Josefin Sans', sans-serif;
-    font-size: 10px;
+    font-size: 14px; /* Framer "Gem address" */
     color: #5a8a95;
-    letter-spacing: 0.03em;
-    margin-bottom: 6px;
+    line-height: 1.3;
+    margin-bottom: 4px;
   }
 
   .gem-card-tag {
@@ -797,10 +798,10 @@ body.city-guide-page .spot-drawer .spot-drawer-content {
     font-family: 'Josefin Sans', sans-serif;
     font-size: 8px;
     font-weight: 700;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: #fff;
-    padding: 3px 7px;
+    padding: 6px 8px 4px; /* 4/8 plus 2px optical offset at the top */
     border-radius: 4px;
   }
 

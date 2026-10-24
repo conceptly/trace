@@ -91,8 +91,9 @@
   text-transform: uppercase;
   font-family: 'Josefin Sans', sans-serif;
   font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0.5px;
+  font-weight: 600; /* Framer "Label M" */
+  letter-spacing: 0;
+  white-space: nowrap;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   border: 1px solid transparent;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0); /* invisible shadow by default */
@@ -881,9 +882,9 @@
     width: auto !important;
     bottom: calc(100% + 12px) !important; /* 12px gap above drawer top edge */
     margin: 0 !important;
-    padding: 14px 16px !important;
-    border-radius: 16px !important;
-    min-height: 56px;
+    padding: 4px 12px 4px 4px !important;
+    border-radius: var(--radius-pill) !important;
+    min-height: 48px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.2);
     pointer-events: auto;
     z-index: 10;
@@ -1019,9 +1020,10 @@
   .nav-btn .text { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }  /* Figma: gap-[4px] */
   .nav-btn .title {
     font-family: 'Josefin Sans', sans-serif;
-    font-size: 16px;                  /* Figma: text-[16px] */
-    font-weight: 400;                 /* Figma: font-normal */
-    text-transform: uppercase;
+    font-size: 20px;                  /* Framer "Label L" (was Figma 16px Regular caps) */
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: none;
     color: #f5f9f6;                   /* Figma: var(--bg-base) */
     line-height: 1;
     white-space: nowrap;

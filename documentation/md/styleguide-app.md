@@ -300,6 +300,22 @@ font-family: 'Adelle', 'Roboto Slab', Avro, serif;
 | Body            | Adelle                     | 400    | 15px      | —              | Sentence  | Descriptions, about text            |
 | Caption         | Adelle                     | 400    | 13px      | —              | Sentence  | Sub-descriptions, detail lines      |
 
+### Text styles (Framer, synced to the live site 25 Oct 2026)
+
+The Framer text styles are the source of truth while the font pair is Josefin Sans + Roboto Slab. Changed on 25 Oct:
+
+| Style | Spec | Used for (live selector) |
+|---|---|---|
+| Section | Josefin Bold 20px, 0em, 120% | Spot drawer headings (`.spot-section h3`) |
+| Label L | Josefin Medium 20px, 0.02em, 100% | Sidebar route names (`.route-name`), menu tile titles (`.nav-btn .title`), Near You title |
+| Label M | Josefin SemiBold 14px, 0em, uppercase | Nav items (`.nav-item`), route pills |
+| CTA title | Josefin Medium 18px, 0em, 120%, title case | Start CTA (`.cta-title`), "Start Typography Route" |
+| Spot meta | Josefin Light 14px, 120% | Author, year, address (`.spot-subtitle`, `.spot-location`) |
+| Spot body | Roboto Slab Light 16px, 140% | Drawer paragraphs (`.spot-section p`) |
+| Route tag | Josefin SemiBold 12px, 0.02em, uppercase | Breadcrumb tag (`.breadcrumb-current`), phone gem row tag (`.gem-route-tag p`) |
+| Gem name | Josefin Bold 16px, 0.02em, 130% | Desktop gem card name (`.gem-card-name`) |
+| Gem address | Josefin Regular 14px, 130% | Desktop gem card address (`.gem-card-location`) |
+
 ### Rules
 
 - Do not mix ITC Avant Garde Gothic Pro and Adelle within the same sentence or label.
@@ -449,7 +465,11 @@ Figma `4015:16430`. Live: `.btn-secondary` (spot drawer). Framer: Button → Sec
 Framer: Button → Secondary. Transparent fill, `1px solid #E7E626` border, `#EDF4F0` label; hover and pressed as the light Secondary.
 
 #### Start CTA (route selector)
-Caps are a style, not typed text: write "Start Typography route" and let `text-transform: uppercase` do the rest, so screen readers read words, not letters.
+Framer: Start CTA. Live: `.btn-cta`.
+- Pill (radius 999), min height 48px, padding 4/12/4/4, gap 12, 40px yellow icon circle
+- Title: "CTA title" (18px, title case: "Start Typography Route"); the subtitle is hidden
+- Started: white border plus a 2px white ring at 40%, yellow label; same size as the base
+- Never type labels in caps; if caps come back, use `text-transform`
 
 #### Icon Button — Default
 - Background: transparent

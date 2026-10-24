@@ -572,14 +572,13 @@ document.addEventListener('routeFilterChange', (e) => {
         const iconImg = ctaBtn.querySelector('.cta-icon img');
         
         if (titleEl) {
-            titleEl.textContent = hasData ? `Start ${routeName} route` : `Select a route to begin!`;
+            titleEl.textContent = hasData ? `Start ${routeName} Route` : `Select a route to begin!`;
             titleEl.style.color = '#FFFFFF';
         }
         
         if (subtitleEl) {
             if (hasData) {
                 subtitleEl.textContent = 'View path details and stops';
-                subtitleEl.style.display = 'block';
             } else {
                 subtitleEl.style.display = 'none';
             }
