@@ -3,3 +3,8 @@ assets/
 
 # Mapbox Studio style exports (reference only)
 map-data/TraceToronto-*/
+
+# Pinegrow working files
+_pgbackup/
+_pginfo/
+pinegrow.json

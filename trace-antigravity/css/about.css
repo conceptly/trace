@@ -186,7 +186,7 @@ body.about-page {
     padding: 6px 12px 7px;
     background-color: var(--cta-text, #2d4855);
     color: var(--bg-card, #ebf2ee);
-    border-radius: 8px;
+    border-radius: 4px;
     white-space: nowrap;
 }
 
@@ -208,9 +208,9 @@ body.about-page {
     font-family: 'Josefin Sans', sans-serif;
     font-weight: 500;
     font-size: 22px;
-    letter-spacing: 2.2px;
+    letter-spacing: 1.2px;
     line-height: 1.2;
-    text-transform: uppercase;
+    text-transform: none;
     margin: 0;
 }
 
@@ -238,7 +238,7 @@ body.about-page {
 
 .about-mission-card {
     background-color: var(--text-body, #2d4855);
-    border-radius: 14px;
+    border-radius: 8px;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -248,10 +248,10 @@ body.about-page {
 .about-card-label {
     font-family: 'Josefin Sans', sans-serif;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 20px;
     letter-spacing: 0.64px;
     line-height: 1.35;
-    text-transform: uppercase;
+    text-transform: none;
     color: var(--brand-trace, #e7e626);
     margin: 0;
 }
@@ -259,7 +259,7 @@ body.about-page {
 .about-card-body {
     font-family: 'Roboto Slab', serif;
     font-weight: 300;
-    font-size: 15px;
+    font-size: 16px;
     line-height: 1.2;
     color: var(--bg-base, #f5f9f6);
     margin: 0;
@@ -332,7 +332,7 @@ body.about-page {
 
 .about-difference-card {
     background-color: var(--text-body, #2d4855);
-    border-radius: 0 14px 14px 0;
+    border-radius: 0 8px 8px 0;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -373,7 +373,7 @@ body.about-page {
 
 .about-ecosystem-card {
     background-color: var(--text-body, #2d4855);
-    border-radius: 16px;
+    border-radius: 8px;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -395,7 +395,7 @@ body.about-page {
 .about-eco-label {
     font-family: 'Josefin Sans', sans-serif;
     font-weight: 400;
-    font-size: 11px;
+    font-size: 14px;
     line-height: 1.2;
     color: var(--bg-base, #f5f9f6);
     background-color: var(--route-experts, #0d7a82);
@@ -407,11 +407,11 @@ body.about-page {
 
 .about-author-card {
     background-color: #2d4855;
-    border-radius: 14px;
+    border-radius: 8px;
     padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 24px;
 }
 
 /* Top row inside the author card: avatar + name/role */
@@ -479,7 +479,7 @@ body.about-page {
 .about-link-item {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 8px;
     height: 24px;
     text-decoration: none;
     color: #f5f9f6;
@@ -494,7 +494,7 @@ body.about-page {
     width: 24px;
     height: 24px;
     background-color: #e7e626;
-    border-radius: 8px;
+    border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -506,7 +506,7 @@ body.about-page {
 .about-link-text {
     font-family: 'Josefin Sans', sans-serif;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.2;
     color: #f5f9f6;
     white-space: nowrap;
@@ -566,16 +566,16 @@ body.about-page {
 
     .about-strip-label {
         position: absolute;
-        bottom: 10px;
-        left: 10px;
+        bottom: 12px;
+        left: 12px;
         font-family: 'Josefin Sans', sans-serif;
         font-weight: 500;
-        font-size: 10px;
+        font-size: 14px;
         letter-spacing: 0.8px;
         text-transform: uppercase;
         color: #fff;
-        padding: 3px 8px 2px;
-        border-radius: 6px;
+        padding: 5px 8px 3px;
+        border-radius: 4px;
         opacity: 0.9;
         pointer-events: none;
     }
@@ -622,11 +622,11 @@ body.about-page {
 
     /* Author links — 3 columns on desktop */
     .about-links-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
     }
 
     .about-section-heading {
-        font-size: 26px;
+        font-size: 28px;
     }
 
     /* Roomier card padding on desktop */
@@ -651,8 +651,8 @@ body.about-page {
 
     .about-route-item {
         min-height: 110px;
-        border-left-width: 5px;
-        border-radius: 0 16px 16px 0;
+        border-left-width: 8px;
+        border-radius: 0 8px 8px 0;
         position: relative;
         align-items: stretch;
     }
@@ -673,8 +673,8 @@ body.about-page {
     }
 
     .about-route-count {
-        font-size: 13px;
-        padding: 4px 10px;
+        font-size: 14px;
+        padding: 4px 12px;
         border-radius: 8px;
         /* Override yellow pill → route color with white text for high contrast */
         background-color: var(--route-accent);
