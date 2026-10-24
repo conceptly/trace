@@ -312,25 +312,100 @@ font-family: 'Adelle', 'Roboto Slab', Avro, serif;
 
 ## 6. Spacing & Border Radius
 
-### Spacing scale
+Everything sits on a **4px grid**. Spacing is set up in two tiers, the same way as the Conceptly portfolio in Webflow:
 
-| Name | Value    | Usage                                    |
-|------|----------|------------------------------------------|
-| xs   | 4px      | Icon internal padding, tight inner gaps  |
-| sm   | 8px      | Component internal gaps                  |
-| md   | 12–16px  | Card padding, list item gaps             |
-| lg   | 24px     | Section internal padding                 |
-| xl   | 32–48px  | Page-level vertical spacing              |
+1. **Primitives** (`space/…`, `radius/…`): the raw scale. Never changes per breakpoint.
+2. **Semantic tokens** (`spacing/…`, `layout/…`): what a space is *for*. Each one points at a primitive and can point at a different one on Desktop, Tablet and Phone.
+
+Components and layouts use the semantic tokens. A primitive is used directly only when no semantic token fits, and then it must still be on the scale.
+
+### Spacing primitives
+
+| Token       | Value |
+|-------------|-------|
+| `space/0`   | 0     |
+| `space/4`   | 4px   |
+| `space/8`   | 8px   |
+| `space/12`  | 12px  |
+| `space/16`  | 16px  |
+| `space/20`  | 20px  |
+| `space/24`  | 24px  |
+| `space/32`  | 32px  |
+| `space/40`  | 40px  |
+| `space/48`  | 48px  |
+| `space/64`  | 64px  |
+| `space/80`  | 80px  |
+| `space/96`  | 96px  |
+
+### Semantic spacing tokens
+
+| Token              | Desktop (1280+) | Laptop (992) | Tablet (768) | Phone (<768) | Use |
+|--------------------|-----------------|--------------|--------------|--------------|-----|
+| `spacing/tight`    | `space/4`  | `space/4`  | `space/4`  | `space/4`  | Label to meta line, tag padding (vertical), title to route tag |
+| `spacing/related`  | `space/8`  | `space/8`  | `space/8`  | `space/8`  | Icon to label, chip to chip, button icon gap, list rows in the sidebar |
+| `spacing/inset`    | `space/12` | `space/12` | `space/12` | `space/12` | Inside cards and rows (gem card body, gem row info, filter row) |
+| `spacing/inset-lg` | `space/24` | `space/24` | `space/16` | `space/16` | Inside panels, drawers and sheets |
+| `spacing/stack`    | `space/16` | `space/16` | `space/16` | `space/16` | Between blocks of one screen: title → chips → divider → list (Figma `2734:12068`) |
+| `spacing/group`    | `space/32` | `space/32` | `space/24` | `space/16` | Between route groups and sidebar sections |
+| `spacing/grid-gap` | `space/16` | `space/16` | `space/16` | `space/12` | Between gem cards in a grid or list |
+| `spacing/gutter`   | `space/32` | `space/32` | `space/24` | `space/16` | Page side margin (content area, Figma phone margin 16) |
+| `spacing/page-top` | `space/24` | `space/24` | `space/24` | `space/24` | Top padding under the nav (Figma `2734:12068`: 24) |
+| `spacing/target`   | 32px       | 32px       | 44px       | 44px       | Minimum hit area (WCAG 2.5.8 / iOS 44pt on touch) |
+
+### Layout tokens
+
+| Token                 | Desktop | Laptop | Tablet | Phone | Note |
+|-----------------------|---------|--------|--------|-------|------|
+| `layout/nav-height`   | 64px    | 64px   | 64px   | 64px  | Top nav |
+| `layout/sidebar-map`  | 416px   | 416px  | 416px  | —     | Map sidebar (live build: 418px, off the grid) |
+| `layout/sidebar-guide`| 280px   | 280px  | 240px  | —     | City Guide filters |
+| `layout/drawer`       | 416px   | 416px  | 416px  | 100%  | Spot drawer (live build: 417px) |
+| `layout/card-min`     | 220px   | 220px  | 220px  | 100%  | Gem card minimum column width |
 
 ### Border radius scale
 
-| Name       | Value   | Usage                                          |
-|------------|---------|------------------------------------------------|
-| Pill       | 50px    | Icon buttons, nav pills, small icon containers |
-| Large Card | 24px    | Bottom drawers, pull-up sheets                 |
-| Card       | 16–20px | Gem cards, image containers, map markers       |
-| Tag        | 8px     | Category chips, small inline badges            |
-| Phone      | 52px    | Device frame outer shell                       |
+| Token         | Value  | Use |
+|---------------|--------|-----|
+| `radius/xs`   | 4px    | Route tags, checkboxes |
+| `radius/s`    | 8px    | Filter chips, small badges |
+| `radius/md`   | 12px   | Desktop gem cards, sidebar rows, ghost buttons |
+| `radius/lg`   | 16px   | Phone gem rows, image containers, CTAs, map markers |
+| `radius/xlg`  | 24px   | Buttons, drawers, pull-up sheets |
+| `radius/pill` | 999px  | Icon buttons, toggles, dots |
+
+Device frame (52px) is a presentation value only, not a UI token.
+
+### Rules
+
+- Every padding, gap, margin, size and radius is a multiple of 4. Hairlines (0.5px and 1px borders, 3px route stripes) are strokes, not spacing, and are exempt.
+- Text boxes keep their line height; optical offsets (the 3px label wrapper from the Framer build) are the only allowed off-grid padding, and are listed as exceptions in the audit below.
+- Prefer a semantic token over a primitive. If a new kind of space keeps appearing, add a semantic token instead of reusing a primitive in many places.
+
+### How the tokens map to each tool
+
+| Tool    | Primitives | Semantic tokens (per breakpoint) |
+|---------|------------|----------------------------------|
+| Figma   | Number variables in a `Space` collection | A `Layout` collection with Desktop / Tablet / Phone modes, aliasing the primitives |
+| Webflow | Size variables (`space/…`, `radius/…`) in the Base collection | A `Layout` collection with breakpoint modes, aliasing the primitives (as in the portfolio) |
+| Framer  | No project-wide spacing variables (Framer's shared styles are colour styles and text styles only). Use the scale by value | Breakpoint variants hold the per-breakpoint values; components expose **Padding**, **Gap** and **Radius** variables so a component's spacing is set in one place and shown as a control on every instance |
+| Code (`trace-antigravity/`) | CSS custom properties `--space-4` … `--space-96`, `--radius-xs` … | `--spacing-gutter` etc., redefined inside each breakpoint's media query |
+
+### Audit: off-grid values to fix
+
+Values found in the live CSS and the Framer build that are not on the 4px grid. Fix them while refining each page.
+
+| Value | Where | Becomes |
+|-------|-------|---------|
+| 10px (19× in CSS) | sidebar row padding, route buttons, chip gaps | 8 or 12 |
+| 6px (15× in CSS) | tag padding, small gaps | 4 or 8 |
+| 14px (10× in CSS) | gem card body side padding, grid gap | 12 or 16 (`spacing/grid-gap`) |
+| 2px, 3px, 7px, 9px, 13px | tag padding (3/7), card body bottom (13) | 4 / 8 / 12 |
+| 22px, 46px, 54px | misc. sizes | 20 or 24, 48, 56 |
+| 418px / 417px | map sidebar, spot drawer | 416px |
+| 34px | icon buttons | 32px desktop, 44px touch target on phone |
+| 28px | Framer City Guide group gap, sidebar section gap | 32 (`spacing/group`) |
+| 12/14/13 | Framer gem card body padding | 12 all round (`spacing/inset`) |
+| 7/12/8 | Framer and live route chip padding | 8/12 |
 
 ---
 
