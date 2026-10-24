@@ -404,7 +404,7 @@ body.city-guide-page .spot-drawer .spot-drawer-content {
 
   .sidebar-section-label {
     font-family: 'Josefin Sans', sans-serif;
-    font-size: 9px;
+    font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
@@ -451,7 +451,7 @@ body.city-guide-page .spot-drawer .spot-drawer-content {
 
   .sidebar-route-name {
     font-family: 'Josefin Sans', sans-serif;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 500;
     color: #edf4f0;
     letter-spacing: 0.02em;
@@ -538,8 +538,8 @@ body.city-guide-page .spot-drawer .spot-drawer-content {
 
   .sidebar-sort-label {
     font-family: 'Josefin Sans', sans-serif;
-    font-size: 12px;
-    color: #bdd0cc;
+    font-size: 14px;
+    color: #edf4f0; /* same as the route names; the active option is set apart by weight */
     letter-spacing: 0.02em;
   }
 
