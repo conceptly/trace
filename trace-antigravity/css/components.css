@@ -698,9 +698,9 @@ a.breadcrumb-root:hover {
 .spot-actions {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
   width: 100%;
-  padding-bottom: 24px;
+  padding: 8px 0 24px; /* Framer Actions: 8px top */
 }
 
 /* CTA buttons (Figma 4015:16415 Primary, 4015:16430 Secondary; styleguide §7).
