@@ -538,6 +538,15 @@
   gap: 4px;
 }
 
+/* Phone: pull the back button's padding into the margin so the chevron's tip
+   lines up with the drawer content, and drop the gap (the icon's own padding gives the space) */
+@media (max-width: 768px) {
+  .spot-breadcrumbs {
+    gap: 0;
+    margin-left: -12px;
+  }
+}
+
 .breadcrumbs-path {
   display: flex;
   align-items: center;
