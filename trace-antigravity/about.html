@@ -309,62 +309,41 @@
                         </div>
                     </div>
                 </div>
-              <!-- Author -->
+            </section>
+
+            <!-- Author -->
             <section class="about-section about-section--border" id="author">
                 <h2 class="about-section-heading" style="color: var(--route-experts, #0d7a82);">Author</h2>
                 <div class="about-author-card">
-                    <!-- Top row: avatar + name/role -->
+                    <!-- Top row: logo + name/role -->
                     <div class="about-author-top">
-                        <div class="about-author-avatar" aria-hidden="true" style="background:transparent; border:none; overflow:visible; width:52px; height:52px; flex-shrink:0;">
-                            <img src="assets/logo/authorLogo/logo-square-dark.svg" alt="Author logo" width="52" height="52" style="display:block; border-radius:8px;">
-                        </div>
+                        <picture class="about-author-avatar" aria-hidden="true">
+                            <source media="(min-width: 769px)" srcset="assets/logo/authorLogo/logo-square-teal.svg">
+                            <img src="assets/logo/authorLogo/logo-square-light.svg" alt="" width="44" height="44">
+                        </picture>
                         <div class="about-author-info">
                             <p class="about-author-name">Etual Fomina</p>
-                            <p class="about-author-role">Graphic Designer &amp; Photographer</p>
+                            <p class="about-author-role">graphic designer &amp; photographer</p>
                         </div>
                     </div>
 
-                    <!-- Contacts grid inside the card -->
+                    <!-- Links: a row on desktop, a divided list on phone -->
                     <div class="about-links-grid">
                         <a href="https://conceptly.design" target="_blank" rel="noopener" class="about-link-item">
-                            <span class="about-link-icon">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                                    <path d="M12 2C6.477 2 2 6.477 2 12C2 17.523 6.477 22 12 22C17.523 22 22 17.523 22 12C22 6.477 17.523 2 12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M2 12H22M12 2C9.333 7 9.333 17 12 22M12 2C14.667 7 14.667 17 12 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </span>
+                            <span class="about-link-icon about-link-icon--web" aria-hidden="true"></span>
                             <span class="about-link-text">conceptly.design</span>
                         </a>
-                        <!-- Row 2: personal contacts -->
+                        <a href="mailto:etual.conceptly@gmail.com" class="about-link-item">
+                            <span class="about-link-icon about-link-icon--mail" aria-hidden="true"></span>
+                            <span class="about-link-text">etual.conceptly@gmail.com</span>
+                        </a>
                         <a href="https://linkedin.com/in/etualfomina" target="_blank" rel="noopener" class="about-link-item">
-                            <span class="about-link-icon">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                                    <path d="M16 8C17.5913 8 19.1174 8.63214 20.2426 9.75736C21.3679 10.8826 22 12.4087 22 14V21H18V14C18 13.4696 17.7893 12.9609 17.4142 12.5858C17.0391 12.2107 16.5304 12 16 12C15.4696 12 14.9609 12.2107 14.5858 12.5858C14.2107 12.9609 14 13.4696 14 14V21H10V14C10 12.4087 10.6321 10.8826 11.7574 9.75736C12.8826 8.63214 14.4087 8 16 8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <rect x="2" y="9" width="4" height="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <circle cx="4" cy="4" r="2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </span>
+                            <span class="about-link-icon about-link-icon--linkedin" aria-hidden="true"></span>
                             <span class="about-link-text">/etualfomina</span>
                         </a>
                         <a href="https://instagram.com/etual.nd" target="_blank" rel="noopener" class="about-link-item">
-                            <span class="about-link-icon">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                                    <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="2"/>
-                                    <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
-                                    <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
-                                </svg>
-                            </span>
+                            <span class="about-link-icon about-link-icon--instagram" aria-hidden="true"></span>
                             <span class="about-link-text">@etual.nd</span>
-                        </a>
-                        <!-- Row 3: email -->
-                        <a href="mailto:etual.conceptly@gmail.com" class="about-link-item">
-                            <span class="about-link-icon">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                                    <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </span>
-                            <span class="about-link-text">etual.conceptly@gmail.com</span>
                         </a>
                     </div>
                 </div>
