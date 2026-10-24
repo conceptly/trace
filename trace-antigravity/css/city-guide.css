@@ -733,7 +733,7 @@ body.city-guide-page .spot-drawer .spot-drawer-content {
   }
 
   .gem-card-thumb {
-    height: 120px;
+    aspect-ratio: 16 / 9;  /* keep the photo's shape at every screen width */
     position: relative;
     overflow: hidden;
     background: #cddbd0;
