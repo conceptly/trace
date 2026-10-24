@@ -377,6 +377,7 @@ Components and layouts use the semantic tokens. A primitive is used directly onl
 | `layout/sidebar-guide`| 280px   | 280px  | 240px  | —     | City Guide filters |
 | `layout/drawer`       | 416px   | 416px  | 416px  | 100%  | Spot drawer (live build: 417px) |
 | `layout/card-min`     | 220px   | 220px  | 220px  | 100%  | Gem card minimum column width |
+| `layout/reading`      | 720px   | 720px  | 720px  | 100%  | Text pages (About). Keeps body copy at a comfortable line length (about 70–90 characters at 16px Roboto Slab); `max-width: 768px` with 24px side padding |
 
 ### Border radius scale
 
@@ -568,6 +569,18 @@ Each marker is a `<button>` with `aria-label="{Spot Name} — {Category} spot"`.
 - Route dot (8px) carries the category colour
 - Matched letters: `#E7E626` highlight with `#1D3240` text
 
+
+### Link Primary
+Figma `4443:14728` (desktop) and `4443:14814` (mobile). Live: `.about-link-item` (About author card).
+- Optional 18px left / right icon, 4px gap, label Josefin Sans Regular 16px, line height 1 (text style "UI Elements/Link Primary")
+- Mobile: 40px row; in the author card each row has a `1px` `#3D5E6A` divider below and the rows sit 4px apart
+- Desktop: no fixed height; the author card spreads the four links across one row
+- Light surfaces: default `#2D4855` (text-body), hover `#7A9A8E` (text-secondary), pressed `#0F2229` (text-primary)
+- Dark surfaces (author card): default `#BDD0CC`, hover `#8AADB5`, pressed `#EDF4F0`
+- Hover exists on the desktop component only, so the live CSS wraps it in `@media (hover: hover)`
+- Pressed drops the label's 4px bottom padding, so the text sits 2px lower (`translateY(2px)` live)
+- Icons follow the text colour. Live icons are CSS masks (`Icon=link-web / -mail / -linkedin / -instagram.svg`) filled with `currentColor`
+- Focus: 2px `#E7E626` outline, 2px offset (live only; not in Figma)
 ---
 
 ## 8. Map Wireframe Styles
