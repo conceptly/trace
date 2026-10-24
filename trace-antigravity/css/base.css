@@ -3,6 +3,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Roboto+Slab:wght@100..900&display=swap');
 
 /* Basic Reset */
+/* Keep the hidden attribute stronger than component display rules (used for Artist's Pick until it's ready) */
+[hidden] {
+  display: none !important;
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;

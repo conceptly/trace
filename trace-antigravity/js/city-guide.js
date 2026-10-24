@@ -467,7 +467,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ── Route metadata for desktop groups ───────────────────────────────
     const routeOrder = [
-        { id: 'artists-pick', label: "Artist's Pick", color: '#0d7a82' },
+        // Artist's Pick is hidden until its route is ready (25 Oct 2026)
+        // { id: 'artists-pick', label: "Artist's Pick", color: '#0d7a82' },
         { id: 'typography',   label: 'Typography',    color: '#3a4e9a' },
         { id: 'art-objects',  label: 'Art Objects',   color: '#257a48' },
         { id: 'architecture', label: 'Architecture',  color: '#9d372e' },
