@@ -382,11 +382,11 @@ Components and layouts use the semantic tokens. A primitive is used directly onl
 
 | Token         | Value  | Use |
 |---------------|--------|-----|
-| `radius/xs`   | 4px    | Route tags, checkboxes |
-| `radius/s`    | 8px    | Filter chips, small badges |
-| `radius/md`   | 12px   | Desktop gem cards, sidebar rows, ghost buttons |
-| `radius/lg`   | 16px   | Phone gem rows, image containers, CTAs, map markers |
-| `radius/xlg`  | 24px   | Buttons, drawers, pull-up sheets |
+| `radius/xs`   | 4px    | Buttons and CTAs (Primary, Secondary, Start CTA), nav items, search field, route rows, Quick Guide tab, route tags, checkboxes |
+| `radius/s`    | 8px    | Near You box and photo tiles, filter chips, small badges |
+| `radius/md`   | 12px   | Desktop gem cards, City Guide filter and sort rows |
+| `radius/lg`   | 16px   | Phone gem rows, image containers, menu tiles, Quick Guide steps, map markers |
+| `radius/xlg`  | 24px   | Phone route tabs (left corners), drawers, pull-up sheets |
 | `radius/pill` | 999px  | Icon buttons, toggles, dots |
 
 Device frame (52px) is a presentation value only, not a UI token.
@@ -440,7 +440,7 @@ Figma `4015:16415`. Live: `.btn-primary`, `.btn-yellow-guide`. Framer: Button â†
 - Background: `--cta-default` `#E7E626`; border `1px solid --cta-ring` `#7A9A8E`
 - Text: Josefin Sans 500, 16px, tracking `0.02em`, `--cta-text` `#2D4855`. **Sentence case, never typed in caps** ("To the Trace City Guide")
 - Padding: 12px 24px (+2px top as the optical offset), gap 8px, icons 18px. Height: 44px
-- Border radius: 24px
+- Border radius: 4px (`radius/xs`; was 24px, changed 25 Oct 2026 to match the type and icons)
 - Hover: `--cta-hover` `#F2F040`, border `#0D7A82`, shadow `4px 4px 12px rgba(15,34,41,0.33)`
 - Pressed: `#E7E626`, border and label `#0D7A82`, inner shadow `inset 4px 4px 8px rgba(45,72,85,0.33)`
 - Disabled: `rgba(231,230,38,0.5)`, border `#E7E626`
@@ -466,7 +466,7 @@ Framer: Button â†’ Secondary. Transparent fill, `1px solid #E7E626` border, `#ED
 
 #### Start CTA (route selector)
 Framer: Start CTA. Live: `.btn-cta`.
-- Pill (radius 999), min height 48px, padding 4/12/4/4, gap 12, 40px yellow icon circle
+- Radius 4px, min height 48px, padding 8/16, gap 12, 32px yellow icon circle (25 Oct 2026; was a pill)
 - Title: "CTA title" (18px, title case: "Start Typography Route"); the subtitle is hidden
 - Started: white border plus a 2px white ring at 40%, yellow label; same size as the base
 - Never type labels in caps; if caps come back, use `text-transform`

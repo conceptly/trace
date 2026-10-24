@@ -13,7 +13,7 @@
   align-items: center;
   gap: 10px;
   padding: 8px 12px;
-  border-radius: 12px;
+  border-radius: 4px; /* Framer Route row, 4px grid */
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   text-align: left;
   border: 0.5px solid transparent;
@@ -120,16 +120,16 @@
 .nearby-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-md);
+  gap: 8px; /* Framer Near you grid */
   margin-top: var(--space-md);
-  padding: var(--space-md);
+  padding: 12px;
   border: 1px solid var(--cat-artists-choice);
-  border-radius: var(--radius-md);
+  border-radius: 8px;
 }
 
 .nearby-item {
   aspect-ratio: 1;
-  border-radius: var(--radius-md);
+  border-radius: 8px;
   overflow: hidden;
   background-color: var(--surface-5);
   cursor: pointer;
@@ -187,11 +187,11 @@
   min-height: 48px;
   background-color: var(--cat-artists-choice);
   border: 1px solid transparent; /* Reserve space for pressed state border to prevent layout shift */
-  border-radius: var(--radius-pill); /* pill at any height (Framer Start CTA radius 999) */
+  border-radius: 4px; /* Framer Start CTA, 4px grid */
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 4px 12px 4px 4px;
+  padding: 8px 16px;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
   box-shadow: 0 0 0 transparent; /* Base for transition */
@@ -228,8 +228,8 @@
 }
 
 .cta-icon {
-  width: 40px; /* Icon circle dimension relative to capsule */
-  height: 40px;
+  width: 32px; /* Icon circle dimension relative to capsule */
+  height: 32px;
   background-color: var(--brand-trace);
   border-radius: var(--radius-pill);
   display: flex;
@@ -715,7 +715,7 @@ a.breadcrumb-root:hover {
   gap: 8px;
   padding: 14px 24px 12px;
   border: 1px solid var(--cta-ring);
-  border-radius: 24px;
+  border-radius: 4px; /* Framer Button, 4px grid (was 24) */
   font-family: 'Josefin Sans', sans-serif;
   font-size: 16px;
   line-height: 1;

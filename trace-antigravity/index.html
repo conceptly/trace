@@ -567,14 +567,19 @@
     <!-- Default route: select Typography on page load -->
     <script>
     window.addEventListener('load', () => {
-        // Small delay to ensure map.js markers are ready
-        setTimeout(() => {
-            const typographyWrapper = document.querySelector('.route-wrapper[data-category="typography"]');
-            if (typographyWrapper) {
-                const btn = typographyWrapper.querySelector('.route-item');
-                if (btn) btn.click();
+        // Wait until map.js has added the markers (a fixed delay raced the map and
+        // showed the "under construction" toast on slow loads); give up after 15s.
+        const started = Date.now();
+        const trySelect = () => {
+            const ready = document.querySelector('.map-marker[data-category="typography"]');
+            if (!ready) {
+                if (Date.now() - started < 15000) setTimeout(trySelect, 250);
+                return;
             }
-        }, 1500);
+            const btn = document.querySelector('.route-wrapper[data-category="typography"] .route-item');
+            if (btn) btn.click();
+        };
+        trySelect();
     });
     </script>
 
