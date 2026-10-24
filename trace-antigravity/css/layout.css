@@ -83,7 +83,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6px 14px;
+  padding: 6px 12px 4px 12px; /* 2px extra at the top: optical offset for Josefin caps */
   border-radius: 8px; /* matching visual roundness */
   text-decoration: none;
   color: var(--content-1);
