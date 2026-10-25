@@ -292,6 +292,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (guideBtn) guideBtn.addEventListener('click', openDrawer);
     if (closeGuideBtn) closeGuideBtn.addEventListener('click', closeDrawer);
+    const backToMapBtn = document.getElementById('close-guide-cta');
+    if (backToMapBtn) backToMapBtn.addEventListener('click', closeDrawer);
     if (goToGuideBtn) goToGuideBtn.addEventListener('click', () => {
         window.location.href = 'city-guide.html';
     });

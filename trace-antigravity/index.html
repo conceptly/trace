@@ -401,73 +401,55 @@
         </main>
         <!-- Quick Guide Drawer -->
         <div class="drawer-overlay" id="guide-overlay"></div>
-        <aside class="drawer" id="guide-drawer">
+        <aside class="drawer" id="guide-drawer" aria-labelledby="guide-drawer-title">
             <div class="drawer-header">
-                <h2>how it works</h2>
+                <h2 id="guide-drawer-title">How it works</h2>
                 <button class="close-drawer" id="close-guide" aria-label="Close guide">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                    <span class="qg-close-icon" aria-hidden="true"></span>
                 </button>
             </div>
-            
+
             <div class="drawer-content">
-                <!-- Step 1 -->
-                <div class="how-it-works-step">
-                    <div class="step-header">
-                        <span class="step-label">Step 1</span>
-                        <h3 class="step-heading">CHOOSE THE <span class="brand-yellow">ROUTE!</span></h3>
+                <ol class="qg-list">
+                <li class="qg-card">
+                    <span class="qg-icon-tile" aria-hidden="true"><span class="qg-icon qg-icon--map"></span></span>
+                    <div class="qg-card-text">
+                        <h3 class="qg-card-title">Pick a route</h3>
+                        <p class="qg-card-body">From the sidebar on the Map page. You can pick one route or several!</p>
                     </div>
-                    <div class="step-info">
-                        <div class="info-row">
-                            <span class="info-label">SELECT:</span>
-                            <span class="info-text">Use the sidebar to filter the routes on the map.</span>
-                        </div>
+                </li>
+                <li class="qg-card">
+                    <span class="qg-icon-tile" aria-hidden="true"><span class="qg-icon qg-icon--tap"></span></span>
+                    <div class="qg-card-text">
+                        <h3 class="qg-card-title">Tap a marker</h3>
+                        <p class="qg-card-body">First tap shows the clue, second one opens a gem's story.</p>
+                    </div>
+                </li>
+                <li class="qg-card">
+                    <span class="qg-icon-tile" aria-hidden="true"><span class="qg-icon qg-icon--clue"></span></span>
+                    <div class="qg-card-text">
+                        <h3 class="qg-card-title">Follow the clue</h3>
+                        <p class="qg-card-body">Walk there and look closely: gems often hide in plain sight.</p>
+                    </div>
+                </li>
+                <li class="qg-card">
+                    <span class="qg-icon-tile" aria-hidden="true"><span class="qg-icon qg-icon--guide"></span></span>
+                    <div class="qg-card-text">
+                        <h3 class="qg-card-title">Read more</h3>
+                        <p class="qg-card-body">Full stories, notes and photos in the City Guide.</p>
+                    </div>
+                </li>
+                </ol>
 
-                    </div>
-                </div>
-
-                <!-- Step 2 -->
-                <div class="how-it-works-step">
-                    <div class="step-header">
-                        <span class="step-label">Step 2</span>
-                        <h3 class="step-heading">EXPLORE <span class="brand-yellow">THE GEMS!</span></h3>
-                    </div>
-                    <div class="step-info">
-                        <div class="info-row">
-                            <span class="info-label">TAP ON:</span>
-                            <span class="info-text">Map markers uncover the hidden history.</span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-label">HINT UP:</span>
-                            <span class="info-text">Follow the clue to navigate there on foot!</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Step 3 -->
-                <div class="how-it-works-step">
-                    <div class="step-header">
-                        <span class="step-label">Step 3</span>
-                        <h3 class="step-heading">KNOW <span class="brand-yellow">THE CITY!</span></h3>
-                    </div>
-                    <div class="step-info">
-                        <div class="info-row">
-                            <span class="info-label">CITY GUIDE:</span>
-                            <span class="info-text">Full stories, designer's notes & photos.</span>
-                        </div>
-                    </div>
-
-                    <button class="btn-yellow-guide" id="go-to-guide">
-                        <span>To the guide</span>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                <div class="qg-actions">
+                    <button class="btn-secondary btn-secondary--dark" id="go-to-guide">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.3124 16.2432C15.0543 15.587 16.1043 15.1304 17.5651 15.1304V13.7391V6.08696V4C15.2523 4 13.9693 5.14429 13.3085 6.41381C12.8565 7.28252 12.6956 8.21014 12.6956 8.86957V15.9377V20C12.6956 19.05 13.0292 17.544 14.0869 16.4582C14.1587 16.3845 14.2338 16.3128 14.3124 16.2432ZM18.9564 16.5217H17.5651C16.0707 16.5217 15.2711 17.1133 14.7986 17.7695C14.609 18.0328 14.4634 18.3206 14.3548 18.6087H20.3478V17.913V6.78261V6.08696H19.6521H18.9564V15.1304V16.5217ZM4.34775 6.08696H3.6521V6.78261V17.913V18.6087H9.91297C10.6814 18.6087 11.3043 19.2316 11.3043 20V8.86957V6.78235C10.7229 6.3457 10.0003 6.08696 9.21732 6.08696H4.34775Z"/></svg>
+                        <span>To the Guide</span>
                     </button>
-                </div>
-                <div class="drawer-footer">
-                    <span class="copyright">© conceptly.design 2026</span>
+                    <button class="btn-primary" id="close-guide-cta">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M8.44444 4.43259L4.17778 5.41721V20L8.44444 19.0399V4.43259ZM9.86667 18.8266V4.21333L14.1333 5.17333V19.7867L9.86667 18.8266ZM15.5556 19.5674L19.8222 18.5828V4L15.5556 4.96V19.5674Z"/></svg>
+                        <span>Back to the Map</span>
+                    </button>
                 </div>
             </div>
         </aside>

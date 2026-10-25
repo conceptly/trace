@@ -460,15 +460,15 @@ Figma `4015:16415`. Live: `.btn-primary`, `.btn-yellow-guide`. Framer: Button �
 
 #### Secondary (light surfaces)
 Figma `4015:16430`. Live: `.btn-secondary` (spot drawer). Framer: Button → Secondary light.
-- Background: `#F5F9F6`; border `1px solid #7A9A8E`
-- Text: Josefin Sans 400, 16px, `#2D4855`, sentence case
+- Background: `#F5F9F6`; border `1px solid` text-secondary `#487389` (26 Oct 2026; was `#7A9A8E`)
+- Text: Josefin Sans 400, 16px, text-secondary `#487389` (4.8 : 1; was `#2D4855`), sentence case. Quieter than the Primary it sits next to; hover brings back the `#2D4855` label on yellow
 - Same padding, gap, icon size, height and radius as the Primary CTA
 - Hover: `#F2F040`, border `#E7E626`, same shadow as the Primary hover
 - Pressed: `#F2F040`, border and label `#0D7A82`, inner shadow `inset 2px 2px 8px rgba(45,72,85,0.33)`
 - Disabled: `rgba(235,242,238,0.33)`, border `#CDDBD0`, label `#7A9A8E`
 
 #### Secondary (dark surfaces)
-Live: `.btn-secondary.btn-secondary--dark` (Profile "Back to Map"). Framer: Button → Secondary. Transparent fill, `1px solid #E7E626` border, `#EDF4F0` label; hover and pressed as the light Secondary (hover label `#2D4855` on the yellow fill, pressed label `#0D7A82`).
+Live: `.btn-secondary.btn-secondary--dark` (Profile "Back to Map"). Framer: Button → Secondary. Transparent fill, `1px solid` text-secondary `#96B8B9` border and `#96B8B9` label (26 Oct 2026; was a yellow border and `#EDF4F0` label); hover and pressed as the light Secondary (hover label `#2D4855` on the yellow fill, pressed label `#0D7A82`). Figma's light text-secondary is still `#41687B`; the site uses `#487389`.
 
 **Button pairs:** Back / secondary on the left, the forward primary on the right; a forward chevron goes after the label, a back chevron before it. On phones under 480px the pair stacks at full width in the same order.
 
@@ -560,6 +560,14 @@ Each marker is a `<button>` with `aria-label="{Spot Name} — {Category} spot"`.
 - Border top: `1px solid` `--divider-strong`
 - Drag handle: 56×3px pill, `#5A8A95` (dark) / `#B0C5CA` (light), centred
 - `role="region" aria-label="Spots near you"`
+
+### Quick Guide drawer
+Figma `4486:16753` (QuickTipsContainer). Live: `#guide-drawer` in `index.html`, styles `.qg-*` in `components.css`.
+- 400px on desktop (Figma 402), full width on phone; `#0F2229`, 20px top and bottom padding
+- Header: "How it works" in Headings/Caption (Josefin Medium 14, 0.1em, caps, `#BDD0CC`), 18px close icon in a 32px hit area; 0.5px `#BDD0CC` rule below
+- Cards (`.qg-card`): `#2D4855`, 8px corners, 16px padding, 16px apart. Each has a 40px `#0F2229` icon tile (4px corners) with a 24px yellow icon (CSS mask: `Icon=Map`, `Icon=tap`, `Icon=clue`, `Icon=Guide`), a Headings/H5 title (18px `#EDF4F0`) and a Body Copy Secondary line (Roboto Slab Light 15px `#BDD0CC`), 12px from the tile
+- Actions: Secondary (dark) "To the Guide" (City Guide) above Primary "Back to the Map" (closes the drawer), 12px apart, 16px above them; full width
+- No copyright line (hidden in Figma)
 
 ### Search bar
 - No placeholder text. The magnifier icon signals search, and the accessible name comes from `aria-label="Search spots and routes"` (or a `sr-only` `<label>`). Placeholders disappear as you type and are often mistaken for filled-in text

@@ -337,15 +337,15 @@
 .drawer {
   position: fixed;
   top: 0;
-  right: -340px; /* Width matching Figma */
-  width: 340px;
+  right: -400px; /* Figma QuickTipsContainer (4486:16753) is 402 wide */
+  width: 400px;
   height: 100%;
   background-color: #0f2229;
   z-index: 1001;
   display: flex;
   flex-direction: column;
   transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  padding: 36px 0;
+  padding: 20px 0;
   box-shadow: -4px 0 20px rgba(0, 0, 0, 0.5);
 }
 
@@ -355,126 +355,142 @@
 
 .drawer-header {
   padding: 0 24px 16px;
-  border-bottom: 0.5px solid #2d4855;
+  border-bottom: 0.5px solid #bdd0cc;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
+/* Figma "Headings/Caption": Josefin Medium 14, 10% tracking, caps */
 .drawer-header h2 {
   font-family: 'Josefin Sans', sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  color: #cddbd0;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  color: #bdd0cc;
+  padding-top: 3px; /* optical offset */
   margin: 0;
 }
 
+/* 18px icon, 32px hit area pulled back so the icon stays on the 24px edge */
 .close-drawer {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 4px;
-  color: #cddbd0;
+  width: 32px;
+  height: 32px;
+  margin: -7px -7px -7px 0;
+  color: #bdd0cc;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 4px;
+  transition: color 0.2s ease;
+}
+
+.close-drawer:hover {
+  color: var(--brand-trace);
+}
+
+.close-drawer:focus-visible {
+  outline: 2px solid var(--brand-trace);
+  outline-offset: 0;
+}
+
+.qg-close-icon {
+  width: 18px;
+  height: 18px;
+  background-color: currentColor;
+  -webkit-mask: url('../assets/icons/Icon=close-regular.svg') center / 15px 15px no-repeat; /* 10px glyph, as in the 18px Figma icon */
+  mask: url('../assets/icons/Icon=close-regular.svg') center / 15px 15px no-repeat;
 }
 
 .drawer-content {
-  flex: 1;
+  flex: 0 1 auto; /* hug the content so the divider sits under the buttons; scrolls when short */
   overflow-y: auto;
-  padding: 24px;
+  padding: 24px 24px 16px;
+  border-bottom: 0.5px solid #bdd0cc;
   display: flex;
   flex-direction: column;
-  gap: 24px;
 }
 
-/* How it Works Steps */
-.how-it-works-step {
-  background-color: #2d4855;
-  border-radius: 8px;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.step-header {
-  border-bottom: 0.5px solid var(--brand-trace);
-  padding-bottom: 8px;
-}
-
-.step-label {
-  color: var(--brand-trace);
-  font-family: 'Josefin Sans', sans-serif;
-  font-size: 11px;
-  font-weight: 400;
-}
-
-.step-heading {
-  font-family: 'Josefin Sans', sans-serif;
-  font-weight: 500;
-  font-size: 16px;
-  color: #edf4f0;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  line-height: 1.35;
+/* Quick Guide cards (Figma 4486:16753): icon tile + title + one line */
+.qg-list {
+  list-style: none;
   margin: 0;
-}
-
-.brand-yellow {
-  color: var(--brand-trace);
-}
-
-.step-info {
+  padding: 0;
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.info-row {
-  display: grid;
-  grid-template-columns: 80px 1fr;
+.qg-card {
+  background-color: #2d4855;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  align-items: flex-start;
   gap: 12px;
 }
 
-.info-label {
-  color: var(--brand-trace);
-  font-family: 'Josefin Sans', sans-serif;
-  font-size: 12px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding-top: 3px;
+.qg-icon-tile {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  background-color: #0f2229;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.info-text {
+.qg-icon {
+  width: 24px;
+  height: 24px;
+  background-color: var(--brand-trace, #e7e626);
+  -webkit-mask: var(--qg-icon) center / 24px 24px no-repeat;
+  mask: var(--qg-icon) center / 24px 24px no-repeat;
+}
+
+.qg-icon--map { --qg-icon: url('../assets/icons/Icon=Map.svg'); }
+.qg-icon--tap { --qg-icon: url('../assets/icons/Icon=tap.svg'); }
+.qg-icon--clue { --qg-icon: url('../assets/icons/Icon=clue.svg'); }
+.qg-icon--guide { --qg-icon: url('../assets/icons/Icon=Guide.svg'); }
+
+.qg-card-text {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Figma "Headings/H5" */
+.qg-card-title {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.35;
+  letter-spacing: 0.04em;
+  color: #edf4f0;
+  margin: 0;
+}
+
+/* Figma "Body Copy/P-Body Copy Secondary" */
+.qg-card-body {
   font-family: 'Roboto Slab', serif;
   font-weight: 300;
   font-size: 15px;
-  color: #ebf2ee;
-  line-height: 1.35;
+  line-height: 1.2;
+  color: #bdd0cc;
+  margin: 0;
 }
 
-/* Yellow Action Button (Quick Guide): same look as .btn-primary */
-.btn-yellow-guide {
-  width: 100%;
-  margin-top: 4px;
+.qg-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 16px;
 }
-
-.drawer-footer {
-  padding: 12px 24px 0;
-}
-
-.copyright {
-  font-family: 'Josefin Sans', sans-serif;
-  font-weight: 400;
-  font-size: 11px;
-  color: #cddbd0;
-}
-
 
 /* Responsive adjustments for drawer */
 @media (max-width: 768px) {
@@ -771,10 +787,12 @@ a.breadcrumb-root:hover {
   cursor: not-allowed;
 }
 
-/* Secondary (light surfaces: the spot drawer) */
+/* Secondary (light surfaces: the spot drawer). Default label and border are
+   text-secondary (Figma 4015:16430): quieter than the Primary next to it */
 .btn-secondary {
   background-color: var(--cta-secondary-fill);
-  color: var(--cta-text);
+  border-color: #487389;
+  color: #487389;
   font-weight: 400;
   letter-spacing: 0;
 }
@@ -782,6 +800,7 @@ a.breadcrumb-root:hover {
 .btn-secondary:hover {
   background-color: var(--cta-hover);
   border-color: var(--cta-default);
+  color: var(--cta-text);
   box-shadow: var(--cta-shadow-hover);
 }
 
@@ -800,12 +819,12 @@ a.breadcrumb-root:hover {
   cursor: not-allowed;
 }
 
-/* Secondary on dark surfaces (styleguide §7): transparent, yellow border,
-   light label; hover and pressed as the light Secondary */
+/* Secondary on dark surfaces (styleguide §7): transparent, text-secondary
+   border and label; hover and pressed as the light Secondary */
 .btn-secondary--dark {
   background-color: transparent;
-  border-color: var(--cta-default);
-  color: #edf4f0;
+  border-color: #96b8b9; /* text-secondary on dark */
+  color: #96b8b9;
 }
 
 .btn-secondary--dark:hover {
