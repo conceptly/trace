@@ -327,6 +327,7 @@ The Framer text styles are the source of truth while the font pair is Josefin Sa
 - ITC Avant Garde Gothic Pro at Label Small and Map Label levels must always be uppercase with `letter-spacing: 0.1em` or wider.
 - Adelle body text must have `line-height: 1.6` (relaxed) minimum.
 - Do not apply Adelle to any interactive element (buttons, nav items, chips). All interactive text uses ITC Avant Garde Gothic Pro (or its fallback).
+- Never use `overflow-x: hidden` on page-level elements (body, page wrappers): it turns `overflow-y` into `auto` and creates a second scroll container, which on iOS stops scroll-up short with the top tucked under the nav. Use `overflow-x: clip` (with `hidden` as the fallback line). The map page is pinned instead (`body.map-page`: `position: fixed; inset: 0`), so it always fills the visible screen
 - Paragraphs use `text-wrap: pretty` (set on `p` in `base.css`) so no paragraph ends on a single short word. Labels that must stay on one line keep `white-space: nowrap` in their own class, which wins over the `p` rule.
 - Heading levels (`<h1>`, `<h2>`) must follow document hierarchy — never skip levels for visual purposes. Use CSS to restyle visually if needed.
 

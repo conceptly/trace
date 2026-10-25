@@ -56,6 +56,7 @@ body.about-page {
     flex-direction: column;
     max-width: 100%;
     overflow-x: hidden;
+    overflow-x: clip; /* no extra scroll container (see base.css body) */
 }
 
 /* Photo-strip links jump to their section; keep headings clear of the sticky nav */

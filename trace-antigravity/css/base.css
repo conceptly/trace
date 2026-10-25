@@ -19,8 +19,23 @@ body {
   background-color: var(--surface-1);
   color: var(--content-1);
   line-height: normal;
+  /* clip, not hidden: hidden turns overflow-y into auto and makes a second scroll
+     container, which on iOS stops scroll-up short (top tucked under the nav) */
   overflow-x: hidden;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Map page: pinned to the visible screen so it can't scroll or leave a gap when
+   iOS shows or hides its browser bars (100svh was shorter than the screen) */
+body.map-page {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+body.map-page .page-container {
+  height: 100%;
 }
 
 /* Balanced paragraph endings (no one-word last lines). Class rules with

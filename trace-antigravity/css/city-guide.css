@@ -9,6 +9,7 @@ body.city-guide-page .page-container,
   min-height: 100svh;
   overflow: visible;
   overflow-x: hidden;
+  overflow-x: clip; /* no extra scroll container (see base.css body) */
 }
 
 /* Hide desktop sidebar AND desktop topbar on mobile — shown only via @media below */
