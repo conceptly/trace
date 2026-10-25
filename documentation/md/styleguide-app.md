@@ -577,6 +577,7 @@ Figma `2734:11998`. Live: `.mobile-menu-overlay` (repeated in all four pages), s
 - Under 390px (iPhone SE / mini): tile padding 16 → 12px, grid gap 12px, page names 15px, so "CITY GUIDE" fits
 - Profile icon: `Icon=profile-user.svg` (Figma, 26 Oct 2026)
 - Page tiles are top-aligned: the 24px icon's top sits level with the page name (16px from the tile top)
+- "EXPLORE THE ROUTES" is in the menu on every page. On the map a route tile selects the route in place; on the City Guide, About and Profile it opens `index.html?route=<category>`, and the map selects that route on load (an unknown or hidden route falls back to Typography)
 - Route tiles (Figma RouteItemNav `2734:16219`): 24px icon in the 30px glass circle (`rgba(235,242,238,0.33)`, white glyph; the live contrast is kept)
 - Page tile states (Figma NavItemHamburgerLines `2734:15974`; no icon circle, a plain 24px icon; no hover, the menu is phone-only):
   - Default: `#2D4855`; icon and subtitle text-secondary `#96B8B9` (4.5 : 1), page name `#EDF4F0`

@@ -543,15 +543,22 @@
     window.addEventListener('load', () => {
         // Wait until map.js has added the markers (a fixed delay raced the map and
         // showed the "under construction" toast on slow loads); give up after 15s.
+        // A route tile on another page links here with ?route=<category>; use it
+        // if it's a visible route, otherwise start with Typography.
+        const wanted = new URLSearchParams(location.search).get('route');
+        const wantedWrapper = wanted && document.querySelector(`.route-wrapper[data-category="${CSS.escape(wanted)}"]:not([hidden])`);
+        const routeId = wantedWrapper ? wanted : 'typography';
         const started = Date.now();
         const trySelect = () => {
-            const ready = document.querySelector('.map-marker[data-category="typography"]');
+            const ready = document.querySelector(`.map-marker[data-category="${routeId}"]`);
             if (!ready) {
                 if (Date.now() - started < 15000) setTimeout(trySelect, 250);
                 return;
             }
-            const btn = document.querySelector('.route-wrapper[data-category="typography"] .route-item');
+            const btn = document.querySelector(`.route-wrapper[data-category="${routeId}"] .route-item`);
             if (btn) btn.click();
+            // Mark the matching menu tile too
+            document.querySelectorAll('#mobileMenu .route-btn').forEach(b => b.classList.toggle('active', b.classList.contains(routeId)));
         };
         trySelect();
     });

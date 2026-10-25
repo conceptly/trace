@@ -117,6 +117,13 @@ document.addEventListener('DOMContentLoaded', () => {
             );
             if (!categoryId) return;
 
+            // Pages without the map (City Guide, About, Profile): open the map
+            // with this route selected (index.html reads ?route=)
+            if (!document.body.classList.contains('map-page')) {
+                window.location.href = 'index.html?route=' + encodeURIComponent(categoryId);
+                return;
+            }
+
             // Find the matching sidebar route-wrapper
             const matchingSidebarWrapper = document.querySelector(
                 `.route-wrapper[data-category="${categoryId}"]`
