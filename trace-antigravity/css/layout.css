@@ -1206,11 +1206,29 @@
   color: var(--brand-trace);
 }
 
+/* Library Instagram icon (Icon=link-instagram.svg, as on the About page),
+   masked so it takes the link colour */
+.sidebar-footer-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  background-color: currentColor;
+  -webkit-mask: url('../assets/icons/Icon=link-instagram.svg') center / 18px 18px no-repeat;
+  mask: url('../assets/icons/Icon=link-instagram.svg') center / 18px 18px no-repeat;
+}
+
 .sidebar-footer-copy {
   font-family: 'Josefin Sans', sans-serif;
   font-size: 15px;
   color: var(--content-2);
   opacity: 0.8;
+}
+
+/* Josefin draws © at cap height: drop it 0.1em so its centre sits on the
+   lowercase middle, level with the Instagram glyph */
+.sidebar-footer-copy-mark {
+  position: relative;
+  top: 0.1em;
 }
 
 /* Hide footer on mobile (sidebar is deconstructed) */
