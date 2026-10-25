@@ -1061,7 +1061,7 @@
     border-radius: 4px;              /* Figma: rounded-[4px] */
     padding: 16px;
     gap: 8px;                        /* Figma: gap-[8px] */
-    align-items: center;
+    align-items: flex-start;         /* Figma: icon top-aligned with the page name */
     border: none;
     position: relative;
     overflow: hidden;
@@ -1079,6 +1079,8 @@
     padding: 0;
   }
   .nav-btn .icon-circle svg { width: 24px; height: 24px; display: block; }
+  /* Route tiles (Figma RouteItemNav 2734:16219): 24px icon in the 30px circle */
+  .route-btn .icon-circle svg { width: 24px; height: 24px; display: block; }
   .nav-btn .text { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }  /* Figma: gap-[4px] */
   .nav-btn .title {
     font-family: 'Josefin Sans', sans-serif;
