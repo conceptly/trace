@@ -1067,14 +1067,18 @@
     overflow: hidden;
     transition: box-shadow 0.15s ease;
   }
+  /* Figma NavItemHamburgerLines (2734:15974): the icon circle is gone, a plain
+     24px icon in the state colour sits next to the text */
   .nav-btn .icon-circle {
-    width: 30px; height: 30px;       /* Figma: size-[30px] */
-    border-radius: 50%;
-    background-color: #0f2229;       /* Figma: bg-[var(--text/text-primary)] */
-    color: #f5f9f6;
+    width: 24px; height: 24px;
+    border-radius: 0;
+    background: none;
+    border: none;
+    color: #96b8b9;                  /* text-secondary */
     flex-shrink: 0;
-    padding: 4px;
+    padding: 0;
   }
+  .nav-btn .icon-circle svg { width: 24px; height: 24px; display: block; }
   .nav-btn .text { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }  /* Figma: gap-[4px] */
   .nav-btn .title {
     font-family: 'Josefin Sans', sans-serif;
@@ -1082,7 +1086,7 @@
     font-weight: 400;
     letter-spacing: 0.04em;           /* Figma 4%: caps need a little air */
     text-transform: uppercase;
-    color: #f5f9f6;                   /* Figma: var(--bg-base) */
+    color: #edf4f0;                   /* Figma: text-primary */
     line-height: 1;
     padding: 3px 0 1px;               /* Figma optical offset */
     white-space: nowrap;
@@ -1091,10 +1095,22 @@
     font-family: 'Josefin Sans', sans-serif;
     font-size: 14px;                  /* Figma Caption 1; lines kept short to fit a 375px phone */
     font-weight: 400;
-    color: #cddbd0;                   /* Figma: var(--bg-elevated) */
+    color: #96b8b9;                   /* Figma: text-secondary (4.5 : 1 on #2D4855) */
     line-height: 1.2;
     white-space: nowrap;              /* Figma: one line */
   }
+
+  /* Pressed (touch): small inner shadow, everything turns primary text */
+  .nav-btn:not(.active):active { box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.25); }
+  .nav-btn:not(.active):active .icon-circle,
+  .nav-btn:not(.active):active .title,
+  .nav-btn:not(.active):active .subtitle { color: #edf4f0; }
+
+  /* Focused (keyboard): 0.5px yellow edge, yellow icon and name */
+  .nav-btn:not(.active):focus-visible { outline: none; box-shadow: inset 0 0 0 0.5px var(--brand-trace); }
+  .nav-btn:not(.active):focus-visible .icon-circle,
+  .nav-btn:not(.active):focus-visible .title { color: var(--brand-trace); }
+  .nav-btn:not(.active):focus-visible .subtitle { color: #edf4f0; }
 
   /* Small phones (iPhone SE / mini, 375px): the Figma 16px padding leaves
      "CITY GUIDE" no room, so tighten the tiles and the page names slightly */
@@ -1105,16 +1121,15 @@
   }
 
   /* Active state — brand-trace yellow bg, dark icon/text */
+  /* Active (the current page): yellow with a soft yellow glow */
   .nav-btn.active {
     background-color: var(--brand-trace);
-    border: 0.5px solid #cddbd0;     /* Figma: border-[var(--border/divider)] */
-    box-shadow: inset 2px 2px 8px rgba(45, 72, 85, 0.33);  /* Figma: BtnSmallPressed */
+    border: none;
+    box-shadow: inset 0 0 0 0.5px #487389, 0 0 12px var(--brand-trace);  /* Figma: 0.5px cta-focused-ring + glow */
+    overflow: visible;
   }
-  .nav-btn.active .icon-circle {
-    background-color: #0f2229;       /* Figma: bg-[var(--text/text-primary)] */
-    border: 0.5px solid #cddbd0;
-    color: var(--brand-trace);
-  }
+  .nav-btn.active .icon-circle { color: #0f2229; }
+  .nav-btn.active:focus-visible { outline: 2px solid #0f2229; outline-offset: -4px; }
   .nav-btn.active .title  { color: #0f2229; font-weight: 400; }   /* Figma: text-[var(--text/text-primary)] */
   .nav-btn.active .subtitle { color: #2d4855; }                   /* Figma: text-[var(--text/text-body)] */
 

@@ -574,6 +574,11 @@ Figma `2734:11998`. Live: `.mobile-menu-overlay` (repeated in all four pages), s
 - Page tiles: page name in Josefin Regular 16px caps with 0.04em tracking (short signage-like names, so caps are a deliberate choice); subtitle in Caption 1, Josefin Regular 14px, sentence case, kept short enough for a 375px phone: "62 gems", "Edition 1", "The story", "Coming soon"
 - Under 390px (iPhone SE / mini): tile padding 16 → 12px, grid gap 12px, page names 15px, so "CITY GUIDE" fits
 - Profile icon: `Icon=profile-user.svg` (Figma, 26 Oct 2026)
+- Page tile states (Figma NavItemHamburgerLines `2734:15974`; no icon circle, a plain 24px icon; no hover, the menu is phone-only):
+  - Default: `#2D4855`; icon and subtitle text-secondary `#96B8B9` (4.5 : 1), page name `#EDF4F0`
+  - Pressed: inner shadow `inset 2px 2px 2px rgba(0,0,0,0.25)`; icon, name and subtitle `#EDF4F0`
+  - Focused (keyboard): 0.5px yellow inner edge, yellow icon and name, `#EDF4F0` subtitle
+  - Active (current page): `#E7E626`, 0.5px `#487389` inner edge, `0 0 12px` yellow glow; icon and name `#0F2229`, subtitle `#2D4855`
 - Contact: four 44px dark Secondary icon buttons (site, email, LinkedIn, Instagram; `.menu-contact-btn`, 26px About link icons as CSS masks, names in `aria-label`s) and a 14px "Designed by Etual Fomina" line
 
 ### Breadcrumbs and back links
