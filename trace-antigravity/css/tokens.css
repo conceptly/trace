@@ -9,12 +9,14 @@
   --cta-default: #E7E626;
   --cta-hover: #F2F040;
   --cta-text: #2D4855;
-  --cta-ring: #7A9A8E;          /* default border */
+  --cta-ring: #487389;          /* default border: text-secondary (Figma cta-focused-ring, light) */
   --cta-focused-border: #0D7A82; /* hover / pressed / focus border, pressed label */
   --cta-disabled: rgba(231, 230, 38, 0.5);
   --cta-secondary-fill: #F5F9F6;
   --cta-secondary-disabled: rgba(235, 242, 238, 0.33);
   --cta-secondary-disabled-border: #CDDBD0;
+  --cta-secondary-hover: rgba(235, 242, 238, 0.33); /* bg-card-glass */
+  --cta-secondary-pressed: #EBF2EE;                 /* bg-card */
   --cta-shadow-hover: 4px 4px 12px rgba(15, 34, 41, 0.33);
   --cta-shadow-pressed: inset 4px 4px 8px rgba(45, 72, 85, 0.33);
   --cta-shadow-pressed-secondary: inset 2px 2px 8px rgba(45, 72, 85, 0.33);

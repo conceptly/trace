@@ -753,6 +753,9 @@ a.breadcrumb-root:hover {
   margin-top: -2px; /* undo the optical offset for the icon */
 }
 
+/* Hover exists only for pointer devices (Figma: no hover on mobile); touch
+   gets the pressed state on :active. */
+
 /* Primary: yellow */
 .btn-primary,
 .btn-yellow-guide {
@@ -762,11 +765,13 @@ a.breadcrumb-root:hover {
   letter-spacing: 0.02em;
 }
 
-.btn-primary:hover,
-.btn-yellow-guide:hover {
-  background-color: var(--cta-hover);
-  border-color: var(--cta-focused-border);
-  box-shadow: var(--cta-shadow-hover);
+@media (hover: hover) {
+  .btn-primary:hover,
+  .btn-yellow-guide:hover {
+    background-color: var(--cta-hover);
+    border-color: var(--cta-focused-border);
+    box-shadow: var(--cta-shadow-hover);
+  }
 }
 
 .btn-primary:active,
@@ -786,27 +791,34 @@ a.breadcrumb-root:hover {
   cursor: not-allowed;
 }
 
+/* Primary on dark surfaces: the default border is yellow (Figma cta-focused-ring, dark) */
+.btn-primary--dark {
+  border-color: var(--cta-default);
+}
+
 /* Secondary (light surfaces: the spot drawer). Default label and border are
    text-secondary (Figma 4015:16430): quieter than the Primary next to it */
 .btn-secondary {
   background-color: var(--cta-secondary-fill);
-  border-color: #487389;
-  color: #487389;
+  border-color: var(--cta-ring);
+  color: var(--cta-ring);
   font-weight: 400;
   letter-spacing: 0;
 }
 
-.btn-secondary:hover {
-  background-color: var(--cta-hover);
-  border-color: var(--cta-default);
-  color: var(--cta-text);
-  box-shadow: var(--cta-shadow-hover);
+@media (hover: hover) {
+  .btn-secondary:hover {
+    background-color: var(--cta-secondary-hover);
+    border-color: var(--cta-text);
+    color: var(--cta-text);
+    box-shadow: var(--cta-shadow-hover);
+  }
 }
 
 .btn-secondary:active {
-  background-color: var(--cta-hover);
-  border-color: var(--cta-focused-border);
-  color: var(--cta-focused-border);
+  background-color: var(--cta-secondary-pressed);
+  border-color: var(--cta-ring);
+  color: var(--cta-text);
   box-shadow: var(--cta-shadow-pressed-secondary);
 }
 
@@ -818,20 +830,31 @@ a.breadcrumb-root:hover {
   cursor: not-allowed;
 }
 
-/* Secondary on dark surfaces (styleguide §7): transparent, text-secondary
-   border and label; hover and pressed as the light Secondary */
+/* Secondary on dark surfaces (Figma HiFi Dark values of the same states) */
 .btn-secondary--dark {
   background-color: transparent;
-  border-color: #96b8b9; /* text-secondary on dark */
+  border-color: #96b8b9; /* text-secondary */
   color: #96b8b9;
 }
 
-.btn-secondary--dark:hover {
-  color: var(--cta-text);
+@media (hover: hover) {
+  .btn-secondary--dark:hover {
+    background-color: rgba(45, 72, 85, 0.75); /* bg-card-glass */
+    border-color: #bdd0cc;                     /* cta-text */
+    color: #bdd0cc;
+  }
 }
 
 .btn-secondary--dark:active {
-  color: var(--cta-focused-border);
+  background-color: #2d4855;                   /* bg-card */
+  border-color: var(--cta-default);            /* cta-focused-ring */
+  color: #bdd0cc;
+}
+
+.btn-secondary--dark:disabled {
+  background-color: rgba(45, 72, 85, 0.75);
+  border-color: #3d5e6a;                       /* border/divider */
+  color: #96b8b9;
 }
 
 .btn-primary:focus-visible,

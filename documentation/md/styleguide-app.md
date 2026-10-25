@@ -442,12 +442,12 @@ Allowed exceptions (kept on purpose): optical-offset label wrappers (2–3px top
 ### Buttons
 
 #### Primary CTA
-Figma `4015:16415`. Live: `.btn-primary`, `.btn-yellow-guide`. Framer: Button → Primary.
-- Background: `--cta-default` `#E7E626`; border `1px solid --cta-ring` `#7A9A8E`
+Figma `4015:16415`. Live: `.btn-primary`, `.btn-yellow-guide`; on dark surfaces add `.btn-primary--dark`. Framer: Button → Primary.
+- Background: `--cta-default` `#E7E626`; border `1px solid --cta-ring`: text-secondary `#487389` on light surfaces, `#E7E626` on dark (`.btn-primary--dark`; Figma cta-focused-ring per mode)
 - Text: Josefin Sans 500, 16px, tracking `0.02em`, `--cta-text` `#2D4855`. **Sentence case, never typed in caps** ("To the Trace City Guide")
-- Padding: 12px 24px (+2px top as the optical offset), gap 8px, icons 18px. Height: 44px
+- Padding: 12px 24px (+2px top as the optical offset), gap 8px, icons 18px. Height: 44px (Figma 42; the live 2px optical offset is kept)
 - Border radius: 4px (`radius/xs`; was 24px, changed 25 Oct 2026 to match the type and icons)
-- Hover: `--cta-hover` `#F2F040`, border `#0D7A82`, shadow `4px 4px 12px rgba(15,34,41,0.33)`
+- Hover (pointer devices only, `@media (hover: hover)`; touch screens have no hover): `--cta-hover` `#F2F040`, border `#0D7A82`, shadow `4px 4px 12px rgba(15,34,41,0.33)`
 - Pressed: `#E7E626`, border and label `#0D7A82`, inner shadow `inset 4px 4px 8px rgba(45,72,85,0.33)`
 - Disabled: `rgba(231,230,38,0.5)`, border `#E7E626`
 - Focus: `outline: 2px solid #0D7A82; outline-offset: 2px`, border `#0D7A82`
@@ -459,16 +459,21 @@ Figma `4015:16415`. Live: `.btn-primary`, `.btn-yellow-guide`. Framer: Button �
 - Border radius: 16px
 
 #### Secondary (light surfaces)
-Figma `4015:16430`. Live: `.btn-secondary` (spot drawer). Framer: Button → Secondary light.
-- Background: `#F5F9F6`; border `1px solid` text-secondary `#487389` (26 Oct 2026; was `#7A9A8E`)
-- Text: Josefin Sans 400, 16px, text-secondary `#487389` (4.8 : 1; was `#2D4855`), sentence case. Quieter than the Primary it sits next to; hover brings back the `#2D4855` label on yellow
+Figma `4015:16430` (refined 26 Oct 2026). Live: `.btn-secondary` (spot drawer). Framer: Button → Secondary light.
+- Default: `#F5F9F6`, border and label text-secondary `#487389` (4.8 : 1). Quieter than the Primary it sits next to
+- Text: Josefin Sans 400, 16px ("UI Elements/Link Primary"), sentence case
 - Same padding, gap, icon size, height and radius as the Primary CTA
-- Hover: `#F2F040`, border `#E7E626`, same shadow as the Primary hover
-- Pressed: `#F2F040`, border and label `#0D7A82`, inner shadow `inset 2px 2px 8px rgba(45,72,85,0.33)`
-- Disabled: `rgba(235,242,238,0.33)`, border `#CDDBD0`, label `#7A9A8E`
+- Hover (pointer devices only): bg-card-glass `rgba(235,242,238,0.33)`, border and label `#2D4855`, same shadow as the Primary hover
+- Pressed: bg-card `#EBF2EE`, border text-secondary `#487389`, label `#2D4855`, inner shadow `inset 2px 2px 8px rgba(45,72,85,0.33)`
+- Disabled: `rgba(235,242,238,0.33)`, border `#CDDBD0`, label text-secondary `#487389`
 
 #### Secondary (dark surfaces)
-Live: `.btn-secondary.btn-secondary--dark` (Profile "Back to Map"). Framer: Button → Secondary. Transparent fill, `1px solid` text-secondary `#96B8B9` border and `#96B8B9` label (26 Oct 2026; was a yellow border and `#EDF4F0` label); hover and pressed as the light Secondary (hover label `#2D4855` on the yellow fill, pressed label `#0D7A82`). Figma's light text-secondary is still `#41687B`; the site uses `#487389`.
+Live: `.btn-secondary.btn-secondary--dark` (Quick Guide "To the Guide", Profile "Back to Map"). The same states with Figma's HiFi Dark values:
+- Default: transparent on the dark surface, border and label `#96B8B9`
+- Hover (pointer devices only): `rgba(45,72,85,0.75)`, border and label `#BDD0CC`, Primary hover shadow
+- Pressed: `#2D4855`, border `#E7E626`, label `#BDD0CC`, inner shadow as the light Secondary
+- Disabled: `rgba(45,72,85,0.75)`, border `#3D5E6A`, label `#96B8B9`
+- Figma's light text-secondary is still `#41687B`; the site uses `#487389`
 
 **Button pairs:** Back / secondary on the left, the forward primary on the right; a forward chevron goes after the label, a back chevron before it. On phones under 480px the pair stacks at full width in the same order.
 
