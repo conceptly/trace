@@ -416,7 +416,8 @@ document.addEventListener('routeFilterChange', (e) => {
     const categoryMarkers = allMarkers.filter(m => m.category === categoryId);
     const hasData = categoryMarkers.length > 0;
     
-    if (!hasData) {
+    // Only a real route without spots gets the toast (not a reset / no-route event)
+    if (!hasData && categoryId && categoryId !== 'reset') {
         // Construct a sleek on-screen toast popup instead of a native browser alert
         const toast = document.createElement('div');
         toast.textContent = "🗺️ The route is under construction, we'll add it soon!";

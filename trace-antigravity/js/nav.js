@@ -17,12 +17,14 @@ document.addEventListener('DOMContentLoaded', () => {
                             wrapper.classList.remove('mobile-open');
                             if (wrapper.closeTimer) clearTimeout(wrapper.closeTimer);
                         } else {
-                            // Click on active-closed: Deactivate route!
-                            wrapper.classList.remove('active');
-                            wrapper.classList.add('inactive');
-                            
-                            // Emit reset event to clear the map entirely
-                            document.dispatchEvent(new CustomEvent('routeFilterChange', { detail: { categoryId: 'reset' } }));
+                            // Click on active-closed: show its label again. Like desktop,
+                            // a route can't be deselected (that left an empty map and
+                            // the "under construction" toast)
+                            wrapper.classList.add('mobile-open');
+                            if (wrapper.closeTimer) clearTimeout(wrapper.closeTimer);
+                            wrapper.closeTimer = setTimeout(() => {
+                                wrapper.classList.remove('mobile-open');
+                            }, 3000); // same 3 second slide-back as on selection
                         }
                         return; // Stop here if it was already active
                     }
