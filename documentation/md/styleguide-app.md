@@ -309,9 +309,10 @@ The Framer text styles are the source of truth while the font pair is Josefin Sa
 | Style | Spec | Used for (live selector) |
 |---|---|---|
 | Section | Josefin Bold 20px, 0em, 120% | Spot drawer headings (`.spot-section h3`) |
-| Label L | Josefin Medium 20px, 0.02em, 100% | Sidebar route names (`.route-name`), Near You title. The mobile menu tiles follow Figma's "Nav Item Hamburger" instead (Josefin Regular 16px caps) |
+| Label L | Josefin Medium 18px, 0.02em, 100% (20 → 18px on 26 Oct 2026) | Map sidebar route names (`.route-name`), 12px from the route icon. The mobile menu tiles follow Figma's "Nav Item Hamburger" instead (Josefin Regular 16px caps) |
 | Label M | Josefin SemiBold 14px, 0em, uppercase | Nav items (`.nav-item`), route pills |
-| CTA title | Josefin Medium 18px, 0em, 120%, title case | Start CTA (`.cta-title`), "Start Typography Route" |
+| Sidebar label | Josefin Bold 14px, 0.08em, 120%, uppercase, `--content-3` | Map sidebar "Explore the Routes" and "Near You" (`#routes-heading`, `#desktop-nearby-heading`, 4px bottom padding) and City Guide "Filter by Route" / "Sort by" (`.sidebar-section-label`, 12px below). Caps at 14px, not sentence case at 20px: the labels support the routes instead of competing with them. On the City Guide the sidebar sets `--content-3: #96B8B9` because the dark sidebar sits on a light-theme page |
+| CTA title | Josefin Medium 16px, 0em, 120%, title case (18 → 16px on 26 Oct 2026) | Start CTA (`.cta-title`), "Start Typography Route" |
 | Spot meta | Josefin Light 14px, 120% | Author, year, address (`.spot-subtitle`, `.spot-location`) |
 | Spot body | Roboto Slab Light 16px, 140% | Drawer paragraphs (`.spot-section p`) |
 | Route tag | Josefin SemiBold 12px, 0.02em, uppercase | Breadcrumb tag (`.breadcrumb-current`), phone gem row tag (`.gem-route-tag p`) |
@@ -471,7 +472,7 @@ Live: `.btn-secondary.btn-secondary--dark` (Profile "Back to Map"). Framer: Butt
 #### Start CTA (route selector)
 Framer: Start CTA. Live: `.btn-cta`.
 - Radius 4px, min height 48px, padding 8/16, gap 12, 32px yellow icon circle (25 Oct 2026; was a pill)
-- Title: "CTA title" (18px, title case: "Start Typography Route"); the subtitle is hidden
+- Title: "CTA title" (16px, title case: "Start Typography Route"); the subtitle is hidden
 - Started: white border plus a 2px white ring at 40%, yellow label; same size as the base
 - Never type labels in caps; if caps come back, use `text-transform`
 

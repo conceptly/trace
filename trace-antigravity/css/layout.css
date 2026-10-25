@@ -526,7 +526,8 @@
 }
 
 /* Hide the desktop-only nearby section on mobile (shown on desktop by default) */
-/* Desktop sidebar headings (Framer: "Explore the routes" and "Near You" in Section, counts in Caption) */
+/* Desktop sidebar headings: small caps labels that support the routes below
+   (sentence case at 20px pulled focus from the content; 26 Oct 2026) */
 #desktop-nearby .nearby-header {
   display: flex;
   align-items: center;
@@ -536,13 +537,13 @@
 #routes-heading,
 #desktop-nearby-heading {
   font-family: 'Josefin Sans', sans-serif;
-  font-size: 20px;
+  font-size: 14px;
   font-weight: 700;
   line-height: 1.2;
-  letter-spacing: 0;
-  text-transform: none;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--content-3);
-  padding-top: 3px; /* optical offset */
+  padding-bottom: 4px;
 }
 
 #routes-heading {

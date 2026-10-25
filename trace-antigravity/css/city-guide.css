@@ -382,6 +382,7 @@ body.city-guide-page .spot-drawer .spot-drawer-content {
 
   /* ── Dark sidebar ── */
   .guide-desktop-sidebar {
+    --content-3: #96B8B9; /* dark sidebar on a light-theme page: dark secondary text */
     background-color: #2d4855;
     border-right: 0.5px solid #3d5e6a;
     flex-direction: column;
@@ -406,9 +407,9 @@ body.city-guide-page .spot-drawer .spot-drawer-content {
     font-family: 'Josefin Sans', sans-serif;
     font-size: 14px;
     font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--divider-strong);
+    letter-spacing: 0.08em;
+    text-transform: uppercase; /* caps keep section labels quieter than the routes they head */
+    color: var(--content-3); /* secondary text token */
     margin-bottom: 12px;
   }
 
