@@ -568,6 +568,14 @@ Each marker is a `<button>` with `aria-label="{Spot Name} — {Category} spot"`.
 - Desktop sidebar (Figma `4007:2`): no box around the photos; a 3-column grid with 12px gaps across the sidebar content width, so the tiles share the edges of the route rows, heading and Start CTA; 12px under the header, 4px photo corners
 - Phone header (Figma `2734:11968`): 30px icon ring, `#F5F9F6` fill, 1px text-secondary `#487389` border, 24px Near icon; "Near You" Josefin Bold; count in Caption 1 (Josefin Regular 14px, sentence case, `#2D4855`); count and chevron vertically centred on the heading's caps
 
+### Mobile menu (hamburger)
+Figma `2734:11998`. Live: `.mobile-menu-overlay` (repeated in all four pages), styles in `layout.css`.
+- Section labels ("NAVIGATE", "EXPLORE THE ROUTES", "CONTACT"): the desktop Sidebar label style, Josefin Bold 14px, 0.08em, caps, `#96B8B9`
+- Page tiles: page name in Josefin Regular 16px caps with 0.04em tracking (short signage-like names, so caps are a deliberate choice); subtitle in Caption 1, Josefin Regular 14px, sentence case, kept short enough for a 375px phone: "62 gems", "Edition 1", "The story", "Coming soon"
+- Under 390px (iPhone SE / mini): tile padding 16 → 12px, grid gap 12px, page names 15px, so "CITY GUIDE" fits
+- Profile icon: `Icon=profile-user.svg` (Figma, 26 Oct 2026)
+- Contact: four 44px dark Secondary icon buttons (site, email, LinkedIn, Instagram; `.menu-contact-btn`, 26px About link icons as CSS masks, names in `aria-label`s) and a 14px "Designed by Etual Fomina" line
+
 ### Breadcrumbs and back links
 One pattern everywhere a back chevron starts a bar (spot drawer `.spot-breadcrumbs`, About `.about-breadcrumb`, desktop City Guide `.guide-breadcrumb-desktop`, phone City Guide title row):
 - Back button 32×32: a 24px chevron with 4px padding, pulled 12px left so the chevron's tip sits on the content edge below (measured: spot drawer 24px, About and phone City Guide 16px, desktop City Guide 300px = the card column)

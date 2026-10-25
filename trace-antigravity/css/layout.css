@@ -1031,7 +1031,8 @@
   .mobile-menu-overlay.active { display: flex; }
   
   .menu-section { display: flex; flex-direction: column; gap: 16px; width: 100%; }
-  .menu-label { font-family: 'Josefin Sans', sans-serif; font-size: 16px; text-transform: uppercase; color: var(--content-2); }
+  /* Same as the desktop sidebar labels (styleguide §5 "Sidebar label") */
+  .menu-label { font-family: 'Josefin Sans', sans-serif; font-size: 14px; font-weight: 700; line-height: 1.2; letter-spacing: 0.08em; text-transform: uppercase; color: #96b8b9; }
   
   .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; width: 100%; }
   .menu-grid .full-width { grid-column: span 2; }
@@ -1079,7 +1080,7 @@
     font-family: 'Josefin Sans', sans-serif;
     font-size: 16px;                  /* Figma "Nav Item Hamburger": Regular 16, caps */
     font-weight: 400;
-    letter-spacing: 0;
+    letter-spacing: 0.04em;           /* Figma 4%: caps need a little air */
     text-transform: uppercase;
     color: #f5f9f6;                   /* Figma: var(--bg-base) */
     line-height: 1;
@@ -1088,11 +1089,19 @@
   }
   .nav-btn .subtitle {
     font-family: 'Josefin Sans', sans-serif;
-    font-size: 11px;                  /* Figma: text-[11px] */
+    font-size: 14px;                  /* Figma Caption 1; lines kept short to fit a 375px phone */
     font-weight: 400;
     color: #cddbd0;                   /* Figma: var(--bg-elevated) */
     line-height: 1.2;
     white-space: nowrap;              /* Figma: one line */
+  }
+
+  /* Small phones (iPhone SE / mini, 375px): the Figma 16px padding leaves
+     "CITY GUIDE" no room, so tighten the tiles and the page names slightly */
+  @media (max-width: 389px) {
+    .menu-grid { gap: 12px; }
+    .menu-btn.nav-btn { padding: 12px; }
+    .nav-btn .title { font-size: 15px; }
   }
 
   /* Active state — brand-trace yellow bg, dark icon/text */
@@ -1123,40 +1132,35 @@
   /* Active tap state: brighten + add inset ring */
   .route-btn.active { filter: brightness(1.25); box-shadow: inset 0 0 0 2px rgba(255,255,255,0.45); }
   
-  /* Contact / Links Buttons */
-  .contact-btn { 
-    background-color: rgba(45, 72, 85, 0.5); 
-    border-radius: 8px;               /* Figma: rounded-[8px] */
-    padding: 4px 8px;                 /* Figma: px-8 py-4 */
-    gap: 4px; 
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    border: 1px solid transparent;
+  /* Contact: 44px dark Secondary icon buttons + a credit line. The names are
+     in aria-labels; icons are the About author-card link icons (CSS masks). */
+  .menu-contact { display: flex; flex-direction: column; gap: 12px; }
+  .menu-contact-icons { display: flex; gap: 12px; }
+  .menu-contact .menu-contact-btn { /* beats .btn-secondary's padding (components.css loads later) */
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    flex-shrink: 0;
   }
-  .contact-btn .icon-circle { background: transparent; width: 24px; height: 24px; }
-  .contact-btn .title { 
-    font-family: 'Roboto Slab', serif;  /* Figma: Roboto Slab Light 15 */
-    font-size: 15px; 
-    font-weight: 300; 
+  .menu-contact-icon {
+    width: 26px;
+    height: 26px;
+    background-color: currentColor;
+    -webkit-mask: var(--contact-icon) center / 26px 26px no-repeat;
+    mask: var(--contact-icon) center / 26px 26px no-repeat;
+  }
+  .menu-contact-icon--web { --contact-icon: url('../assets/icons/Icon=link-web.svg'); }
+  .menu-contact-icon--mail { --contact-icon: url('../assets/icons/Icon=link-mail.svg'); }
+  .menu-contact-icon--linkedin { --contact-icon: url('../assets/icons/Icon=link-linkedin.svg'); }
+  .menu-contact-icon--instagram { --contact-icon: url('../assets/icons/Icon=link-instagram.svg'); }
+  .menu-contact-credit {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 14px;
     line-height: 1.2;
-    padding: 1px 0 3px;               /* Figma optical offset (Roboto sits low) */
-    color: var(--content-1);
-    transition: color 0.2s ease;
+    color: #bdd0cc;
+    margin: 0;
   }
 
-  .contact-btn:hover {
-    background-color: rgba(45, 72, 85, 0.7);
-  }
-  .contact-btn:hover .title {
-    color: var(--brand-trace);
-  }
-
-  .contact-btn:active {
-    transform: scale(0.98);
-    background-color: rgba(45, 72, 85, 0.8);
-    box-shadow: inset 2px 2px 8px rgba(0, 0, 0, 0.3);
-    border-color: rgba(254, 219, 102, 0.2);
-  }
-  
   .menu-divider { width: 100%; height: 1px; background: var(--divider-strong); margin: 0; }
   
   /* Toggle Animations */
