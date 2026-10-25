@@ -133,7 +133,7 @@
 
 .nearby-item {
   aspect-ratio: 1;
-  border-radius: 8px;
+  border-radius: 4px; /* photos sharper than their 8px box (nested corners) */
   overflow: hidden;
   background-color: var(--surface-5);
   cursor: pointer;

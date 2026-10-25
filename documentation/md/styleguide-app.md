@@ -389,11 +389,11 @@ Components and layouts use the semantic tokens. A primitive is used directly onl
 
 | Token         | Value  | Use |
 |---------------|--------|-----|
-| `radius/xs`   | 4px    | Buttons and CTAs (Primary, Secondary, Start CTA), nav items, search field, route rows and phone route tabs (left corners), City Guide filter and sort rows, desktop gem cards, Quick Guide tab, route tags, checkboxes |
-| `radius/s`    | 8px    | Larger surfaces: cards (mission, ecosystem, author, phone gem rows and their photo / colour strip), image containers (spot drawer photo), Near You box and photo tiles, About route items, Quick Guide steps, search suggestions, map tooltip, toasts, phone bottom dock (top corners), Profile preview card and its tiles, filter chips |
+| `radius/xs`   | 4px    | Buttons and CTAs (Primary, Secondary, Start CTA), nav items, search field, route rows and phone route tabs (left corners), City Guide filter and sort rows, desktop gem cards, Quick Guide tab, route tags, checkboxes, Near You photo tiles (desktop and phone; their box stays 8px) |
+| `radius/s`    | 8px    | Larger surfaces: cards (mission, ecosystem, author, phone gem rows and their photo / colour strip), image containers (spot drawer photo), Near You box, About route items, Quick Guide steps, search suggestions, map tooltip, toasts, phone bottom dock (top corners), Profile preview card and its tiles, filter chips |
 | `radius/pill` | 999px / 50% | Exceptions only: round buttons and icon circles, toggles, dots, progress bars, pill badges and Profile's pill buttons |
 
-**Two radii only (26 Oct 2026).** The site uses 4px and 8px. Pick by scale: 4px for controls and small elements (buttons, rows, tags, fields), 8px for anything that holds content (cards, photos, sheets, dropdowns). Pills and circles are the only exception, plus drawn shapes such as the Profile badge shield. The old 12 / 16 / 24px steps are retired; `--radius-lg` in `tokens.css` now equals 8px and is unused.
+**Two radii only (26 Oct 2026).** The site uses 4px and 8px. Pick by scale: 4px for controls and small elements (buttons, rows, tags, fields), 8px for anything that holds content (cards, sheets, dropdowns, photo boxes). When a shape sits inside an 8px container, it takes 4px: an inner radius equal to the outer one reads rounder than its frame (Near You photos in their 8px box). The 4px corners also carry the brand: Toronto's industrial, brutalist streets and the sharp type and icons. Pills and circles are the only exception, plus drawn shapes such as the Profile badge shield. The old 12 / 16 / 24px steps are retired; `--radius-lg` in `tokens.css` now equals 8px and is unused.
 
 Device frame (52px) is a presentation value only, not a UI token.
 
