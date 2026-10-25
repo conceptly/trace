@@ -139,13 +139,16 @@ Variable names are taken directly from the Figma design file.
   --cta-focused-border:   #0D7A82;   /* Focus / pressed accent */
   --cta-disabled:         rgba(231, 230, 38, 0.5);  /* Disabled primary button */
 
-  /* Secondary button (glass style — no solid fill) */
-  --btn-secondary-bg:           rgba(237, 244, 240, 0.25);
-  --btn-secondary-border:       #E7E626;
-  --btn-secondary-text:         #2D4855;
-  --btn-secondary-disabled-bg:  #BDD0CC;
-  --btn-secondary-disabled-border: rgba(45, 72, 85, 0.75);
-  --btn-secondary-disabled-text:   rgba(45, 72, 85, 0.75);
+  /* Buttons: the live CSS uses these mode-independent tokens (tokens.css :root).
+     Hover is for pointer devices only; the dark-surface variants are classes,
+     .btn-primary--dark and .btn-secondary--dark (styleguide §7, 26 Oct 2026). */
+  --cta-hover:            #F2F040;
+  --cta-ring:             #487389;   /* Primary and Secondary default border, Secondary label (text-secondary) */
+  --cta-secondary-fill:   #F5F9F6;
+  --cta-secondary-hover:  rgba(235, 242, 238, 0.33);
+  --cta-secondary-pressed: #EBF2EE;
+  --cta-secondary-disabled: rgba(235, 242, 238, 0.33);
+  --cta-secondary-disabled-border: #CDDBD0;
 
   /* ── Navigation ── */
   --nav-top-bg:           var(--surface-4);    /* #2D4855 dark / #FFFFFF light */
@@ -252,13 +255,8 @@ Variable names are taken directly from the Figma design file.
   /* CTA text — same surface-4 hex, now resolves to white in light mode */
   --cta-text:             #2D4855;
 
-  /* Secondary button overrides */
-  --btn-secondary-bg:           rgba(45, 72, 85, 0.08);
-  --btn-secondary-border:       #1D3240;
-  --btn-secondary-text:         #1D3240;
-  --btn-secondary-disabled-bg:  #BDD0D5;
-  --btn-secondary-disabled-border: rgba(45, 72, 85, 0.3);
-  --btn-secondary-disabled-text:   rgba(45, 72, 85, 0.3);
+  /* No button overrides per theme: the CTA tokens don't change with the mode.
+     On dark surfaces use .btn-primary--dark / .btn-secondary--dark instead. */
 
   /* Navigation */
   /* --nav-top-bg, --nav-bottom-bg etc. inherit from surface/content above */
