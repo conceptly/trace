@@ -848,14 +848,14 @@
     width: 30px; height: 30px;
     border-radius: 50%;
     background-color: #F5F9F6; /* Figma bg-base, always light */
-    border: 1.5px solid #E7E626; /* brand-trace yellow */
+    border: 1px solid #487389; /* Figma text-secondary, inside stroke (box-sizing: border-box) */
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
     overflow: visible; /* Don't clip the SVG */
     padding: 0;
   }
   .nearby-icon img {
-    width: 20px; height: 20px;
+    width: 24px; height: 24px; /* Figma Icons-opt2 24px in the 30px ring */
     display: block;
     flex-shrink: 0;
     /* SVG has its own dark fill (#2D4855) — no filter needed */
@@ -883,6 +883,7 @@
   /* Chevron — same dark color, rotate when open */
   .nearby-chevron {
     width: 12px;
+    margin-top: -3px; /* lifts the glyph 1.5px onto the caps' middle of "6 SPOTS" */
     transition: transform 0.4s ease;
     opacity: 0.6;
     filter: brightness(0); /* Make it dark */
