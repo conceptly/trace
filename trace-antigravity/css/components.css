@@ -103,9 +103,9 @@
   opacity: 0;
   font-family: 'Josefin Sans', sans-serif;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 14px;
   color: #FFFFFF;
-  padding: 0 12px 0 46px; /* align text carefully */
+  padding: 0 12px 0 48px; /* under the route name: 12 padding + 24 icon + 12 gap */
   margin: 0;
   transition: all 0.3s ease;
 }
