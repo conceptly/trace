@@ -553,9 +553,15 @@
   margin-bottom: 12px;
 }
 
-/* Framer Near you: 12px between the header and the photos box */
+/* Desktop Near You photos sit straight on the sidebar (Figma 4007:2): no box,
+   so the tiles share the edges of the route rows and the Start CTA.
+   12px between the header and the photos, 12px between tiles. */
 #desktop-nearby .nearby-grid {
   margin-top: 12px;
+  gap: 12px;
+  padding: 0;
+  border: none;
+  border-radius: 0;
 }
 
 /* Same style as the route counts (.route-meta) */
