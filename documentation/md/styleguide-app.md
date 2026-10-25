@@ -565,8 +565,9 @@ Each marker is a `<button>` with `aria-label="{Spot Name} — {Category} spot"`.
 Figma `4486:16753` (QuickTipsContainer). Live: `#guide-drawer` in `index.html`, styles `.qg-*` in `components.css`.
 - 400px on desktop (Figma 402), full width on phone; `#0F2229`, 20px top and bottom padding
 - Header: "How it works" in Headings/Caption (Josefin Medium 14, 0.1em, caps, `#BDD0CC`), 18px close icon in a 32px hit area; 0.5px `#BDD0CC` rule below
+- Cards start 32px below the header rule; no rule under the buttons
 - Cards (`.qg-card`): `#2D4855`, 8px corners, 16px padding, 16px apart. Each has a 40px `#0F2229` icon tile (4px corners) with a 24px yellow icon (CSS mask: `Icon=Map`, `Icon=tap`, `Icon=clue`, `Icon=Guide`), a Headings/H5 title (18px `#EDF4F0`) and a Body Copy Secondary line (Roboto Slab Light 15px `#BDD0CC`), 12px from the tile
-- Actions: Secondary (dark) "To the Guide" (City Guide) above Primary "Back to the Map" (closes the drawer), 12px apart, 16px above them; full width
+- Actions: Secondary (dark) "To the Guide" (City Guide) above Primary "Back to the Map" (closes the drawer), 12px apart, 32px below the last card; full width
 - No copyright line (hidden in Figma)
 
 ### Search bar
