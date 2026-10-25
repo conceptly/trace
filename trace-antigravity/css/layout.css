@@ -463,7 +463,10 @@
 
 .quick-guide-btn {
   pointer-events: auto;
-  transform: rotate(-90deg) translateY(-50%);
+  /* Rotated around its right-middle point; translate (in the rotated frame)
+     +50% of its length back up so the tab's centre sits on the map's centre,
+     and -50% of its height to sit flush with the right edge */
+  transform: rotate(-90deg) translate(50%, -50%);
   transform-origin: center right;
   background-color: var(--backgrounds-bg-card-glass, rgba(45, 72, 85, 0.75));
   backdrop-filter: blur(4px);
