@@ -568,6 +568,13 @@ Each marker is a `<button>` with `aria-label="{Spot Name} — {Category} spot"`.
 
 - Phone header (Figma `2734:11968`): 30px icon ring, `#F5F9F6` fill, 1px text-secondary `#487389` border, 24px Near icon; "Near You" Josefin Bold; count in Caption 1 (Josefin Regular 14px, sentence case, `#2D4855`); count and chevron vertically centred on the heading's caps
 
+### Breadcrumbs and back links
+One pattern everywhere a back chevron starts a bar (spot drawer `.spot-breadcrumbs`, About `.about-breadcrumb`, desktop City Guide `.guide-breadcrumb-desktop`, phone City Guide title row):
+- Back button 32×32: a 24px chevron with 4px padding, pulled 12px left so the chevron's tip sits on the content edge below (measured: spot drawer 24px, About and phone City Guide 16px, desktop City Guide 300px = the card column)
+- No gap after the button; the icon's padding is the space before the label
+- Label ("Breadcrumb" style): Josefin Medium 16px, line height 1, no tracking, `#0F2229`, 2px optical top offset. Path parts sit 4px apart; the current route is the Route tag (`.breadcrumb-current`)
+- The desktop City Guide topbar uses the grid's 28px side padding so the chevron lines up with the cards
+
 ### Quick Guide drawer
 Figma `4486:16753` (QuickTipsContainer). Live: `#guide-drawer` in `index.html`, styles `.qg-*` in `components.css`.
 - Desktop: a 400px panel (Figma 402) that hugs its content, 12px under the 64px nav, flush right, 8px left corners; max height `100vh − 64px − 24px`, the cards scroll inside when the window is shorter. The overlay starts under the nav so the nav stays undimmed

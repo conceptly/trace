@@ -71,7 +71,7 @@ html { scroll-behavior: smooth; }
 .about-breadcrumb {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0; /* the back button's padding gives the space (spot drawer breadcrumbs) */
     padding: 16px;
     border-bottom: 1px solid #cddbd0;
     background-color: #f5f9f6;
@@ -83,8 +83,10 @@ html { scroll-behavior: smooth; }
     align-items: center;
     justify-content: center;
     color: #0f2229;
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
+    padding: 4px;
+    margin-left: -12px; /* chevron tip on the content edge, as in the spot drawer */
     flex-shrink: 0;
     text-decoration: none;
     transition: opacity 0.15s ease;
@@ -98,10 +100,11 @@ html { scroll-behavior: smooth; }
     font-family: 'Josefin Sans', sans-serif;
     font-weight: 500;
     font-size: 16px;
-    letter-spacing: 0.64px;
+    letter-spacing: 0;
     line-height: 1;
     text-transform: capitalize;
     color: #0f2229;
+    padding-top: 2px; /* optical offset, as .breadcrumb-root */
 }
 
 /* ── Content Wrapper ─────────────────────────────────────────────────────── */
