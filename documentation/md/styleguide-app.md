@@ -464,7 +464,9 @@ Figma `4015:16430`. Live: `.btn-secondary` (spot drawer). Framer: Button → Sec
 - Disabled: `rgba(235,242,238,0.33)`, border `#CDDBD0`, label `#7A9A8E`
 
 #### Secondary (dark surfaces)
-Framer: Button → Secondary. Transparent fill, `1px solid #E7E626` border, `#EDF4F0` label; hover and pressed as the light Secondary.
+Live: `.btn-secondary.btn-secondary--dark` (Profile "Back to Map"). Framer: Button → Secondary. Transparent fill, `1px solid #E7E626` border, `#EDF4F0` label; hover and pressed as the light Secondary (hover label `#2D4855` on the yellow fill, pressed label `#0D7A82`).
+
+**Button pairs:** Back / secondary on the left, the forward primary on the right; a forward chevron goes after the label, a back chevron before it. On phones under 480px the pair stacks at full width in the same order.
 
 #### Start CTA (route selector)
 Framer: Start CTA. Live: `.btn-cta`.

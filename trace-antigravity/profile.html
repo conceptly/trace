@@ -378,44 +378,10 @@
             z-index: 1;
             margin-top: 32px;
         }
-        .btn-explore {
-            font-family: 'Josefin Sans', sans-serif;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: #1a2c36;
-            background: #e7e626;
-            border: none;
-            border-radius: 100px;
-            padding: 13px 28px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: background 0.2s, transform 0.15s;
+        /* Phone: stack the two buttons at full width (Back to Map first) */
+        @media (max-width: 480px) {
+            .profile-cta { flex-direction: column; align-items: stretch; width: 100%; }
         }
-        .btn-explore:hover { background: #f0ef40; transform: translateY(-1px); }
-        .btn-back {
-            font-family: 'Josefin Sans', sans-serif;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: #96b8b9;
-            background: transparent;
-            border: 1px solid rgba(189,208,213,0.2);
-            border-radius: 100px;
-            padding: 13px 28px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: color 0.2s, border-color 0.2s, transform 0.15s;
-        }
-        .btn-back:hover { color: #edf4f0; border-color: rgba(189,208,213,0.4); transform: translateY(-1px); }
     </style>
 </head>
 <body>
@@ -753,13 +719,17 @@
 
         <!-- CTAs -->
         <div class="profile-cta">
-            <a href="city-guide.html" class="btn-explore">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
-                Explore the City Guide
+            <a href="index.html" class="btn-secondary btn-secondary--dark">
+                <svg width="15" height="24" viewBox="0 0 15 24" fill="none" stroke="currentColor" aria-hidden="true">
+                    <path d="M10 18L4 12L10 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Back to Map</span>
             </a>
-            <a href="index.html" class="btn-back">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
-                Back to Map
+            <a href="city-guide.html" class="btn-primary">
+                <span>Explore the City Guide</span>
+                <svg width="15" height="24" viewBox="0 0 15 24" fill="none" stroke="currentColor" aria-hidden="true">
+                    <path d="M5 18L11 12L5 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
             </a>
         </div>
 

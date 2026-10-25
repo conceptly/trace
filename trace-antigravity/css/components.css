@@ -720,6 +720,7 @@ a.breadcrumb-root:hover {
   font-size: 16px;
   line-height: 1;
   text-transform: none;
+  text-decoration: none; /* also used on <a> links */
   cursor: pointer;
   transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
 }
@@ -793,6 +794,22 @@ a.breadcrumb-root:hover {
   color: var(--cta-ring);
   box-shadow: none;
   cursor: not-allowed;
+}
+
+/* Secondary on dark surfaces (styleguide §7): transparent, yellow border,
+   light label; hover and pressed as the light Secondary */
+.btn-secondary--dark {
+  background-color: transparent;
+  border-color: var(--cta-default);
+  color: #edf4f0;
+}
+
+.btn-secondary--dark:hover {
+  color: var(--cta-text);
+}
+
+.btn-secondary--dark:active {
+  color: var(--cta-focused-border);
 }
 
 .btn-primary:focus-visible,
