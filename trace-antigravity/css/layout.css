@@ -530,7 +530,7 @@
    (sentence case at 20px pulled focus from the content; 26 Oct 2026) */
 #desktop-nearby .nearby-header {
   display: flex;
-  align-items: center;
+  align-items: baseline; /* "NEAR YOU" and "6 spots" share a baseline (different fonts and padding) */
   justify-content: space-between;
 }
 
@@ -563,7 +563,6 @@
   letter-spacing: 0;
   text-transform: none;
   color: var(--content-3);
-  padding-top: 3px; /* optical offset */
 }
 
 .desktop-only {
