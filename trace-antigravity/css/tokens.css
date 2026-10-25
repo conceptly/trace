@@ -61,7 +61,7 @@
 
   --content-1: #EDF4F0;
   --content-2: #BDD0CC;
-  --content-3: #8AADB5;
+  --content-3: #96B8B9;   /* secondary text: AA 4.5+ on #2D4855 cards */
 
   --divider-soft: #8AADB5;
   --divider-strong: #3D5E6A;
@@ -84,7 +84,7 @@
 
   --content-1: #1D3240;
   --content-2: #2D4855;
-  --content-3: #3A6070;
+  --content-3: #487389;   /* secondary text: AA 4.5+ on #EBF2EE cards */
 
   --divider-soft: #3A6070;
   --divider-strong: #BDD0D5;

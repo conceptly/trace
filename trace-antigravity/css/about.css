@@ -489,7 +489,7 @@ html { scroll-behavior: smooth; }
    with the label's 4px bottom padding dropped (text sits 2px lower) */
 @media (hover: hover) {
     .about-link-item:hover {
-        color: #8aadb5;
+        color: #96b8b9;
     }
 }
 

@@ -90,7 +90,9 @@ content-3  →  muted text / captions / inactive icons
 |---|---|---|---|---|
 | content-1 | `--content-1` | `#EDF4F0` | 12.0 : 1 | AAA |
 | content-2 | `--content-2` | `#BDD0CC` | 7.9 : 1 | AAA |
-| content-3 | `--content-3` | `#8AADB5` | 5.3 : 1 | AA |
+| content-3 | `--content-3` | `#96B8B9` | 4.54 : 1 on `#2D4855` cards, 7.8 : 1 on surface-1 | AA |
+
+> **Secondary text (`content-3`, 26 Oct 2026).** Was `#8AADB5` dark / `#3A6070` light, and Figma's text-secondary was `#7A9A8E` (2.7 : 1, failing). The rule: secondary text stays below body copy in contrast but never below AA (4.5 : 1) on any surface it sits on, so it lands just above the AA floor in both themes. Hues follow body copy: light `#487389` has the same hue and saturation as text-body `#2D4855` (HSL 200° / 31%), dark `#96B8B9` (OKLCH 199°) sits next to text-body `#BDD0CC` (182°). Light `#487389` is 4.38 : 1 on `--surface-3` `#E4EFF2`, so keep light secondary text off surface-3.
 
 ### Dividers
 
@@ -98,10 +100,10 @@ Two divider tokens exist to distinguish structural edges from soft internal sepa
 
 | Token | CSS var | Hex | Use for |
 |---|---|---|---|
-| divider-soft | `--divider-soft` | `#8AADB5` | Sidebar section separators, subtle rule lines within a panel |
+| divider-soft | `--divider-soft` | `#8AADB5` | Sidebar section separators, subtle rule lines within a panel. Not for text (4.0 : 1 on cards): use `--content-3` |
 | divider-strong | `--divider-strong` | `#3D5E6A` | Card borders, nav borders, structural page-level hairlines |
 
-> `--divider-soft` shares its value with `--content-3`. This is intentional — a soft internal divider should visually read at the same weight as muted text, so it recedes within a panel rather than competing with card borders.
+> `--divider-soft` used to share its value with `--content-3`; since 26 Oct 2026 `--content-3` is `#96B8B9` for AA on cards, and the divider keeps `#8AADB5`. This is intentional — a soft internal divider should visually read at the same weight as muted text, so it recedes within a panel rather than competing with card borders.
 
 ### Brand & Interactive
 
@@ -119,7 +121,7 @@ Two divider tokens exist to distinguish structural edges from soft internal sepa
 | Top Nav BG | `#2D4855` | `--surface-4` |
 | Bottom Nav BG | `#223740` | `--surface-3` |
 | Active Icon | `#EDF4F0` | `--content-1` |
-| Inactive Icon | `#8AADB5` | `--content-3` — 5.3 : 1 ✓ AA |
+| Inactive Icon | `#96B8B9` | `--content-3` — 4.54 : 1 on cards ✓ AA |
 | Active Pill BG | `#2D4855` | `--surface-4` |
 
 ### Search & Inputs
@@ -164,7 +166,7 @@ All contrast ratios measured against the primary screen background (`--surface-3
 |---|---|---|---|---|
 | content-1 | `--content-1` | `#1D3240` | 11.4 : 1 | AAA |
 | content-2 | `--content-2` | `#2D4855` | 7.5 : 1 | AAA |
-| content-3 | `--content-3` | `#3A6070` | 5.1 : 1 | AA |
+| content-3 | `--content-3` | `#487389` | 4.52 : 1 on `#EBF2EE` cards, 4.65 on surface-2 | AA |
 
 ### Dividers
 
@@ -173,7 +175,7 @@ All contrast ratios measured against the primary screen background (`--surface-3
 | divider-soft | `--divider-soft` | `#3A6070` | Sidebar section separators, subtle rule lines within a panel |
 | divider-strong | `--divider-strong` | `#BDD0D5` | Card borders, nav borders, structural page-level hairlines |
 
-> In light mode `--divider-soft` shares its value with `--content-3` (`#3A6070`), and `--divider-strong` shares its value with `--surface-5` (`#BDD0D5`). Same principle as dark mode — intentional.
+> In light mode `--divider-soft` keeps `#3A6070` (`--content-3` moved to `#487389` on 26 Oct 2026), and `--divider-strong` shares its value with `--surface-5` (`#BDD0D5`). Same principle as dark mode — intentional.
 
 ### Brand & Interactive
 
@@ -192,7 +194,7 @@ All contrast ratios measured against the primary screen background (`--surface-3
 | Top Nav BG | `#FFFFFF` | `--surface-4` |
 | Bottom Nav BG | `#EDF5F7` | `--surface-2` |
 | Active Icon | `#1D3240` | `--content-1` |
-| Inactive Icon | `#3A6070` | `--content-3` — 5.1 : 1 on surface-2 ✓ AA |
+| Inactive Icon | `#487389` | `--content-3` — 4.65 : 1 on surface-2 ✓ AA |
 | Active Pill BG | `#DDE9EC` | — |
 
 ### Search & Inputs
@@ -201,7 +203,7 @@ All contrast ratios measured against the primary screen background (`--surface-3
 |---|---|
 | Search BG | `rgba(45, 72, 85, 0.08)` |
 | Search Border | `rgba(45, 72, 85, 0.15)` |
-| Search Text | `#3A6070` — `--content-3` |
+| Search Text | `#487389` — `--content-3` |
 | Caret Colour | `#1D3240` — `--content-1` |
 
 These apply to inputs that sit on light surfaces, not to the top-nav search pill (see the dark-mode table). The mobile floating search pill is a light surface: background `rgba(235, 242, 238, 0.9)`, typed text `#0F2229`. No placeholder text (see Search bar in §7).
@@ -575,8 +577,8 @@ Figma `4443:14728` (desktop) and `4443:14814` (mobile). Live: `.about-link-item`
 - Optional 18px left / right icon, 4px gap, label Josefin Sans Regular 16px, line height 1 (text style "UI Elements/Link Primary")
 - Mobile: 40px row; in the author card each row has a `1px` `#3D5E6A` divider below and the rows sit 4px apart
 - Desktop: no fixed height; the author card spreads the four links across one row
-- Light surfaces: default `#2D4855` (text-body), hover `#7A9A8E` (text-secondary), pressed `#0F2229` (text-primary)
-- Dark surfaces (author card): default `#BDD0CC`, hover `#8AADB5`, pressed `#EDF4F0`
+- Light surfaces: default `#2D4855` (text-body), hover `#487389` (text-secondary), pressed `#0F2229` (text-primary)
+- Dark surfaces (author card): default `#BDD0CC`, hover `#96B8B9`, pressed `#EDF4F0`
 - Hover exists on the desktop component only, so the live CSS wraps it in `@media (hover: hover)`
 - Pressed drops the label's 4px bottom padding, so the text sits 2px lower (`translateY(2px)` live)
 - Icons follow the text colour. Live icons are CSS masks (`Icon=link-web / -mail / -linkedin / -instagram.svg`) filled with `currentColor`

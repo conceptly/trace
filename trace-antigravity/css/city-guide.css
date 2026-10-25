@@ -461,7 +461,7 @@ body.city-guide-page .spot-drawer .spot-drawer-content {
   .sidebar-route-count {
     font-family: 'Josefin Sans', sans-serif;
     font-size: 14px;
-    color: #8aadb5;
+    color: #96b8b9;
     letter-spacing: 0.04em;
   }
 
@@ -562,7 +562,7 @@ body.city-guide-page .spot-drawer .spot-drawer-content {
   .sidebar-result-summary {
     font-family: 'Josefin Sans', sans-serif;
     font-size: 14px;
-    color: #8aadb5;
+    color: #96b8b9;
     letter-spacing: 0.04em;
   }
 
@@ -577,7 +577,7 @@ body.city-guide-page .spot-drawer .spot-drawer-content {
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #8aadb5;
+    color: #96b8b9;
     background: transparent;
     border: 0.5px solid #3d5e6a;
     border-radius: 8px;
@@ -626,7 +626,7 @@ body.city-guide-page .spot-drawer .spot-drawer-content {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #8aadb5;
+    color: #487389;
     width: 22px;
     height: 22px;
     flex-shrink: 0;
@@ -707,7 +707,7 @@ body.city-guide-page .spot-drawer .spot-drawer-content {
   .route-group-count {
     font-family: 'Josefin Sans', sans-serif;
     font-size: 14px;
-    color: var(--divider-soft); /* #3A6070 on this light page, AA contrast */
+    color: var(--content-3); /* secondary text, #487389 on this light page */
     letter-spacing: 0.04em;
   }
 
@@ -942,7 +942,7 @@ body.city-guide-page .nav-btn.active .subtitle { color: #2d4855 !important; }
 .search-suggestion-empty {
   font-family: 'Josefin Sans', sans-serif;
   font-size: 12px;
-  color: #8aadb5;
+  color: #96b8b9;
   padding: 12px 14px;
   text-align: center;
   letter-spacing: 0.04em;
