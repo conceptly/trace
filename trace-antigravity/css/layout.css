@@ -853,38 +853,24 @@
   }
   .nearby-header-left {
     display: flex; align-items: center; gap: 12px;
+    min-height: 30px; /* the row keeps the height the 30px icon ring gave it: same dock
+                         height and tap area, and the route tabs stay centred */
   }
   .nearby-header-right {
     display: flex; align-items: center; gap: 4px;
   }
 
-  /* Near You icon circle — hardcoded light bg so it's always visible */
-  .nearby-icon {
-    width: 30px; height: 30px;
-    border-radius: 50%;
-    background-color: #F5F9F6; /* Figma bg-base, always light */
-    border: 1px solid #487389; /* Figma text-secondary, inside stroke (box-sizing: border-box) */
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    overflow: visible; /* Don't clip the SVG */
-    padding: 0;
-  }
-  .nearby-icon img {
-    width: 24px; height: 24px; /* Figma Icons-opt2 24px in the 30px ring */
-    display: block;
-    flex-shrink: 0;
-    /* SVG has its own dark fill (#2D4855) — no filter needed */
-  }
-
-  /* Near You heading — hardcoded Figma light-mode dark text */
+  /* Same as the desktop sidebar labels (styleguide §5 "Sidebar label"); no icon,
+     so the Start CTA above stays the hero. text-secondary on the light dock */
   #mobile-bottom-dock #nearby-heading {
     margin: 0;
-    color: #1D3240 !important; /* Figma text-primary, always dark */
+    color: #487389 !important;
     font-family: 'Josefin Sans', sans-serif;
-    font-size: 17px;
+    font-size: 14px;
     font-weight: 700;
-    text-transform: capitalize;
-    letter-spacing: 0;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
   }
 
   /* Spots count — hardcoded Figma text-body color */

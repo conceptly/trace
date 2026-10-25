@@ -313,7 +313,7 @@ The Framer text styles are the source of truth while the font pair is Josefin Sa
 | Label M | Josefin SemiBold 14px, 0em, uppercase | Nav items (`.nav-item`), route pills |
 | Route meta | Josefin Regular 16px, `--content-2` `#BDD0CC`; `--content-1` `#EDF4F0` on the selected row | Map route counts (`.route-meta`, "12 spots") and the Near You count (`#desktop-spots-count`, on the "NEAR YOU" baseline). The selected-row colour keeps AA on the Art Objects tint (`#BDD0CC` is 3.8 : 1 there) |
 | Route description | Josefin Regular 14px, `#FFFFFF` | Selected route's line under the name (`.route-description`), indented 48px so it starts under the route name |
-| Sidebar label | Josefin Bold 14px, 0.08em, 120%, uppercase, `--content-3` | Map sidebar "Explore the Routes" and "Near You" (`#routes-heading`, `#desktop-nearby-heading`, 4px bottom padding) and City Guide "Filter by Route" / "Sort by" (`.sidebar-section-label`, 12px below). Caps at 14px, not sentence case at 20px: the labels support the routes instead of competing with them. On the City Guide the sidebar sets `--content-3: #96B8B9` because the dark sidebar sits on a light-theme page |
+| Sidebar label | Josefin Bold 14px, 0.08em, 120%, uppercase, `--content-3` | Phone Near You dock heading (`#nearby-heading`, `#487389` on the light dock), mobile menu section labels, map sidebar "Explore the Routes" and "Near You" (`#routes-heading`, `#desktop-nearby-heading`, 4px bottom padding) and City Guide "Filter by Route" / "Sort by" (`.sidebar-section-label`, 12px below). Caps at 14px, not sentence case at 20px: the labels support the routes instead of competing with them. On the City Guide the sidebar sets `--content-3: #96B8B9` because the dark sidebar sits on a light-theme page |
 | CTA title | Josefin Medium 16px, 0em, 120%, title case (18 → 16px on 26 Oct 2026) | Start CTA (`.cta-title`), "Start Typography Route" |
 | Spot meta | Josefin Light 14px, 120% | Author, year, address (`.spot-subtitle`, `.spot-location`) |
 | Spot body | Roboto Slab Light 16px, 140% | Drawer paragraphs (`.spot-section p`) |
@@ -566,7 +566,7 @@ Each marker is a `<button>` with `aria-label="{Spot Name} — {Category} spot"`.
 - Drag handle: 56×3px pill, `#5A8A95` (dark) / `#B0C5CA` (light), centred
 - `role="region" aria-label="Spots near you"`
 - Desktop sidebar (Figma `4007:2`): no box around the photos; a 3-column grid with 12px gaps across the sidebar content width, so the tiles share the edges of the route rows, heading and Start CTA; 12px under the header, 4px photo corners
-- Phone header (Figma `2734:11968`): 30px icon ring, `#F5F9F6` fill, 1px text-secondary `#487389` border, 24px Near icon; "Near You" Josefin Bold; count in Caption 1 (Josefin Regular 14px, sentence case, `#2D4855`); count and chevron vertically centred on the heading's caps
+- Phone header: no icon (26 Oct 2026; the ring and pin felt busy under the Start CTA). "NEAR YOU" in the Sidebar label style (Josefin Bold 14px, 0.08em, caps) in text-secondary `#487389` (4.8 : 1 on the light dock), as on desktop and in the mobile menu; count in Caption 1 (Josefin Regular 14px, `#2D4855`) with the chevron, all on one line. The row keeps a 30px minimum height so the closed dock stays 69px and the route tabs stay centred
 
 ### Mobile menu (hamburger)
 Figma `2734:11998`. Live: `.mobile-menu-overlay` (repeated in all four pages), styles in `layout.css`.
