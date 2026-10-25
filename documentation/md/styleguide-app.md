@@ -517,7 +517,7 @@ Framer: Start CTA. Live: `.btn-cta`.
 
 #### Route side nav (Map screen)
 - Right-anchored, icon-only buttons
-- Size: 54×48px closed (184px open), border radius `4px 0 0 4px` (rounded left only), padding 8/12, gap 8, 30px icon circle. Desktop route rows (`.route-item`): padding 8/12, 4px corners, 12px between the icon and the name (26 Oct 2026; was 8)
+- Size: 54×48px closed (184px open), border radius `4px 0 0 4px` (rounded left only), padding 8/12, a 30px icon circle centred in the closed tab with a 24px icon (Figma SideNavItem1 `2734:12976`); tabs 16px apart (one every 64px). The phone sizes are scoped to `.explore-routes` because the desktop route-row rules in `components.css` load later. Desktop route rows (`.route-item`): padding 8/12, 4px corners, 12px between the icon and the name (26 Oct 2026; was 8)
 - Background: `{categoryHex}CC` (dark) / `{categoryHex}DD` (light)
 - Each button has `aria-label="{Route Name} route"`
 - No visible text labels — all labelling through `aria-label` only

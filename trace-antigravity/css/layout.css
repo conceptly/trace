@@ -694,7 +694,7 @@
   .side-section.explore-routes {
     position: absolute; right: 0; top: 15vh; transform: none;
     pointer-events: auto; padding: 0; margin: 0; border: none;
-    background: transparent; display: flex; flex-direction: column; gap: 12px; height: auto;
+    background: transparent; display: flex; flex-direction: column; gap: 16px; height: auto; /* Figma: 48px tabs every 64px */
     align-items: flex-end; z-index: 100;
   }
   .side-section.explore-routes h2,
@@ -746,7 +746,13 @@
   .explore-routes .route-icon img {
     filter: none !important;
   }
-  /* The img dropshadow logic relies on filter, we just rely on the existing filter drop shadow for color but we need the drop shadow to be colored using our variable. Wait... */
+
+  /* components.css (desktop route rows) loads after this file, so scope the
+     phone tab sizes to .explore-routes: 30px circle centred in the 54px tab,
+     24px icon (Figma SideNavItem1 2734:12976), no desktop row margin */
+  .explore-routes .route-wrapper { margin: 0; }
+  .explore-routes .route-icon { width: 30px; height: 30px; }
+  .explore-routes .route-icon img { width: 24px !important; height: 24px; } /* beats the inline 16px used on desktop */
   
   .route-info { display: flex; align-items: center; white-space: nowrap; opacity: 0; transition: opacity 0.3s 0.18s ease; }
   .route-wrapper.mobile-open .route-info { opacity: 1; }
