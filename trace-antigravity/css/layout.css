@@ -692,7 +692,10 @@
 
   /* Explore Routes -> Sliding Tabs docked to Right Edge */
   .side-section.explore-routes {
-    position: absolute; right: 0; top: 15vh; transform: none;
+    /* Centred in the open map (Figma 2734:11961): between the 64px nav and the
+       Start CTA, whose top is 130px from the bottom (69px closed Near You dock +
+       12px gap + 49px button). Midpoint = 64 + (100% - 64 - 130) / 2 = 50% - 33px */
+    position: absolute; right: 0; top: calc(50% - 33px); bottom: auto; transform: translateY(-50%);
     pointer-events: auto; padding: 0; margin: 0; border: none;
     background: transparent; display: flex; flex-direction: column; gap: 16px; height: auto; /* Figma: 48px tabs every 64px */
     align-items: flex-end; z-index: 100;
