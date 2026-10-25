@@ -3,7 +3,7 @@
 **Companion to design.md. Paste both files at the start of every Claude Code session.**  
 **Figma file:** https://www.figma.com/design/qWtyO6CR3xF5vrACpVBjuU/Trace-Mi-Fi-Backup-March-27?node-id=2423-4831
 
-> **October 2026: the site is moving to Framer.** Sections 0–15 describe the current static build (vanilla HTML/CSS/JS in `trace-antigravity/`, hosted on Netlify), which stays live until cutover. Section 16 is the migration plan. Progress is tracked in [migration-progress.md](migration-progress.md).
+> **26 October 2026: the Framer migration is paused.** Sections 0–15 describe the static build (vanilla HTML/CSS/JS in `trace-antigravity/`, hosted on Netlify), which stays the live site. Section 16 keeps the Framer plan for reference. Progress up to the pause is in [migration-progress.md](migration-progress.md).
 
 ---
 
@@ -1276,6 +1276,8 @@ Use these if Claude Code has Figma plugin access.
 ---
 
 ## 16. Migration to Framer (plan, October 2026)
+
+> ⏸ Paused on 26 Oct 2026. Kept for reference; the static build stays live.
 
 Progress is tracked in [migration-progress.md](migration-progress.md). Update that file whenever a step changes status; this section only changes when the plan changes.
 
