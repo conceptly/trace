@@ -873,10 +873,14 @@
   }
 
   /* Spots count — hardcoded Figma text-body color */
+  /* Figma "Body Copy/Caption 1": Josefin Regular 14px, sentence case (overrides .label-small) */
   #mobile-bottom-dock .nearby-spots-count {
     color: #2D4855 !important; /* Figma text-body */
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0;
+    text-transform: none;
     font-family: 'Josefin Sans', sans-serif;
   }
 

@@ -566,7 +566,7 @@ Each marker is a `<button>` with `aria-label="{Spot Name} — {Category} spot"`.
 - Drag handle: 56×3px pill, `#5A8A95` (dark) / `#B0C5CA` (light), centred
 - `role="region" aria-label="Spots near you"`
 
-- Phone header (Figma `2734:11968`): 30px icon ring, `#F5F9F6` fill, 1px text-secondary `#487389` border, 24px Near icon; "Near You" Josefin Bold, count and chevron vertically centred on the heading's caps
+- Phone header (Figma `2734:11968`): 30px icon ring, `#F5F9F6` fill, 1px text-secondary `#487389` border, 24px Near icon; "Near You" Josefin Bold; count in Caption 1 (Josefin Regular 14px, sentence case, `#2D4855`); count and chevron vertically centred on the heading's caps
 
 ### Quick Guide drawer
 Figma `4486:16753` (QuickTipsContainer). Live: `#guide-drawer` in `index.html`, styles `.qg-*` in `components.css`.
