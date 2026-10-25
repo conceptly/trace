@@ -491,6 +491,28 @@
   padding-top: 32px; /* Figma: 16px gap + 16px top padding below the last card */
 }
 
+/* Desktop Quick Guide: a panel that hugs its content under the 64px nav,
+   flush right with 8px left corners; scrolls inside when the window is short.
+   The overlay starts under the nav so the nav stays readable. Phone stays
+   full screen (below). */
+@media (min-width: 769px) {
+  #guide-drawer {
+    top: calc(64px + 12px);
+    height: auto;
+    max-height: calc(100vh - 64px - 24px);
+    border-radius: 8px 0 0 8px;
+  }
+
+  #guide-drawer .drawer-content {
+    min-height: 0; /* lets the card list scroll inside the max height */
+  }
+
+  #guide-overlay {
+    top: 64px;
+    height: calc(100% - 64px);
+  }
+}
+
 /* Responsive adjustments for drawer */
 @media (max-width: 768px) {
   .drawer {
