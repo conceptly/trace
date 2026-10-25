@@ -89,13 +89,17 @@
 }
 
 .route-meta {
-  font-size: 13px;
+  font-size: 16px;
   display: flex;
   gap: 4px;
+  color: var(--content-2, #bdd0cc); /* body text, a step below the route name */
 }
 
-.route-count { color: #f5f9f6; }
-.route-unit { color: #ebf2ee; }
+/* Selected row: the 75% route tint is too dark for #BDD0CC on Art Objects
+   (3.8 : 1), so the count uses primary text there (5.5 : 1 and up) */
+.route-wrapper.active .route-meta {
+  color: var(--content-1, #edf4f0);
+}
 
 .route-description {
   max-height: 0;
