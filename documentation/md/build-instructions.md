@@ -121,7 +121,7 @@ Variable names are taken directly from the Figma design file.
   /* ── Content (text & icons) ── */
   --content-1:            #EDF4F0;   /* Primary — H1–H3, active icons — 12.0:1 AAA */
   --content-2:            #BDD0CC;   /* Secondary — body copy, labels — 7.9:1 AAA */
-  --content-3:            #8AADB5;   /* Muted — captions, metadata — 5.3:1 AA */
+  --content-3:            #96B8B9;   /* Secondary text — 4.54:1 on #2D4855 cards, AA (was #8AADB5, 26 Oct 2026) */
 
   /* Translucent content variant (inactive states — use sparingly) */
   --content-1-glass:      rgba(237, 244, 240, 0.5);
@@ -130,7 +130,7 @@ Variable names are taken directly from the Figma design file.
   /* ── Internal section divider (softer than surface-5) ── */
   /*    Use content-3 for subtle internal separators within a panel.      */
   /*    Use surface-5 for structural card borders and page-level dividers. */
-  --divider-soft:         #8AADB5;   /* Sidebar section separator — same as content-3 */
+  --divider-soft:         #8AADB5;   /* Sidebar section separator (lines only, not text) */
   --divider-strong:       #3D5E6A;   /* Card borders, structural hairlines — same as surface-5 */
 
   /* ── Brand & interactive ── */
@@ -151,7 +151,7 @@ Variable names are taken directly from the Figma design file.
   --nav-top-bg:           var(--surface-4);    /* #2D4855 dark / #FFFFFF light */
   --nav-bottom-bg:        var(--surface-3);    /* #223740 dark / #EDF5F7 light */
   --nav-active-icon:      var(--content-1);    /* #EDF4F0 dark / #1D3240 light */
-  --nav-inactive-icon:    var(--content-3);    /* #8AADB5 dark / #3A6070 light */
+  --nav-inactive-icon:    var(--content-3);    /* #96B8B9 dark / #487389 light */
   --nav-active-pill:      var(--surface-4);    /* #2D4855 dark / #DDE9EC light */
 
   /* ── Search & inputs ── */
@@ -197,10 +197,10 @@ Variable names are taken directly from the Figma design file.
   --bottomnav-height:   64px;
 
   /* ── Border radius ── */
-  --radius-sm:    8px;
-  --radius-md:   12px;
-  --radius-lg:   16px;
-  --radius-xl:   24px;
+  /* 4px and 8px only (26 Oct 2026, styleguide §6); pills and circles excepted */
+  --radius-sm:    4px;
+  --radius-md:    8px;
+  --radius-lg:    8px;
   --radius-full: 50px;
 
   /* ── Typography: font families ── */
@@ -240,13 +240,13 @@ Variable names are taken directly from the Figma design file.
   /* Content */
   --content-1:            #1D3240;   /* 11.4:1 on surface-3 AAA */
   --content-2:            #2D4855;   /* 7.5:1 on surface-3 AAA */
-  --content-3:            #3A6070;   /* 5.1:1 on surface-3 AA */
+  --content-3:            #487389;   /* Secondary text — 4.52:1 on #EBF2EE cards, AA (was #3A6070, 26 Oct 2026); keep off surface-3 */
 
   --content-1-glass:      rgba(29, 50, 64, 0.5);
   --content-2-glass:      rgba(45, 72, 85, 0.5);
 
   /* Dividers */
-  --divider-soft:         #3A6070;   /* Sidebar section separator in light mode */
+  --divider-soft:         #3A6070;   /* Sidebar section separator in light mode (lines only) */
   --divider-strong:       #BDD0D5;   /* Card borders, structural hairlines — same as surface-5 */
 
   /* CTA text — same surface-4 hex, now resolves to white in light mode */

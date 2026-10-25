@@ -311,6 +311,8 @@ The Framer text styles are the source of truth while the font pair is Josefin Sa
 | Section | Josefin Bold 20px, 0em, 120% | Spot drawer headings (`.spot-section h3`) |
 | Label L | Josefin Medium 18px, 0.02em, 100% (20 → 18px on 26 Oct 2026) | Map sidebar route names (`.route-name`), 12px from the route icon. The mobile menu tiles follow Figma's "Nav Item Hamburger" instead (Josefin Regular 16px caps) |
 | Label M | Josefin SemiBold 14px, 0em, uppercase | Nav items (`.nav-item`), route pills |
+| Route meta | Josefin Regular 16px, `--content-2` `#BDD0CC`; `--content-1` `#EDF4F0` on the selected row | Map route counts (`.route-meta`, "12 spots") and the Near You count (`#desktop-spots-count`, on the "NEAR YOU" baseline). The selected-row colour keeps AA on the Art Objects tint (`#BDD0CC` is 3.8 : 1 there) |
+| Route description | Josefin Regular 14px, `#FFFFFF` | Selected route's line under the name (`.route-description`), indented 48px so it starts under the route name |
 | Sidebar label | Josefin Bold 14px, 0.08em, 120%, uppercase, `--content-3` | Map sidebar "Explore the Routes" and "Near You" (`#routes-heading`, `#desktop-nearby-heading`, 4px bottom padding) and City Guide "Filter by Route" / "Sort by" (`.sidebar-section-label`, 12px below). Caps at 14px, not sentence case at 20px: the labels support the routes instead of competing with them. On the City Guide the sidebar sets `--content-3: #96B8B9` because the dark sidebar sits on a light-theme page |
 | CTA title | Josefin Medium 16px, 0em, 120%, title case (18 → 16px on 26 Oct 2026) | Start CTA (`.cta-title`), "Start Typography Route" |
 | Spot meta | Josefin Light 14px, 120% | Author, year, address (`.spot-subtitle`, `.spot-location`) |
@@ -325,6 +327,7 @@ The Framer text styles are the source of truth while the font pair is Josefin Sa
 - ITC Avant Garde Gothic Pro at Label Small and Map Label levels must always be uppercase with `letter-spacing: 0.1em` or wider.
 - Adelle body text must have `line-height: 1.6` (relaxed) minimum.
 - Do not apply Adelle to any interactive element (buttons, nav items, chips). All interactive text uses ITC Avant Garde Gothic Pro (or its fallback).
+- Paragraphs use `text-wrap: pretty` (set on `p` in `base.css`) so no paragraph ends on a single short word. Labels that must stay on one line keep `white-space: nowrap` in their own class, which wins over the `p` rule.
 - Heading levels (`<h1>`, `<h2>`) must follow document hierarchy — never skip levels for visual purposes. Use CSS to restyle visually if needed.
 
 ---
@@ -413,7 +416,7 @@ Device frame (52px) is a presentation value only, not a UI token.
 
 Values found in the live CSS and the Framer build that are not on the 4px grid. **Framer: fixed on 24 Oct 2026** (all components, Home and City Guide). The live CSS still has them; fix those while refining each page.
 
-Allowed exceptions (kept on purpose): optical-offset label wrappers (2–3px top padding, and the spot drawer route tag at 3/1), the Day/Night knob clearance (2px), strokes and bars (0.5–1px borders, 3px route stripes and note bars), logo artwork widths, widths derived from the 390px phone frame (390, 358 = 390 − 2×16, 163 = menu tile column), and the pill radius 999px.
+Allowed exceptions (kept on purpose): optical-offset label wrappers (2–3px top padding, and the spot drawer route tag at 3/1; the Profile "In Development" badge label 2px; the map footer © dropped 0.1em to sit on the lowercase middle), the Day/Night knob clearance (2px), strokes and bars (0.5–1px borders, 3px route stripes and note bars), logo artwork widths, widths derived from the 390px phone frame (390, 358 = 390 − 2×16, 163 = menu tile column), and the pill radius 999px.
 
 | Value | Where | Becomes |
 |-------|-------|---------|
@@ -509,7 +512,7 @@ Framer: Start CTA. Live: `.btn-cta`.
 
 #### Route side nav (Map screen)
 - Right-anchored, icon-only buttons
-- Size: 54×48px closed (184px open), border radius `4px 0 0 4px` (rounded left only), padding 8/12, gap 8, 30px icon circle — same spacing as the desktop route rows (25 Oct 2026)
+- Size: 54×48px closed (184px open), border radius `4px 0 0 4px` (rounded left only), padding 8/12, gap 8, 30px icon circle. Desktop route rows (`.route-item`): padding 8/12, 4px corners, 12px between the icon and the name (26 Oct 2026; was 8)
 - Background: `{categoryHex}CC` (dark) / `{categoryHex}DD` (light)
 - Each button has `aria-label="{Route Name} route"`
 - No visible text labels — all labelling through `aria-label` only
