@@ -481,7 +481,8 @@ Live: `.btn-secondary.btn-secondary--dark` (Quick Guide "To the Guide", Profile 
 Framer: Start CTA. Live: `.btn-cta`.
 - Radius 4px, min height 48px, padding 8/16, gap 12, 32px yellow icon circle (25 Oct 2026; was a pill)
 - Title: "CTA title" (16px, title case: "Start Typography Route"); the subtitle is hidden
-- Started: white border plus a 2px white ring at 40%, yellow label; same size as the base
+- Started (route line shown): label "Typography Route Started" and a 14px close icon instead of the chevron; white border plus a 2px white ring at 40%; `aria-pressed="true"` and the name "End the Typography route". Tapping again ends the route (back to "Start … Route"); choosing another route ends it too and hides the previous line
+- Later: the Figma ButtonRoutes `NextSpotRoute` state (`2734:13370`): "NEXT: Kensington Market Sign", "Tap to visit", "1 of 5" (see migration-progress, Future)
 - Never type labels in caps; if caps come back, use `text-transform`
 
 #### Icon Button — Default

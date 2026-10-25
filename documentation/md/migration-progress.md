@@ -196,6 +196,7 @@ Fixes still land on the current site until cutover. Port each one to Framer too.
 | 26 Oct 2026 | Phone route tabs on the map (Figma `2734:12976`): the desktop route-row rules (loaded later in `components.css`) were shrinking the icon circle to 24px (3px off the tab's centre), the icon to 16px and adding an 8px margin under each tab. Scoped the phone sizes to `.explore-routes`: 30px circle centred in the 54px tab, 24px icon, 16px between tabs (one every 64px, was 68). Desktop unchanged. The stack is now centred in the open map between the nav and the Start CTA instead of `top: 15vh`, as in Figma `2734:11961`: 126px clear above and below at 686px tall (it sat 39px under the nav and 213px above the CTA), centre within 11px of the Quick Guide tab's | (this commit) | ⏸ |
 | 26 Oct 2026 | Phone route tabs: one route is always selected, as on desktop. Tapping the active closed tab used to deselect it, which sent a "reset" event that `map.js` treated as a route with no spots: every marker hidden, Near You "0 spots" and the "under construction" toast. Now it slides the label out again (`nav.js`), and `map.js` only shows the toast for a real route without spots | (this commit) | ⏸ |
 | 26 Oct 2026 | Phone Near You dock header: icon ring and pin removed; "Near You" 17px Bold `#1D3240` → "NEAR YOU" in the Sidebar label style (14px Bold caps 0.08em) in text-secondary `#487389`, matching desktop and the menu. Heading, count and chevron on one line; the row keeps 30px so the closed dock stays 69px and the route tabs stay centred. Unused `.nearby-icon` CSS removed | (this commit) | ⏸ |
+| 26 Oct 2026 | Start CTA started state (`map.js`): tapping "Start Typography Route" now changes the label to "Typography Route Started" with a close icon (`aria-pressed`, "End the … route"); tapping again ends it. Also fixed: choosing another route left the previous route's line on the map; every route line now hides on a new selection | (this commit) | ⏸ |
 
 ---
 
@@ -206,6 +207,11 @@ Fixes still land on the current site until cutover. Port each one to Framer too.
 - ⏸ (Framer paused) Framer differs from the live site: Menu tile titles (Framer Label L 20px, live Figma 16px caps) and corners (Framer 16, live 4); Route tab corners (Framer 24px half-pill, live 4px); Start CTA phone floating position; spot drawer back-chevron alignment (live pulls the button 12px left)
 - ⬜ Icon buttons: touch target 44px on phone still to do (Framer 32px vs live 34px no longer tracked)
 - ⏸ (Framer paused) Not synced from Framer: mobile route tab labels, the Near You dock layout on phone
+
+## Future (after the capstone)
+
+- ⬜ **Route walk mode: link the Start CTA to the next spot** (Figma ButtonRoutes `NextSpotRoute`, `2734:13370`: "NEXT: Kensington Market Sign", "Tap to visit", "1 of 5"). Needs a spot order per route in the data, a current-spot state that survives a reload (localStorage), tapping to fly to the spot and open its drawer, a way to mark a spot visited (button, or arrival by geolocation), the progress tracker, and an end-of-route state. Roughly a few days of work plus testing on foot; the current started state (label + close icon) is the interim step
+- ⬜ Mapbox Studio style: the layer `route-typography-2rejaf (1)` in the map style is always visible (opacity 0.79) whatever route is selected; hide it in Studio or drop it, since the site draws its own route lines
 
 ## Decisions log
 

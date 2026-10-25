@@ -55,6 +55,23 @@ const allMarkers = [];
 const allLineSources = [];
 let routeLineActive = false; // toggle state for line visibility
 let currentActiveCategoryId = null;
+let currentRouteName = '';     // name of the selected route, for the Start CTA label
+
+// Start CTA label: "Start X Route" with a chevron, or "X Route Started" with a
+// close icon while the route line is shown (tapping again ends the route).
+// Linking the button to the next spot (Figma "NEXT: … / 1 of 5") is a later step.
+function updateCtaState(btn) {
+    if (!currentRouteName) return;
+    const titleEl = btn.querySelector('.cta-title');
+    const arrowImg = btn.querySelector('.cta-arrow img');
+    if (titleEl) titleEl.textContent = routeLineActive ? `${currentRouteName} Route Started` : `Start ${currentRouteName} Route`;
+    if (arrowImg) {
+        arrowImg.src = routeLineActive ? 'assets/icons/Icon=close-regular.svg' : 'assets/icons/Icon=chevron-right.svg';
+        arrowImg.style.width = routeLineActive ? '14px' : '';
+    }
+    btn.setAttribute('aria-pressed', routeLineActive ? 'true' : 'false');
+    btn.setAttribute('aria-label', routeLineActive ? `End the ${currentRouteName} route` : `Start the ${currentRouteName} route`);
+}
 
 /**
  * Mix a hex colour toward white by `amount` (0 = original, 1 = pure white).
@@ -411,6 +428,13 @@ document.addEventListener('routeFilterChange', (e) => {
     const { categoryId, routeName, color, iconUrl } = e.detail;
     currentActiveCategoryId = categoryId;
     routeLineActive = false;
+    currentRouteName = routeName || '';
+
+    // A new selection ends any started route: hide every route line
+    allLineSources.forEach(src => {
+        animateLineOpacity(src.id, 0, 250);
+        if (src.haloId) animateLineOpacity(src.haloId, 0, 250);
+    });
     
     // Validate map data availability
     const categoryMarkers = allMarkers.filter(m => m.category === categoryId);
@@ -576,6 +600,7 @@ document.addEventListener('routeFilterChange', (e) => {
             titleEl.textContent = hasData ? `Start ${routeName} Route` : `Select a route to begin!`;
             titleEl.style.color = '#FFFFFF';
         }
+        if (hasData) updateCtaState(ctaBtn); // back to "Start …" with the chevron
         
         if (subtitleEl) {
             if (hasData) {
@@ -627,6 +652,7 @@ const buildCtaLogic = () => {
         // Toggle active class on ALL CTA buttons
         document.querySelectorAll('.btn-cta').forEach(btn => {
             btn.classList.toggle('btn-active-line', routeLineActive);
+            updateCtaState(btn);
         });
         
         // Animate lines in/out for current category using easeInOutCubic
