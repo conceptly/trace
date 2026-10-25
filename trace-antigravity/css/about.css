@@ -283,7 +283,7 @@ html { scroll-behavior: smooth; }
 .about-route-item {
     background-color: var(--text-body, #2d4855);
     border-left: 4px solid var(--route-accent, #3a4e9a);
-    border-radius: 0 14px 14px 0;
+    border-radius: 0 8px 8px 0;
     min-height: 44px;
     display: flex;
     align-items: center;

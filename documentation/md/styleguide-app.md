@@ -386,11 +386,10 @@ Components and layouts use the semantic tokens. A primitive is used directly onl
 | Token         | Value  | Use |
 |---------------|--------|-----|
 | `radius/xs`   | 4px    | Buttons and CTAs (Primary, Secondary, Start CTA), nav items, search field, route rows and phone route tabs (left corners), City Guide filter and sort rows, desktop gem cards, Quick Guide tab, route tags, checkboxes |
-| `radius/s`    | 8px    | Near You box and photo tiles, filter chips, small badges |
-| `radius/md`   | 12px   | (free; desktop gem cards and City Guide rows moved to 4px on 25 Oct 2026) |
-| `radius/lg`   | 16px   | Phone gem rows, image containers, menu tiles, Quick Guide steps, map markers |
-| `radius/xlg`  | 24px   | Drawers, pull-up sheets |
-| `radius/pill` | 999px  | Icon buttons, toggles, dots |
+| `radius/s`    | 8px    | Larger surfaces: cards (mission, ecosystem, author, phone gem rows and their photo / colour strip), image containers (spot drawer photo), Near You box and photo tiles, About route items, Quick Guide steps, search suggestions, map tooltip, toasts, phone bottom dock (top corners), Profile preview card and its tiles, filter chips |
+| `radius/pill` | 999px / 50% | Exceptions only: round buttons and icon circles, toggles, dots, progress bars, pill badges and Profile's pill buttons |
+
+**Two radii only (26 Oct 2026).** The site uses 4px and 8px. Pick by scale: 4px for controls and small elements (buttons, rows, tags, fields), 8px for anything that holds content (cards, photos, sheets, dropdowns). Pills and circles are the only exception, plus drawn shapes such as the Profile badge shield. The old 12 / 16 / 24px steps are retired; `--radius-lg` in `tokens.css` now equals 8px and is unused.
 
 Device frame (52px) is a presentation value only, not a UI token.
 

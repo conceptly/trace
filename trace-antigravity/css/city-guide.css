@@ -172,7 +172,7 @@ body.mobile-search-is-open .city-guide-content {
 /* Figma: bg #ebf2ee, 116×116 square image, 16px left indicator bar           */
 .gem-item {
   background-color: #ebf2ee;
-  border-radius: 16px;
+  border-radius: 8px;
   display: flex;
   gap: 0;
   overflow: clip;
@@ -196,14 +196,14 @@ body.mobile-search-is-open .city-guide-content {
   height: 116px;
   object-fit: cover;
   display: block;
-  border-radius: 16px 0 0 16px;
+  border-radius: 8px 0 0 8px;
 }
 
 .gem-img-placeholder {
   width: 116px;
   height: 116px;
   background-color: rgba(45, 72, 85, 0.15);
-  border-radius: 16px 0 0 16px;
+  border-radius: 8px 0 0 8px;
 }
 
 /* 16px route-colour bar sits over the left edge of the image */
@@ -213,7 +213,7 @@ body.mobile-search-is-open .city-guide-content {
   left: 0;
   width: 16px;
   height: 116px;
-  border-radius: 16px 0 0 16px;
+  border-radius: 8px 0 0 8px;
 }
 
 /* ─── Gem text area ──────────────────────────────────────────────────────── */
@@ -879,7 +879,7 @@ body.city-guide-page .nav-btn.active .subtitle { color: #2d4855 !important; }
   right: 0;
   background: #1d3240;
   border: 0.5px solid #3d5e6a;
-  border-radius: 12px;
+  border-radius: 8px;
   overflow: hidden;
   z-index: 9000;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
@@ -963,5 +963,5 @@ body.city-guide-page .nav-btn.active .subtitle { color: #2d4855 !important; }
 /* Mobile floating search needs extra z-context */
 .mobile-floating-search .search-inner .search-suggestions {
   top: calc(100% + 8px);
-  border-radius: 12px;
+  border-radius: 8px;
 }

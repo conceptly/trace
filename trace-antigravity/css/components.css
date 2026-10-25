@@ -390,7 +390,7 @@
 /* How it Works Steps */
 .how-it-works-step {
   background-color: #2d4855;
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 16px;
   display: flex;
   flex-direction: column;
@@ -647,7 +647,7 @@ a.breadcrumb-root:hover {
 }
 
 .spot-hero {
-  border-radius: 16px;
+  border-radius: 8px;
   overflow: hidden;
   height: 211px;
   flex-shrink: 0;

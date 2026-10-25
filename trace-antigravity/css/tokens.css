@@ -42,7 +42,7 @@
 
   /* Border Radius Scale */
   --radius-pill: 50px;
-  --radius-lg: 16px; /* 4px grid (Pinegrow edit, 25 Oct 2026) */
+  --radius-lg: 8px;  /* site radii are 4px and 8px only (26 Oct 2026); pills and circles excepted */
   --radius-md: 8px;
   --radius-sm: 4px;
 
