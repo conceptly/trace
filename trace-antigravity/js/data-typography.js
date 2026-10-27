@@ -242,7 +242,7 @@ const geojsonTypography =
                 ]
             },
             "properties": {
-                "Name": "OCAD ",
+                "Name": "OCAD",
                 "Location": "100 McCaul St",
                 "Author": "Bruce Mau Design",
                 "About": "A modular, pixelated branding system designed by Bruce Mau that acts as a frame for the building's creative spirit.",
@@ -252,7 +252,7 @@ const geojsonTypography =
                 "Designer Note": "This is \"Dynamic Branding\"; the logo isn't just a word, it’s a modular system that mirrors the \"tabletop\" architecture of the building.",
                 "Clue / Hint": "The black and white pixel!",
                 "Route": "Typography",
-                "IMG": null
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1793077433/ocad-1_eo0asi.jpg"
             }
         },
         {
