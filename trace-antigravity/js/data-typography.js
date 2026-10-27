@@ -68,7 +68,7 @@ const geojsonTypography =
                 "Designer Note": "The high-contrast serifs on such a massive scale create a \"monumental\" authority that anchors the corner of Bloor and St. George.",
                 "Clue / Hint": "Giant letters on concrete!",
                 "Route": "Typography",
-                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1773978993/signage-11_wdswkv.jpg"
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1793077146/signage-12_akz6ri.jpg"
             }
         },
         {
@@ -183,7 +183,7 @@ const geojsonTypography =
                 "Designer Note": "This is \"3D Typography\" as an environment; the letters are large enough to be inhabited, turning the word into a physical playground.",
                 "Clue / Hint": "Snap a photo with the city!",
                 "Route": "Typography",
-                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1773978994/signage-14_veqsdt.jpg"
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1793077164/signage-15_latfxu.jpg"
             }
         },
         {

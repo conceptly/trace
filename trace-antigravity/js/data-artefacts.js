@@ -292,7 +292,7 @@ const geojsonArtObjects = {
                 "Designer Note": "A masterclass in using light and material to tell a story; the relationship between the figure and its fixed shadow is a beautiful urban pause.",
                 "Clue / Hint": "Find the man and his flat shadow on the Simcoe wall.",
                 "Route": "Art Objects",
-                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1773983705/artefacts-9_ixzzfo.jpg"
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1793081364/boy-fin-district-portrait_eaiwau.jpg"
             }
         },
         {
