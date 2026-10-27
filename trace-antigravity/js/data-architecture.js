@@ -258,7 +258,7 @@ const geojsonArchitecture =
                 "Designer Note": "A \"courageous\" architectural UX; it preserves the view of the park by lifting the entire building 26 meters into the air on \"pencils.\"",
                 "Clue / Hint": "Black and white pixel box!",
                 "Route": "Architecture",
-                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1776392761/ocad-2_lrbmrj.jpg"
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1793077753/ocad-1_nbtjyy.jpg"
             },
             "id": 14
         },
