@@ -136,7 +136,8 @@ const geojsonArchitecture =
                 "Interesting Fact": "The design is meant to mimic the canopy of a forest, with white steel columns branching out into an intricate web of glass.",
                 "Designer Note": "Note how the structure manages to feel organic despite its industrial materials. It is a 'Trace' of nature inserted into the Financial District.",
                 "Clue / Hint": "The white forest of steel in the Financial District.",
-                "Route": "Architecture"
+                "Route": "Architecture",
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1793077830/brookfield-place-2_derlui.jpg"
             }
         },
         {
@@ -205,7 +206,8 @@ const geojsonArchitecture =
                 "Interesting Fact": "The soaring \"Allen Lambert Galleria\" is often called a \"cathedral of commerce\" due to its tree-like support columns.",
                 "Designer Note": "Calatrava's \"biomorphic\" ribs turn a functional transit corridor into a rhythmic, organic forest of white steel.",
                 "Clue / Hint": "Walk through the white forest!",
-                "Route": "Architecture"
+                "Route": "Architecture",
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1793077830/brookfield-place-1_gvtnvu.jpg"
             }
         },
         {
