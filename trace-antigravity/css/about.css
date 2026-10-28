@@ -231,6 +231,7 @@ html { scroll-behavior: smooth; }
     line-height: 1.2;
     color: #2d4855;
     margin: 0;
+    max-width: 700px;
 }
 
 .about-body-text strong {
@@ -635,9 +636,9 @@ html { scroll-behavior: smooth; }
         pointer-events: none;
     }
 
-    /* 720px content column (Figma desktop About) */
+    /* 1024px content column; body text stays at 700px inside it */
     .about-content {
-        max-width: 768px;
+        max-width: 1024px;
         margin: 0 auto;
         width: 100%;
         padding: 0 24px;
