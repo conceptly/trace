@@ -134,7 +134,7 @@ Instagram and LinkedIn content series: reels, carousels, and stories that reveal
 | Map | Mapbox GL JS | Custom dark style, GeoJSON data, route lines + markers |
 | Frontend | Vanilla HTML + CSS + JS | No framework, no build step, external CSS files |
 | Data | GeoJSON + JS flat file | One file per route; Cloudinary for image hosting |
-| Hosting | Vercel | Static site, free tier |
+| Hosting | Netlify | Static site from `main` of `conceptly/trace`, live at tracedesign.art |
 | Design | Figma | Prototype, component library, design system |
 | Future CMS | Webflow CMS | Post-submission content management |
 

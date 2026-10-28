@@ -19,8 +19,10 @@ NO CSS-in-JS
 ```
 
 Files open directly in a browser with no compilation step.  
-Deploy target: Vercel static site (drag-and-drop or GitHub push).  
+Deploy target: Netlify. It publishes `trace-antigravity/` from `main` of `conceptly/trace` (live at https://tracedesign.art) within about a minute of a push, so changes land through a PR into `main`. Netlify's Pretty URLs setting rewrites links in the published HTML (`about.html` → `/about`, `index.html` → `/`), so live HTML differs from the repo in its links only; keep `.html` links in the source.  
 Map: embedded `<iframe>` or Mapbox GL JS snippet — do NOT build map rendering from scratch.
+
+**Pinegrow edits:** Pinegrow (used on the About page) reformats every file it saves, and its `_pgbackup/`, `_pginfo/` and `pinegrow.json` are git-ignored. Port only the values that changed onto the current build and leave the reformatting out; a word diff ignoring whitespace (`git diff --word-diff -w`) shows them. Check that each value keeps its unit: Pinegrow once saved `max-width: 1024` with no `px`, which browsers drop.
 
 **Fonts:** Load via `<link>` in `<head>`. ITC Avant Garde Gothic Pro is not on Google Fonts — use Josefin Sans as the fallback. Adelle is not on Google Fonts — use Roboto Slab as fallback. When the Adobe Fonts kit (`evd2cyp`) is available, load it before the Google Fonts link so licensed fonts take priority.
 
@@ -1219,7 +1221,7 @@ Key constraints:
 - NO TypeScript, NO Tailwind, NO React, NO build tools
 - CSS in separate .css files using CSS custom properties
 - JS in separate .js files using ES6 module import/export
-- Target: mobile-first at 402px max-width, deploy to Vercel as static site
+- Target: mobile-first at 402px max-width, deploy to Netlify as static site
 
 Today's task: [describe what you want to build, e.g. "Build index.html — the Home/Map screen"]
 
