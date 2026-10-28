@@ -384,7 +384,7 @@ Components and layouts use the semantic tokens. A primitive is used directly onl
 | `layout/sidebar-guide`| 280px   | 280px  | 240px  | —     | City Guide filters |
 | `layout/drawer`       | 416px   | 416px  | 416px  | 100%  | Spot drawer (live build: 417px) |
 | `layout/card-min`     | 220px   | 220px  | 220px  | 100%  | Gem card minimum column width |
-| `layout/reading`      | 720px   | 720px  | 720px  | 100%  | Text pages (About). Keeps body copy at a comfortable line length (about 70–90 characters at 16px Roboto Slab); `max-width: 768px` with 24px side padding |
+| `layout/reading`      | 976px   | 976px  | 976px  | 100%  | Text pages (About). Content column `max-width: 1024px` with 24px side padding; cards and the route list use its full width. Body text (`.about-body-text`) is capped at 700px to keep a comfortable line length (about 70–90 characters at 16px Roboto Slab). Since 28 Oct 2026; the column was 720px, as in Figma desktop About `4443:14925` |
 
 ### Border radius scale
 
