@@ -24,6 +24,8 @@ Map: embedded `<iframe>` or Mapbox GL JS snippet — do NOT build map rendering 
 
 **Pinegrow edits:** Pinegrow (used on the About page) reformats every file it saves, and its `_pgbackup/`, `_pginfo/` and `pinegrow.json` are git-ignored. Port only the values that changed onto the current build and leave the reformatting out; a word diff ignoring whitespace (`git diff --word-diff -w`) shows them. Check that each value keeps its unit: Pinegrow once saved `max-width: 1024` with no `px`, which browsers drop.
 
+**Spot data and photos:** the map reads `trace-antigravity/js/data-architecture.js`, `data-artefacts.js`, `data-street-art.js` and `data-typography.js` (one `const geojson…` FeatureCollection each), not the files in `map-data/`. Change a spot in its `data-*.js` file and in the matching `map-data/*.geojson` so the two stay in step (they already differ in places; see migration-progress.md, Known gaps). A spot's photo is its `IMG` property: a Cloudinary URL with `q_auto/f_auto/` added after `/image/upload/` (automatic quality and format). All 62 spots have one (29 Oct 2026). The spot drawer shows the photo at its own aspect ratio, so portrait shots are fine. The semicolon CSVs in `map-data/csv/` are the April source sheets and are out of date (no Typography sheet, fewer spots).
+
 **Fonts:** Load via `<link>` in `<head>`. ITC Avant Garde Gothic Pro is not on Google Fonts — use Josefin Sans as the fallback. Adelle is not on Google Fonts — use Roboto Slab as fallback. When the Adobe Fonts kit (`evd2cyp`) is available, load it before the Google Fonts link so licensed fonts take priority.
 
 ```html

@@ -619,6 +619,14 @@ Figma `4486:16753` (QuickTipsContainer). Live: `#guide-drawer` in `index.html`, 
 - Route dot (8px) carries the category colour
 - Matched letters: `#E7E626` highlight with `#1D3240` text
 
+#### Map search results panel
+Live: `.search-results` (`js/search.js`, `css/components.css`), 29 Oct 2026. Searching on the map shows every match, from any route, and hides the other markers; the map fits all the matches (one match: it flies to it).
+- Panel: `#2D4855` (`--surface-4`), 8px corners, 320px wide (screen width minus 32px on small screens), centred 80px from the top; 136px on phones so it clears the floating search pill
+- Header: "N spots found" (13px Josefin, `#F5F9F6`) and a × button (32px target, `aria-label="Clear search"`); `#3D5E6A` rule below
+- Rows are buttons: 10px route dot in the route colour, spot name 14px `#F5F9F6`, route name 12px `#96B8B9` (`--content-3`, 4.5 : 1) on the right; hover and keyboard focus `#3D5E6A` (`--surface-5`). The list scrolls after 40vh
+- Tapping a row flies to the spot (zoom 16, offset left of the drawer on desktop) and opens its drawer
+- The panel stays until the search is cleared: ×, Escape, an emptied input (including the phone search pill's ×) or choosing a route. Clearing brings back the selected route's markers
+
 
 ### Link Primary
 Figma `4443:14728` (desktop) and `4443:14814` (mobile). Live: `.about-link-item` (About author card).
