@@ -4,7 +4,7 @@ Tracks the move from the static build (`trace-antigravity/`, Netlify) to Framer.
 
 **Status key:** ✅ done · 🟡 in progress · ⬜ not started · ⏸ paused
 
-**Last updated:** 26 Oct 2026
+**Last updated:** 29 Oct 2026
 
 > ⏸ **Framer migration paused (26 Oct 2026).** The static build on Netlify stays the live site and the place where changes land. Figma remains the design source. The Framer project is kept as it is (unpublished changes included) in case the decision changes. The "Ported to Framer" column below is no longer tracked from this date.
 
@@ -17,7 +17,7 @@ Tracks the move from the static build (`trace-antigravity/`, Netlify) to Framer.
 | Framer project | "Trace.Design" (was "Youthful Scone"), project id `BTWkApQ3pJgFVyoNzc31` |
 | Published test site | https://youthful-scone-296021.framer.app (last published before the Home page rebuild; everything since is unpublished) |
 | Live site (until cutover) | https://tracedesign.art (Netlify, from `main` of `conceptly/trace`) |
-| Spot data (source of truth) | `map-data/csv/*.csv`, `map-data/*.geojson` |
+| Spot data (source of truth) | `trace-antigravity/js/data-*.js` (what the map reads) and `map-data/*.geojson`, kept in step by hand. The CSVs in `map-data/csv/` are the April source sheets and out of date |
 | Figma | Trace-Toronto file: desktop layout `4007:2`, route list states `4015:15398`, mobile map `2734:11965`, mobile route tabs `2734:12976` |
 | Webflow fallback | Webflow project with style guide variables, Places CMS, playground and 36 icon components (paused) |
 
@@ -199,6 +199,11 @@ Fixes still land on the current site until cutover. Port each one to Framer too.
 | 26 Oct 2026 | Start CTA started state (`map.js`): tapping "Start Typography Route" now changes the label to "Typography Route Started" with a close icon (`aria-pressed`, "End the … route"); tapping again ends it. Also fixed: choosing another route left the previous route's line on the map; every route line now hides on a new selection | (this commit) | ⏸ |
 | 26 Oct 2026 | iOS scroll fixes: on About and the City Guide, scrolling back up stopped short with the top under the nav; on the map the whole layout could shift up and leave a dark band under the dock. Causes: `overflow-x: hidden` on the body, the City Guide page wrapper and the About main area made extra scroll containers (computed `overflow-y: auto`), and the map page was `100svh`, shorter than the screen when iOS hides its bars. Fixes: `overflow-x: clip` on those three (no extra scroll container), and `body.map-page` pinned with `position: fixed; inset: 0`. Checked in the browser (no stray scroll containers, map can't scroll); still to confirm on the iPhone | (this commit) | ⏸ |
 | 28 Oct 2026 | About page on desktop: content column 768 → 1024px; body text (What is TRACE?, routes note) capped at 700px so lines stay readable. From a Pinegrow session; Pinegrow's reformatting left out, and its `max-width: 1024` (no unit, so the browser dropped it and the column ran full width) written as `1024px` | (this commit) | ⏸ |
+| 27 Oct 2026 | Missing spot photos added: OCAD (Typography) and both Brookfield Place spots; "OCAD " lost its trailing space. Photo links in `IMG` use Cloudinary's `q_auto/f_auto/` | `773e82d` | ⏸ |
+| 27 Oct 2026 | Spot drawer photo keeps the source photo's aspect ratio (`.spot-hero img { height: auto }`, was cropped), so portrait shots show whole. On phones it's capped at `min(55vh, 100vh − 345px)` with `object-fit: cover` so the About section stays on screen | `04e87f7` | ⏸ |
+| 27 Oct 2026 | Photos replaced: Toronto Sign, OISE, Lineal Order, OCAD (Sharp Centre) | `f5f2600` | ⏸ |
+| 29 Oct 2026 | Massey Hall photo added; every spot now has a photo | `4419c24` | ⏸ |
+| 29 Oct 2026 | Map search shows every match (styleguide §7 Map search results panel). It used to fly to the first match only and leave matches on other routes hidden ("Ann" found Annex Wall and Annex Photo, but Annex Photo couldn't be reached from the Street Art route). Now the matches show whatever route they're on, the map fits them, and a results panel lists them; a row opens the spot's drawer. ×, Escape or an empty search brings the route back | `53c220e` | ⏸ |
 | 26 Oct 2026 | Mobile menu "EXPLORE THE ROUTES" added to About and Profile (it was never in their menus). Route tiles on pages without the map (City Guide, About, Profile) now open `index.html?route=<category>` (`nav.js`); on the City Guide they did nothing before. `index.html` selects the route from `?route=` on load (hidden or unknown routes fall back to Typography) and marks the menu tile | (this commit) | ⏸ |
 
 ---
@@ -207,6 +212,7 @@ Fixes still land on the current site until cutover. Port each one to Framer too.
 
 - ⬜ `index.html` spot drawer has a placeholder photo `assets/img/typography/lees.jpg` that doesn't exist (404 on every load since the first commit; the script swaps in the real photo when a spot opens). Remove the placeholder `src`
 - ⬜ No favicon / Apple touch icons (404s in the server log)
+- ⬜ (29 Oct 2026) `map-data/*.geojson` and the `js/data-*.js` files the map reads have drifted apart. GeoJSON differs in field names (Art Objects `About (The Trace)` and Street Art `about` instead of `About`; Art Objects route "Arttefacts"), spot names (Paupers Pub vs "Paupers Pub (Former Home Bank of Canada)", "History of Music on Yonge" vs "… (North)", “Municipal Building” with quotes, Lee’s Palace apostrophe), straight vs curly apostrophes in some texts, a Street Art style tag typo ("Souful", fixed in JS) and The TMU Falcon photo (`birdo-tmu_sm.jpg` in GeoJSON, `murals-2_thhxph.jpg` on the map). Pick `data-*.js` as the master and regenerate the GeoJSON from it before any CMS import
 - ⏸ (Framer paused) Framer differs from the live site: Menu tile titles (Framer Label L 20px, live Figma 16px caps) and corners (Framer 16, live 4); Route tab corners (Framer 24px half-pill, live 4px); Start CTA phone floating position; spot drawer back-chevron alignment (live pulls the button 12px left)
 - ⬜ Icon buttons: touch target 44px on phone still to do (Framer 32px vs live 34px no longer tracked)
 - ⏸ (Framer paused) Not synced from Framer: mobile route tab labels, the Near You dock layout on phone
