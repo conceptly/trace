@@ -15,7 +15,7 @@ const geojsonArtObjects = {
                 "Designer Note": "A \"visual full stop\" in the grid; use the white material as a high-contrast anchor against the dark glass of the Financial District.",
                 "Clue / Hint": "Find the giant white head in the financial heart.",
                 "Route": "Art Objects",
-                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1773983710/artefacts-16_sm4ygu.jpg"
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1793297356/artefacts-16_sm4ygu.jpg"
             }
         },
         {
@@ -32,7 +32,7 @@ const geojsonArtObjects = {
                 "Designer Note": "A masterclass in 'Material Deception'; it references the neighborhood's Victorian brick heritage through a digital-age, pixelated lens.",
                 "Clue / Hint": "Look for the pixelated man standing tall on the corner of Jarvis.",
                 "Route": "Art Objects",
-                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1773983703/artefacts-5_ugspzo.jpg"
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1793078249/artefacts-5_ugspzo.jpg"
             },
             "id": 1
         },
@@ -50,7 +50,7 @@ const geojsonArtObjects = {
                 "Designer Note": "The reflective surface creates a \"dynamic UI,\" constantly re-skinning the art with the colors of passing traffic and weather.",
                 "Clue / Hint": "Search for the steel branch covered in silver birds.",
                 "Route": "Art Objects",
-                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1773983704/artefacts-7_nfdi2i.jpg"
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1793078241/artefacts-7_nfdi2i.jpg"
             }
         },
         {
@@ -67,7 +67,7 @@ const geojsonArtObjects = {
                 "Designer Note": "A study in \"urban juxtaposition\"; the organic curves of the bronze cows provide a necessary soft-edge to the Mies van der Rohe grid.",
                 "Clue / Hint": "Find the bronze cows resting in a modern field of glass.",
                 "Route": "Art Objects",
-                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1773983711/artefacts-18_jk45vr.jpg"
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1793078102/artefacts-18_jk45vr.jpg"
             }
         },
         {
@@ -84,7 +84,7 @@ const geojsonArtObjects = {
                 "Designer Note": "Use this as a \"Wayfinding Marker\"; it serves as a physical label for the neighborhood's manufacturing soul.",
                 "Clue / Hint": "Look for the giant thimble and its colorful buttons.",
                 "Route": "Art Objects",
-                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1776440814/thimble_hqewyf.jpg"
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1793078074/thimble_hqewyf.jpg"
             }
         },
         {
@@ -101,7 +101,7 @@ const geojsonArtObjects = {
                 "Designer Note": "This is \"Architecture as Performance\"; the sculpture turns the building's exterior into a permanent event.",
                 "Clue / Hint": "Find the golden crowd cheering from the stadium wall.",
                 "Route": "Art Objects",
-                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1773983706/artefacts-11_yt14ej.jpg"
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1793078189/artefacts-11_yt14ej.jpg"
             }
         },
         {
@@ -118,7 +118,7 @@ const geojsonArtObjects = {
                 "Designer Note": "A study in 'structural verticality'—the brilliant red finish provides a high-saturation contrast against the modern glass of The Gloucester.",
                 "Clue / Hint": "Look for the red steel gateway at the corner of Yonge and Gloucester.",
                 "Route": "Art Objects",
-                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1773983708/artefacts-13_gazwmz.jpg"
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1793078147/artefacts-13_gazwmz.jpg"
             },
             "id": 6
         },
@@ -136,7 +136,7 @@ const geojsonArtObjects = {
                 "Designer Note": "This is \"Living Architecture\"; the garden is designed to change with the seasons, creating a shifting temporal trace.",
                 "Clue / Hint": "Find the massive limestone turtle in the city's civic garden.",
                 "Route": "Art Objects",
-                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1776531516/spirit-garden-1_juviof.jpg"
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1793077089/spirit-garden-1_juviof.jpg"
             }
         },
         {
@@ -153,7 +153,7 @@ const geojsonArtObjects = {
                 "Designer Note": "A literal \"Geometric Viewfinder\"; it forces the user to choose a specific \"crop\" of the university's chaotic architecture.",
                 "Clue / Hint": "Look through the circular frame on the campus walk.",
                 "Route": "Art Objects",
-                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1776440819/ring-tmu-1_a45pfx.jpg"
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1793297382/ring-tmu-1_a45pfx.jpg"
             }
         },
         {
@@ -170,7 +170,7 @@ const geojsonArtObjects = {
                 "Designer Note": "This is \"Tactile Logic\"—the interlocking forms mirror the complex social and economic links of the Financial District.",
                 "Clue / Hint": "Find the interlocking bronze links on King Street.",
                 "Route": "Art Objects",
-                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1776440815/sun-life-1_md0nkh.jpg"
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1793078064/sun-life-1_md0nkh.jpg"
             },
             "id": 9
         },
@@ -188,7 +188,7 @@ const geojsonArtObjects = {
                 "Designer Note": "A 'visual wind-gauge'; the polished steel surfaces reflect the surrounding traffic and weather, constantly re-skinning the piece.",
                 "Clue / Hint": "Look for the towering steel shapes swaying at Yonge and Bloor.",
                 "Route": "Art Objects",
-                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1776440816/safe-hands-1_ker5uf.jpg"
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1793078053/safe-hands-1_ker5uf.jpg"
             }
         },
         {
@@ -205,7 +205,7 @@ const geojsonArtObjects = {
                 "Designer Note": "A \"Social Trace\"—the wear on the bronze seat over time will document the physical presence of thousands of strangers.",
                 "Clue / Hint": "Find the animals on a bike and take the empty seat.",
                 "Route": "Art Objects",
-                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1773983713/artefacts_ctzf6m.jpg"
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1793078081/artefacts_ctzf6m.jpg"
             },
             "id": 11
         },
@@ -223,7 +223,7 @@ const geojsonArtObjects = {
                 "Designer Note": "\"Large-Scale Interface\"—walking through the trains allows the reader to physically \"read\" the mechanical history of the city.",
                 "Clue / Hint": "Look for the steam engines across from the CN Tower.",
                 "Route": "Art Objects",
-                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1776400889/railway-1_xuhqig.jpg"
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1793077673/railway-1_xuhqig.jpg"
             }
         },
         {
@@ -240,7 +240,7 @@ const geojsonArtObjects = {
                 "Designer Note": "A monument to creative engineering that makes the \"invisible\" urban waste of discarded furniture visible through high-art bronze.",
                 "Clue / Hint": "Search for the elephant made of 'leather' sofas near the AGO.",
                 "Route": "Art Objects",
-                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1776440824/couch-monster-1_y5o9ty.jpg"
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1793078012/couch-monster-1_y5o9ty.jpg"
             }
         },
         {
@@ -257,7 +257,7 @@ const geojsonArtObjects = {
                 "Designer Note": "A study in human perception and fragmentation; it turns the human form into a mathematical puzzle within the Financial District.",
                 "Clue / Hint": "Find the man's head sliced into quarters in the hidden passage.",
                 "Route": "Art Objects",
-                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1773983701/artefacts-2_tyzfgl.jpg"
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1793078260/artefacts-2_tyzfgl.jpg"
             },
             "id": 14
         },
@@ -275,7 +275,7 @@ const geojsonArtObjects = {
                 "Designer Note": "A legendary example of \"Environmental Branding\" that uses architecture as a canvas for a high-impact narrative.",
                 "Clue / Hint": "Look for the news truck bursting out of a brick wall.",
                 "Route": "Art Objects",
-                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1773983710/artefacts-17_oh3qle.jpg"
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1793078115/artefacts-17_oh3qle.jpg"
             }
         },
         {
@@ -309,7 +309,7 @@ const geojsonArtObjects = {
                 "Designer Note": "A \"Historical High-Pass Filter\"; it cuts out the modern condos and focuses the eye purely on the Victorian brickwork.",
                 "Clue / Hint": "Look for the steel ring framing a historic chimney.",
                 "Route": "Art Objects",
-                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1776440820/peace-ring-1_yrpiyk.jpg"
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1793078041/peace-ring-1_yrpiyk.jpg"
             }
         },
         {
