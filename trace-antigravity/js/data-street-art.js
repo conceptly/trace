@@ -15,7 +15,7 @@ const geojsonStreetart = {
                 "Designer Note": "A masterclass in \"large-scale grid design\"; birdO uses high-contrast geometric blocks to create organic curves that are visible from blocks away.",
                 "Clue / Hint": "Find the wise bird watching Bloor!",
                 "Route": "Street Art",
-                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1773983671/murals-6_xijzsy.jpg"
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1793078436/murals-6_xijzsy.jpg"
             }
         },
         {
@@ -32,7 +32,7 @@ const geojsonStreetart = {
                 "Designer Note": "The design uses vibrant \"Day of the Dead\" iconography to create a high-impact commercial brand touchpoint in a historic area.",
                 "Clue / Hint": "Mariachis playing on the corner!",
                 "Route": "Street Art",
-                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1773993504/bianco_ub8han.jpg"
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1793331906/bianco_ub8han.jpg"
             },
             "id": 1
         },
@@ -50,7 +50,7 @@ const geojsonStreetart = {
                 "Designer Note": "Sweetman uses \"macro-perspective\" to turn a tiny insect into a monumental hero, forcing a change in the viewer's scale perception.",
                 "Clue / Hint": "Spot the giant bee near Howland!",
                 "Route": "Street Art",
-                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1773983672/murals-8_xg4ui4.jpg"
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1793298798/murals-8_xg4ui4.jpg"
             }
         },
         {
@@ -102,7 +102,7 @@ const geojsonStreetart = {
                 "Designer Note": "Uses a \"split-panel\" layout similar to a graphic novel to guide the viewer through a chronological narrative of the city.",
                 "Clue / Hint": "History lessons painted on brick!",
                 "Route": "Street Art",
-                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1773983673/murals-11_rfbtvy.jpg"
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1793078409/murals-11_rfbtvy.jpg"
             }
         },
         {
@@ -119,7 +119,7 @@ const geojsonStreetart = {
                 "Designer Note": "Elicser's use of soft, blended spray-paint gradients creates a \"human\" feel that contrasts beautifully with the rough alley textures.",
                 "Clue / Hint": "Faces hidden in the quiet lane!",
                 "Route": "Street Art",
-                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1776443452/Barbara-Barrett-Lane-1_rhm7we.jpg"
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1793333047/Barbara-Barrett-Lane-1_rhm7we.jpg"
             }
         },
         {
@@ -136,7 +136,7 @@ const geojsonStreetart = {
                 "Designer Note": "The \"organic flow\" of the vines is designed to mimic the natural movement of pedestrians walking toward the subway station.",
                 "Clue / Hint": "Flowers blooming near the subway!",
                 "Route": "Street Art",
-                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1773983669/murals-7_ropa2t.jpg"
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1793078470/murals-7_ropa2t.jpg"
             },
             "id": 7
         },
@@ -154,7 +154,7 @@ const geojsonStreetart = {
                 "Designer Note": "A masterclass in portrait scaling; the monochromatic blue tone creates a high-contrast 'history wall' for the downtown core.",
                 "Clue / Hint": "Look for the towering music legends of Yonge Street!",
                 "Route": "Street Art",
-                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1773983671/murals-5_n2qjpm.jpg"
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1793078448/murals-5_n2qjpm.jpg"
             }
         },
         {
@@ -171,7 +171,7 @@ const geojsonStreetart = {
                 "Designer Note": "The \"minimalist\" color palette (lots of black, white, and gold) matches the high-end retail environment of the Village.",
                 "Clue / Hint": "Chic art in the narrow lane!",
                 "Route": "Street Art",
-                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1776443214/yorkville-mural-1_wlwjxv.jpg"
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1793078377/yorkville-mural-1_wlwjxv.jpg"
             },
             "id": 9
         },
@@ -189,7 +189,7 @@ const geojsonStreetart = {
                 "Designer Note": "A study in 'visual rhythm'; the characters are stacked vertically to guide the eye up the Brunswick Avenue facade.",
                 "Clue / Hint": "Find the giant blue faces of the Annex legends!",
                 "Route": "Street Art",
-                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1776443691/blues-1_rllsyp.jpg"
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1793332046/blues-1_rllsyp.jpg"
             }
         },
         {
@@ -223,7 +223,7 @@ const geojsonStreetart = {
                 "Designer Note": "A masterclass in portrait scaling; the monochromatic blue tone creates a high-contrast 'history wall' for the downtown core.",
                 "Clue / Hint": "Look for the towering music legends of Yonge Street!",
                 "Route": "Street Art",
-                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1776443693/yonge-music-2_r26wbu.jpg"
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1793078321/yonge-music-2_r26wbu.jpg"
             }
         },
         {
@@ -258,7 +258,7 @@ const geojsonStreetart = {
                 "Designer Note": "The 'ball and wire' geometric elements are a birdO signature, creating a sense of mechanical movement across the static wall.",
                 "Clue / Hint": "Find the giant falcon watching Church Street!",
                 "Route": "Street Art",
-                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1773983669/murals-2_thhxph.jpg"
+                "IMG": "https://res.cloudinary.com/dx3ccwjnz/image/upload/q_auto/f_auto/v1793078460/murals-2_thhxph.jpg"
             }
         },
         {
