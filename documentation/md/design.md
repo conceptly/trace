@@ -196,6 +196,7 @@ All screens are 402 × 874pt (iPhone 16/17 Pro).
 | **Sign Up** | `2423:7596` | Create account form over blurred map background. Display name, email, password. |
 | **Login** | `2423:7741` | Sign in form. Email + password, forgot password, Face ID / Touch ID option. |
 | **Style Guide** | `2509:2879` | Internal reference frame — not a deliverable screen. |
+| **404 — Wrong turn. Good discovery** | `4357:15306` (Trace-Toronto file) | Desktop 1280 × 833. Page not found: message, Back to the Map / Explore this spot, and a random spot card with a Shuffle button. Live as `404.html` (styleguide §7 404 spot card). |
 
 ---
 
@@ -314,7 +315,8 @@ Sort dropdown component. Variants: `variant=Top Picks` | `variant=A-Z` | `varian
 
 **Icons-opt2** (`2423:5899`)  
 24×24pt icon set. All icons available:  
-Map, Guide, User, Art Objects, Architecture, Street Art, Typography, Experts, Close (solid), Tap, Double Tap, Info Bubble, Light/Dark, Search, Near, Back, Chevron Right, Preferences, Close (regular), Filter, Sort, Sort Circles, Sort Z-A, Sort A-Z, Sort Z-A opt2, Sort A-Z opt2, Location/Map Pin.
+Map, Guide, User, Art Objects, Architecture, Street Art, Typography, Experts, Close (solid), Tap, Double Tap, Info Bubble, Light/Dark, Search, Near, Back, Chevron Right, Preferences, Close (regular), Filter, Sort, Sort Circles, Sort Z-A, Sort A-Z, Sort Z-A opt2, Sort A-Z opt2, Location/Map Pin.  
+Added in the Trace-Toronto file (`HX9YaK5hA70mzcOrK1BM35`), 2 Nov 2026: Shuffle (`4570:7579`, used on the 404 page), Roadmap (`4486:16742`).
 
 **IconNav** (`2423:5879`)  
 30×30pt nav icons for BottomNav.  
