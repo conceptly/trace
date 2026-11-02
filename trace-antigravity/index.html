@@ -545,7 +545,10 @@
         // showed the "under construction" toast on slow loads); give up after 15s.
         // A route tile on another page links here with ?route=<category>; use it
         // if it's a visible route, otherwise start with Typography.
-        const wanted = new URLSearchParams(location.search).get('route');
+        // ?spot=<name> (from the 404 page) then opens that spot's drawer.
+        const params = new URLSearchParams(location.search);
+        const wanted = params.get('route');
+        const wantedSpot = params.get('spot');
         const wantedWrapper = wanted && document.querySelector(`.route-wrapper[data-category="${CSS.escape(wanted)}"]:not([hidden])`);
         const routeId = wantedWrapper ? wanted : 'typography';
         const started = Date.now();
@@ -559,6 +562,8 @@
             if (btn) btn.click();
             // Mark the matching menu tile too
             document.querySelectorAll('#mobileMenu .route-btn').forEach(b => b.classList.toggle('active', b.classList.contains(routeId)));
+            const spot = wantedSpot && allMarkers.find(m => m.name === wantedSpot && m.category === routeId);
+            if (spot && window.traceOpenSpot) window.traceOpenSpot(spot);
         };
         trySelect();
     });
