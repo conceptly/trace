@@ -1,0 +1,272 @@
+/* =============================================================================
+   404 PAGE — not-found.css
+   "Wrong turn. Good discovery." Figma node 4357-15306.
+   The nav and light page colours come from about.css (body.about-page).
+   ============================================================================= */
+
+/* ── Layout ───────────────────────────────────────────────────────────────── */
+.nf-main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 464px) minmax(0, 600px);
+    justify-content: space-between;
+    align-items: center;
+    gap: 48px 72px;
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 72px;
+}
+
+/* ── Error explanation ────────────────────────────────────────────────────── */
+.nf-error {
+    display: flex;
+    flex-direction: column;
+}
+
+.nf-label {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #2d4855; /* text-body */
+}
+
+.nf-heading {
+    margin-top: 28px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 48px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: #0f2229; /* text-primary */
+    text-wrap: balance;
+}
+
+.nf-text {
+    margin-top: 28px;
+    max-width: 424px;
+    font-family: 'Roboto Slab', serif;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.4; /* Figma P-Body Copy Primary is 1.2; loosened for a 3-line paragraph, same as Spot body */
+    color: #2d4855;
+}
+
+.nf-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+/* ── Suggested spot card ──────────────────────────────────────────────────── */
+.nf-spot {
+    display: flex;
+    flex-direction: column;
+    background-color: #ebf2ee; /* bg-card */
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.nf-spot-photo {
+    position: relative;
+    aspect-ratio: 600 / 344;
+    overflow: hidden; /* keeps the scale-up during a spot change inside the frame */
+    background-color: #cddbd0; /* replaced by the route colour while a photo loads */
+    transition: background-color 0.3s ease;
+}
+
+/* Absolute so the photo fills the 600:344 frame instead of setting its height:
+   an in-flow image's height counts as content, which aspect-ratio won't shrink */
+.nf-spot-photo img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Spot change: the photo and text ease out, the content swaps, then they ease
+   back in (in once the new photo has loaded). Timings match not-found.js. */
+.nf-spot-photo img,
+.nf-spot-body > :not(.nf-shuffle) {
+    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nf-spot-photo img {
+    transform: scale(1);
+}
+
+.nf-spot.is-changing .nf-spot-photo img,
+.nf-spot.is-changing .nf-spot-body > :not(.nf-shuffle) {
+    opacity: 0;
+    transition-duration: 0.2s;
+    transition-timing-function: cubic-bezier(0.7, 0, 0.84, 0); /* ease-in on the way out */
+}
+
+.nf-spot.is-changing .nf-spot-photo img {
+    transform: scale(1.03);
+}
+
+.nf-spot.is-changing .nf-spot-body > :not(.nf-shuffle) {
+    transform: translateY(6px);
+}
+
+/* Shuffle: the map's user-location button (Figma 4330:7093) with the shuffle
+   icon, on the photo 16px above its bottom edge. Solid yellow by default so it
+   holds up on any photo (the map version is 75%). */
+.nf-shuffle {
+    position: absolute;
+    top: -58px; /* 42px button + 16px gap, measured up from the photo's bottom edge */
+    right: 16px;
+    z-index: 1;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background-color: #e7e626;
+    cursor: pointer;
+    transition: background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nf-shuffle img {
+    display: block;
+    width: 24px;
+    height: 24px;
+}
+
+@media (hover: hover) {
+    .nf-shuffle:hover {
+        box-shadow: 4px 4px 12px 0px rgba(15, 34, 41, 0.33);
+    }
+}
+
+.nf-shuffle:active {
+    box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.25);
+}
+
+.nf-shuffle:focus-visible,
+.nf-actions a:focus-visible {
+    outline: 2px solid #41687b;
+    outline-offset: 2px;
+}
+
+.nf-spot-body {
+    position: relative; /* anchors the shuffle button */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 28px 20px 20px;
+}
+
+.nf-spot-name {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #0f2229;
+}
+
+/* Route tag, same look as the City Guide catalog pill */
+.nf-spot-tag {
+    padding: 3px 4px;
+    border-radius: 2px;
+    font-family: 'Roboto Slab', serif;
+    font-size: 14px;
+    line-height: 1;
+    color: #ffffff;
+}
+
+.nf-spot-desc {
+    font-family: 'Roboto Slab', serif;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.4;
+    color: #41687b; /* text-secondary */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* ── Footer ───────────────────────────────────────────────────────────────── */
+.nf-footer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+    padding: 24px 72px;
+    border-top: 1px solid #cddbd0; /* border/divider */
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #2d4855;
+}
+
+/* ── Tablet: stack, card under the message ───────────────────────────────── */
+@media (max-width: 1024px) {
+    .nf-main {
+        grid-template-columns: minmax(0, 600px);
+        justify-content: center;
+        padding: 64px 40px;
+    }
+    .nf-footer {
+        padding: 24px 40px;
+    }
+}
+
+/* ── Phone ────────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .nf-main {
+        padding: 40px 16px 48px;
+        gap: 32px;
+    }
+    .nf-heading {
+        margin-top: 20px;
+        font-size: 36px;
+    }
+    .nf-text,
+    .nf-actions {
+        margin-top: 20px;
+    }
+    .nf-actions a {
+        flex: 1 1 auto;
+    }
+    .nf-spot-body {
+        padding: 20px 16px 16px;
+    }
+    .nf-spot-name {
+        font-size: 20px;
+    }
+    .nf-footer {
+        flex-direction: column;
+        padding: 20px 16px;
+        font-size: 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .nf-spot-photo,
+    .nf-spot-photo img,
+    .nf-spot-body > :not(.nf-shuffle) {
+        transition: none;
+    }
+    .nf-spot.is-changing .nf-spot-photo img,
+    .nf-spot.is-changing .nf-spot-body > :not(.nf-shuffle) {
+        transform: none;
+    }
+}

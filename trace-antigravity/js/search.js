@@ -76,6 +76,8 @@
             window.openSpotDrawer();
         }
     }
+    // Also used by index.html to open a spot linked with ?spot=<name>
+    window.traceOpenSpot = openSpot;
 
     // Panel listing every match; stays until the search is cleared
     function showResults(matches) {

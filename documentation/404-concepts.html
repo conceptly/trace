@@ -1,0 +1,442 @@
+<title>Trace 404 Concepts</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&family=Roboto+Slab:wght@300;400;500&family=Roboto+Mono:wght@500&display=swap">
+<style>
+/* Layout: a review sheet. Each concept is a live mini-mockup of the Trace page (nav, body, footer) beside short design notes. */
+:root {
+  /* Trace tokens (light), from css/tokens.css + Figma */
+  --brand: #E7E626;
+  --cta-text: #2D4855;
+  --cta-ring: #487389;
+  --nav-bg: #1D3240;
+  --nav-fg: #EDF4F0;
+  --surface-1: #F5F9F6;
+  --surface-2: #EBF2EE;
+  --surface-3: #CDDBD0;
+  --content-1: #0F2229;
+  --content-2: #2D4855;
+  --content-3: #487389;
+  --divider: #CDDBD0;
+  --cat-artists-choice: #0D7A82;
+  --cat-typography: #2B5EA8;
+  --cat-art-objects: #257A48;
+  --cat-architecture: #9A4520;
+  --cat-street-art: #7E3090;
+  --map-street: #FFFFFF;
+  --map-block: #E4EFF2;
+  --map-water: #CFE3E8;
+  --wall: #B76E4E;
+  --wall-mortar: #9C5A3E;
+  --buff: #8F9A93;
+  /* Sheet chrome */
+  --sheet-bg: #E9EFEC;
+  --sheet-fg: #1D3240;
+  --sheet-muted: #4E6E7C;
+  --frame-edge: #BDD0D5;
+  --font-display: "Josefin Sans", "Futura", "Century Gothic", system-ui, sans-serif;
+  --font-body: "Roboto Slab", "Rockwell", Georgia, serif;
+  --font-mono: "Roboto Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --cta-ring: #96B8B9;
+    --nav-bg: #12202A;
+    --surface-1: #1D3240;
+    --surface-2: #2D4855;
+    --surface-3: #3D5E6A;
+    --content-1: #EDF4F0;
+    --content-2: #BDD0CC;
+    --content-3: #96B8B9;
+    --divider: #3D5E6A;
+    --cat-artists-choice: #12B5C1;
+    --cat-typography: #5B8EE8;
+    --cat-art-objects: #3BB86B;
+    --cat-architecture: #E8713A;
+    --cat-street-art: #B84FDF;
+    --map-street: #2D4855;
+    --map-block: #223740;
+    --map-water: #12202A;
+    --wall: #6B3D2A;
+    --wall-mortar: #50291B;
+    --buff: #4A5853;
+    --sheet-bg: #0E1A21;
+    --sheet-fg: #EDF4F0;
+    --sheet-muted: #96B8B9;
+    --frame-edge: #2D4855;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --cta-ring: #96B8B9;
+  --nav-bg: #12202A;
+  --surface-1: #1D3240;
+  --surface-2: #2D4855;
+  --surface-3: #3D5E6A;
+  --content-1: #EDF4F0;
+  --content-2: #BDD0CC;
+  --content-3: #96B8B9;
+  --divider: #3D5E6A;
+  --cat-artists-choice: #12B5C1;
+  --cat-typography: #5B8EE8;
+  --cat-art-objects: #3BB86B;
+  --cat-architecture: #E8713A;
+  --cat-street-art: #B84FDF;
+  --map-street: #2D4855;
+  --map-block: #223740;
+  --map-water: #12202A;
+  --wall: #6B3D2A;
+  --wall-mortar: #50291B;
+  --buff: #4A5853;
+  --sheet-bg: #0E1A21;
+  --sheet-fg: #EDF4F0;
+  --sheet-muted: #96B8B9;
+  --frame-edge: #2D4855;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--sheet-bg);
+  color: var(--sheet-fg);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 48px 72px;
+}
+.sheet { max-width: 1180px; margin: 0 auto; display: grid; gap: 64px; }
+
+/* Sheet header */
+.intro { display: grid; gap: 16px; max-width: 70ch; }
+.eyebrow {
+  font-family: var(--font-display); font-weight: 500; font-size: 13px;
+  letter-spacing: .28em; text-transform: uppercase; color: var(--sheet-muted);
+}
+h1 { font-family: var(--font-display); font-weight: 500; font-size: clamp(32px, 5vw, 52px); line-height: 1.05; margin: 0; text-wrap: balance; }
+.intro p { margin: 0; font-size: 17px; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 20px; font-family: var(--font-display); font-size: 14px; letter-spacing: .04em; color: var(--sheet-muted); }
+.legend b { color: var(--sheet-fg); font-weight: 600; }
+
+/* Concept block */
+.concept { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 32px; align-items: start; }
+@media (max-width: 960px) { .concept { grid-template-columns: minmax(0, 1fr); } }
+.notes { display: grid; gap: 14px; font-size: 15px; }
+.notes .tag { font-family: var(--font-display); font-weight: 600; font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: var(--sheet-muted); }
+.notes h2 { font-family: var(--font-display); font-weight: 500; font-size: 28px; line-height: 1.1; margin: 0; text-wrap: balance; }
+.notes p { margin: 0; }
+.notes dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; margin: 4px 0 0; padding-top: 14px; border-top: 1px solid var(--frame-edge); }
+.notes dt { font-family: var(--font-display); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--sheet-muted); padding-top: 3px; }
+.notes dd { margin: 0; }
+.pick { display: inline-flex; align-self: start; width: fit-content; gap: 6px; align-items: center; background: var(--brand); color: #1D3240; font-family: var(--font-display); font-weight: 600; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; padding: 5px 10px 3px; border-radius: 4px; }
+
+/* ---------- Mockup frame (the Trace page itself) ---------- */
+.mock {
+  container-type: inline-size;
+  background: var(--surface-1);
+  color: var(--content-2);
+  border: 1px solid var(--frame-edge);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px -24px rgba(15, 34, 41, .45);
+}
+.nav { background: var(--nav-bg); color: var(--nav-fg); display: flex; align-items: center; gap: 20px; padding: 12px 20px; }
+.logo { font-family: var(--font-display); font-weight: 700; font-size: 18px; letter-spacing: .02em; }
+.logo span:first-child { color: var(--brand); }
+.search { flex: 1; max-width: 300px; margin-inline: auto; height: 28px; border-radius: 8px; background: rgba(237, 244, 240, .15); border: 1px solid rgba(237, 244, 240, .12); font-size: 12px; font-style: italic; color: rgba(237, 244, 240, .6); display: flex; align-items: center; padding-inline: 12px; }
+.links { display: flex; gap: 18px; font-family: var(--font-display); font-size: 12px; letter-spacing: .12em; }
+@container (max-width: 640px) { .links, .search { display: none; } .nav { justify-content: space-between; } .nav::after { content: "≡"; font-size: 20px; line-height: 1; } }
+.foot { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 14px 28px; border-top: 1px solid var(--divider); font-family: var(--font-display); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--content-2); }
+
+.body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 40px; align-items: center; padding: 48px 36px; min-height: 380px; }
+@container (max-width: 640px) { .body { grid-template-columns: minmax(0, 1fr); padding: 32px 20px; gap: 28px; min-height: 0; } }
+.copy { display: grid; gap: 16px; align-content: center; min-width: 0; }
+.copy .label { font-family: var(--font-display); font-weight: 500; font-size: 11px; letter-spacing: .26em; text-transform: uppercase; color: var(--content-2); }
+.copy h3 { font-family: var(--font-display); font-weight: 500; font-size: clamp(26px, 4.6cqi, 40px); line-height: 1.08; margin: 0; color: var(--content-1); text-wrap: balance; }
+.copy p { margin: 0; font-size: 14px; max-width: 40ch; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; padding-top: 4px; }
+.btn { font-family: var(--font-display); font-size: 13px; letter-spacing: .04em; padding: 10px 16px 8px; border-radius: 4px; border: 1px solid var(--cta-ring); background: transparent; color: var(--content-2); cursor: pointer; }
+.btn.primary { background: var(--brand); color: #2D4855; border-color: #2D4855; }
+.btn:focus-visible, .chip:focus-visible { outline: 2px solid var(--cta-ring); outline-offset: 2px; }
+.chip { font-family: var(--font-body); font-size: 12px; padding: 4px 9px 3px; border-radius: 4px; color: #fff; border: 0; cursor: pointer; }
+.c-typo { background: var(--cat-typography); } .c-street { background: var(--cat-street-art); } .c-arch { background: var(--cat-architecture); } .c-obj { background: var(--cat-art-objects); } .c-ac { background: var(--cat-artists-choice); }
+:root:not([data-theme="light"]) .chip { color: #fff; }
+
+/* A · Off the map */
+.mapbox { position: relative; aspect-ratio: 4 / 3; max-width: 100%; border-radius: 8px; overflow: hidden; background: var(--map-block); }
+.mapbox svg { display: block; width: 100%; height: 100%; }
+.trail { stroke: var(--content-1); stroke-width: 3; stroke-dasharray: 2 8; stroke-linecap: round; fill: none; animation: walk 2.4s linear infinite; }
+@keyframes walk { to { stroke-dashoffset: -40; } }
+.edge-fade { fill: url(#fade); }
+
+/* B · Not in service */
+.board { background: #0F1A20; border-radius: 8px; padding: 22px 22px 18px; display: grid; gap: 14px; box-shadow: inset 0 0 0 6px #22343D; }
+.board .row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-family: var(--font-mono); color: var(--brand); text-shadow: 0 0 10px rgba(231, 230, 38, .45); }
+.board .big { font-size: clamp(28px, 6cqi, 52px); letter-spacing: .08em; line-height: 1; }
+.board .small { font-size: 12px; letter-spacing: .14em; opacity: .85; }
+.board .blink { animation: blink 1.2s steps(2) infinite; }
+@keyframes blink { 50% { opacity: .15; } }
+.routes { display: grid; gap: 8px; }
+.route { display: grid; grid-template-columns: 10px 1fr auto; gap: 10px; align-items: center; font-size: 13px; color: var(--content-1); padding: 8px 10px; background: var(--surface-2); border-radius: 4px; }
+.route i { width: 10px; height: 10px; border-radius: 50%; }
+.route small { font-family: var(--font-display); letter-spacing: .12em; text-transform: uppercase; font-size: 10px; color: var(--content-3); }
+
+/* C · Painted over */
+.wall { position: relative; aspect-ratio: 4 / 3; max-width: 100%; border-radius: 8px; overflow: hidden;
+  background-color: var(--wall);
+  background-image:
+    linear-gradient(var(--wall-mortar) 2px, transparent 2px),
+    linear-gradient(90deg, var(--wall-mortar) 2px, transparent 2px),
+    linear-gradient(90deg, var(--wall-mortar) 2px, transparent 2px);
+  background-size: 100% 22px, 56px 44px, 56px 44px;
+  background-position: 0 0, 0 0, 28px 22px;
+}
+.tag404 { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--font-display); font-weight: 700; font-size: clamp(70px, 18cqi, 150px); color: var(--cat-street-art); -webkit-text-stroke: 3px #F5F9F6; transform: rotate(-6deg); letter-spacing: -.02em; }
+.buff { position: absolute; background: var(--buff); top: 18%; left: 36%; width: 44%; height: 62%; border-radius: 3px; transform: rotate(2deg); box-shadow: 0 0 0 1px rgba(0,0,0,.08); transform-origin: left; animation: roll 1.1s ease-out both; }
+@keyframes roll { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+.roller-note { position: absolute; right: 10px; bottom: 10px; background: var(--surface-1); color: var(--content-2); font-size: 11px; font-family: var(--font-display); letter-spacing: .12em; text-transform: uppercase; padding: 5px 8px 3px; border-radius: 4px; }
+
+/* D · Shuffle */
+.spot { background: var(--surface-2); border-radius: 8px; overflow: hidden; display: grid; }
+.photo { aspect-ratio: 16 / 9; max-width: 100%; display: grid; place-items: center; color: rgba(255,255,255,.9); font-family: var(--font-display); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; transition: background .3s ease;
+  background-image: repeating-linear-gradient(135deg, rgba(255,255,255,.08) 0 10px, transparent 10px 20px); }
+.spot-meta { padding: 16px 18px 18px; display: grid; gap: 8px; }
+.spot-meta h4 { margin: 0; font-family: var(--font-display); font-weight: 500; font-size: 20px; letter-spacing: .1em; text-transform: uppercase; color: var(--content-1); }
+.spot-meta .chip { justify-self: start; cursor: default; }
+.spot-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+.count { font-family: var(--font-display); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--content-3); font-variant-numeric: tabular-nums; }
+
+/* E · Search first */
+.searchfirst { display: grid; gap: 18px; }
+.addr { font-family: var(--font-mono); font-size: 13px; background: var(--surface-2); border-radius: 4px; padding: 10px 12px; color: var(--content-2); overflow-x: auto; white-space: nowrap; }
+.addr s { color: var(--content-3); text-decoration-thickness: 2px; text-decoration-color: var(--cat-architecture); }
+.bigsearch { display: flex; align-items: center; gap: 10px; border: 1.5px solid var(--content-2); border-radius: 8px; padding: 12px 14px; background: var(--surface-1); }
+.bigsearch input { flex: 1; min-width: 0; border: 0; background: transparent; font: 300 16px var(--font-body); color: var(--content-1); outline: none; }
+.bigsearch svg { flex: none; }
+.bigsearch:focus-within { outline: 2px solid var(--cta-ring); outline-offset: 2px; }
+.suggest { display: grid; gap: 6px; }
+.suggest .label { font-family: var(--font-display); font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--content-3); }
+.sugg { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--divider); font-size: 14px; color: var(--content-1); }
+
+@media (prefers-reduced-motion: reduce) { .trail, .blink, .buff { animation: none; } }
+</style>
+
+<main class="sheet">
+  <header class="intro">
+    <div class="eyebrow">Trace Toronto · 404 exploration · Nov 2026</div>
+    <h1>Five ways to get lost on Trace</h1>
+    <p>Your current frame, "Wrong turn. Good discovery.", already does the most important thing: it hands the person a real spot instead of a dead end. These five directions push that idea in different ways. Each one keeps the Trace nav, the yellow primary button, and the five category colours. Every mockup follows your light/dark theme.</p>
+    <div class="legend"><span><b>Tone</b> how playful it is</span><span><b>Build</b> rough effort in trace-antigravity</span><span><b>Risk</b> what could go wrong</span></div>
+  </header>
+
+  <!-- A -->
+  <section class="concept" aria-labelledby="a-h">
+    <div class="mock">
+      <div class="nav"><div class="logo"><span>TRACE</span><span>TO</span></div><div class="search">Search for spots or routes!</div><div class="links"><span>MAP</span><span>CITY GUIDE</span><span>ABOUT</span><span>PROFILE</span></div></div>
+      <div class="body">
+        <div class="copy">
+          <div class="label">404 / Off the map</div>
+          <h3>This street isn't on our map.</h3>
+          <p>The link might be old, or the page has moved. Pick the trail back up from somewhere we know.</p>
+          <div class="actions"><button class="btn primary">Back to the map</button><button class="btn">Search spots</button></div>
+        </div>
+        <div class="mapbox" aria-hidden="true">
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="fade" x1="0" x2="1">
+                <stop offset="0.55" stop-color="var(--surface-1)" stop-opacity="0"/>
+                <stop offset="1" stop-color="var(--surface-1)" stop-opacity="1"/>
+              </linearGradient>
+            </defs>
+            <rect width="400" height="300" fill="var(--map-block)"/>
+            <path d="M0 262 C90 248 180 270 260 255 S360 262 400 250 V300 H0 Z" fill="var(--map-water)"/>
+            <g stroke="var(--map-street)" stroke-width="7" fill="none">
+              <path d="M0 60 H400"/><path d="M0 130 H400"/><path d="M0 200 H400"/>
+              <path d="M50 0 V250"/><path d="M130 0 V250"/><path d="M210 0 V250"/><path d="M290 0 V250"/>
+              <path d="M0 20 L230 100 L400 150" stroke-width="5"/>
+            </g>
+            <g font-family="Josefin Sans, sans-serif" font-size="9" letter-spacing="1.5" fill="var(--content-3)">
+              <text x="60" y="56">BLOOR ST W</text><text x="60" y="126">COLLEGE ST</text><text x="60" y="196">QUEEN ST W</text>
+              <text x="136" y="245" transform="rotate(-90 136 245)">SPADINA AVE</text>
+            </g>
+            <circle cx="130" cy="130" r="7" fill="var(--cat-typography)" stroke="#fff" stroke-width="2"/>
+            <circle cx="50" cy="60" r="6" fill="var(--cat-street-art)" stroke="#fff" stroke-width="2"/>
+            <circle cx="210" cy="200" r="6" fill="var(--cat-architecture)" stroke="#fff" stroke-width="2"/>
+            <path class="trail" d="M130 130 C170 130 200 150 230 145 S300 110 330 140 S380 190 430 175"/>
+            <rect width="400" height="300" class="edge-fade"/>
+            <g transform="translate(352 120)">
+              <path d="M0 -26 C-11 -26 -18 -18 -18 -9 C-18 4 0 18 0 18 C0 18 18 4 18 -9 C18 -18 11 -26 0 -26 Z" fill="none" stroke="var(--content-2)" stroke-width="2" stroke-dasharray="4 3"/>
+              <text x="0" y="-4" text-anchor="middle" font-family="Josefin Sans, sans-serif" font-size="16" font-weight="600" fill="var(--content-2)">?</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <div class="foot"><span>Trace Toronto / City guide</span><span>404 · Page not found</span></div>
+    </div>
+    <div class="notes">
+      <span class="pick">My pick</span>
+      <div class="tag">Concept A</div>
+      <h2>Off the map</h2>
+      <p>A slice of the real street grid with a dotted trail that walks off the edge into blank space, ending in an empty pin. It speaks the app's main language (the map) and needs no photo, so it works for every broken link and in both themes.</p>
+      <dl><dt>Tone</dt><dd>Calm, a little witty</dd><dt>Build</dt><dd>Low. Inline SVG plus one CSS dash animation.</dd><dt>Risk</dt><dd>Less discovery than your current version. You could add one "nearest spot" chip under the buttons.</dd></dl>
+    </div>
+  </section>
+
+  <!-- B -->
+  <section class="concept" aria-labelledby="b-h">
+    <div class="mock">
+      <div class="nav"><div class="logo"><span>TRACE</span><span>TO</span></div><div class="search">Search for spots or routes!</div><div class="links"><span>MAP</span><span>CITY GUIDE</span><span>ABOUT</span><span>PROFILE</span></div></div>
+      <div class="body">
+        <div class="copy">
+          <div class="label">404 / Not in service</div>
+          <h3>No route stops here.</h3>
+          <p>This page isn't on any of our routes. Hop on one that is.</p>
+          <div class="actions"><button class="btn primary">See all routes</button><button class="btn">Back to the map</button></div>
+        </div>
+        <div style="display:grid; gap:14px; min-width:0">
+          <div class="board" role="img" aria-label="Destination sign reading 404, not in service">
+            <div class="row"><span class="small">ROUTE</span><span class="small">NEXT STOP</span></div>
+            <div class="row"><span class="big">404</span><span class="big blink">—</span></div>
+            <div class="row"><span class="small">NOT IN SERVICE</span><span class="small">PLEASE TRANSFER</span></div>
+          </div>
+          <div class="routes">
+            <div class="route"><i class="c-typo"></i>Typography<small>13 stops</small></div>
+            <div class="route"><i class="c-street"></i>Street Art<small>16 stops</small></div>
+            <div class="route"><i class="c-arch"></i>Architecture<small>18 stops</small></div>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><span>Trace Toronto / City guide</span><span>404 · Page not found</span></div>
+    </div>
+    <div class="notes">
+      <div class="tag">Concept B</div>
+      <h2>Not in service</h2>
+      <p>A dot-matrix destination sign, the kind every Torontonian has stared at on a streetcar. Below it, your category routes read as transfer options, with real stop counts from the map data. It's generic transit signage, so no TTC branding is needed.</p>
+      <dl><dt>Tone</dt><dd>Local, nostalgic</dd><dt>Build</dt><dd>Low–medium. Counts come from the GeoJSON files you already load.</dd><dt>Risk</dt><dd>Only works if "routes" is a word people already know from the City Guide.</dd></dl>
+    </div>
+  </section>
+
+  <!-- C -->
+  <section class="concept" aria-labelledby="c-h">
+    <div class="mock">
+      <div class="nav"><div class="logo"><span>TRACE</span><span>TO</span></div><div class="search">Search for spots or routes!</div><div class="links"><span>MAP</span><span>CITY GUIDE</span><span>ABOUT</span><span>PROFILE</span></div></div>
+      <div class="body">
+        <div class="copy">
+          <div class="label">404 / Painted over</div>
+          <h3>Someone painted over this page.</h3>
+          <p>Toronto's walls change all the time, and so do our pages. The work that's still up is on the map.</p>
+          <div class="actions"><button class="btn primary">See street art</button><button class="btn">Back to the map</button></div>
+        </div>
+        <div class="wall" aria-hidden="true">
+          <div class="tag404">404</div>
+          <div class="buff"></div>
+          <div class="roller-note">Buffed · Nov 2026</div>
+        </div>
+      </div>
+      <div class="foot"><span>Trace Toronto / City guide</span><span>404 · Page not found</span></div>
+    </div>
+    <div class="notes">
+      <div class="tag">Concept C</div>
+      <h2>Painted over</h2>
+      <p>A brick wall with a "404" tag that gets half-buffed out with a grey roller as the page loads. Graffiti and murals do disappear, so the metaphor is honest, and it leans on your strongest category.</p>
+      <dl><dt>Tone</dt><dd>Most playful</dd><dt>Build</dt><dd>Low in CSS. Medium if you swap in a real buffed-wall photo from Cloudinary.</dd><dt>Risk</dt><dd>Favours street art over the other four categories.</dd></dl>
+    </div>
+  </section>
+
+  <!-- D -->
+  <section class="concept" aria-labelledby="d-h">
+    <div class="mock">
+      <div class="nav"><div class="logo"><span>TRACE</span><span>TO</span></div><div class="search">Search for spots or routes!</div><div class="links"><span>MAP</span><span>CITY GUIDE</span><span>ABOUT</span><span>PROFILE</span></div></div>
+      <div class="body">
+        <div class="copy">
+          <div class="label">404 / Page not found</div>
+          <h3>Wrong turn. Good discovery.</h3>
+          <p>We couldn't find that page. Here's a spot from the map instead. Not your thing? Shuffle for another.</p>
+          <div class="actions"><button class="btn">Back to the map</button><button class="btn primary">Explore this spot</button></div>
+        </div>
+        <div class="spot">
+          <div class="photo" id="d-photo">Spot photo</div>
+          <div class="spot-meta">
+            <h4 id="d-name">Lee’s Palace</h4>
+            <span class="chip c-typo" id="d-cat">Typography</span>
+            <div class="spot-row"><span class="count" id="d-count">Spot 1 of 66</span><button class="btn" id="d-shuffle" type="button">↻ Shuffle</button></div>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><span>Trace Toronto / City guide</span><span>404 · Page not found</span></div>
+    </div>
+    <div class="notes">
+      <div class="tag">Concept D · your current frame</div>
+      <h2>Wrong turn, with a shuffle</h2>
+      <p>Your current layout with two changes. A shuffle button (try it) turns the card into a small slot machine across all 66 spots. "Explore this spot" becomes the primary action, since the spot is the reason the page exists.</p>
+      <dl><dt>Tone</dt><dd>Warm, discovery-led</dd><dt>Build</dt><dd>Medium. Pick a random feature from the GeoJSON and reuse the spot card.</dd><dt>Risk</dt><dd>Two yellow-ish focal points (photo and CTA) compete. Keep the photo calm.</dd></dl>
+    </div>
+  </section>
+
+  <!-- E -->
+  <section class="concept" aria-labelledby="e-h">
+    <div class="mock">
+      <div class="nav"><div class="logo"><span>TRACE</span><span>TO</span></div><div class="search">Search for spots or routes!</div><div class="links"><span>MAP</span><span>CITY GUIDE</span><span>ABOUT</span><span>PROFILE</span></div></div>
+      <div class="body">
+        <div class="copy">
+          <div class="label">404 / Nothing at this address</div>
+          <h3>Nothing at this address.</h3>
+          <p>Try searching for the spot or route you had in mind. We'll match names, artists and categories.</p>
+          <div class="actions"><button class="btn">Back to the map</button></div>
+        </div>
+        <div class="searchfirst">
+          <div class="addr">traceto.ca/<s>spots/lees-palce</s></div>
+          <label class="bigsearch" for="e-search">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+            <input id="e-search" type="text" value="lees palce" aria-label="Search spots">
+          </label>
+          <div class="suggest">
+            <span class="label">Did you mean</span>
+            <div class="sugg">Lee’s Palace <span class="chip c-typo">Typography</span></div>
+            <div class="sugg">Annex Photo <span class="chip c-typo">Typography</span></div>
+            <div class="sugg">Owl Saint George <span class="chip c-street">Street Art</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><span>Trace Toronto / City guide</span><span>404 · Page not found</span></div>
+    </div>
+    <div class="notes">
+      <div class="tag">Concept E</div>
+      <h2>Nothing at this address</h2>
+      <p>The most useful option and the least decorative. It reads the broken URL, strikes it through, and pre-fills a search with the slug so a typo like "lees-palce" lands on the right spot in one tap.</p>
+      <dl><dt>Tone</dt><dd>Plain, helpful</dd><dt>Build</dt><dd>Medium. Reuse your search results panel and feed it <code>location.pathname</code>.</dd><dt>Risk</dt><dd>Flat on its own. Pairs well with A's map as a background.</dd></dl>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  var spots = [
+    ["Lee’s Palace", "Typography", "c-typo", "var(--cat-typography)"],
+    ["Owl Saint George", "Street Art", "c-street", "var(--cat-street-art)"],
+    ["ROM (The Crystal)", "Architecture", "c-arch", "var(--cat-architecture)"],
+    ["The Brickman", "Art Objects", "c-obj", "var(--cat-art-objects)"],
+    ["Annex Photo", "Typography", "c-typo", "var(--cat-typography)"],
+    ["Rise of the Pollinator", "Street Art", "c-street", "var(--cat-street-art)"],
+    ["TD Centre", "Architecture", "c-arch", "var(--cat-architecture)"],
+    ["Dreaming", "Art Objects", "c-obj", "var(--cat-art-objects)"]
+  ];
+  var i = 0;
+  var photo = document.getElementById("d-photo"), name = document.getElementById("d-name"),
+      cat = document.getElementById("d-cat"), count = document.getElementById("d-count");
+  function show() {
+    var s = spots[i];
+    name.textContent = s[0];
+    cat.textContent = s[1];
+    cat.className = "chip " + s[2];
+    photo.style.backgroundColor = s[3];
+    count.textContent = "Spot " + (i + 1) + " of 66";
+  }
+  document.getElementById("d-shuffle").addEventListener("click", function () {
+    var n; do { n = Math.floor(Math.random() * spots.length); } while (n === i);
+    i = n; show();
+  });
+  show();
+})();
+</script>

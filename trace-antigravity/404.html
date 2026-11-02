@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page not found — TRACE</title>
+    <meta name="description" content="This page isn’t on the TRACE map. Head back to the map or explore a random spot.">
+    <meta name="robots" content="noindex">
+    <!-- Design System Styles -->
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/about.css">
+    <link rel="stylesheet" href="css/not-found.css">
+</head>
+<!-- about-page gives this page the same dark sticky nav and light body as About -->
+<body class="about-page not-found-page">
+
+    <!-- Top Navigation (shared) -->
+    <header class="top-nav" aria-label="Main navigation">
+        <div class="nav-left">
+            <button class="mobile-hamburger mobile-only" aria-label="Open Mobile Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <circle cx="7" cy="5" r="2.5"/><circle cx="17" cy="5" r="2.5"/>
+                    <circle cx="7" cy="12" r="2.5"/><circle cx="17" cy="12" r="2.5"/>
+                    <circle cx="7" cy="19" r="2.5"/><circle cx="17" cy="19" r="2.5"/>
+                </svg>
+            </button>
+            <div class="logo-container">
+                <a href="index.html" style="text-decoration:none; display:flex; align-items:center;">
+                    <img src="assets/logo/logoAPP.svg" alt="TRACE TO" height="16" style="display:block;">
+                </a>
+            </div>
+        </div>
+        <div class="nav-right">
+            <nav class="nav-center" aria-label="Primary links">
+                <a href="index.html" class="nav-item">Map</a>
+                <a href="city-guide.html" class="nav-item">City Guide</a>
+                <a href="about.html" class="nav-item">About</a>
+                <a href="profile.html" class="nav-item">Profile</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay (required by nav.js) -->
+    <div class="mobile-menu-overlay" id="mobileMenu">
+        <!-- NAVIGATE Section -->
+        <div class="menu-section">
+            <span class="menu-label">NAVIGATE</span>
+            <div class="menu-grid">
+                <button class="menu-btn nav-btn" onclick="window.location.href='index.html'">
+                    <div class="icon-circle">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M8.4444 4.43259L4.17773 5.41721V20L8.4444 19.0399V4.43259ZM9.86662 18.8266V4.21333L14.1333 5.17333V19.7867L9.86662 18.8266ZM15.5555 19.5674L19.8222 18.5828V4L15.5555 4.96V19.5674Z" fill="currentColor"/></svg>
+                    </div>
+                    <div class="text">
+                        <span class="title">Map</span>
+                        <span class="subtitle">62 gems</span>
+                    </div>
+                </button>
+                <button class="menu-btn nav-btn" onclick="window.location.href='city-guide.html'">
+                    <div class="icon-circle">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.3124 16.2432C15.0543 15.587 16.1043 15.1304 17.5651 15.1304V13.7391V6.08696V4C15.2523 4 13.9693 5.14429 13.3085 6.41381C12.8565 7.28252 12.6956 8.21014 12.6956 8.86957V15.9377V20C12.6956 19.05 13.0292 17.544 14.0869 16.4582C14.1587 16.3845 14.2338 16.3128 14.3124 16.2432ZM18.9564 16.5217H17.5651C16.0707 16.5217 15.2711 17.1133 14.7986 17.7695C14.609 18.0328 14.4634 18.3206 14.3548 18.6087H20.3478V17.913V6.78261V6.08696H19.6521H18.9564V15.1304V16.5217ZM4.34775 6.08696H3.6521V6.78261V17.913V18.6087H9.91297C10.6814 18.6087 11.3043 19.2316 11.3043 20V8.86957V6.78235C10.7229 6.3457 10.0003 6.08696 9.21732 6.08696H4.34775Z" fill="currentColor"/></svg>
+                    </div>
+                    <div class="text">
+                        <span class="title">City Guide</span>
+                        <span class="subtitle">Edition 1</span>
+                    </div>
+                </button>
+                <button class="menu-btn nav-btn" onclick="window.location.href='about.html'">
+                    <div class="icon-circle">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.8836 4V6.23261H13.1162V4H10.8836ZM7.53467 7.5346H13.1162V17.7674H16.4651V20H7.53467V17.7674H10.8836V9.76721H7.53467V7.5346Z" fill="currentColor"/></svg>
+                    </div>
+                    <div class="text">
+                        <span class="title">About</span>
+                        <span class="subtitle">The story</span>
+                    </div>
+                </button>
+                <button class="menu-btn nav-btn" onclick="window.location.href='profile.html'">
+                    <div class="icon-circle">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 13.2009C14.2509 13.2009 15.9578 13.6838 17.1154 14.1799C17.6931 14.4275 18.1328 14.6773 18.4334 14.8706C18.5837 14.9672 18.6991 15.0503 18.7804 15.1113C18.8209 15.1417 18.8531 15.1667 18.8764 15.1855C18.8881 15.1949 18.898 15.2028 18.9054 15.209L18.9148 15.2167L18.9187 15.2198L18.9202 15.2214C18.9205 15.2217 18.9204 15.2238 18.4006 15.8301L18.921 15.2222L19.2007 15.4621V20H4.79928V15.4621L5.079 15.2222L5.59936 15.8301C5.07974 15.2238 5.07869 15.2225 5.079 15.2222L5.07978 15.2214L5.08134 15.2198L5.08524 15.2167L5.09462 15.209C5.10203 15.2028 5.11186 15.1949 5.12353 15.1855C5.14695 15.1667 5.17912 15.1417 5.21963 15.1113C5.30091 15.0503 5.41628 14.9672 5.56654 14.8706C5.86719 14.6773 6.30689 14.4275 6.88465 14.1799C8.04216 13.6838 9.74905 13.2009 12 13.2009ZM12 4C14.2089 4 15.9995 5.79068 15.9996 7.99962C15.9996 10.2086 14.209 11.9992 12 11.9992C9.79102 11.9992 8.00038 10.2086 8.00038 7.99962C8.00044 5.79068 9.79105 4.00001 12 4Z" fill="currentColor"/></svg>
+                    </div>
+                    <div class="text">
+                        <span class="title">Profile</span>
+                        <span class="subtitle">Coming soon</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <div class="menu-divider"></div>
+
+        <!-- EXPLORE ROUTES Section -->
+        <div class="menu-section">
+            <span class="menu-label">EXPLORE THE ROUTES</span>
+            <div class="menu-grid">
+                <button class="menu-btn route-btn typography">
+                    <div class="icon-circle">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M20.7259 4H3.27417L6.18095 20H17.8191L20.7259 4ZM8.3638 6.90909H7.63653V9.81818H9.09107V8.36364H11.273V15.6364H9.81834V17.0909H14.182V15.6364H12.7276V8.36364H14.9092V9.81818H16.3638V6.90909H8.3638Z" fill="currentColor"/></svg>
+                    </div>
+                    <span class="title">Typography</span>
+                </button>
+                <button class="menu-btn route-btn art-objects">
+                    <div class="icon-circle">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M19.4721 8.1708V17.0044L12.6794 20V11.1664L19.4721 8.1708ZM18.7892 6.98719L12.0001 4L5.20756 6.98873L11.9966 9.98271L18.7892 6.98719ZM11.9966 10.7251L11.996 10.7264H11.9973L11.9966 10.7251ZM11.3208 20V11.1695L4.52808 8.17387V17.0044L11.3208 20Z" fill="currentColor"/></svg>
+                    </div>
+                    <span class="title">Art Objects</span>
+                </button>
+                <button class="menu-btn route-btn architecture">
+                    <div class="icon-circle">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 4H11.2727V6.51206L6.18182 9.78479V10.5455H17.8182V9.78479L12.7273 6.51206V5.45455H14.1818V4H12ZM19.2727 13.4545V18.5455H20V20H4V18.5455H4.72727V13.4545H4V12H20V13.4545H19.2727ZM7.63636 18.5455V13.4545H9.09091V18.5455H7.63636ZM11.2727 18.5455H12.7273V16.3636H11.2727V18.5455ZM14.9091 18.5455V13.4545H16.3636V18.5455H14.9091Z" fill="currentColor"/></svg>
+                    </div>
+                    <span class="title">Architecture</span>
+                </button>
+                <button class="menu-btn route-btn street-art">
+                    <div class="icon-circle">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.0006 4H6.66724V8.66667H12.0006V4ZM14.0006 10H4.66724V20H14.0006V10ZM16.0006 6.66643C16.0006 7.21906 15.5526 7.66707 15 7.66717C14.4473 7.66717 13.9992 7.21929 13.9992 6.6666C13.9992 6.11397 14.4472 5.66579 14.9998 5.66569C15.5525 5.66569 16.0006 6.11373 16.0006 6.66643ZM18.333 6.00073C18.8851 6.00033 19.3326 5.55261 19.3326 5.00037C19.3326 4.44788 18.8847 4 18.3322 4C17.7801 4.0004 17.3326 4.4482 17.3326 5.00045C17.3326 5.55293 17.7805 6.00073 18.333 6.00073ZM17.3326 8.33207C17.3326 7.77959 17.7805 7.33171 18.333 7.33171C18.8851 7.3321 19.3326 7.78007 19.3326 8.33231C19.3326 8.8848 18.8847 9.33244 18.3322 9.33244C17.7801 9.33204 17.3326 8.88431 17.3326 8.33207Z" fill="currentColor"/></svg>
+                    </div>
+                    <span class="title">Street Art</span>
+                </button>
+                <button class="menu-btn route-btn artists-pick full-width" hidden>
+                    <div class="icon-circle">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M15.5906 7.59035L15.1185 8.06243L12.4723 10.7086L12.0002 11.1807L11.5282 10.7086L8.882 8.06243L8.40991 7.59035L8.882 7.11826L11.5282 4.47208L12.0002 4L12.4723 4.47208L15.1185 7.11826L15.5906 7.59035ZM19.5285 12.4721L20.0006 12L19.5285 11.5279L16.8823 8.88175L16.4103 8.40966L15.9382 8.88175L13.292 11.5279L12.8199 12L13.292 12.4721L15.9382 15.1182L16.4103 15.5904L16.8823 15.1182L19.5285 12.4721ZM15.5906 16.4097L15.1185 16.8818L12.4723 19.5279L12.0002 20L11.5282 19.5279L8.882 16.8818L8.40991 16.4097L8.882 15.9376L11.5282 13.2914L12.0002 12.8193L12.4723 13.2914L15.1185 15.9376L15.5906 16.4097ZM11.18 12L10.7078 12.4721L8.0617 15.1182L7.58961 15.5904L7.11753 15.1182L4.47135 12.4721L3.99927 12L4.47135 11.5279L7.11753 8.88175L7.58961 8.40966L8.0617 8.88175L10.7078 11.5279L11.18 12Z" fill="currentColor"/></svg>
+                    </div>
+                    <span class="title">Artist's Pick</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="menu-divider"></div>
+
+        <!-- CONTACT Section -->
+        <div class="menu-section">
+            <span class="menu-label">CONTACT</span>
+            <div class="menu-contact">
+                    <div class="menu-contact-icons">
+                        <a href="https://conceptly.design" target="_blank" rel="noopener" class="btn-secondary btn-secondary--dark menu-contact-btn" aria-label="conceptly.design (opens in a new tab)"><span class="menu-contact-icon menu-contact-icon--web" aria-hidden="true"></span></a>
+                        <a href="mailto:etual.conceptly@gmail.com" class="btn-secondary btn-secondary--dark menu-contact-btn" aria-label="Email etual.conceptly@gmail.com"><span class="menu-contact-icon menu-contact-icon--mail" aria-hidden="true"></span></a>
+                        <a href="https://linkedin.com/in/etualfomina" target="_blank" rel="noopener" class="btn-secondary btn-secondary--dark menu-contact-btn" aria-label="LinkedIn: Etual Fomina (opens in a new tab)"><span class="menu-contact-icon menu-contact-icon--linkedin" aria-hidden="true"></span></a>
+                        <a href="https://instagram.com/etual.nd" target="_blank" rel="noopener" class="btn-secondary btn-secondary--dark menu-contact-btn" aria-label="Instagram: @etual.nd (opens in a new tab)"><span class="menu-contact-icon menu-contact-icon--instagram" aria-hidden="true"></span></a>
+                    </div>
+                    <p class="menu-contact-credit">Designed by Etual Fomina</p>
+                </div>
+        </div>
+    </div>
+
+    <!-- 404 Content (Figma 4357:15306 "Wrong turn. Good discovery") -->
+    <main class="nf-main">
+        <section class="nf-error" aria-labelledby="nf-heading">
+            <p class="nf-label">404 / Page not found</p>
+            <h1 class="nf-heading" id="nf-heading">Wrong turn.<br>Good discovery.</h1>
+            <p class="nf-text">We couldn’t find that page, but here’s a spot worth a closer look. Not your thing? Shuffle for another.</p>
+            <div class="nf-actions">
+                <a href="index.html" class="btn-secondary">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Back to the Map
+                </a>
+                <a href="index.html" class="btn-primary" id="nf-explore">
+                    Explore this spot
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.5"/><path d="M16 16L20 20M11 8.5V13.5M8.5 11H13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- Suggested spot: filled by the script below from the route GeoJSON files -->
+        <article class="nf-spot" id="nf-spot" aria-live="polite" hidden>
+            <div class="nf-spot-photo" id="nf-spot-photo">
+                <img id="nf-spot-img" alt="">
+            </div>
+            <div class="nf-spot-body">
+                <!-- Round control in the style of the map's user-location button (Figma 4330:7093) -->
+                <button class="nf-shuffle" id="nf-shuffle" type="button" aria-label="Show another spot" title="Show another spot">
+                    <img src="assets/icons/Icon=shuffle.svg" alt="" width="24" height="24">
+                </button>
+                <h2 class="nf-spot-name" id="nf-spot-name"></h2>
+                <span class="nf-spot-tag" id="nf-spot-tag"></span>
+                <p class="nf-spot-desc" id="nf-spot-desc"></p>
+            </div>
+        </article>
+    </main>
+
+    <footer class="nf-footer">
+        <span>Trace Toronto / City Guide</span>
+        <span>404 — Page not found</span>
+    </footer>
+
+    <script src="js/data-architecture.js"></script>
+    <script src="js/data-typography.js"></script>
+    <script src="js/data-street-art.js"></script>
+    <script src="js/data-artefacts.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/not-found.js"></script>
+</body>
+</html>
