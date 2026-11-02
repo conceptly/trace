@@ -4,7 +4,7 @@ Tracks the move from the static build (`trace-antigravity/`, Netlify) to Framer.
 
 **Status key:** ✅ done · 🟡 in progress · ⬜ not started · ⏸ paused
 
-**Last updated:** 29 Oct 2026
+**Last updated:** 2 Nov 2026
 
 > ⏸ **Framer migration paused (26 Oct 2026).** The static build on Netlify stays the live site and the place where changes land. Figma remains the design source. The Framer project is kept as it is (unpublished changes included) in case the decision changes. The "Ported to Framer" column below is no longer tracked from this date.
 
@@ -204,6 +204,8 @@ Fixes still land on the current site until cutover. Port each one to Framer too.
 | 27 Oct 2026 | Photos replaced: Toronto Sign, OISE, Lineal Order, OCAD (Sharp Centre) | `f5f2600` | ⏸ |
 | 29 Oct 2026 | Massey Hall photo added; every spot now has a photo | `4419c24` | ⏸ |
 | 29 Oct 2026 | Map search shows every match (styleguide §7 Map search results panel). It used to fly to the first match only and leave matches on other routes hidden ("Ann" found Annex Wall and Annex Photo, but Annex Photo couldn't be reached from the Street Art route). Now the matches show whatever route they're on, the map fits them, and a results panel lists them; a row opens the spot's drawer. ×, Escape or an empty search brings the route back | `53c220e` | ⏸ |
+| 2 Nov 2026 | 404 page "Wrong turn. Good discovery." (Figma `4357:15306`, styleguide §7 404 spot card): `404.html`, served by Netlify for any missing URL. Suggests a random spot from the route data with a round yellow Shuffle button (user-location style, new `Icon=shuffle.svg`; `Icon=roadmap.svg` added as the alternative) and an eased change; spots come from a shuffled deck, so none repeats until all have shown. "Explore this spot" opens it on the map through the new `index.html?route=…&spot=…` link (build-instructions §0). Intro paragraph at 1.4 line height (Figma P-Body Copy Primary is 1.2). Exploration of five directions in `documentation/404-concepts.html` | `70dce3e` | ⏸ |
+| 2 Nov 2026 | 404 page fix: at a nested missing URL (`/a/b/nope`) its CSS, scripts and links resolved under `/a/b/` and the page loaded unstyled; `<base href="/">` resolves them from the site root | (this commit) | ⏸ |
 | 26 Oct 2026 | Mobile menu "EXPLORE THE ROUTES" added to About and Profile (it was never in their menus). Route tiles on pages without the map (City Guide, About, Profile) now open `index.html?route=<category>` (`nav.js`); on the City Guide they did nothing before. `index.html` selects the route from `?route=` on load (hidden or unknown routes fall back to Typography) and marks the menu tile | (this commit) | ⏸ |
 
 ---

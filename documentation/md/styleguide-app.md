@@ -627,6 +627,22 @@ Live: `.search-results` (`js/search.js`, `css/components.css`), 29 Oct 2026. Sea
 - Tapping a row flies to the spot (zoom 16, offset left of the drawer on desktop) and opens its drawer
 - The panel stays until the search is cleared: ×, Escape, an emptied input (including the phone search pill's ×) or choosing a route. Clearing brings back the selected route's markers
 
+#### 404 spot card
+Figma `4357:15306`. Live: `404.html`, `.nf-spot` (`css/not-found.css`, `js/not-found.js`), 2 Nov 2026. The 404 page suggests one spot instead of a dead end.
+- Layout (desktop): message column up to 464px and card up to 600px, 72px page padding, both centred vertically; fits 1280×833 with the footer. Under 1024px they stack (card under the message); on phones the two buttons go full width
+- Message: label in Headings/Caption (Josefin Medium 14px, 0.1em, caps, `#2D4855`); heading Josefin Medium 48px / 1.2 `#0F2229` (36px on phones); intro Roboto Slab Light 16px `#2D4855` at **1.4** line height (Figma P-Body Copy Primary is 1.2, too tight for a three-line paragraph); then Secondary "Back to the Map" and Primary "Explore this spot"
+- Card: bg-card `#EBF2EE`, 8px corners. Photo frame fixed at 600:344 with `object-fit: cover`; the photo is absolutely positioned so a portrait photo can't stretch the frame. While a photo loads, the frame shows the route colour
+- Body: 28/20/20px padding (20/16/16 on phones); name Josefin 24px, 0.08em, caps (20px on phones); route tag Roboto Slab 14px white on the route colour at 75%, 2px corners (as in the City Guide); description Roboto Slab Light 16px / 1.4 `#41687B`, clamped to 3 lines
+- "Explore this spot" links to `index.html?route=<route>&spot=<Name>` (build-instructions §0), so it always opens the spot on the card
+
+#### Shuffle button (round icon button)
+The map's user-location control (Figma `4330:7093`) reused as a button, with `Icon=shuffle` (Figma `4570:7579`). Live: `.nf-shuffle` on the 404 spot card.
+- 42px circle, 24px icon, `aria-label` and `title` "Show another spot"
+- Position: on the photo, 16px from its bottom and right edges
+- Default: solid `#E7E626` (the map version is 75%: on a photo the solid fill holds up better). Hover (pointer devices only): shadow `4px 4px 12px rgba(15,34,41,0.33)`. Pressed: `inset 2px 2px 2px rgba(0,0,0,0.25)`
+- Change animation: photo and text fade out in 0.2s (ease-in, photo scales to 1.03, text drops 6px), the content swaps, then they fade back in over 0.35s on `cubic-bezier(0.16, 1, 0.3, 1)` once the new photo has loaded (at most 1.5s wait). Clicks during a change are ignored; with reduced motion the swap is instant
+- Alternative icon: `Icon=roadmap` (Figma `4486:16742`) is in `assets/icons/` but not used
+
 
 ### Link Primary
 Figma `4443:14728` (desktop) and `4443:14814` (mobile). Live: `.about-link-item` (About author card).
