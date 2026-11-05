@@ -1,0 +1,1265 @@
+/* site/css/layout.css */
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Fallback */
+  height: 100svh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* Top Navigation */
+.top-nav {
+  height: 64px;
+  background-color: var(--surface-4);
+  border-bottom: 1px solid var(--divider-strong);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-lg);
+  flex-shrink: 0;
+  z-index: 100;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.logo-container {
+  width: 418px; /* Matches the new sidebar width avoiding CTA wrapping */
+  height: 16px;
+  display: flex;
+  align-items: center;
+  padding-left: 0;
+}
+
+.search-container {
+  width: 370px;
+  height: 38px;
+  /* The top nav stays dark on every page (City Guide uses the light theme),
+     so the search pill uses fixed dark-nav values instead of theme tokens.
+     Background is the styleguide's dark --search-bg; text >= 4.5:1 on it. */
+  background-color: rgba(237, 244, 240, 0.15);
+  border: 0.5px solid var(--backgrounds-elevated, #cddbd0);
+  backdrop-filter: blur(4px);
+  border-radius: 4px; /* Framer Search field */
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 6px;
+  cursor: text;
+}
+
+.search-container svg {
+  color: #D6E3DF;
+}
+
+.search-container input {
+  font-family: 'Adelle', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 15px;
+  color: #FFFFFF;
+  background: transparent;
+  border: none;
+  outline: none;
+  width: 100%;
+}
+
+.search-container input::placeholder {
+  color: #D6E3DF;
+}
+
+.nav-center {
+  display: flex;
+  gap: 12px;
+  margin-right: 24px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px 4px 12px; /* 2px extra at the top: optical offset for Josefin caps */
+  border-radius: 4px; /* Framer Nav item, 4px grid */
+  text-decoration: none;
+  color: var(--content-1);
+  background-color: var(--surface-5);
+  text-transform: uppercase;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600; /* Framer "Label M" */
+  letter-spacing: 0;
+  white-space: nowrap;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid transparent;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0); /* invisible shadow by default */
+}
+
+.nav-item:hover {
+  color: var(--brand-trace);
+}
+
+.nav-item:active {
+  transform: scale(0.96);
+}
+
+.nav-item.active {
+  color: var(--brand-trace);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45); /* Distinct soft drop shadow */
+}
+
+.nav-item:focus-visible {
+  outline: none;
+  border-color: var(--brand-trace);
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ── Map Style Toggle (Figma: ThemeSwitch component) ───────────────────────
+   Pill with two icon slots — selected side gets an elevated bg pill + inner shadow.
+   Default = satellite/dark map (light-icon slot active, pill bg is dark #2d4855).
+   Active  = street/light map  (dark-icon slot active, pill bg is light #ebf2ee).
+   ──────────────────────────────────────────────────────────────────────────── */
+.theme-switcher {
+  display: flex;
+  align-items: center;
+}
+
+.map-style-toggle {
+  /* Outer pill — always dark bg in default state */
+  display: flex;
+  align-items: center;
+  border: 0.5px solid #cddbd0;
+  border-radius: 50px;
+  background-color: #2d4855;
+  padding: 0;
+  cursor: default; /* individual slots are interactive */
+  transition: background-color 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.32s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Light-map active: flip outer pill to light bg */
+.map-style-toggle.map-light {
+  background-color: #ebf2ee;
+}
+
+/* ── Shared slot styles ── */
+.toggle-slot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  border-radius: 50px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  line-height: 0;
+  transition: background-color 0.25s ease;
+  z-index: 1;
+}
+
+/* The inner elevated pill that appears on the ACTIVE slot */
+.toggle-slot::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+/* Inner shadow layer (tapped-icon effect from Figma) */
+.toggle-slot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50px;
+  box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+/* Icon wrapper — 24×24 with 4px padding = 16px icon display area */
+.toggle-icon-box {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  position: relative;
+  z-index: 1;
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.toggle-icon-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* ── Slot: Light icon (left) — active in DEFAULT/satellite state ───────── */
+/* In default state: bg = #ebf2ee, shadow visible */
+.map-style-toggle:not(.map-light) .toggle-slot-light::before {
+  background-color: #ebf2ee;
+  opacity: 1;
+}
+.map-style-toggle:not(.map-light) .toggle-slot-light::after {
+  opacity: 1;
+}
+
+/* ── Slot: Dark icon (right) — active in MAP-LIGHT/street state ─────────── */
+/* In map-light state: bg = #2d4855, shadow visible */
+.map-style-toggle.map-light .toggle-slot-dark::before {
+  background-color: #2d4855;
+  opacity: 1;
+}
+.map-style-toggle.map-light .toggle-slot-dark::after {
+  opacity: 1;
+}
+
+/* ── Icon visibility rules ──────────────────────────────────────────────────
+   Both SVG icons use #2D4855 fill by default:
+   • Sun/lightDark icon  → dark fill, always fine on light elevated pill (#ebf2ee)
+   • Moon/dark-2.svg     → dark fill, invisible on dark (#2d4855) backgrounds!
+
+   Moon icon needs filter:invert(1) in TWO situations:
+   1. satellite/dark map (no .map-light) — icon sits on dark outer pill #2d4855
+   2. street/light map (.map-light)      — icon sits on dark inner ACTIVE pill #2d4855
+   ie. whenever the background behind the moon is dark, flip it white.          */
+
+/* 1. Dark map (no .map-light): moon on dark outer pill → make it white */
+.map-style-toggle:not(.map-light) .toggle-slot-dark .toggle-icon-box img {
+  filter: brightness(0) invert(1);
+}
+
+/* 2. Light map (.map-light): moon on dark ACTIVE inner pill → keep it white */
+.map-style-toggle.map-light .toggle-slot-dark .toggle-icon-box img {
+  filter: brightness(0) invert(1);
+}
+
+/* Sun icon: always dark fill → always fine on its light elevated pill or light outer pill.
+   No filter needed. */
+
+/* Hover intent — subtle highlight on inactive slot */
+.map-style-toggle:not(.map-light) .toggle-slot-dark:hover::before {
+  background-color: rgba(255, 255, 255, 0.1);
+  opacity: 1;
+}
+.map-style-toggle.map-light .toggle-slot-light:hover::before {
+  background-color: rgba(45, 72, 85, 0.1);
+  opacity: 1;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+  .toggle-icon-box {
+    width: 22px;
+    height: 22px;
+    padding: 3px;
+  }
+}
+
+/* Main Content Area */
+.main-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Sidebar */
+.side-nav {
+  width: 418px;
+  background-color: var(--surface-4);
+  border-right: 1px solid var(--divider-strong);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  z-index: 90;
+  scrollbar-width: none; /* Firefox */
+}
+.side-nav::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Edge */
+}
+
+.side-section {
+  padding: var(--space-lg);
+  border-bottom: 1px solid var(--divider-soft);
+}
+
+.side-section:last-child {
+  border-bottom: none;
+}
+
+.section-title {
+  color: var(--content-3);
+  margin-bottom: var(--space-md);
+}
+
+/* Map Area */
+.map-canvas {
+  flex: 1;
+  background-color: #1E3340; /* Dark mode map base */
+  position: relative;
+  overflow: hidden;
+}
+
+/* Marker Styles (HTML based for mapboxgl.Marker) */
+.map-marker {
+  width: 60px;
+  height: 60px;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.map-marker:hover {
+  transform: scale(1.1);
+  z-index: 10;
+}
+
+.map-marker:active {
+  transform: scale(1.05); /* slightly scale down on critical press */
+}
+
+.map-marker.active {
+  transform: scale(1.15);
+  z-index: 20;
+}
+
+.map-marker.hidden {
+  display: none !important;
+}
+
+.marker-inner {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 3px solid #ffffff; /* slightly thicker solid border for bigger scale */
+  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.15), 0 2px 4px rgba(0,0,0,0.3); /* precise halo & depth */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden; /* cleanly clip inner images */
+  background-size: cover;
+  background-position: center;
+  transition: all 0.2s ease;
+}
+
+.map-marker.active .marker-inner {
+  width: 64px;
+  height: 64px;
+  box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.25), 0 4px 8px rgba(0,0,0,0.5); /* Emphasized glow when selected */
+  border-width: 3px;
+}
+
+/* ── No-image dot marker (temporary placeholder) ────────────────────────────
+   Figma spec: 44px circle, route color ring, semi-transparent center.
+   Used when a spot has no IMG property — smaller & lighter than photo markers. */
+.map-marker.no-image {
+  width: 40px;
+  height: 40px;
+}
+
+.map-marker.no-image .marker-inner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid currentColor;           /* Ring uses route color set via JS */
+  background-color: rgba(255,255,255,0.15); /* Semi-transparent center */
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.1), 0 1px 3px rgba(0,0,0,0.25);
+  border-radius: 50%;
+}
+
+.map-marker.no-image.active .marker-inner {
+  width: 32px;
+  height: 32px;
+  box-shadow: 0 0 0 5px rgba(255,255,255,0.2), 0 2px 6px rgba(0,0,0,0.4);
+}
+
+
+/* Tooltip (Tulip) design */
+.marker-tooltip {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translate(-50%, -100%) translateY(10px);
+  background: var(--surface-4, #2A3B47);
+  padding: 10px 14px;
+  border-radius: 8px;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 140px;
+  max-width: 200px;
+  text-align: center;
+  border: 1px solid var(--divider-strong, rgba(255,255,255,0.1));
+}
+
+.marker-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: var(--surface-4, #2A3B47) transparent transparent transparent;
+}
+
+.map-marker.active .marker-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -100%) translateY(0); /* float up cleanly */
+}
+
+.marker-tooltip .tooltip-title {
+  color: var(--content-1, #fff);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.marker-tooltip .tooltip-hint {
+  color: var(--content-3, #99A1A6);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+/* Floating Actions */
+.quick-guide-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  z-index: 80;
+}
+
+.quick-guide-btn {
+  pointer-events: auto;
+  /* Rotated around its right-middle point; translate (in the rotated frame)
+     +50% of its length back up so the tab's centre sits on the map's centre,
+     and -50% of its height to sit flush with the right edge */
+  transform: rotate(-90deg) translate(50%, -50%);
+  transform-origin: center right;
+  background-color: var(--backgrounds-bg-card-glass, rgba(45, 72, 85, 0.75));
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px 4px 0 0; /* Framer Side tab */
+  color: var(--text-text-body, #bdd0cc);
+  font-family: 'Josefin Sans', sans-serif;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0;
+  cursor: pointer;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  white-space: nowrap;
+  transition: all var(--transition-fast, 0.2s ease);
+}
+
+.quick-guide-icon-box {
+  width: 24px;
+  height: 24px;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.quick-guide-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.quick-guide-btn:hover {
+  background-color: rgba(45, 72, 85, 0.95);
+  padding-top: 12px; /* Slight tab out effect for left-facing tab */
+}
+
+/* =========================================================================
+   MOBILE COMPONENTS & UTILITIES (Global Desktop Hidden)
+   ========================================================================= */
+.mobile-only {
+  display: none !important;
+}
+
+/* Hide the mobile bottom dock on desktop */
+#mobile-bottom-dock {
+  display: none;
+}
+
+/* Hide the mobile hamburger menu overlay on desktop */
+.mobile-menu-overlay {
+  display: none;
+}
+
+/* Hide the desktop-only nearby section on mobile (shown on desktop by default) */
+/* Desktop sidebar headings: small caps labels that support the routes below
+   (sentence case at 20px pulled focus from the content; 26 Oct 2026) */
+#desktop-nearby .nearby-header {
+  display: flex;
+  align-items: baseline; /* "NEAR YOU" and "6 spots" share a baseline (different fonts and padding) */
+  justify-content: space-between;
+}
+
+#routes-heading,
+#desktop-nearby-heading {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--content-3);
+  padding-bottom: 4px;
+}
+
+#routes-heading {
+  margin-bottom: 12px;
+}
+
+/* Desktop Near You photos sit straight on the sidebar (Figma 4007:2): no box,
+   so the tiles share the edges of the route rows and the Start CTA.
+   12px between the header and the photos, 12px between tiles. */
+#desktop-nearby .nearby-grid {
+  margin-top: 12px;
+  gap: 12px;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+}
+
+/* Same style as the route counts (.route-meta) */
+#desktop-spots-count {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--content-2, #bdd0cc);
+}
+
+.desktop-only {
+  display: block;
+}
+
+.mobile-floating-search {
+  display: none;
+  width: 100%;
+  padding: 12px 16px;
+  background-color: transparent;
+  position: fixed;
+  top: 64px;
+  left: 0;
+  z-index: 150;
+  pointer-events: none;   /* Transparent area passes touches to map beneath */
+}
+
+.mobile-floating-search .search-inner {
+  width: 100%;
+  height: 54px;
+  background-color: rgba(235, 242, 238, 0.9); /* Higher contrast opacity */
+  border: 0.5px solid var(--text-secondary, #7a9a8e);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 10px;
+  pointer-events: auto;   /* The pill itself IS interactive */
+  /* Avoid backdrop-filter — it creates a stacking context that breaks iOS input focus */
+}
+
+/* Form must not break the flex layout — display:contents has iOS bugs */
+.mobile-floating-search .search-inner form {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  height: 100%;
+  min-width: 0;
+}
+
+.mobile-floating-search .search-inner input {
+  background: transparent;
+  border: none;
+  outline: none;
+  width: 100%;
+  flex: 1;
+  height: 100%;
+  font-family: 'Adelle', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 15px;
+  color: #0f2229;                      /* Dark text — legible on light map/pill background */
+  pointer-events: auto;
+  touch-action: auto;
+  -webkit-user-select: text;
+  user-select: text;
+  cursor: text;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.mobile-floating-search .search-inner input::placeholder {
+  color: #3A6070;                      /* Solid dark placeholder on light pill (6:1) */
+  font-style: italic;
+}
+
+/* =========================================================================
+   MOBILE RESPONSIVE BREAKPOINT (iPhone Pro & Map Overlays)
+   Refactors the Desktop Flexbox into Absolute Float topology
+   ========================================================================= */
+@media (max-width: 768px) {
+  /* Release Map bounds to fill entire viewport */
+  .main-content { display: block; }
+  .map-canvas { 
+    position: absolute !important; 
+    inset: 0; width: 100vw; height: 100svh;
+  }
+
+  /* Release Desktop Fixed Widths protecting the mobile breakpoint */
+  .logo-container { width: auto; max-width: none; justify-content: center; left: 50%; position: absolute; transform: translateX(-50%); }
+  .search-container { display: none; }
+  .nav-center { display: none; } /* Hide massive desktop map/city guide/about links! */
+  .nav-right { gap: 8px; }
+  .top-nav { padding: 0 16px; height: 64px; position: relative; }
+
+  /* Hide desktop-only elements on mobile */
+  .desktop-only { display: none !important; }
+
+  /* Unveil Mobile Specific Nav Components */
+  .mobile-only { display: flex !important; }
+  .logo-to { display: inline !important; }
+
+  /* Style Header Mobile Icons */
+  .mobile-hamburger {
+    background: transparent; border: none; color: var(--content-3);
+    width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;
+  }
+  .mobile-search-btn {
+    background: transparent; border: none; color: var(--content-3);
+    width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;
+    border-radius: 50%; transition: background-color 0.2s;
+  }
+
+  /* Active State for Mobile Overlay Search */
+  .mobile-floating-search.mobile-search-active {
+    display: block;
+  }
+
+  /* Deconstruct Left Panel into Ghost Wrapper */
+  .side-nav {
+    position: fixed; inset: 0; width: 100vw; height: 100%;
+    background: transparent; border: none; padding: 0;
+    pointer-events: none; /* Allow map clicks through wrapper */
+    z-index: 50;
+  }
+
+  /* Explore Routes -> Sliding Tabs docked to Right Edge */
+  .side-section.explore-routes {
+    /* Centred in the open map (Figma 2734:11961): between the 64px nav and the
+       Start CTA, whose top is 130px from the bottom (69px closed Near You dock +
+       12px gap + 49px button). Midpoint = 64 + (100% - 64 - 130) / 2 = 50% - 33px */
+    position: absolute; right: 0; top: calc(50% - 33px); bottom: auto; transform: translateY(-50%);
+    pointer-events: auto; padding: 0; margin: 0; border: none;
+    background: transparent; display: flex; flex-direction: column; gap: 16px; height: auto; /* Figma: 48px tabs every 64px */
+    align-items: flex-end; z-index: 100;
+  }
+  .side-section.explore-routes h2,
+  .route-description { display: none; }
+  
+  .route-wrapper[data-category="artists-pick"] { --route-bg: var(--cat-artists-choice); }
+  .route-wrapper[data-category="typography"] { --route-bg: var(--cat-typography); }
+  .route-wrapper[data-category="art-objects"] { --route-bg: var(--cat-art-objects); }
+  .route-wrapper[data-category="architecture"] { --route-bg: var(--cat-architecture); }
+  .route-wrapper[data-category="street-art"] { --route-bg: var(--cat-street-art); }
+
+  .route-wrapper {
+    background-color: var(--route-bg);
+    border-radius: 4px 0 0 4px;    /* 4px grid, like the desktop route rows */
+    height: 48px;                  /* Figma: h-[48px] */
+    max-width: 54px;               /* Figma: w-[54px] closed (icon + padding only) */
+    width: max-content;
+    overflow: hidden;
+    transition: max-width 0.55s cubic-bezier(0.34, 1.22, 0.64, 1), opacity 0.3s ease;
+    opacity: 0.9;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    margin: 0; padding: 0; border: none;
+  }
+
+  /* The inner button follows the tab's shape (its desktop radius is 4px) */
+  .route-wrapper .route-item { border-radius: inherit; }
+
+  .route-wrapper.mobile-open {
+    max-width: 184px;  /* Figma: w-[184px] open */
+    opacity: 1;
+  }
+  .route-wrapper.active {
+    opacity: 1; /* Stay full opacity when active, even if closed */
+  }
+
+  .route-item { 
+    display: flex; align-items: center; gap: 8px;
+    height: 48px; padding: 8px 12px;  /* same as the desktop route rows; icon centred in 48px */
+    background: transparent; border: none; width: 100%; cursor: pointer;
+  }
+  .route-item:hover, .route-wrapper.active .route-item { border: none; background: transparent; box-shadow: none; }
+  
+  .route-icon {
+    width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;  /* Figma: size-[30px] */
+    background-color: rgba(235, 242, 238, 0.8) !important;
+    display: flex; align-items: center; justify-content: center;
+    border: none; box-shadow: none;
+  }
+  .explore-routes .route-icon img {
+    filter: none !important;
+  }
+
+  /* components.css (desktop route rows) loads after this file, so scope the
+     phone tab sizes to .explore-routes: 30px circle centred in the 54px tab,
+     24px icon (Figma SideNavItem1 2734:12976), no desktop row margin */
+  .explore-routes .route-wrapper { margin: 0; }
+  .explore-routes .route-icon { width: 30px; height: 30px; }
+  .explore-routes .route-icon img { width: 24px !important; height: 24px; } /* beats the inline 16px used on desktop */
+  
+  .route-info { display: flex; align-items: center; white-space: nowrap; opacity: 0; transition: opacity 0.3s 0.18s ease; }
+  .route-wrapper.mobile-open .route-info { opacity: 1; }
+  .route-name { font-family: 'Josefin Sans', sans-serif; font-size: 17px; font-weight: 700; color: white !important; }  /* Figma: text-[17px] font-bold */
+  .route-meta { display: none !important; }
+
+  /* =========================================================================
+     MOBILE BOTTOM DOCK — Figma-accurate layout
+     Structure: #mobile-bottom-dock > .btn-cta + .side-section
+     Closed: button visible above drawer header (86px)
+     Open:   drawer expands, button moves inside at bottom
+     ========================================================================= */
+
+  /* Hide the desktop sidebar layout rules for side-section on mobile */
+  .side-section:not(.explore-routes) {
+    /* Will be styled via #mobile-bottom-dock instead */
+    position: static !important;
+    background: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    z-index: auto !important;
+  }
+
+  /* The unified fixed wrapper */
+  #mobile-bottom-dock {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    z-index: 95;
+    pointer-events: none; /* Let map through by default */
+  }
+
+
+
+
+  /* The frosted drawer — only the header visible when closed */
+  #mobile-bottom-dock .side-section {
+    position: relative !important;
+    background: rgba(241, 246, 243, 0.75) !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    border-radius: 8px 8px 0 0 !important;
+    border-top: 1px solid rgba(255,255,255,0.5) !important;
+    box-shadow: 0 -4px 32px rgba(0,0,0,0.08) !important;
+    padding: 0 20px 0 20px !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    pointer-events: auto;
+    overflow: visible; /* Allow btn-cta to float above the drawer */
+    z-index: 1;
+  }
+
+  /* Add bottom spacing only when open */
+  #mobile-bottom-dock.drawer-open .side-section {
+    padding-bottom: 24px !important;
+  }
+
+  /* When drawer is open, raise dock above route pills (z:100) and nav (z:100) */
+  #mobile-bottom-dock.drawer-open {
+    z-index: 120 !important;
+  }
+
+  /* Raise the side-nav stacking context above the quick-guide-wrapper (z:80)
+     when the drawer is open — :has() is supported in all modern browsers */
+  .side-nav:has(#mobile-bottom-dock.drawer-open) {
+    z-index: 90 !important;
+  }
+
+  /* Drag Handle pill */
+  .nearby-drag-handle {
+    width: 44px; height: 4px;
+    border-radius: 2px;
+    background: rgba(0,0,0,0.15);
+    margin: 10px auto 0 auto;
+    flex-shrink: 0;
+  }
+
+  /* Header row */
+  .nearby-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 12px 0;
+    flex-shrink: 0;
+  }
+  .nearby-header-left {
+    display: flex; align-items: center; gap: 12px;
+    min-height: 30px; /* the row keeps the height the 30px icon ring gave it: same dock
+                         height and tap area, and the route tabs stay centred */
+  }
+  .nearby-header-right {
+    display: flex; align-items: center; gap: 4px;
+  }
+
+  /* Same as the desktop sidebar labels (styleguide §5 "Sidebar label"); no icon,
+     so the Start CTA above stays the hero. text-secondary on the light dock */
+  #mobile-bottom-dock #nearby-heading {
+    margin: 0;
+    color: #487389 !important;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* Spots count — hardcoded Figma text-body color */
+  /* Figma "Body Copy/Caption 1": Josefin Regular 14px, sentence case (overrides .label-small) */
+  #mobile-bottom-dock .nearby-spots-count {
+    color: #2D4855 !important; /* Figma text-body */
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0;
+    text-transform: none;
+    font-family: 'Josefin Sans', sans-serif;
+  }
+
+  /* Chevron — same dark color, rotate when open */
+  .nearby-chevron {
+    width: 12px;
+    margin-top: -3px; /* lifts the glyph 1.5px onto the caps' middle of "6 SPOTS" */
+    transition: transform 0.4s ease;
+    opacity: 0.6;
+    filter: brightness(0); /* Make it dark */
+  }
+  #mobile-bottom-dock.drawer-open .nearby-chevron {
+    transform: rotate(180deg);
+  }
+
+  /* Image carousel — display:none when closed (fully collapses, no height residue) */
+  .nearby-grid {
+    display: none !important;
+    flex-wrap: nowrap;
+    gap: 12px;
+    scroll-snap-type: x mandatory;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    border: none !important;
+  }
+  .nearby-grid::-webkit-scrollbar { display: none; }
+
+  /* When open: reveal grid as horizontal flex scroll */
+  #mobile-bottom-dock.drawer-open .nearby-grid {
+    display: flex !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin-top: 4px;
+    margin-bottom: 16px;
+  }
+
+  .nearby-item {
+    flex: 0 0 96px; height: 96px; min-width: 96px;
+    scroll-snap-align: start;
+    border-radius: 4px; overflow: hidden;
+    box-shadow: none; border: none; margin: 0;
+  }
+  .nearby-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* CTA Button — floats ABOVE the drawer in closed state */
+  #mobile-bottom-dock .btn-cta {
+    position: absolute !important;
+    left: 20px !important;
+    right: 20px !important;
+    width: auto !important;
+    bottom: calc(100% + 12px) !important; /* 12px gap above drawer top edge */
+    margin: 0 !important;
+    padding: 8px 16px !important;
+    border-radius: 4px !important;
+    min-height: 48px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    pointer-events: auto;
+    z-index: 10;
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  /* CTA Button — flows inside when drawer is open */
+  #mobile-bottom-dock.drawer-open .btn-cta {
+    position: static !important;
+    width: 100% !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* On mobile: geolocate sits on the LEFT (route buttons own the right side).
+     bottom value accounts for real Safari browser chrome (~85px) being taller
+     than desktop viewport simulation, so it sits midway between Quick-Guide
+     and the Start Route CTA. */
+  .mapboxgl-ctrl-bottom-right {
+    bottom: 200px !important;
+    top: auto !important;
+    right: auto !important;
+    left: 12px !important;
+  }
+
+  /* Split the Mapbox attribution out of the left-side geolocate stack —
+     reposition it to its natural bottom-right corner so it never crowds
+     the location icon. Uses position:fixed to break out of the parent. */
+  .mapboxgl-ctrl-bottom-right .mapboxgl-ctrl-attrib {
+    position: fixed !important;
+    bottom: 130px !important;  /* sits just above the Near You drawer header */
+    right: 12px !important;
+    left: auto !important;
+    top: auto !important;
+    background: rgba(255, 255, 255, 0.7) !important;
+    border-radius: 8px !important;
+    padding: 2px 6px !important;
+    font-size: 10px !important;
+  }
+
+  
+  /* Turn off non-mobile things */
+  /* Keep .quick-guide-wrapper visible on mobile, but move to the left edge */
+  .quick-guide-wrapper {
+    right: auto;
+    left: 0;
+    width: 35px;
+    justify-content: center;
+    padding-bottom: 25dvh; /* pushes the button higher visually out of the way of the bottom docks */
+  }
+  .quick-guide-btn {
+    transform-origin: center center;
+    transform: rotate(-90deg);
+    border-radius: 0 0 4px 4px;
+  }
+  .quick-guide-btn:hover {
+    padding-top: 8px; /* reset desktop hover */
+    padding-bottom: 12px; /* slight tab out effect for right-facing tab */
+  }
+
+  /* =========================================================================
+     MOBILE HAMBURGER MENU OVERLAY
+     ========================================================================= */
+  .mobile-menu-overlay {
+    --surface-1: #12202A;
+    --surface-2: #1D3240;
+    --surface-3: #223740;
+    --surface-4: #2D4855;
+    --surface-5: #3D5E6A;
+    --content-1: #EDF4F0;
+    --content-2: #BDD0CC;
+    --content-3: #96B8B9;
+    --divider-soft: #8AADB5;
+    --divider-strong: #3D5E6A;
+    --logo-to: #EDF4F0;
+
+    display: none;
+    position: absolute; top: 64px; left: 0;
+    width: 100vw; height: calc(100vh - 64px); height: calc(100svh - 64px);
+    background-color: var(--surface-1);
+    z-index: 200; padding: 24px;
+    overflow-y: auto; flex-direction: column; gap: 24px;
+  }
+  .mobile-menu-overlay.active { display: flex; }
+  
+  .menu-section { display: flex; flex-direction: column; gap: 16px; width: 100%; }
+  /* Same as the desktop sidebar labels (styleguide §5 "Sidebar label") */
+  .menu-label { font-family: 'Josefin Sans', sans-serif; font-size: 14px; font-weight: 700; line-height: 1.2; letter-spacing: 0.08em; text-transform: uppercase; color: #96b8b9; }
+  
+  .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; width: 100%; }
+  .menu-grid .full-width { grid-column: span 2; }
+  
+  .menu-btn {
+    display: flex; align-items: center; gap: 10px; padding: 8px 12px;  /* Figma RouteItemNav: 8/12, gap 10 */
+    border-radius: 4px; border: none; cursor: pointer; text-decoration: none;
+    background-color: var(--surface-4); color: var(--content-1); text-align: left;
+  }
+  .menu-btn .icon-circle {
+    width: 30px; height: 30px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    background-color: var(--surface-1); color: var(--content-1);
+  }
+  .svg-mask {
+    width: 16px; height: 16px;
+    background-color: currentColor;
+    -webkit-mask-size: contain; mask-size: contain;
+    -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+    -webkit-mask-position: center; mask-position: center;
+  }
+  
+  /* Navigate Buttons — matches Figma NavItemHamburgerLines spec */
+  .nav-btn {
+    background-color: #2d4855;      /* var(--text-body) */
+    border-radius: 4px;              /* Figma: rounded-[4px] */
+    padding: 16px;
+    gap: 8px;                        /* Figma: gap-[8px] */
+    align-items: flex-start;         /* Figma: icon top-aligned with the page name */
+    border: none;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.15s ease;
+  }
+  /* Figma NavItemHamburgerLines (2734:15974): the icon circle is gone, a plain
+     24px icon in the state colour sits next to the text */
+  .nav-btn .icon-circle {
+    width: 24px; height: 24px;
+    border-radius: 0;
+    background: none;
+    border: none;
+    color: #96b8b9;                  /* text-secondary */
+    flex-shrink: 0;
+    padding: 0;
+  }
+  .nav-btn .icon-circle svg { width: 24px; height: 24px; display: block; }
+  /* Route tiles (Figma RouteItemNav 2734:16219): 24px icon in the 30px circle */
+  .route-btn .icon-circle svg { width: 24px; height: 24px; display: block; }
+  .nav-btn .text { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }  /* Figma: gap-[4px] */
+  .nav-btn .title {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 16px;                  /* Figma "Nav Item Hamburger": Regular 16, caps */
+    font-weight: 400;
+    letter-spacing: 0.04em;           /* Figma 4%: caps need a little air */
+    text-transform: uppercase;
+    color: #edf4f0;                   /* Figma: text-primary */
+    line-height: 1;
+    padding: 3px 0 1px;               /* Figma optical offset */
+    white-space: nowrap;
+  }
+  .nav-btn .subtitle {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 14px;                  /* Figma Caption 1; lines kept short to fit a 375px phone */
+    font-weight: 400;
+    color: #96b8b9;                   /* Figma: text-secondary (4.5 : 1 on #2D4855) */
+    line-height: 1.2;
+    white-space: nowrap;              /* Figma: one line */
+  }
+
+  /* Pressed (touch): small inner shadow, everything turns primary text */
+  .nav-btn:not(.active):active { box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.25); }
+  .nav-btn:not(.active):active .icon-circle,
+  .nav-btn:not(.active):active .title,
+  .nav-btn:not(.active):active .subtitle { color: #edf4f0; }
+
+  /* Focused (keyboard): 0.5px yellow edge, yellow icon and name */
+  .nav-btn:not(.active):focus-visible { outline: none; box-shadow: inset 0 0 0 0.5px var(--brand-trace); }
+  .nav-btn:not(.active):focus-visible .icon-circle,
+  .nav-btn:not(.active):focus-visible .title { color: var(--brand-trace); }
+  .nav-btn:not(.active):focus-visible .subtitle { color: #edf4f0; }
+
+  /* Small phones (iPhone SE / mini, 375px): the Figma 16px padding leaves
+     "CITY GUIDE" no room, so tighten the tiles and the page names slightly */
+  @media (max-width: 389px) {
+    .menu-grid { gap: 12px; }
+    .menu-btn.nav-btn { padding: 12px; }
+    .nav-btn .title { font-size: 15px; }
+  }
+
+  /* Active state — brand-trace yellow bg, dark icon/text */
+  /* Active (the current page): yellow with a soft yellow glow */
+  .nav-btn.active {
+    background-color: var(--brand-trace);
+    border: none;
+    box-shadow: inset 0 0 0 0.5px #487389, 0 0 12px var(--brand-trace);  /* Figma: 0.5px cta-focused-ring + glow */
+    overflow: visible;
+  }
+  .nav-btn.active .icon-circle { color: #0f2229; }
+  .nav-btn.active:focus-visible { outline: 2px solid #0f2229; outline-offset: -4px; }
+  .nav-btn.active .title  { color: #0f2229; font-weight: 400; }   /* Figma: text-[var(--text/text-primary)] */
+  .nav-btn.active .subtitle { color: #2d4855; }                   /* Figma: text-[var(--text/text-body)] */
+
+
+  
+  /* Explore Routes Buttons */
+  .route-btn { align-items: center; font-family: 'Josefin Sans', sans-serif; font-size: 14px; font-weight: 500; transition: filter 0.2s ease, box-shadow 0.2s ease; }
+  .route-btn.typography { background-color: rgba(43, 94, 168, 0.75); }
+  .route-btn.art-objects { background-color: rgba(37, 122, 72, 0.75); }
+  .route-btn.architecture { background-color: rgba(154, 69, 32, 0.75); }
+  .route-btn.street-art { background-color: rgba(126, 48, 144, 0.75); }
+  .route-btn.artists-pick { background-color: rgba(13, 122, 130, 0.75); }
+  .route-btn .icon-circle { background-color: rgba(235, 242, 238, 0.33); color: white; }
+  .route-btn .title { font-size: 16px; font-weight: 500; line-height: 1.35; }  /* Figma: Josefin Medium 16 */
+  /* Active tap state: brighten + add inset ring */
+  .route-btn.active { filter: brightness(1.25); box-shadow: inset 0 0 0 2px rgba(255,255,255,0.45); }
+  
+  /* Contact: 44px dark Secondary icon buttons + a credit line. The names are
+     in aria-labels; icons are the About author-card link icons (CSS masks). */
+  .menu-contact { display: flex; flex-direction: column; gap: 12px; }
+  .menu-contact-icons { display: flex; gap: 12px; }
+  .menu-contact .menu-contact-btn { /* beats .btn-secondary's padding (components.css loads later) */
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    flex-shrink: 0;
+  }
+  .menu-contact-icon {
+    width: 26px;
+    height: 26px;
+    background-color: currentColor;
+    -webkit-mask: var(--contact-icon) center / 26px 26px no-repeat;
+    mask: var(--contact-icon) center / 26px 26px no-repeat;
+  }
+  .menu-contact-icon--web { --contact-icon: url('../assets/icons/Icon=link-web.svg'); }
+  .menu-contact-icon--mail { --contact-icon: url('../assets/icons/Icon=link-mail.svg'); }
+  .menu-contact-icon--linkedin { --contact-icon: url('../assets/icons/Icon=link-linkedin.svg'); }
+  .menu-contact-icon--instagram { --contact-icon: url('../assets/icons/Icon=link-instagram.svg'); }
+  .menu-contact-credit {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.2;
+    color: #bdd0cc;
+    margin: 0;
+  }
+
+  .menu-divider { width: 100%; height: 1px; background: var(--divider-strong); margin: 0; }
+  
+  /* Toggle Animations */
+  .mobile-hamburger svg { transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+  .mobile-hamburger.open svg { transform: rotate(90deg); }
+}
+
+/* ─── Desktop Sidebar Footer ──────────────────────────────────────────────── */
+.sidebar-footer {
+  margin-top: auto;
+  padding: 16px 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Outer gap: brand-block vs bottom-block */
+}
+
+.sidebar-footer-brand {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.sidebar-footer-logo {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 700;
+  font-size: 16px; /* Slightly larger than others to maintain hierarchy */
+  letter-spacing: 0.06em;
+  color: var(--content-1); /* Fixed missing token */
+}
+
+.sidebar-footer-tagline {
+  font-family: 'Roboto Slab', serif;
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--content-2); /* Improved contrast for 15px text */
+  letter-spacing: 0.03em;
+}
+
+.sidebar-footer-bottom {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Inner gap between flex items */
+}
+
+.sidebar-footer-link {
+  display: flex;
+  align-items: center;
+  gap: 4px; /* Max gap for icon-text at this size */
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--content-2);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: color 0.2s ease;
+}
+
+.sidebar-footer-link:hover {
+  color: var(--brand-trace);
+}
+
+/* Library Instagram icon (Icon=link-instagram.svg, as on the About page),
+   masked so it takes the link colour */
+.sidebar-footer-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  background-color: currentColor;
+  -webkit-mask: url('../assets/icons/Icon=link-instagram.svg') center / 18px 18px no-repeat;
+  mask: url('../assets/icons/Icon=link-instagram.svg') center / 18px 18px no-repeat;
+}
+
+.sidebar-footer-copy {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 15px;
+  color: var(--content-2);
+  opacity: 0.8;
+}
+
+/* Josefin draws © at cap height: drop it 0.1em so its centre sits on the
+   lowercase middle, level with the Instagram glyph */
+.sidebar-footer-copy-mark {
+  position: relative;
+  top: 0.1em;
+}
+
+/* Hide footer on mobile (sidebar is deconstructed) */
+@media (max-width: 768px) {
+  .sidebar-footer { display: none; }
+}

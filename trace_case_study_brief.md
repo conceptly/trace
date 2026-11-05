@@ -97,7 +97,7 @@ The chain: route button click → filter map markers → update CTA button → t
 Across ~10 sessions, the AI's context window was periodically truncated, which occasionally meant re-discovering decisions made earlier. The duplicate-`</html>` issue in the profile page (old content appended after new content) happened because a previous session's write was incomplete and the next session had lost that context. Clean handoffs and explicit "this is the current state" framing at the start of each session help significantly.
 
 ### 4. Asset path resolution
-Because `assets/` lives inside `trace-antigravity/`, paths should be `assets/img/...` not `../assets/...`. The desktop City Guide layout initially inherited wrong assumptions about the folder structure, requiring a pass of path corrections.
+Because `assets/` lives inside `site/`, paths should be `assets/img/...` not `../assets/...`. The desktop City Guide layout initially inherited wrong assumptions about the folder structure, requiring a pass of path corrections.
 
 ---
 

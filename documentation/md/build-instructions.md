@@ -3,7 +3,7 @@
 **Companion to design.md. Paste both files at the start of every Claude Code session.**  
 **Figma file:** https://www.figma.com/design/qWtyO6CR3xF5vrACpVBjuU/Trace-Mi-Fi-Backup-March-27?node-id=2423-4831
 
-> **26 October 2026: the Framer migration is paused.** Sections 0–15 describe the static build (vanilla HTML/CSS/JS in `trace-antigravity/`, hosted on Netlify), which stays the live site. Section 16 keeps the Framer plan for reference. Progress up to the pause is in [migration-progress.md](migration-progress.md).
+> **26 October 2026: the Framer migration is paused.** Sections 0–15 describe the static build (vanilla HTML/CSS/JS in `site/`, hosted on Netlify), which stays the live site. Section 16 keeps the Framer plan for reference. Progress up to the pause is in [migration-progress.md](migration-progress.md).
 
 ---
 
@@ -19,18 +19,18 @@ NO CSS-in-JS
 ```
 
 Files open directly in a browser with no compilation step.  
-Deploy target: Netlify. It publishes `trace-antigravity/` from `main` of `conceptly/trace` (live at https://tracedesign.art) within about a minute of a push, so changes land through a PR into `main`. Netlify's Pretty URLs setting rewrites links in the published HTML (`about.html` → `/about`, `index.html` → `/`), so live HTML differs from the repo in its links only; keep `.html` links in the source.  
+Deploy target: Netlify. It publishes `site/` from `main` of `conceptly/trace` (live at https://tracedesign.art) within about a minute of a push, so changes land through a PR into `main`. Netlify's Pretty URLs setting rewrites links in the published HTML (`about.html` → `/about`, `index.html` → `/`), so live HTML differs from the repo in its links only; keep `.html` links in the source.  
 Map: embedded `<iframe>` or Mapbox GL JS snippet — do NOT build map rendering from scratch.
 
 **Pinegrow edits:** Pinegrow (used on the About page) reformats every file it saves, and its `_pgbackup/`, `_pginfo/` and `pinegrow.json` are git-ignored. Port only the values that changed onto the current build and leave the reformatting out; a word diff ignoring whitespace (`git diff --word-diff -w`) shows them. Check that each value keeps its unit: Pinegrow once saved `max-width: 1024` with no `px`, which browsers drop.
 
-**Spot data and photos:** the map reads `trace-antigravity/js/data-architecture.js`, `data-artefacts.js`, `data-street-art.js` and `data-typography.js` (one `const geojson…` FeatureCollection each), not the files in `map-data/`. Change a spot in its `data-*.js` file and in the matching `map-data/*.geojson` so the two stay in step (they already differ in places; see migration-progress.md, Known gaps). A spot's photo is its `IMG` property: a Cloudinary URL with `q_auto/f_auto/` added after `/image/upload/` (automatic quality and format). All 62 spots have one (29 Oct 2026). The spot drawer shows the photo at its own aspect ratio, so portrait shots are fine. The semicolon CSVs in `map-data/csv/` are the April source sheets and are out of date (no Typography sheet, fewer spots).
+**Spot data and photos:** the map reads `site/js/data-architecture.js`, `data-artefacts.js`, `data-street-art.js` and `data-typography.js` (one `const geojson…` FeatureCollection each), not the files in `map-data/`. Change a spot in its `data-*.js` file and in the matching `map-data/*.geojson` so the two stay in step (they already differ in places; see migration-progress.md, Known gaps). A spot's photo is its `IMG` property: a Cloudinary URL with `q_auto/f_auto/` added after `/image/upload/` (automatic quality and format). All 62 spots have one (29 Oct 2026). The spot drawer shows the photo at its own aspect ratio, so portrait shots are fine. The semicolon CSVs in `map-data/csv/` are the April source sheets and are out of date (no Typography sheet, fewer spots).
 
 **Links into the map:** `index.html?route=<route>` selects that route on load (route ids: `typography`, `architecture`, `art-objects`, `street-art`; a hidden or unknown route falls back to Typography). Add `&spot=<Name>` to also fly to that spot and open its drawer; the name must match the spot's `Name` exactly, and the route must be the one it's on (`index.html?route=architecture&spot=Hockey+Hall+of+Fame`). The handler is the load script at the bottom of `index.html`, which calls `window.traceOpenSpot` (the `openSpot` from `search.js`). Used by the mobile menu route tiles (`?route=`) and the 404 page (`?route=&spot=`).
 
-**404 page:** `trace-antigravity/404.html` (Figma `4357:15306`). Netlify serves it, with a 404 status, for any URL that doesn't exist, at that URL (`/a/b/nope` stays in the address bar). That's why it has `<base href="/">`: its relative links (`css/`, `js/`, `assets/`, `index.html`) resolve from the site root at any depth. A side effect: opened straight from disk (`file://`) it loads unstyled; preview it through a local server rooted at `trace-antigravity/`. It shares the About page's nav and light theme (`body.about-page not-found-page`, `css/about.css` plus `css/not-found.css`) and reads the same `js/data-*.js` files as the map (`js/not-found.js`). It's `noindex`.
+**404 page:** `site/404.html` (Figma `4357:15306`). Netlify serves it, with a 404 status, for any URL that doesn't exist, at that URL (`/a/b/nope` stays in the address bar). That's why it has `<base href="/">`: its relative links (`css/`, `js/`, `assets/`, `index.html`) resolve from the site root at any depth. A side effect: opened straight from disk (`file://`) it loads unstyled; preview it through a local server rooted at `site/`. It shares the About page's nav and light theme (`body.about-page not-found-page`, `css/about.css` plus `css/not-found.css`) and reads the same `js/data-*.js` files as the map (`js/not-found.js`). It's `noindex`.
 
-**New files under `assets/`:** the root `.gitignore` has `assets/` (meant for the root image library), which also matches `trace-antigravity/assets/`. Files already in the repo stay tracked, but a new icon or photo there is ignored: add it with `git add -f`, or the live site will link to a file Netlify never got.
+**New files under `assets/`:** the root `.gitignore` has `assets/` (meant for the root image library), which also matches `site/assets/`. Files already in the repo stay tracked, but a new icon or photo there is ignored: add it with `git add -f`, or the live site will link to a file Netlify never got.
 
 **Fonts:** Load via `<link>` in `<head>`. ITC Avant Garde Gothic Pro is not on Google Fonts — use Josefin Sans as the fallback. Adelle is not on Google Fonts — use Roboto Slab as fallback. When the Adobe Fonts kit (`evd2cyp`) is available, load it before the Google Fonts link so licensed fonts take priority.
 
@@ -1317,7 +1317,7 @@ Upgrade to Pro only when a third collection is needed (articles, artists, a real
 
 ### 16.3 How the current build maps to Framer
 
-| Current build (`trace-antigravity/`) | Framer |
+| Current build (`site/`) | Framer |
 |---|---|
 | `css/tokens.css` colours, day/night | Colour styles (tokens) with light/dark values |
 | `css/base.css` type classes | Text styles (Josefin Sans for UI, Roboto Slab for editorial; Adobe kit later) |
@@ -1345,7 +1345,7 @@ Upgrade to Pro only when a third collection is needed (articles, artists, a real
    - Connect `tracedesign.art` in Framer and move the DNS from Netlify.
    - Add the Mapbox token's new allowed URLs: the domain and the framer.app address.
    - Add redirects: `/city-guide.html` → `/city-guide`, `/about.html` → `/about`, `/profile.html` → `/profile`, `/index.html` → `/`.
-8. **After cutover.** Keep the Netlify site and this repo as the rollback (point DNS back) for at least a month. Then archive `trace-antigravity/`.
+8. **After cutover.** Keep the Netlify site and this repo as the rollback (point DNS back) for at least a month. Then archive `site/`.
 
 ### 16.5 Working rules for the Framer project
 
