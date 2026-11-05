@@ -147,6 +147,7 @@ function hydrateSpotDrawer(spot) {
     if (heroImgEl) {
         if (p.IMG) {
             heroImgEl.src = p.IMG;
+            heroImgEl.alt = p.Name || '';
             heroImgEl.style.display = 'block';
         } else {
             heroImgEl.style.display = 'none';
