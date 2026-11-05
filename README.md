@@ -35,8 +35,8 @@ Design system: light and dark colour tokens checked for WCAG AA, a 4px spacing g
 
 ```
 site/                    the live site: 4 pages, CSS, JS modules, images
-map-data/                GeoJSON for each route, plus CSV sources
-documentation/           style guide and design notes
+map-data/                GeoJSON and CSV for each route, plus the Mapbox map style
+documentation/           style guide, design and build notes, 404 page concepts
 screenshots-and-drafts/  early drafts and concept pages
 ```
 
