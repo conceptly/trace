@@ -1,6 +1,6 @@
 # TRACE : Toronto — Framer Migration Progress
 
-Tracks the move from the static build (`trace-antigravity/`, Netlify) to Framer. The plan and working rules are in [build-instructions.md §16](build-instructions.md#16-migration-to-framer-plan-october-2026).
+Tracks the move from the static build (`site/`, Netlify) to Framer. The plan and working rules are in [build-instructions.md §16](build-instructions.md#16-migration-to-framer-plan-october-2026).
 
 **Status key:** ✅ done · 🟡 in progress · ⬜ not started · ⏸ paused
 
@@ -17,7 +17,7 @@ Tracks the move from the static build (`trace-antigravity/`, Netlify) to Framer.
 | Framer project | "Trace.Design" (was "Youthful Scone"), project id `BTWkApQ3pJgFVyoNzc31` |
 | Published test site | https://youthful-scone-296021.framer.app (last published before the Home page rebuild; everything since is unpublished) |
 | Live site (until cutover) | https://tracedesign.art (Netlify, from `main` of `conceptly/trace`) |
-| Spot data (source of truth) | `trace-antigravity/js/data-*.js` (what the map reads) and `map-data/*.geojson`, kept in step by hand. The CSVs in `map-data/csv/` are the April source sheets and out of date |
+| Spot data (source of truth) | `site/js/data-*.js` (what the map reads) and `map-data/*.geojson`, kept in step by hand. The CSVs in `map-data/csv/` are the April source sheets and out of date |
 | Figma | Trace-Toronto file: desktop layout `4007:2`, route list states `4015:15398`, mobile map `2734:11965`, mobile route tabs `2734:12976` |
 | Webflow fallback | Webflow project with style guide variables, Places CMS, playground and 36 icon components (paused) |
 
@@ -111,7 +111,7 @@ Desktop 1280+ · Laptop 992–1279 (new; search field 240px) · Tablet 768–991
 - ⬜ Import Architecture spots
 - ⬜ Import Art Objects spots
 - ⬜ Import Street Art spots
-- ⬜ Upload and attach all spot photos (`trace-antigravity/assets/img/`, 161 files)
+- ⬜ Upload and attach all spot photos (`site/assets/img/`, 161 files)
 - ⬜ Import route paths from the GeoJSON LineStrings (Typography, Architecture, Art Objects, Street Art)
 - ⬜ Artist's Pick route data (still "Coming soon" on the live site)
 - ⬜ Spot-check every spot against the live map: route, coordinates, slug, photo
@@ -158,7 +158,7 @@ Desktop 1280+ · Laptop 992–1279 (new; search field 240px) · Tablet 768–991
 ## 8. After cutover ⬜
 
 - ⬜ Keep the Netlify site deployable as the rollback for at least a month
-- ⬜ Archive `trace-antigravity/` in the repo
+- ⬜ Archive `site/` in the repo
 
 ---
 

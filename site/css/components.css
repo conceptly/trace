@@ -1,0 +1,1079 @@
+/* site/css/components.css */
+
+/* Route Wrapper */
+.route-wrapper {
+  margin-bottom: 8px;
+  transition: opacity 0.3s ease;
+}
+
+/* Route Item Button */
+.route-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px; /* icon to route name */
+  padding: 8px 12px;
+  border-radius: 4px; /* Framer Route row, 4px grid */
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: left;
+  border: 0.5px solid transparent;
+  cursor: pointer;
+  background: transparent;
+}
+
+.route-wrapper.inactive .route-item:hover,
+.route-item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.route-wrapper.active .route-item {
+  border-color: var(--divider-soft);
+}
+
+/* Category Specific Active States */
+.route-wrapper.active[data-category="artists-pick"] .route-item { background-color: rgba(13, 122, 130, 0.75); }
+.route-wrapper.active[data-category="typography"] .route-item { background-color: rgba(58, 78, 154, 0.75); }
+.route-wrapper.active[data-category="architecture"] .route-item { background-color: rgba(157, 55, 46, 0.75); }
+.route-wrapper.active[data-category="art-objects"] .route-item { background-color: rgba(37, 122, 72, 0.75); }
+.route-wrapper.active[data-category="street-art"] .route-item { background-color: rgba(122, 48, 132, 0.75); }
+
+.route-wrapper.inactive {
+  opacity: 1;
+}
+
+.route-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background-color 0.3s ease;
+}
+
+/* Default state: icons are light grey/white */
+.route-icon img {
+  filter: brightness(0) invert(1);
+  transition: filter 0.3s ease;
+}
+
+/* When active, icon BG becomes yellow */
+.route-wrapper.active .route-icon {
+  background-color: var(--brand-trace) !important;
+}
+
+/* When active, icon glyph color becomes dark */
+.route-wrapper.active .route-icon img {
+  filter: brightness(0) saturate(100%) invert(18%) sepia(35%) saturate(543%) hue-rotate(152deg) brightness(95%) contrast(92%) !important;
+}
+
+.route-info {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.route-name {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: 0.02em;
+  color: #f5f9f6;
+  text-transform: capitalize;
+}
+
+.route-wrapper.active .route-name {
+  color: var(--brand-trace);
+}
+
+.route-meta {
+  font-size: 16px;
+  display: flex;
+  gap: 4px;
+  color: var(--content-2, #bdd0cc); /* body text, a step below the route name */
+}
+
+/* Selected row: the 75% route tint is too dark for #BDD0CC on Art Objects
+   (3.8 : 1), so the count uses primary text there (5.5 : 1 and up) */
+.route-wrapper.active .route-meta {
+  color: var(--content-1, #edf4f0);
+}
+
+.route-description {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #FFFFFF;
+  padding: 0 12px 0 48px; /* under the route name: 12 padding + 24 icon + 12 gap */
+  margin: 0;
+  transition: all 0.3s ease;
+}
+
+.route-wrapper.active .route-description {
+  max-height: 40px;
+  opacity: 1;
+  margin-top: 8px; /* space below button */
+}
+
+/* Nearby Grid */
+.nearby-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px; /* Framer Near you grid */
+  margin-top: var(--space-md);
+  padding: 12px;
+  border: 1px solid var(--cat-artists-choice);
+  border-radius: 8px;
+}
+
+.nearby-item {
+  aspect-ratio: 1;
+  border-radius: 4px; /* photos sharper than their 8px box (nested corners) */
+  overflow: hidden;
+  background-color: var(--surface-5);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 0 1px transparent;
+}
+
+.nearby-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Hover State */
+.nearby-item:hover {
+  box-shadow: 0 0 0 1px var(--brand-trace), 0 0 16px rgba(254, 219, 102, 0.25);
+  z-index: 1;
+}
+
+/* Selected Active Map State */
+.nearby-item.active {
+  box-shadow: 0 0 0 2px var(--brand-trace), 0 0 16px rgba(254, 219, 102, 0.4);
+  z-index: 2;
+  transform: scale(1.05);
+}
+
+/* Pressed State Outer & Scale */
+.nearby-item:active {
+  box-shadow: 0 0 0 1.5px #151e1a; /* Dark border resembling trace dark theme */
+  transform: scale(0.97);
+  transition: all 0.1s ease;
+}
+
+/* Pressed State Dark Overlay */
+.nearby-item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: rgba(0, 0, 0, 0.25); /* Darken the image slightly */
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.nearby-item:active::after {
+  opacity: 1;
+  transition: opacity 0.1s ease;
+}
+/* Primary CTA Button */
+.btn-cta {
+  width: 100%;
+  min-height: 48px;
+  background-color: var(--cat-artists-choice);
+  border: 1px solid transparent; /* Reserve space for pressed state border to prevent layout shift */
+  border-radius: 4px; /* Framer Start CTA, 4px grid */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  box-shadow: 0 0 0 transparent; /* Base for transition */
+}
+
+.btn-cta:hover {
+  filter: brightness(1.1); /* Subtle elevation */
+}
+
+/* Pressed State */
+.btn-cta:active {
+  transform: scale(0.98);
+  border-color: var(--brand-trace);
+}
+
+.btn-cta.btn-active-line {
+  border-color: #FFFFFF;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
+}
+.btn-cta.btn-active-line .cta-title {
+  color: var(--brand-trace);
+}
+
+.btn-cta:focus-visible {
+  outline: none;
+  border-color: var(--brand-trace);
+  box-shadow: 0 0 0 1px var(--brand-trace);
+}
+
+.cta-left {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Sufficient space between icon and text */
+}
+
+.cta-icon {
+  width: 32px; /* Icon circle dimension relative to capsule */
+  height: 32px;
+  background-color: var(--brand-trace);
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cta-text-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.cta-title {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.2;
+  padding-top: 2px; /* optical offset */
+  color: #FFFFFF; /* High contrast white */
+  text-transform: none;
+  letter-spacing: 0;
+  transition: color 0.2s ease;
+}
+
+.cta-subtitle {
+  display: none; /* hidden in the Framer Start CTA (25 Oct) */
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 11px;
+  color: #ebf2ee; /* Soft off-white */
+  font-weight: 300;
+}
+
+.cta-arrow {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cta-arrow img {
+  filter: brightness(0) invert(1); /* Default arrow is white */
+  transition: filter 0.2s ease;
+  width: 16px;
+}
+
+/* Color changes when pressed / focused */
+.btn-cta:active .cta-title,
+.btn-cta:focus-visible .cta-title {
+  color: var(--brand-trace);
+}
+
+.btn-cta:active .cta-arrow img,
+.btn-cta:focus-visible .cta-arrow img {
+  /* Yellow filter approx for #E7E626 */
+  filter: brightness(0) saturate(100%) invert(86%) sepia(31%) saturate(1212%) hue-rotate(354deg) brightness(96%) contrast(93%);
+}
+
+/* Drawer Overlay */
+.drawer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(18, 32, 42, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.drawer-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Side Drawer (Quick Guide) */
+.drawer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(15, 34, 41, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.drawer-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: -400px; /* Figma QuickTipsContainer (4486:16753) is 402 wide */
+  width: 400px;
+  height: 100%;
+  background-color: #0f2229;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 20px 0;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.drawer.active {
+  right: 0;
+}
+
+.drawer-header {
+  padding: 0 24px 16px;
+  border-bottom: 0.5px solid #bdd0cc;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Figma "Headings/Caption": Josefin Medium 14, 10% tracking, caps */
+.drawer-header h2 {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #bdd0cc;
+  padding-top: 3px; /* optical offset */
+  margin: 0;
+}
+
+/* 18px icon, 32px hit area pulled back so the icon stays on the 24px edge */
+.close-drawer {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  margin: -7px -7px -7px 0;
+  color: #bdd0cc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: color 0.2s ease;
+}
+
+.close-drawer:hover {
+  color: var(--brand-trace);
+}
+
+.close-drawer:focus-visible {
+  outline: 2px solid var(--brand-trace);
+  outline-offset: 0;
+}
+
+.qg-close-icon {
+  width: 18px;
+  height: 18px;
+  background-color: currentColor;
+  -webkit-mask: url('../assets/icons/Icon=close-regular.svg') center / 15px 15px no-repeat; /* 10px glyph, as in the 18px Figma icon */
+  mask: url('../assets/icons/Icon=close-regular.svg') center / 15px 15px no-repeat;
+}
+
+.drawer-content {
+  flex: 0 1 auto; /* hug the content so the divider sits under the buttons; scrolls when short */
+  overflow-y: auto;
+  padding: 32px 24px 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Quick Guide cards (Figma 4486:16753): icon tile + title + one line */
+.qg-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.qg-card {
+  background-color: #2d4855;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.qg-icon-tile {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  background-color: #0f2229;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qg-icon {
+  width: 24px;
+  height: 24px;
+  background-color: var(--brand-trace, #e7e626);
+  -webkit-mask: var(--qg-icon) center / 24px 24px no-repeat;
+  mask: var(--qg-icon) center / 24px 24px no-repeat;
+}
+
+.qg-icon--map { --qg-icon: url('../assets/icons/Icon=Map.svg'); }
+.qg-icon--tap { --qg-icon: url('../assets/icons/Icon=tap.svg'); }
+.qg-icon--clue { --qg-icon: url('../assets/icons/Icon=clue.svg'); }
+.qg-icon--guide { --qg-icon: url('../assets/icons/Icon=Guide.svg'); }
+
+.qg-card-text {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Figma "Headings/H5" */
+.qg-card-title {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.35;
+  letter-spacing: 0.04em;
+  color: #edf4f0;
+  margin: 0;
+}
+
+/* Figma "Body Copy/P-Body Copy Secondary" */
+.qg-card-body {
+  font-family: 'Roboto Slab', serif;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.2;
+  color: #bdd0cc;
+  margin: 0;
+}
+
+.qg-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 32px; /* Figma: 16px gap + 16px top padding below the last card */
+}
+
+/* Desktop Quick Guide: a panel that hugs its content under the 64px nav,
+   flush right with 8px left corners; scrolls inside when the window is short.
+   The overlay starts under the nav so the nav stays readable. Phone stays
+   full screen (below). */
+@media (min-width: 769px) {
+  #guide-drawer {
+    top: calc(64px + 12px);
+    height: auto;
+    max-height: calc(100vh - 64px - 24px);
+    border-radius: 8px 0 0 8px;
+  }
+
+  #guide-drawer .drawer-content {
+    min-height: 0; /* lets the card list scroll inside the max height */
+  }
+
+  #guide-overlay {
+    top: 64px;
+    height: calc(100% - 64px);
+  }
+}
+
+/* Responsive adjustments for drawer */
+@media (max-width: 768px) {
+  .drawer {
+    width: 100vw;
+    right: auto;
+    left: -100vw;
+  }
+  .drawer.active {
+    transform: translateX(100%);
+  }
+}
+
+/* Spot Drawer Styles */
+.spot-drawer {
+  width: 417px;
+  right: -417px;
+  background-color: var(--backgrounds-bg-card, #ebf2ee);
+  color: var(--text-text-primary, #0f2229);
+  padding: 0;
+}
+@media (max-width: 768px) {
+  .spot-drawer {
+    width: 100vw;
+    /* Cancel the left:-100vw set by .drawer mobile — we use right-based positioning */
+    left: auto;
+    right: -100vw;
+    z-index: 99; /* Sit behind the z-index:100 Top Nav & Search Bar on Mobile */
+    background-color: var(--surface-bg-base, #f5f9f6);
+    transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .spot-drawer.active {
+    /* Override the transform-based .drawer.active to use right:0 instead */
+    transform: none;
+    right: 0;
+  }
+  .spot-drawer .spot-drawer-content {
+    /* Push content below mobile Top Nav (64px) + tight gap by default */
+    padding-top: 84px; 
+    padding-bottom: 32px; 
+    transition: padding-top 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  body.mobile-search-is-open .spot-drawer .spot-drawer-content {
+    /* Push content down to accommodate the active floating search bar */
+    padding-top: 154px;
+  }
+}
+
+.spot-drawer-content {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  padding-bottom: 32px;
+  gap: 16px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+  min-height: 0; /* Allow flex container to respect its fixed height bound */
+}
+
+/* The back button's padding is pulled into the margin so the chevron's tip lines up
+   with the drawer content; the icon's own padding gives the space before "City Guide". */
+.spot-breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-left: -12px;
+}
+
+.breadcrumbs-path {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.icon-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-text-primary, #0f2229);
+}
+
+.breadcrumb-root,
+.breadcrumb-slash {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--text-text-primary, #0f2229);
+  text-transform: capitalize;
+  line-height: 1;
+  padding-top: 2px; /* optical offset, as in the Framer "Breadcrumb" style */
+}
+
+/* When breadcrumb-root is an <a> tag, strip link defaults */
+a.breadcrumb-root {
+  text-decoration: none;
+  cursor: pointer;
+  transition: text-decoration-color 0.2s ease;
+}
+a.breadcrumb-root:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--text-text-primary, #0f2229);
+}
+
+.breadcrumb-current {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: var(--backgrounds-bg-card, #ebf2ee);
+  text-transform: uppercase;
+  padding: 3px 8px 1px; /* 3/1 = optical offset */
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.bg-typography {
+  background-color: var(--route-typography, #3a4e9a);
+}
+
+.spot-divider {
+  border: none;
+  border-top: 1px solid rgba(15, 34, 41, 0.2);
+  margin: 0;
+  width: 100%;
+}
+
+.spot-header {
+  border-left: 5px solid var(--route-typography, #3a4e9a);
+  padding-left: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.spot-title {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 500;
+  font-size: 22px;
+  color: var(--text-text-primary, #0f2229);
+  letter-spacing: 0.1em; /* 2.2px tracking relative to 22px is 10% or 0.1em */
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.spot-subtitle {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 300; /* Framer "Spot meta": 14px Light */
+  font-size: 14px;
+  color: var(--text-text-primary, #0f2229);
+  display: flex;
+  gap: 8px;
+  line-height: 1.2;
+}
+
+.spot-location {
+  display: flex;
+  align-items: center;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  color: var(--text-text-primary, #0f2229);
+  gap: 4px;
+  line-height: 1.2;
+}
+
+.spot-hero {
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+/* Height follows the photo, so portrait shots aren't cropped */
+.spot-hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* On phones, cap tall photos so the About section stays on screen
+   (345px ≈ nav bar + breadcrumbs + title above the photo, plus room for About) */
+@media (max-width: 768px) {
+  .spot-hero img {
+    max-height: min(55vh, calc(100vh - 345px));
+    object-fit: cover;
+  }
+}
+
+.spot-section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.spot-section h3, .spot-designer-note h3 {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 700;
+  font-size: 20px; /* Framer "Section": 20px, 0em */
+  color: var(--text-text-primary, #0f2229);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.spot-section p, .spot-designer-note p {
+  font-family: 'Roboto Slab', serif;
+  font-weight: 300;
+  font-size: 16px;
+  color: var(--text-text-body, #2d4855);
+  margin: 0;
+  line-height: 1.4; /* Framer "Spot body" */
+}
+
+.spot-designer-note {
+  background-color: var(--backgrounds-bg-elevated, #cddbd0);
+  border-left: 3px solid var(--route-typography, #3a4e9a);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.spot-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 8px 0 24px; /* Framer Actions: 8px top */
+}
+
+/* CTA buttons (Figma 4015:16415 Primary, 4015:16430 Secondary; styleguide §7).
+   12/24 padding on the 4px grid, plus 2px at the top as the optical offset
+   for Josefin's high-sitting caps (same as the Framer "Label box"). */
+.btn-primary,
+.btn-yellow-guide,
+.btn-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 24px 12px;
+  border: 1px solid var(--cta-ring);
+  border-radius: 4px; /* Framer Button, 4px grid (was 24) */
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1;
+  text-transform: none;
+  text-decoration: none; /* also used on <a> links */
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+}
+
+.btn-primary svg,
+.btn-yellow-guide svg,
+.btn-secondary svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin-top: -2px; /* undo the optical offset for the icon */
+}
+
+/* Hover exists only for pointer devices (Figma: no hover on mobile); touch
+   gets the pressed state on :active. */
+
+/* Primary: yellow */
+.btn-primary,
+.btn-yellow-guide {
+  background-color: var(--cta-default);
+  color: var(--cta-text);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+@media (hover: hover) {
+  .btn-primary:hover,
+  .btn-yellow-guide:hover {
+    background-color: var(--cta-hover);
+    border-color: var(--cta-focused-border);
+    box-shadow: var(--cta-shadow-hover);
+  }
+}
+
+.btn-primary:active,
+.btn-yellow-guide:active {
+  background-color: var(--cta-default);
+  border-color: var(--cta-focused-border);
+  color: var(--cta-focused-border);
+  box-shadow: var(--cta-shadow-pressed);
+}
+
+.btn-primary:disabled,
+.btn-yellow-guide:disabled {
+  background-color: var(--cta-disabled);
+  border-color: var(--cta-default);
+  color: var(--cta-text);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* Primary on dark surfaces: the default border is yellow (Figma cta-focused-ring, dark) */
+.btn-primary--dark {
+  border-color: var(--cta-default);
+}
+
+/* Secondary (light surfaces: the spot drawer). Default label and border are
+   text-secondary (Figma 4015:16430): quieter than the Primary next to it */
+.btn-secondary {
+  background-color: var(--cta-secondary-fill);
+  border-color: var(--cta-ring);
+  color: var(--cta-ring);
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+@media (hover: hover) {
+  .btn-secondary:hover {
+    background-color: var(--cta-secondary-hover);
+    border-color: var(--cta-text);
+    color: var(--cta-text);
+    box-shadow: var(--cta-shadow-hover);
+  }
+}
+
+.btn-secondary:active {
+  background-color: var(--cta-secondary-pressed);
+  border-color: var(--cta-ring);
+  color: var(--cta-text);
+  box-shadow: var(--cta-shadow-pressed-secondary);
+}
+
+.btn-secondary:disabled {
+  background-color: var(--cta-secondary-disabled);
+  border-color: var(--cta-secondary-disabled-border);
+  color: var(--cta-ring);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* Secondary on dark surfaces (Figma HiFi Dark values of the same states) */
+.btn-secondary--dark {
+  background-color: transparent;
+  border-color: #96b8b9; /* text-secondary */
+  color: #96b8b9;
+}
+
+@media (hover: hover) {
+  .btn-secondary--dark:hover {
+    background-color: rgba(45, 72, 85, 0.75); /* bg-card-glass */
+    border-color: #bdd0cc;                     /* cta-text */
+    color: #bdd0cc;
+  }
+}
+
+.btn-secondary--dark:active {
+  background-color: #2d4855;                   /* bg-card */
+  border-color: var(--cta-default);            /* cta-focused-ring */
+  color: #bdd0cc;
+}
+
+.btn-secondary--dark:disabled {
+  background-color: rgba(45, 72, 85, 0.75);
+  border-color: #3d5e6a;                       /* border/divider */
+  color: #96b8b9;
+}
+
+.btn-primary:focus-visible,
+.btn-yellow-guide:focus-visible,
+.btn-secondary:focus-visible {
+  outline: 2px solid var(--cta-focused-border);
+  outline-offset: 2px;
+  border-color: var(--cta-focused-border);
+}
+
+/* User Location Control Stylings */
+.mapboxgl-ctrl-bottom-right {
+    margin-right: 12px !important;
+    margin-bottom: 24px !important;
+}
+
+.mapboxgl-ctrl-bottom-right .mapboxgl-ctrl-group {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.mapboxgl-ctrl-group button.mapboxgl-ctrl-geolocate {
+  background-color: rgba(231, 230, 38, 0.75) !important;
+  width: 42px !important;
+  height: 42px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+}
+
+.mapboxgl-ctrl-group button.mapboxgl-ctrl-geolocate:hover {
+  background-color: #e7e626 !important;
+  box-shadow: 4px 4px 12px 0px rgba(15, 34, 41, 0.33) !important;
+}
+
+.mapboxgl-ctrl-group button.mapboxgl-ctrl-geolocate:active {
+  background-color: #e7e626 !important;
+  box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.25) !important;
+}
+
+.mapboxgl-ctrl-geolocate .mapboxgl-ctrl-icon {
+    background-image: url('../assets/icons/user-location.svg') !important;
+    background-size: 26px 26px !important;
+    width: 26px !important;
+    height: 26px !important;
+    filter: none !important;
+}
+
+/* On mobile, position is fully handled by layout.css bottom offset */
+
+/* ── Custom User Location Marker (The Dot) ────────────────────────────────── */
+/* Theme-aware: Yellow on Dark Map, Surface-5 on Light/Street Map */
+
+/* 1. Default / Dark Map State (Yellow) */
+.map-dark .mapboxgl-user-location-dot,
+.mapboxgl-user-location-dot {
+    background-color: var(--brand-trace) !important;
+}
+
+.map-dark .mapboxgl-user-location-dot::before,
+.mapboxgl-user-location-dot::before {
+    background-color: var(--brand-trace) !important;
+}
+
+.map-dark .mapboxgl-user-location-show-heading .mapboxgl-user-location-heading::after,
+.map-dark .mapboxgl-user-location-show-heading .mapboxgl-user-location-heading::before,
+.mapboxgl-user-location-show-heading .mapboxgl-user-location-heading::after,
+.mapboxgl-user-location-show-heading .mapboxgl-user-location-heading::before {
+    border-bottom-color: var(--brand-trace) !important;
+}
+
+.map-dark .mapboxgl-user-location-accuracy-circle {
+    background-color: rgba(231, 230, 38, 0.1) !important;
+}
+
+/* 2. Light Map State (Contrast Surface Color) */
+body:not(.map-dark) .mapboxgl-user-location-dot {
+    background-color: var(--surface-5) !important;
+}
+
+body:not(.map-dark) .mapboxgl-user-location-dot::before {
+    background-color: var(--surface-5) !important;
+}
+
+body:not(.map-dark) .mapboxgl-user-location-show-heading .mapboxgl-user-location-heading::after,
+body:not(.map-dark) .mapboxgl-user-location-show-heading .mapboxgl-user-location-heading::before {
+    border-bottom-color: var(--surface-5) !important;
+}
+
+body:not(.map-dark) .mapboxgl-user-location-accuracy-circle {
+    background-color: rgba(189, 208, 213, 0.2) !important; /* surface-5 tint */
+}
+
+/* ── Search results panel (js/search.js) ─────────────────────────────────── */
+.search-results {
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9990;
+    width: min(320px, calc(100vw - 32px));
+    background-color: var(--surface-4, #2d4855);
+    color: #f5f9f6;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    font-family: 'Josefin Sans', sans-serif;
+    overflow: hidden;
+}
+
+.search-results-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 8px 8px 16px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--divider-strong, #3d5e6a);
+}
+
+.search-results-close {
+    width: 32px;
+    height: 32px;
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: inherit;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.search-results ul {
+    list-style: none;
+    margin: 0;
+    padding: 4px 0;
+    max-height: 40vh;
+    overflow-y: auto;
+}
+
+.search-result {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px 16px;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: 14px;
+    text-align: left;
+    cursor: pointer;
+}
+
+.search-results-close:hover,
+.search-result:hover,
+.search-results-close:focus-visible,
+.search-result:focus-visible {
+    background-color: var(--surface-5, #3d5e6a);
+    outline: none;
+}
+
+.search-result-dot {
+    flex-shrink: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.search-result-name {
+    flex: 1;
+    min-width: 0;
+}
+
+.search-result-route {
+    flex-shrink: 0;
+    font-size: 12px;
+    color: var(--content-3, #96b8b9);
+}
+
+/* Below the floating mobile search bar */
+@media (max-width: 768px) {
+    .search-results { top: 136px; }
+}

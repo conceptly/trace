@@ -1,0 +1,100 @@
+/* site/css/tokens.css */
+
+:root {
+  /* Brand Colors */
+  --brand-trace: #E7E626;
+  --focus-ring: #E7E626;
+
+  /* CTA buttons (Figma 4015:16415, 4015:16430; styleguide §7) */
+  --cta-default: #E7E626;
+  --cta-hover: #F2F040;
+  --cta-text: #2D4855;
+  --cta-ring: #487389;          /* default border: text-secondary (Figma cta-focused-ring, light) */
+  --cta-focused-border: #0D7A82; /* hover / pressed / focus border, pressed label */
+  --cta-disabled: rgba(231, 230, 38, 0.5);
+  --cta-secondary-fill: #F5F9F6;
+  --cta-secondary-disabled: rgba(235, 242, 238, 0.33);
+  --cta-secondary-disabled-border: #CDDBD0;
+  --cta-secondary-hover: rgba(235, 242, 238, 0.33); /* bg-card-glass */
+  --cta-secondary-pressed: #EBF2EE;                 /* bg-card */
+  --cta-shadow-hover: 4px 4px 12px rgba(15, 34, 41, 0.33);
+  --cta-shadow-pressed: inset 4px 4px 8px rgba(45, 72, 85, 0.33);
+  --cta-shadow-pressed-secondary: inset 2px 2px 8px rgba(45, 72, 85, 0.33);
+
+  /* Category Palette — Light map (default) */
+  --cat-artists-choice: #0D7A82;
+  --cat-typography: #2B5EA8;
+  --cat-art-objects: #257A48;
+  --cat-architecture: #9A4520;
+  --cat-street-art: #7E3090;
+
+  /* Category Palette — Dark satellite map (brighter for pop on dark bg) */
+  --cat-artists-choice-dark: #12B5C1;
+  --cat-typography-dark:     #5B8EE8;
+  --cat-art-objects-dark:    #3BB86B;
+  --cat-architecture-dark:   #E8713A;
+  --cat-street-art-dark:     #B84FDF;
+
+  /* Spacing Scale */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 48px;
+
+  /* Border Radius Scale */
+  --radius-pill: 50px;
+  --radius-lg: 8px;  /* site radii are 4px and 8px only (26 Oct 2026); pills and circles excepted */
+  --radius-md: 8px;
+  --radius-sm: 4px;
+
+  /* Animation */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+}
+
+/* Dark Mode (Default) */
+[data-theme="dark"], :root {
+  --surface-1: #12202A;
+  --surface-2: #1D3240;
+  --surface-3: #223740;
+  --surface-4: #2D4855;
+  --surface-5: #3D5E6A;
+
+  --content-1: #EDF4F0;
+  --content-2: #BDD0CC;
+  --content-3: #96B8B9;   /* secondary text: AA 4.5+ on #2D4855 cards */
+
+  --divider-soft: #8AADB5;
+  --divider-strong: #3D5E6A;
+
+  --search-bg: rgba(237, 244, 240, 0.15);
+  --search-border: rgba(237, 244, 240, 0.12);
+  --focus-ring: #E7E626;
+  
+  --logo-trace: #E7E626;
+  --logo-to: #EDF4F0;
+}
+
+/* Light Mode */
+[data-theme="light"] {
+  --surface-1: #F4F9FA;
+  --surface-2: #EDF5F7;
+  --surface-3: #E4EFF2;
+  --surface-4: #FFFFFF;
+  --surface-5: #BDD0D5;
+
+  --content-1: #1D3240;
+  --content-2: #2D4855;
+  --content-3: #487389;   /* secondary text: AA 4.5+ on #EBF2EE cards */
+
+  --divider-soft: #3A6070;
+  --divider-strong: #BDD0D5;
+
+  --search-bg: rgba(45, 72, 85, 0.08);
+  --search-border: rgba(45, 72, 85, 0.15);
+  --focus-ring: #1D3240;
+
+  --logo-trace: #1D3240;
+  --logo-to: #2D4855;
+}
